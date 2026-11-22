@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pick a POJ Font</title>
+<meta name="description" content="Free fonts that draw Taiwanese POJ correctly, fonts to avoid, the Google Fonts trap, and a test line to check any font yourself.">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="./">POJ Font Guide</a>
+  <nav>
+    <a href="./">Start</a>
+    <a href="letters.html">How letters are stored</a>
+    <a href="fonts.html">How fonts draw them</a>
+    <a href="choose.html" aria-current="page">Pick a font</a>
+    <a href="problems.html">Fix problems</a>
+    <a href="makers.html">For font makers</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+<h1>Pick a font that gets POJ right</h1>
+<p class="lead">All of these are free to use, and most are open source: you may also share and change them.</p>
+
+<h2>For POJ text</h2>
+<div class="table-wrap"><table>
+  <tr><th>Font</th><th>Style</th><th>Notes</th></tr>
+  <tr><td><a href="https://github.com/ButTaiwan/LessonOne"><strong>Lesson One</strong></a></td><td>clean sans-serif</td><td>Our top pick. Every test letter correct, in every form. This site uses it.</td></tr>
+  <tr><td><a href="https://github.com/aiongg/POJFonts"><strong>POJ Chhiu-ki</strong></a></td><td>made for POJ</td><td>Correct throughout.</td></tr>
+  <tr><td><a href="https://software.sil.org/charis/"><strong>Charis</strong></a>, <a href="https://software.sil.org/doulos/"><strong>Doulos</strong></a>, <a href="https://software.sil.org/gentium/"><strong>Gentium</strong></a> (SIL)</td><td>book-style serif</td><td>Excellent. The dot takes a little space of its own (<a href="fonts.html">way C</a>).</td></tr>
+  <tr><td><a href="https://github.com/localremotetw/TASA-Typeface-Collection"><strong>TASA Explorer / Orbiter</strong></a></td><td>modern sans-serif</td><td>Correct when downloaded from GitHub. <strong>Not</strong> from Google Fonts (<a href="#google-fonts">see below</a>).</td></tr>
+  <tr><td><a href="https://github.com/adobe-fonts/source-sans"><strong>Source Sans 3</strong></a></td><td>sans-serif</td><td>Fine except the rare <span class="poj">ŏ͘</span> (9th tone), where the dot slips out.</td></tr>
+</table></div>
+
+<h2>For Han characters with POJ (漢羅)</h2>
+<div class="table-wrap"><table>
+  <tr><th>Font</th><th>Style</th><th>Notes</th></tr>
+  <tr><td><a href="https://github.com/justfont/open-huninn-font"><strong>jf open 粉圓 (Huninn)</strong></a></td><td>rounded</td><td>Every test letter correct.</td></tr>
+  <tr><td><a href="https://github.com/ButTaiwan/iansui"><strong>芫荽 Iansui</strong></a></td><td>handwritten feel</td><td>Every test letter correct.</td></tr>
+  <tr><td><a href="https://github.com/NightFurySL2001/WD-XL-font"><strong>WD-XL Lubrifont 滑油字</strong></a></td><td>sans-serif</td><td>Every test letter correct.</td></tr>
+  <tr><td><a href="https://github.com/ichitenfont/I.Ming"><strong>一點明體 I.Ming</strong></a></td><td>Ming (serif)</td><td>Correct. Free, but its licence (IPA) is not the usual open-font one.</td></tr>
+  <tr><td><a href="https://github.com/ButTaiwan/genyo-font"><strong>源樣明體 GenYo Min</strong></a>, 豆腐烏 / Tāu-hū fonts</td><td>various</td><td>Common syllables are correct, but there is no safety net for rare ones. The <span class="poj">o͘</span> dot is drawn tight to the letter.</td></tr>
+</table></div>
+
+<h3>POJ above Han characters (ruby)</h3>
+<p>The <a href="https://github.com/ButTaiwan/taigivs"><strong>字咍 Taigi fonts</strong></a> can show the POJ reading above each Han character, chosen with a hidden code after the character. They are great for that. For ordinary POJ text they are weaker: the <span class="poj">i</span> keeps its dot under <span class="poj">i̍</span> and the dots rely on the browser's guess.</p>
+
+<h2>Fonts to avoid for POJ</h2>
+<div class="table-wrap"><table>
+  <tr><th>Font</th><th>Problem</th></tr>
+  <tr><td>EB Garamond</td><td>Has no <span class="poj">o͘</span> dot at all: you get empty boxes. It appears on some POJ font lists, so beware.</td></tr>
+  <tr><td>Arial</td><td>The dot lands in the gap after the letter.</td></tr>
+  <tr><td>Helvetica, Geneva, Menlo (Mac)</td><td>No snap points: dots float too high on capitals.</td></tr>
+</table></div>
+
+<h2 id="google-fonts">The Google Fonts trap</h2>
+<p>To load faster, Google Fonts cuts each font into small pieces and only sends the pieces a page needs. For some fonts, <strong>the pieces with the POJ stickers are simply not offered</strong>:</p>
+<div class="table-wrap"><table>
+  <tr><th>Font on Google Fonts</th><th>POJ dot and 8th tone line</th></tr>
+  <tr><td>TASA Explorer</td><td><span class="tag bad">missing</span> even though the full font has them</td></tr>
+  <tr><td>Source Sans 3</td><td><span class="tag bad">missing</span></td></tr>
+  <tr><td>Iansui, Huninn</td><td><span class="tag good">included</span> in a special Taiwanese piece</td></tr>
+</table></div>
+<p>When a piece is missing, the browser borrows the dot from some other font, and it usually lands in the wrong place.</p>
+<div class="note">
+  <p><strong>For websites:</strong> download the full font and put it on your own site, as this guide does. Or check carefully that the Google Fonts version really has <span class="poj">o͘</span> and <span class="poj">a̍</span>. (Checked November 2026.)</p>
+</div>
+
+<h2 id="test">Test any font yourself</h2>
+<p>Copy this line, paste it into your app, and switch to the font you want to check.</p>
+<div class="testline">
+  <span class="text poj" id="testline">o͘ ó͘ ò͘ ô͘ ō͘ o̍͘ O͘ Ó͘ Ō͘ · a̍ e̍ i̍ o̍ u̍ m̍ n̍g · ḿ m̄ m̂ ǹ n̄ · thiⁿ hō͘ chia̍h · lâi--khì · Pe̍h-ōe-jī</span>
+  <button class="copy" data-form="NFC">Copy</button>
+  <button class="copy" data-form="NFD" title="The decomposed form Macs and PDFs sometimes produce">Copy (Mac/PDF form)</button>
+</div>
+<p>Check these things:</p>
+<ol>
+  <li><strong>No empty boxes</strong> or letters in a different style. Either means the font lacks that character.</li>
+  <li><strong>The <span class="poj">o͘</span> dot</strong> sits at the top right of each <span class="poj">o</span>, next to the tone, not on top of it and not floating high, and especially on the capitals <span class="poj">O͘ Ó͘ Ō͘</span>.</li>
+  <li><strong><span class="poj">i̍</span> has no dot</strong> under the tone line.</li>
+  <li><strong>The 8th-tone line</strong> sits centred above <span class="poj">a̍ e̍ m̍ n̍</span>.</li>
+  <li><strong><span class="poj">--</span> stays two hyphens.</strong></li>
+  <li>Paste the second copy (Mac/PDF form) too. <strong>It should look exactly the same.</strong></li>
+</ol>
+
+<div class="next"><a href="fonts.html">← How fonts draw them</a><a href="problems.html">Next: Fix problems →</a></div>
+</main>
+
+<footer class="site"><div class="wrap">
+  PehoejiFont project · Text on this site is set in <a href="https://github.com/ButTaiwan/LessonOne">Lesson One</a> by But Ko (<a href="assets/fonts/LessonOne-OFL.txt">SIL Open Font License</a>) · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">Source on GitHub</a>
+</div></footer>
+<script>
+document.querySelectorAll('button.copy').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var text = document.getElementById('testline').textContent.normalize(b.dataset.form);
+    var label = b.textContent;
+    function done(msg) { b.textContent = msg; setTimeout(function () { b.textContent = label; }, 1500); }
+    try {
+      navigator.clipboard.writeText(text).then(function () { done('Copied'); }, function () { done('Select and copy by hand'); });
+    } catch (e) { done('Select and copy by hand'); }
+  });
+});
+</script>
+</body>
+</html>

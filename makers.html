@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>POJ for Font Makers</title>
+<meta name="description" content="A checklist for adding Taiwanese POJ support to a font: glyphs, anchors, ccmp rules and testing.">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="./">POJ Font Guide</a>
+  <nav>
+    <a href="./">Start</a>
+    <a href="letters.html">How letters are stored</a>
+    <a href="fonts.html">How fonts draw them</a>
+    <a href="choose.html">Pick a font</a>
+    <a href="problems.html">Fix problems</a>
+    <a href="makers.html" aria-current="page">For font makers</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+<h1>Adding POJ to a font</h1>
+<p class="lead">A checklist for designers and developers. The <a href="https://github.com/PehoejiFont/PehoejiFont.github.io/blob/main/docs/poj-font-implementation.md">full technical report</a> has the details, a feature-code sketch and the survey data.</p>
+
+<h2>1. Characters to add</h2>
+<div class="table-wrap"><table>
+  <tr><th>Character</th><th>What for</th></tr>
+  <tr><td><code>U+0358</code> <span class="poj">&nbsp;͘</span></td><td>the <span class="poj">o͘</span> dot (zero-width mark)</td></tr>
+  <tr><td><code>U+030D</code> <span class="poj">&nbsp;̍</span></td><td>8th tone</td></tr>
+  <tr><td><code>U+207F</code> <span class="poj">ⁿ</span>, <code>U+1D3A</code> <span class="poj">ᴺ</span></td><td>nasal, and its all-caps form</td></tr>
+  <tr><td><code>U+030B</code>, <code>U+030C</code></td><td>Tâi-lô 9th and 6th tones</td></tr>
+  <tr><td><span class="poj">ı</span> <code>U+0131</code>, <span class="poj">ȷ</span> <code>U+0237</code></td><td>dotless forms for <span class="poj">i̍</span></td></tr>
+  <tr><td><span class="poj">ḿ Ḿ ǹ Ǹ ń Ń ň Ň ŏ Ŏ ő ű ǎ ě ǐ ǒ ǔ</span>…</td><td>ready-made letters, so no app has to borrow them</td></tr>
+</table></div>
+
+<h2>2. Snap points (anchors)</h2>
+<ul>
+  <li><code>top</code> on every letter that takes a tone: <span class="poj">a e ı o u m n</span> and capitals.</li>
+  <li><code>topright</code> on <span class="poj">o O</span> <strong>and on every toned o</strong>: <span class="poj">ó ò ô ǒ ō ŏ ő</span> and capitals. Most fonts miss some of these, because after text is tidied to NFC the dot follows <span class="poj">ó</span>, not <span class="poj">o</span>.</li>
+  <li>Check wide accents and bold weights: the dot must not touch the tone or the next letter (<span class="poj">o͘h</span>, <span class="poj">o͘ⁿ</span>).</li>
+</ul>
+
+<h2>3. Rules</h2>
+<ol>
+  <li>Build POJ letters in <code>ccmp</code>, <strong>never</strong> in <code>liga</code>. <code>liga</code> is switched off by CSS letter-spacing and in Word.</li>
+  <li>If you add ready-drawn letters, match all three input forms: <code>ó + 0358</code>, <code>o 0301 0358</code> and <code>o 0358 0301</code>. List longer sequences first.</li>
+  <li>Keep the anchors even when you have ready-drawn letters, as a safety net.</li>
+  <li>Always ship a GPOS <code>mark</code> feature. Browsers only guess positions when a font has none, and other engines don't guess at all.</li>
+  <li>Swap <span class="poj">i</span> → <span class="poj">ı</span> before above-marks in <code>ccmp</code>.</li>
+  <li>Use standard glyph names (<code>uni0358</code>, <code>o_uni0358</code>) so text copied from PDFs comes out right.</li>
+  <li>Give the font enough height: <span class="poj">Ó͘ Ő M̍</span> are taller than Western accents and get clipped otherwise.</li>
+  <li>Don't let <code>--</code> turn into a dash.</li>
+</ol>
+
+<h2>4. Test</h2>
+<p>This repository has three small scripts (Python, needs <code>fonttools</code>, <code>uharfbuzz</code>, <code>pillow</code>):</p>
+<pre><code>tools/poj_font_audit.py  Font.ttf   # which POJ characters, features and anchors exist
+tools/poj_shape_test.py  Font.ttf   # how each POJ letter is built, NFC vs decomposed
+tools/poj_specimen.py    out/ Font.ttf   # picture to check by eye</code></pre>
+<p>Then look at the <a href="choose.html#test">test line</a> in Chrome, Safari and Word, once with <code>letter-spacing</code>, and in the Google Fonts version if you publish there.</p>
+
+<h2>Help fix it upstream</h2>
+<ul>
+  <li><a href="https://github.com/googlefonts/glyphsets/issues/5">googlefonts/glyphsets#5</a> asks Google Fonts to require <code>U+0358</code>, <code>U+030D</code> and <code>U+207F</code> in its Latin set.</li>
+  <li><a href="https://github.com/googlefonts/lang">googlefonts/lang</a> has no entry for Taiwanese in Latin script yet. Adding one would let Google's tools check fonts for POJ.</li>
+</ul>
+
+<div class="next"><a href="problems.html">← Fix problems</a><a href="./">Back to start</a></div>
+</main>
+
+<footer class="site"><div class="wrap">
+  PehoejiFont project · Text on this site is set in <a href="https://github.com/ButTaiwan/LessonOne">Lesson One</a> by But Ko (<a href="assets/fonts/LessonOne-OFL.txt">SIL Open Font License</a>) · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">Source on GitHub</a>
+</div></footer>
+</body>
+</html>

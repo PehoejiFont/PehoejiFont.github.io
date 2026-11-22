@@ -1,0 +1,160 @@
+/* Lesson One (OFL, by But Ko) is self-hosted so every POJ letter on these pages draws correctly. */
+@font-face { font-family: "Lesson One"; src: url("fonts/LessonOne-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Lesson One"; src: url("fonts/LessonOne-Bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Lesson One"; src: url("fonts/LessonOne-Italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+
+:root {
+  --bg: #fbfaf7;
+  --surface: #ffffff;
+  --ink: #1d1d1f;
+  --muted: #5b5b63;
+  --line: #e3e0d8;
+  --accent: #b8360b;
+  --accent-soft: #fdf0e9;
+  --good: #1f7a3f;
+  --good-soft: #eaf6ee;
+  --bad: #b3261e;
+  --bad-soft: #fdecea;
+  --code-bg: #f2efe8;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15161a;
+    --surface: #1d1f24;
+    --ink: #ececec;
+    --muted: #a3a3ad;
+    --line: #2e3038;
+    --accent: #ff8a5c;
+    --accent-soft: #2c1f19;
+    --good: #6fcf8f;
+    --good-soft: #17271d;
+    --bad: #ff8a80;
+    --bad-soft: #2d1b1a;
+    --code-bg: #24262c;
+  }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Lesson One", system-ui, -apple-system, "Segoe UI", "PingFang TC", "Noto Sans TC", sans-serif;
+  font-size: 18px;
+  line-height: 1.65;
+}
+a { color: var(--accent); }
+a:hover { text-decoration-thickness: 2px; }
+
+header.site {
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+header.site .wrap { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 20px; padding-top: 14px; padding-bottom: 12px; }
+header.site .brand { font-weight: 700; font-size: 20px; text-decoration: none; color: var(--ink); }
+header.site nav { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 16px; }
+header.site nav a { color: var(--muted); text-decoration: none; }
+header.site nav a[aria-current="page"] { color: var(--accent); font-weight: 700; }
+
+.wrap { max-width: 760px; margin: 0 auto; padding-left: 16px; padding-right: 16px; }
+main { padding-top: 28px; padding-bottom: 48px; }
+
+h1 { font-size: 34px; line-height: 1.2; margin: 0 0 12px; }
+h2 { font-size: 25px; line-height: 1.3; margin: 44px 0 10px; }
+h3 { font-size: 20px; margin: 28px 0 6px; }
+p.lead { font-size: 20px; color: var(--muted); margin-top: 0; }
+
+.poj { font-family: "Lesson One", sans-serif; }
+.big { font-size: 1.6em; }
+code, kbd {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.85em;
+  background: var(--code-bg);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+/* Example cards: a label, then the picture or live text */
+.examples { display: grid; gap: 12px; margin: 18px 0; }
+.ex {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 14px 12px;
+}
+.ex.good { border-left-color: var(--good); }
+.ex.bad { border-left-color: var(--bad); }
+.ex .label { font-size: 15px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; }
+.ex .label b { color: var(--ink); }
+.ex img { display: block; width: 100%; height: auto; max-height: 90px; object-fit: contain; object-position: left; margin-top: 6px; }
+.ex.tall img { max-height: 190px; }
+.tag { font-size: 13px; font-weight: 700; padding: 1px 8px; border-radius: 99px; }
+.tag.good { background: var(--good-soft); color: var(--good); }
+.tag.bad { background: var(--bad-soft); color: var(--bad); }
+
+/* Building-block tiles for showing how letters are stored */
+.tiles { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 10px 0 18px; }
+.tile {
+  display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
+  min-width: 64px; padding: 6px 10px 4px;
+  background: var(--surface); border: 2px solid var(--line); border-radius: 8px;
+}
+.tile .ch { font-size: 30px; line-height: 1.2; }
+.tile .cp { font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--muted); }
+.tile.mark { border-color: var(--accent); background: var(--accent-soft); }
+.tile.mark .ch { color: var(--accent); }
+.tiles .op { font-size: 22px; color: var(--muted); }
+.tiles .eq { font-size: 22px; color: var(--muted); padding: 0 4px; }
+.tiles .result { font-size: 40px; }
+
+.ways { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 18px 0; }
+.way { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+.way img { display: block; height: 130px; width: auto; max-width: 100%; margin: 4px auto 8px; }
+.way h3 { margin: 0; font-size: 18px; }
+.way p { margin: 4px 0 0; font-size: 15px; color: var(--muted); line-height: 1.5; }
+.legend { font-size: 15px; color: var(--muted); }
+.legend .sw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -1px; margin-right: 4px; }
+
+.note {
+  background: var(--accent-soft);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 18px 0;
+}
+.note > :first-child { margin-top: 0; }
+.note > :last-child { margin-bottom: 0; }
+
+.table-wrap { overflow-x: auto; margin: 14px 0; }
+table { border-collapse: collapse; width: 100%; font-size: 16px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 14px; color: var(--muted); font-weight: 700; }
+
+.testline {
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; margin: 14px 0;
+}
+.testline .text { font-size: 24px; flex: 1 1 320px; word-break: break-word; }
+button.copy {
+  font: inherit; font-size: 15px; cursor: pointer;
+  background: var(--ink); color: var(--bg); border: 0; border-radius: 6px; padding: 6px 14px;
+}
+
+details { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; margin: 10px 0; }
+details summary { cursor: pointer; font-weight: 700; }
+details[open] summary { margin-bottom: 6px; }
+
+.next { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+footer.site { border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer.site .wrap { padding-top: 16px; padding-bottom: 28px; }
+
+@media (max-width: 520px) {
+  body { font-size: 17px; }
+  h1 { font-size: 28px; }
+  h2 { font-size: 22px; }
+}
+
+pre { background: var(--code-bg); border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-size: 15px; line-height: 1.5; }
+pre code { background: none; padding: 0; font-size: inherit; }

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fix POJ Problems</title>
+<meta name="description" content="Common problems with Taiwanese POJ text on screen, what causes them and how to fix them.">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="./">POJ Font Guide</a>
+  <nav>
+    <a href="./">Start</a>
+    <a href="letters.html">How letters are stored</a>
+    <a href="fonts.html">How fonts draw them</a>
+    <a href="choose.html">Pick a font</a>
+    <a href="problems.html" aria-current="page">Fix problems</a>
+    <a href="makers.html">For font makers</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+<h1>Fix common problems</h1>
+<p class="lead">What you see, why it happens, and what to do.</p>
+
+<details open>
+  <summary>I see empty boxes (□) instead of letters</summary>
+  <p><strong>Why:</strong> the font doesn't have that character at all. EB Garamond, for example, has no <span class="poj">o͘</span> dot.</p>
+  <p><strong>Fix:</strong> switch to a font from the <a href="choose.html">list</a>.</p>
+</details>
+
+<details open>
+  <summary>The dot of <span class="poj">o͘</span> is far to the right, or floating high</summary>
+  <p><strong>Why:</strong> the font has the dot but doesn't know where to put it (see <a href="fonts.html">way D</a>). It is usually worst on capitals such as <span class="poj">Ó͘</span>.</p>
+  <p><strong>Fix:</strong> switch fonts. Adding extra spaces or moving the dot by hand will break on someone else's screen.</p>
+</details>
+
+<details>
+  <summary>One letter looks different from the rest of the word</summary>
+  <p><strong>Why:</strong> the font lacks that letter, so the app quietly borrows it from another font. Letters often borrowed: <span class="poj">ḿ ǹ</span>, the <span class="poj">o͘</span> dot, the 8th-tone line. On a Mac, for example, EB Garamond borrows the <span class="poj">o͘</span> dot from Helvetica.</p>
+  <p><strong>Fix:</strong> use a font that has every POJ letter (<a href="choose.html#test">test it</a>).</p>
+</details>
+
+<details>
+  <summary>There is a dot under the tone line on <span class="poj">i̍</span></summary>
+  <p><strong>Why:</strong> the font doesn't remove the <span class="poj">i</span>'s own dot when a tone is added (<a href="letters.html#dotted-i">explained here</a>).</p>
+  <p><strong>Fix:</strong> switch fonts. Don't type a dotless <span class="poj">ı</span> by hand: the word will no longer match searches.</p>
+</details>
+
+<details>
+  <summary>The text looked fine until I added letter-spacing (or opened it in Word)</summary>
+  <p><strong>Why:</strong> the font builds POJ letters with an optional feature (“ligatures”) that browsers switch off under letter-spacing and that Word leaves off by default.</p>
+  <p><strong>Fix:</strong> use a font that builds POJ letters with the always-on feature. All fonts in our <a href="choose.html">list</a> do. In Word you can also turn ligatures on under <em>Font → Advanced</em>.</p>
+</details>
+
+<details>
+  <summary><span class="poj">thiⁿ</span> turned into <span class="poj">thin</span></summary>
+  <p><strong>Why:</strong> a program “normalised” the text with NFKC, which turns <span class="poj">ⁿ</span> into a plain <span class="poj">n</span> (<a href="letters.html#nasal">explained here</a>).</p>
+  <p><strong>Fix:</strong> if you run the system, set it to NFC, not NFKC. Otherwise report it to whoever runs it.</p>
+</details>
+
+<details>
+  <summary>Search can't find a word I can see on screen</summary>
+  <p><strong>Why:</strong> the word is stored in a different form from what you typed (<a href="letters.html#same-letter">same letter, different codes</a>), or it uses a look-alike such as <span class="poj">o·</span> or <span class="poj">ơ</span>.</p>
+  <p><strong>Fix:</strong> convert the text to NFC once, and replace look-alikes with the real <span class="poj">o͘</span>.</p>
+</details>
+
+<details>
+  <summary><span class="poj">lâi--khì</span> became <span class="poj">lâi–khì</span></summary>
+  <p><strong>Why:</strong> the word processor auto-corrected two hyphens into a dash.</p>
+  <p><strong>Fix:</strong> turn off “replace hyphens with dash” in the auto-correct settings.</p>
+</details>
+
+<details>
+  <summary>My website shows the dots wrong but my computer doesn't</summary>
+  <p><strong>Why:</strong> the website probably loads the font from Google Fonts, which leaves out the POJ pieces for some fonts (<a href="choose.html#google-fonts">the Google Fonts trap</a>).</p>
+  <p><strong>Fix:</strong> host the full font file on your own site.</p>
+</details>
+
+<details>
+  <summary>Old documents show strange symbols after I changed the font</summary>
+  <p><strong>Why:</strong> the document was typed with an old POJ font that used private codes. Those codes mean nothing in any other font.</p>
+  <p><strong>Fix:</strong> convert the document to real Unicode POJ once. After that it works in every font.</p>
+</details>
+
+<h2 id="mac">Mac and Windows</h2>
+<p>Phones, Chrome and Firefox all use the same text engine (HarfBuzz), which we tested in detail. Macs and Windows also have their own engines, which are used by Safari, Pages, Word and other built-in apps.</p>
+<ul>
+  <li><strong>Mac (first results):</strong> we ran the same tests through the Mac's own engine. <strong>Lesson One, jf open 粉圓, 芫荽 Iansui, I.Ming, GenYo Min and WD-XL Lubrifont</strong> gave exactly the same result as Chrome for every test letter. Fonts that depend on the browser's guess (Helvetica, Menlo, the 字咍 Taigi fonts) look different on a Mac. More results are coming.</li>
+  <li><strong>Windows:</strong> not tested yet.</li>
+</ul>
+<p>Fonts with ready-drawn letters and snap points (<a href="fonts.html">ways A + B</a>) depend least on the engine, which is one more reason to choose them.</p>
+
+<div class="next"><a href="choose.html">← Pick a font</a><a href="makers.html">Next: For font makers →</a></div>
+</main>
+
+<footer class="site"><div class="wrap">
+  PehoejiFont project · Text on this site is set in <a href="https://github.com/ButTaiwan/LessonOne">Lesson One</a> by But Ko (<a href="assets/fonts/LessonOne-OFL.txt">SIL Open Font License</a>) · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">Source on GitHub</a>
+</div></footer>
+</body>
+</html>

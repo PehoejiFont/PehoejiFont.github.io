@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>POJ Font Guide</title>
+<meta name="description" content="Why Taiwanese Pe̍h-ōe-jī letters like o͘ and a̍ break in many fonts, and which free fonts get them right. A plain-language guide with examples.">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="./">POJ Font Guide</a>
+  <nav>
+    <a href="./" aria-current="page">Start</a>
+    <a href="letters.html">How letters are stored</a>
+    <a href="fonts.html">How fonts draw them</a>
+    <a href="choose.html">Pick a font</a>
+    <a href="problems.html">Fix problems</a>
+    <a href="makers.html">For font makers</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+<h1>Why does <span class="poj">o͘</span> look wrong in my font?</h1>
+<p class="lead">A short guide to writing Taiwanese in <span class="poj">Pe̍h-ōe-jī</span> (白話字, POJ) on computers and phones: why some letters break, and how to pick a font that gets them right.</p>
+
+<h2>The problem in one picture</h2>
+<p>Here are the same five Taiwanese words in five fonts: <span class="poj">O͘-á</span>, <span class="poj">hō͘</span> (雨, rain), <span class="poj">chia̍h</span> (食, eat), <span class="poj">thiⁿ</span> (天, sky) and <span class="poj">n̂g</span> (黃, yellow).</p>
+
+<div class="examples">
+  <div class="ex good"><div class="label"><span class="tag good">Correct</span><b>Lesson One</b> a free font with full POJ support</div>
+    <img src="assets/img/sample-lessonone.svg" alt="O͘-á hō͘ chia̍h thiⁿ n̂g drawn correctly in Lesson One"></div>
+  <div class="ex bad"><div class="label"><span class="tag bad">Dot in the wrong place</span><b>Arial</b> the dot of hō͘ lands in the space after the letter</div>
+    <img src="assets/img/sample-arial.svg" alt="The same words in Arial: the dot of hō͘ sits far to the right"></div>
+  <div class="ex bad"><div class="label"><span class="tag bad">Dot floats away</span><b>Helvetica</b> the dot of capital O͘ sits too high</div>
+    <img src="assets/img/sample-helvetica.svg" alt="The same words in Helvetica: dots float above the letters"></div>
+  <div class="ex bad"><div class="label"><span class="tag bad">Missing</span><b>EB Garamond</b> empty boxes where the dot should be</div>
+    <img src="assets/img/sample-ebgaramond.svg" alt="The same words in EB Garamond: empty boxes instead of the dot"></div>
+  <div class="ex"><div class="label"><span class="tag">Different style</span><b>GenYo Min (源樣明體)</b> the dot is drawn tight, like a hook</div>
+    <img src="assets/img/sample-genyo.svg" alt="The same words in GenYo Min: the dot is close to the o"></div>
+</div>
+<p class="legend">The pictures show what Chrome, Firefox and Android draw. Macs can differ a little; see <a href="problems.html#mac">Mac and Windows</a>.</p>
+
+<h2>Why it happens, in three sentences</h2>
+<ol>
+  <li><strong>The computer has no ready-made <span class="poj">o͘</span>.</strong> It stores an <span class="poj">o</span> plus a separate “dot” sticker, and the font must glue them together. <a href="letters.html">More →</a></li>
+  <li><strong>Many fonts never learned where the dot goes.</strong> They were made for English or European languages, which don't use it. <a href="fonts.html">More →</a></li>
+  <li><strong>The same letter can arrive in several different codes</strong>, and a good font has to handle all of them. <a href="letters.html#same-letter">More →</a></li>
+</ol>
+
+<h2>Short answers</h2>
+<div class="table-wrap"><table>
+  <tr><th>I want to…</th><th>Do this</th></tr>
+  <tr><td>Write POJ text</td><td>Use <strong>Lesson One</strong>, <strong>POJ Chhiu-ki</strong>, <strong>Charis SIL</strong> or <strong>TASA Explorer</strong> (downloaded from GitHub). <a href="choose.html">Full list →</a></td></tr>
+  <tr><td>Write Han characters and POJ together (漢羅)</td><td>Use <strong>jf open 粉圓 (Huninn)</strong> or <strong>芫荽 Iansui</strong>.</td></tr>
+  <tr><td>Make a website</td><td>Put the font file on your own site. Some fonts on Google Fonts lose the POJ marks. <a href="choose.html#google-fonts">Why →</a></td></tr>
+  <tr><td>Check a font quickly</td><td>Copy the <a href="choose.html#test">test line</a>, paste it in that font and look at the dots.</td></tr>
+  <tr><td>Fix text that looks broken</td><td>See <a href="problems.html">Fix problems</a>.</td></tr>
+</table></div>
+
+<div class="note">
+  <p><strong>Where this comes from.</strong> We tested 24 fonts, including all the free POJ fonts listed by <a href="https://oh.taigi.info/siataibun/jithe/">狗公會曉學台語</a>, letter by letter with the same text engine browsers use (November 2026). The full technical report, the test tools and the raw results are on <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">GitHub</a>.</p>
+</div>
+
+<div class="next"><span></span><a href="letters.html">Next: How letters are stored →</a></div>
+</main>
+
+<footer class="site"><div class="wrap">
+  PehoejiFont project · Text on this site is set in <a href="https://github.com/ButTaiwan/LessonOne">Lesson One</a> by But Ko (<a href="assets/fonts/LessonOne-OFL.txt">SIL Open Font License</a>) · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">Source on GitHub</a>
+</div></footer>
+</body>
+</html>

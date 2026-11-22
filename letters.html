@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How POJ Letters Are Stored</title>
+<meta name="description" content="How computers store POJ letters like o͘ and a̍ as a base letter plus marks, and why the same letter can arrive in different codes.">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="./">POJ Font Guide</a>
+  <nav>
+    <a href="./">Start</a>
+    <a href="letters.html" aria-current="page">How letters are stored</a>
+    <a href="fonts.html">How fonts draw them</a>
+    <a href="choose.html">Pick a font</a>
+    <a href="problems.html">Fix problems</a>
+    <a href="makers.html">For font makers</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+<h1>How the computer stores POJ letters</h1>
+<p class="lead">To a computer, <span class="poj">o͘</span> is not one letter. It is a letter plus a sticker.</p>
+
+<h2>Letters and stickers</h2>
+<p>Every character on a computer has a number in a big world-wide list called <strong>Unicode</strong>. The letter <span class="poj">o</span> is number <code>U+006F</code>, for example.</p>
+<p>Some accented letters have their own number, such as <span class="poj">ó</span> (<code>U+00F3</code>). We call these <strong>ready-made</strong> letters.</p>
+<p>Others are built from a plain letter plus one or more <strong>stickers</strong>. Unicode calls these stickers <em>combining marks</em>. The sticker has no letter of its own; it attaches to the letter in front of it.</p>
+
+<div class="tiles" aria-label="o plus dot sticker makes o͘">
+  <span class="tile"><span class="ch poj">o</span><span class="cp">U+006F</span></span>
+  <span class="op">+</span>
+  <span class="tile mark"><span class="ch poj">&nbsp;͘</span><span class="cp">U+0358</span></span>
+  <span class="eq">=</span>
+  <span class="result poj">o͘</span>
+</div>
+<div class="tiles" aria-label="a plus vertical line sticker makes a̍">
+  <span class="tile"><span class="ch poj">a</span><span class="cp">U+0061</span></span>
+  <span class="op">+</span>
+  <span class="tile mark"><span class="ch poj">&nbsp;̍</span><span class="cp">U+030D</span></span>
+  <span class="eq">=</span>
+  <span class="result poj">a̍</span>
+</div>
+
+<p>POJ needs two stickers that European languages don't use:</p>
+<ul>
+  <li>the <strong>dot at the top right</strong> of <span class="poj">o͘</span> (<code>U+0358</code>), and</li>
+  <li>the <strong>short vertical line</strong> for the 8th tone, as in <span class="poj">chia̍h</span> (<code>U+030D</code>).</li>
+</ul>
+<p>Many fonts simply don't have these two. That is the first reason POJ breaks.</p>
+
+<div class="note">
+  <p><strong>Will Unicode ever add a ready-made <span class="poj">o͘</span>?</strong> No. When POJ was added in 2005, Unicode chose to add the dot sticker instead, and its rules no longer allow new ready-made accented letters. Stickers are the only way, now and in the future.</p>
+</div>
+
+<h2>The POJ stickers</h2>
+<div class="table-wrap"><table>
+  <tr><th>Tone</th><th>Mark</th><th>Example</th><th>Ready-made letters exist?</th></tr>
+  <tr><td>1 and 4</td><td>none</td><td class="poj">sai, sat</td><td>no mark needed</td></tr>
+  <tr><td>2</td><td class="poj big">´</td><td class="poj">sái</td><td>yes for vowels (á é í ó ú), and for <span class="poj">ḿ ń</span></td></tr>
+  <tr><td>3</td><td class="poj big">`</td><td class="poj">sài</td><td>yes for vowels, and for <span class="poj">ǹ</span>; <span class="poj">m̀</span> is built</td></tr>
+  <tr><td>5</td><td class="poj big">^</td><td class="poj">sâi</td><td>yes for vowels; <span class="poj">m̂ n̂</span> are built</td></tr>
+  <tr><td>7</td><td class="poj big">¯</td><td class="poj">sāi</td><td>yes for vowels; <span class="poj">m̄ n̄</span> are built</td></tr>
+  <tr><td>8</td><td class="poj big">&nbsp;̍</td><td class="poj">sa̍t</td><td><strong>never</strong>: always built</td></tr>
+  <tr><td>dot of <span class="poj">o͘</span></td><td class="poj big">&nbsp;͘</td><td class="poj">o͘, hō͘</td><td><strong>never</strong>: always built</td></tr>
+</table></div>
+<p>Tâi-lô, the other common Taiwanese spelling, adds a 9th tone mark <span class="poj">&nbsp;̋</span> (as in <span class="poj">ő</span>) and sometimes a 6th tone <span class="poj">ˇ</span> (as in <span class="poj">ǎ</span>). A good POJ font usually covers Tâi-lô too.</p>
+
+<h3>Two stickers at once</h3>
+<p>A toned <span class="poj">o͘</span> carries <strong>two</strong> stickers: the tone on top and the dot at the right. The font has to place both without them bumping into each other.</p>
+<div class="tiles">
+  <span class="tile"><span class="ch poj">o</span><span class="cp">U+006F</span></span><span class="op">+</span>
+  <span class="tile mark"><span class="ch poj">&nbsp;́</span><span class="cp">U+0301</span></span><span class="op">+</span>
+  <span class="tile mark"><span class="ch poj">&nbsp;͘</span><span class="cp">U+0358</span></span>
+  <span class="eq">=</span><span class="result poj">ó͘</span>
+</div>
+
+<h2 id="same-letter">The same letter, written different ways</h2>
+<p>Here is the surprising part. <span class="poj">ó͘</span> can reach the font in at least three different codes, and <strong>they all should look the same</strong>:</p>
+
+<h3>1. Ready-made <span class="poj">ó</span> + dot <span class="legend">(most web pages and phones)</span></h3>
+<div class="tiles">
+  <span class="tile"><span class="ch poj">ó</span><span class="cp">U+00F3</span></span><span class="op">+</span>
+  <span class="tile mark"><span class="ch poj">&nbsp;͘</span><span class="cp">U+0358</span></span>
+</div>
+<h3>2. Plain <span class="poj">o</span> + tone + dot <span class="legend">(Mac file names, text copied out of PDFs)</span></h3>
+<div class="tiles">
+  <span class="tile"><span class="ch poj">o</span><span class="cp">U+006F</span></span><span class="op">+</span>
+  <span class="tile mark"><span class="ch poj">&nbsp;́</span><span class="cp">U+0301</span></span><span class="op">+</span>
+  <span class="tile mark"><span class="ch poj">&nbsp;͘</span><span class="cp">U+0358</span></span>
+</div>
+<h3>3. Plain <span class="poj">o</span> + dot + tone <span class="legend">(some keyboards, where you type <span class="poj">o͘</span> first, then the tone)</span></h3>
+<div class="tiles">
+  <span class="tile"><span class="ch poj">o</span><span class="cp">U+006F</span></span><span class="op">+</span>
+  <span class="tile mark"><span class="ch poj">&nbsp;͘</span><span class="cp">U+0358</span></span><span class="op">+</span>
+  <span class="tile mark"><span class="ch poj">&nbsp;́</span><span class="cp">U+0301</span></span>
+</div>
+
+<p>Unicode says all three mean the same thing, and it has a standard “tidy-up” that turns them into one form (form 1 above; experts call it <strong>NFC</strong>). After tidying, the tone always comes before the dot.</p>
+<p>Chrome, Firefox and Android tidy the text before the font sees it. Other programs may not, so a good font is built to handle every form itself.</p>
+<p><strong>Why you might care:</strong> if a document mixes forms, searching for <span class="poj">hō͘</span> may miss some of them. Tools that tidy text to NFC fix this.</p>
+
+<h2 id="dotted-i">The <span class="poj">i</span> must drop its dot</h2>
+<p>When a tone sits on <span class="poj">i</span>, the dot of the <span class="poj">i</span> should disappear, just like in <span class="poj">í</span>. Ready-made letters such as <span class="poj">í</span> already do this. But <span class="poj">i̍</span> (8th tone) is always built from stickers, so the <strong>font</strong> has to remove the dot.</p>
+<div class="examples">
+  <div class="ex good"><div class="label"><span class="tag good">Correct</span><b>chi̍t</b> (一) in Lesson One: no dot under the line</div>
+    <img src="assets/img/i8-good.svg" alt="chi̍t with dotless i"></div>
+  <div class="ex bad"><div class="label"><span class="tag bad">Wrong</span>the same word in Taigi Huninn POJ (字咍): the dot stays, under the tone line</div>
+    <img src="assets/img/i8-bad.svg" alt="chi̍t where the i keeps its dot"></div>
+</div>
+
+<h2 id="nasal">The small <span class="poj">ⁿ</span> is a letter, not a sticker</h2>
+<p>The nasal <span class="poj">ⁿ</span> in <span class="poj">thiⁿ</span> (天) is a letter of its own (<code>U+207F</code>). Fonts draw it easily, but two things go wrong with it:</p>
+<ul>
+  <li><strong>Some “clean-up” tools turn it into a plain <span class="poj">n</span>.</strong> A different tidy-up called <strong>NFKC</strong> (used by some search engines and databases) changes <span class="poj">thiⁿ</span> into <span class="poj">thin</span>. Use NFC, never NFKC, for Taiwanese text.</li>
+  <li><strong>It has no capital.</strong> Writing in ALL CAPS gives <span class="poj">THIⁿ</span>. Some people use <span class="poj">ᴺ</span> (<code>U+1D3A</code>) or <span class="poj">NN</span> instead.</li>
+</ul>
+
+<h2>Look-alikes that are not POJ</h2>
+<p>Before the dot sticker existed, people used whatever was on the keyboard. You will still find these in old text:</p>
+<div class="table-wrap"><table>
+  <tr><th>Looks like</th><th>What it really is</th><th>Problem</th></tr>
+  <tr><td class="poj big">o·</td><td>o + middle dot (<code>U+00B7</code>)</td><td>The dot is punctuation, so search and spell tools treat the word as two pieces.</td></tr>
+  <tr><td class="poj big">ơ</td><td>Vietnamese “horn” o (<code>U+01A1</code>)</td><td>A different letter. Searches for <span class="poj">o͘</span> won't find it.</td></tr>
+  <tr><td class="poj big">oo, ou</td><td>typed spellings</td><td>Fine as a choice (Tâi-lô uses <span class="poj">oo</span>), but not POJ.</td></tr>
+  <tr><td><span class="poj big">o͘</span> that only works in one font</td><td>a “private” code (Private Use Area), used by a few old POJ fonts</td><td>Turns into an empty box or a random symbol in any other font.</td></tr>
+</table></div>
+<p>If you have old text like this, convert it to the real stickers once, and it will work everywhere.</p>
+
+<h2>Hyphens</h2>
+<p>POJ joins syllables with <span class="poj">-</span> and marks the neutral tone with two hyphens: <span class="poj">lâi--khì</span> (來去). Some word processors “helpfully” turn <span class="poj">--</span> into a long dash (<span class="poj">–</span>). Turn that auto-correct option off.</p>
+
+<div class="next"><a href="./">← Start</a><a href="fonts.html">Next: How fonts draw them →</a></div>
+</main>
+
+<footer class="site"><div class="wrap">
+  PehoejiFont project · Text on this site is set in <a href="https://github.com/ButTaiwan/LessonOne">Lesson One</a> by But Ko (<a href="assets/fonts/LessonOne-OFL.txt">SIL Open Font License</a>) · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">Source on GitHub</a>
+</div></footer>
+</body>
+</html>

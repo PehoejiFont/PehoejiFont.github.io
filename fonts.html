@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How Fonts Draw POJ</title>
+<meta name="description" content="The four ways fonts place the dot of o͘ and the POJ tone marks, with pictures from real fonts.">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="./">POJ Font Guide</a>
+  <nav>
+    <a href="./">Start</a>
+    <a href="letters.html">How letters are stored</a>
+    <a href="fonts.html" aria-current="page">How fonts draw them</a>
+    <a href="choose.html">Pick a font</a>
+    <a href="problems.html">Fix problems</a>
+    <a href="makers.html">For font makers</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+<h1>How fonts put the dot in the right place</h1>
+<p class="lead">The text says “<span class="poj">o</span> + tone + dot”. The font decides what that looks like. We found four different ways fonts do it.</p>
+
+<p>In the pictures below, each <strong>box</strong> is the space a piece takes up on the line, and the <strong style="color:var(--accent)">orange</strong> part is a sticker the font placed separately. All four show <span class="poj">ó͘</span>.</p>
+
+<div class="ways">
+  <div class="way">
+    <img src="assets/img/way-a-anchor.svg" alt="ó͘ in POJ Chhiu-ki: one box, with the orange dot attached at the top right">
+    <h3>A. Snap points</h3>
+    <p>The <span class="poj">o</span> has a marked spot at its top right. The dot snaps onto it, like a magnet.</p>
+    <p><em>POJ Chhiu-ki, Source Sans 3</em></p>
+  </div>
+  <div class="way">
+    <img src="assets/img/way-b-ligature.svg" alt="ó͘ in Lesson One: one box, drawn as one piece with no orange parts">
+    <h3>B. Ready-drawn letter</h3>
+    <p>The designer drew the whole <span class="poj">ó͘</span> as one picture. The font swaps the three pieces for it.</p>
+    <p><em>Lesson One, Huninn, Iansui, TASA</em></p>
+  </div>
+  <div class="way">
+    <img src="assets/img/way-c-spacing.svg" alt="ó͘ in Charis: the orange dot has its own narrow box after the o">
+    <h3>C. Dot with its own space</h3>
+    <p>The dot takes a little room of its own after the <span class="poj">o</span>, so it can never touch the next letter.</p>
+    <p><em>Charis, Doulos, Gentium (SIL)</em></p>
+  </div>
+  <div class="way">
+    <img src="assets/img/way-d-overstrike.svg" alt="ó͘ in Arial: the orange dot sits outside the o's box, far to the right">
+    <h3>D. Printed in a fixed spot</h3>
+    <p>The dot is drawn at one fixed place, whatever letter it follows. If that place is wrong, it is wrong every time.</p>
+    <p><em>Arial, Helvetica, Menlo</em></p>
+  </div>
+</div>
+
+<h2>A. Snap points</h2>
+<p>The font designer marks an invisible point on each letter: “a tone goes here”, “the <span class="poj">o͘</span> dot goes here”. The text engine moves each sticker onto its point. Font people call these points <strong>anchors</strong>.</p>
+<p><strong>Good:</strong> one dot works with every letter that has a snap point, so the font stays small.</p>
+<p><strong>Watch out:</strong> every letter needs its own snap point, <em>including</em> the ready-made toned ones like <span class="poj">ō</span> and <span class="poj">ŏ</span>. If the designer forgets one, the dot ends up in a strange place. Source Sans 3 does this for <span class="poj">ŏ͘</span>:</p>
+<div class="examples">
+  <div class="ex bad tall"><div class="label"><span class="tag bad">Missing snap point</span><b>Source Sans 3</b>: <span class="poj">ō͘</span> is fine, but on <span class="poj">ŏ͘</span> the dot falls outside the letter</div>
+    <img src="assets/img/sourcesans-breve.svg" alt="ō͘ and ŏ͘ in Source Sans 3: the second dot sits outside its letter"></div>
+</div>
+
+<h2>B. Ready-drawn letters</h2>
+<p>The designer draws <span class="poj">o͘ ó͘ ò͘ ô͘ ō͘ o̍͘</span> and the capitals as finished pictures. When the font sees the pieces, it swaps in the finished picture.</p>
+<p><strong>Good:</strong> the designer controls every detail, so the tone and the dot never collide.</p>
+<p><strong>Watch out:</strong> the font must recognise <em>every</em> way the letter can arrive (see <a href="letters.html#same-letter">the same letter, written different ways</a>). Anything it doesn't recognise falls back to the stickers, so it still needs snap points as a safety net.</p>
+
+<h2>C. Dot with its own space</h2>
+<p>The SIL fonts treat the dot almost like a tiny letter: it takes up a little width after the <span class="poj">o</span>.</p>
+<p><strong>Good:</strong> the dot can never crash into the next letter, as in <span class="poj">o͘h</span> or <span class="poj">o͘ⁿ</span>.</p>
+<p><strong>Watch out:</strong> words with <span class="poj">o͘</span> get a bit wider. Copying text out of a PDF sometimes adds a space after the dot.</p>
+
+<h2>D. Printed in a fixed spot</h2>
+<p>The font has a dot, but no snap point for it, so the dot is drawn wherever its picture happens to sit. In Arial that is the gap after the letter. At best it suits one letter; on capitals and toned letters it lands in the wrong place.</p>
+<p>When a font has <strong>no snap points at all</strong>, Chrome and Firefox try to guess where stickers go. The guess is fine for a plain <span class="poj">o͘</span> but goes too high on <span class="poj">Ó͘</span> and <span class="poj">Ō͘</span>, as the Helvetica example on the <a href="./">start page</a> shows.</p>
+
+<h2>The best fonts use A and B together</h2>
+<div class="note">
+  <p>Ready-drawn letters (B) for the common syllables, so they look perfect, <strong>plus</strong> snap points (A) as a safety net for everything else. Lesson One, jf open 粉圓, 芫荽 Iansui, TASA and WD-XL Lubrifont all work this way.</p>
+</div>
+
+<h2>One more thing: hidden switches</h2>
+<p>Fonts can hide letter-building rules behind switches that are not always on. One of them, “ligatures”, is <strong>turned off</strong> when you add letter-spacing on a web page, and is off by default in Microsoft Word. A font that builds <span class="poj">o͘</span> only behind that switch will break in those places. Good POJ fonts use the switch that is always on.</p>
+
+<div class="next"><a href="letters.html">← How letters are stored</a><a href="choose.html">Next: Pick a font →</a></div>
+</main>
+
+<footer class="site"><div class="wrap">
+  PehoejiFont project · Text on this site is set in <a href="https://github.com/ButTaiwan/LessonOne">Lesson One</a> by But Ko (<a href="assets/fonts/LessonOne-OFL.txt">SIL Open Font License</a>) · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">Source on GitHub</a>
+</div></footer>
+</body>
+</html>

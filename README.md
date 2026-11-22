@@ -87,6 +87,10 @@ Three repo names exist under more than one owner (`baloo2-variable`, `signika`, 
 - [googlefonts/glyphsets#5](https://github.com/googlefonts/glyphsets/issues/5) has been open since 2020. It asks to add U+030D, U+0358 and U+207F to the GF Latin Plus glyph set. If they were added, POJ support would become part of Google Fonts' own requirements.
 - [googlefonts/lang](https://github.com/googlefonts/lang) has no language definition for Taiwanese in Latin script (`nan_Latn`). Adding one would let Google Fonts' tools report which fonts support POJ.
 
+## Plain-language guide
+
+The website at <https://pehoejifont.github.io/> (`index.html` and the pages next to it) explains the findings for non-specialists, with pictures drawn from the real fonts by `tools/poj_guide_svg.py`.
+
 ## Research notes
 
 [`docs/poj-font-implementation.md`](docs/poj-font-implementation.md) explains how POJ differs from an English font, every Unicode form POJ text arrives in (NFC, NFD, mark order, ⁿ/NFKC, PUA, IVS), the four ways existing fonts implement it, a survey of the free fonts listed on [oh.taigi.info › 字體](https://oh.taigi.info/siataibun/jithe/), and a recipe for the forks. Model reviews are in `docs/reviews/`.
