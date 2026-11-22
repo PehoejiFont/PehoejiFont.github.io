@@ -3,105 +3,368 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pick a POJ Font</title>
-<meta name="description" content="Free fonts that draw Taigi POJ correctly, fonts to avoid, the Google Fonts trap, and a test line to check any font yourself.">
+<title>24-Font Audit, Picks &amp; Specimens — POJ Font Documentation</title>
+<meta name="description" content="Recommended free POJ and Han-Lo fonts, interactive live test bench with Unicode inspector, complete 24-font HarfBuzz audit explorer, and NFC vs NFD specimens.">
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-<header class="site"><div class="wrap">
-  <a class="brand" href="./">POJ Font Guide</a>
-  <nav>
-    <a href="./">Start</a>
-    <a href="letters.html">How letters are stored</a>
-    <a href="fonts.html">How fonts draw them</a>
-    <a href="choose.html" aria-current="page">Pick a font</a>
-    <a href="problems.html">Fix problems</a>
-    <a href="makers.html">For font makers</a>
-  </nav>
-</div></header>
+<header class="topbar">
+  <div class="topbar-inner">
+    <button class="menu-btn" id="menu-toggle" type="button" aria-label="Toggle navigation">☰</button>
+    <a class="brand" href="./">
+      <span class="brand-mark poj">o͘</span>
+      <span>PehoejiFont</span>
+      <span class="brand-badge">Docs</span>
+    </a>
+    <div class="topbar-spacer"></div>
+    <button class="search-trigger" id="search-trigger" type="button">
+      <span>⌕</span>
+      <span class="search-label">Search docs…</span>
+      <span class="kbd">⌘K</span>
+    </button>
+    <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    <a class="icon-btn" href="https://github.com/PehoejiFont/PehoejiFont.github.io">GitHub</a>
+  </div>
+</header>
 
-<main class="wrap">
-<h1>Pick a font that gets POJ right</h1>
-<p class="lead">All of these are free to use, and most are open source: you may also share and change them.</p>
+<div class="sidebar-backdrop" id="sidebar-backdrop"></div>
 
-<h2>For POJ text</h2>
-<div class="table-wrap"><table>
-  <tr><th>Font</th><th>Style</th><th>Notes</th></tr>
-  <tr><td><a href="https://github.com/ButTaiwan/LessonOne"><strong>Lesson One</strong></a></td><td>clean sans-serif</td><td>Our top pick for sans-serif. Every test letter correct, in every form.</td></tr>
-  <tr><td><a href="https://github.com/aiongg/POJFonts"><strong>POJ Chhiu-ki</strong></a></td><td>made for POJ</td><td>Correct throughout.</td></tr>
-  <tr><td><a href="https://software.sil.org/charis/"><strong>Charis</strong></a>, <a href="https://software.sil.org/doulos/"><strong>Doulos</strong></a>, <a href="https://software.sil.org/gentium/"><strong>Gentium</strong></a> (SIL)</td><td>book-style serif</td><td>Excellent. The dot takes a little space of its own (<a href="fonts.html">way C</a>).</td></tr>
-  <tr><td><a href="https://github.com/localremotetw/TASA-Typeface-Collection"><strong>TASA Explorer / Orbiter</strong></a></td><td>modern sans-serif</td><td>Correct when downloaded from GitHub. <strong>Not</strong> from Google Fonts (<a href="#google-fonts">see below</a>).</td></tr>
-  <tr><td><a href="https://github.com/adobe-fonts/source-sans"><strong>Source Sans 3</strong></a></td><td>sans-serif</td><td>Fine except the rare <span class="poj">ŏ͘</span> (9th tone), where the dot slips out.</td></tr>
-</table></div>
+<div class="doc-shell">
+  <aside class="sidebar" aria-label="Documentation navigation">
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Getting Started</div>
+      <ul>
+        <li><a href="./">Overview</a></li>
+        <li><a href="choose.html#test">Live POJ Test Bench</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Core Concepts</div>
+      <ul>
+        <li><a href="letters.html">Unicode &amp; Encoding</a></li>
+        <li><a href="fonts.html">How Fonts Implement POJ</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Font Directory &amp; Data</div>
+      <ul>
+        <li><a href="choose.html" aria-current="page">24-Font Audit &amp; Specimens</a></li>
+        <li><a href="catalog.html">Google Fonts Survey &amp; Forks</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Practical Guides</div>
+      <ul>
+        <li><a href="problems.html">Troubleshooting &amp; Platforms</a></li>
+        <li><a href="makers.html">Font Maker’s Guide</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Reference</div>
+      <ul>
+        <li><a href="tools.html">Tools, Methodology &amp; Reviews</a></li>
+      </ul>
+    </div>
+  </aside>
 
-<h2>For Han characters with POJ (漢羅)</h2>
-<div class="table-wrap"><table>
-  <tr><th>Font</th><th>Style</th><th>Notes</th></tr>
-  <tr><td><a href="https://github.com/justfont/open-huninn-font"><strong>jf open 粉圓 (Huninn)</strong></a></td><td>rounded</td><td>Every test letter correct.</td></tr>
-  <tr><td><a href="https://github.com/ButTaiwan/iansui"><strong>芫荽 Iansui</strong></a></td><td>handwritten feel</td><td>Every test letter correct.</td></tr>
-  <tr><td><a href="https://github.com/NightFurySL2001/WD-XL-font"><strong>WD-XL Lubrifont 滑油字</strong></a></td><td>sans-serif</td><td>Every test letter correct.</td></tr>
-  <tr><td><a href="https://github.com/ichitenfont/I.Ming"><strong>一點明體 I.Ming</strong></a></td><td>Ming (serif)</td><td>Correct. Free, but its licence (IPA) is not the usual open-font one.</td></tr>
-  <tr><td><a href="https://github.com/ButTaiwan/genyo-font"><strong>源樣明體 GenYo Min</strong></a>, 豆腐烏 / Tāu-hū fonts</td><td>various</td><td>Every test letter correct, through ready-drawn letters. No snap points as a safety net for rare combinations. The <span class="poj">o͘</span> dot is drawn tight to the letter. <strong>This site uses GenYo Min.</strong></td></tr>
-</table></div>
+  <main class="doc-main">
+    <div class="breadcrumb"><a href="./">Docs</a> › <span>Font Directory &amp; Data</span> › <span>24-Font Audit &amp; Specimens</span></div>
+    <h1>24-Font Audit, Recommendations &amp; Specimens</h1>
+    <p class="lead">Free and open fonts tested across all POJ and KPL clusters in NFC and NFD, an interactive test bench, the full 24-font HarfBuzz audit explorer, and rendered PNG specimens.</p>
 
-<h3>POJ above Han characters (ruby)</h3>
-<p>The <a href="https://github.com/ButTaiwan/taigivs"><strong>字咍 Taigi fonts</strong></a> can show the POJ reading above each Han character, chosen with a hidden code after the character. They are great for that. For ordinary POJ text they are weaker: the <span class="poj">i</span> keeps its dot under <span class="poj">i̍</span> and the dots rely on the browser's guess.</p>
+    <h2 id="picks">Recommended free &amp; open fonts</h2>
+    <h3 id="running-poj">For running POJ text</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Font</th><th>Style</th><th>License</th><th>Technique</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><a href="https://github.com/ButTaiwan/LessonOne"><strong>Lesson One</strong></a></td><td>Clean sans-serif</td><td>OFL 1.1</td><td>B + A</td><td>Top pick for sans-serif. Every test cluster correct in NFC, NFD, and reverse order.</td></tr>
+        <tr><td><a href="https://github.com/aiongg/POJFonts"><strong>POJ Chhiu-ki</strong></a></td><td>POJ display/text</td><td>Apache-2.0</td><td>A</td><td>Built specifically for POJ; clean anchor positioning throughout.</td></tr>
+        <tr><td><a href="https://software.sil.org/charis/"><strong>Charis</strong></a>, <a href="https://software.sil.org/doulos/"><strong>Doulos</strong></a>, <a href="https://software.sil.org/gentium/"><strong>Gentium</strong></a> (SIL)</td><td>Book-style serif</td><td>OFL 1.1 (RFN)</td><td>A + C</td><td>Excellent book typography. Spacing dot (<a href="fonts.html#technique-c">Way C</a>) prevents collisions. Forks must be renamed.</td></tr>
+        <tr><td><a href="https://github.com/localremotetw/TASA-Typeface-Collection"><strong>TASA Explorer / Orbiter</strong></a></td><td>Modern sans-serif</td><td>OFL 1.1</td><td>B + A</td><td>Correct when downloaded from GitHub. <strong>Do not load from Google Fonts</strong> (<a href="fonts.html#google-fonts">strips POJ marks</a>).</td></tr>
+        <tr><td><a href="https://github.com/adobe-fonts/source-sans"><strong>Source Sans 3</strong></a></td><td>Sans-serif</td><td>OFL 1.1</td><td>A</td><td>Clean except rare 9th-tone <span class="poj">ŏ͘</span> / <span class="poj">Ŏ͘</span> (missing anchor). Avoid Google Fonts web delivery.</td></tr>
+      </tbody>
+    </table></div>
 
-<h2>Fonts to avoid for POJ</h2>
-<div class="table-wrap"><table>
-  <tr><th>Font</th><th>Problem</th></tr>
-  <tr><td>EB Garamond</td><td>Has no <span class="poj">o͘</span> dot at all: you get empty boxes. It appears on some POJ font lists, so beware.</td></tr>
-  <tr><td>Arial</td><td>The dot lands in the gap after the letter.</td></tr>
-  <tr><td>Helvetica, Geneva, Menlo (Mac)</td><td>No snap points: dots float too high on capitals.</td></tr>
-</table></div>
+    <h3 id="hanlo">For Han characters + POJ (漢羅)</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Font</th><th>Style</th><th>License</th><th>Technique</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><a href="https://github.com/justfont/open-huninn-font"><strong>jf open 粉圓 2.1 (Huninn)</strong></a></td><td>Rounded</td><td>OFL 1.1</td><td>B + A</td><td>Every test letter correct; dedicated Taigi slice on Google Fonts.</td></tr>
+        <tr><td><a href="https://github.com/ButTaiwan/iansui"><strong>芫荽 Iansui</strong></a></td><td>Handwritten Kai</td><td>OFL 1.1</td><td>B + A</td><td>Every test letter correct; dedicated Taigi slice on Google Fonts.</td></tr>
+        <tr><td><a href="https://github.com/NightFurySL2001/WD-XL-font"><strong>WD-XL Lubrifont TC 滑油字</strong></a></td><td>Sans-serif</td><td>OFL 1.1</td><td>B + A</td><td><code>ccmp</code> dynamic composition + full <code>mark</code>/<code>mkmk</code> safety net.</td></tr>
+        <tr><td><a href="https://github.com/ichitenfont/I.Ming"><strong>一點明體 I.Ming</strong></a></td><td>Ming (serif)</td><td>IPA Font 1.0</td><td>B + A</td><td>Very solid; <code>U+0358</code> anchors only on <code>o ō</code>, with ligatures covering the rest. Uses IPA licence, not OFL.</td></tr>
+        <tr><td><a href="https://github.com/ButTaiwan/genyo-font"><strong>源樣明體 GenYo Min</strong></a></td><td>Ming (serif)</td><td>OFL 1.1</td><td>B only</td><td><strong>This documentation site uses GenYo Min.</strong> Ready-drawn <code>ccmp</code> glyphs (dot drawn close to the bowl, horn-like); no <code>mark</code> safety net for unlisted clusters.</td></tr>
+        <tr><td><strong>豆腐烏 / Tāu-hū</strong> family (Khu-lé-iòng, Môo-tn̄g, Tauhu Oo)</td><td>Various</td><td>OFL 1.1</td><td>B only</td><td>Clean on common clusters via <code>ccmp</code>; no <code>mark</code> table for uncovered combinations.</td></tr>
+      </tbody>
+    </table></div>
 
-<h2 id="google-fonts">The Google Fonts trap</h2>
-<p>To load faster, Google Fonts cuts each font into small pieces and only sends the pieces a page needs. For some fonts, <strong>the pieces with the POJ stickers are simply not offered</strong>:</p>
-<div class="table-wrap"><table>
-  <tr><th>Font on Google Fonts</th><th>POJ dot and 8th tone line</th></tr>
-  <tr><td>TASA Explorer</td><td><span class="tag bad">missing</span> even though the full font has them</td></tr>
-  <tr><td>Source Sans 3</td><td><span class="tag bad">missing</span></td></tr>
-  <tr><td>Iansui, Huninn</td><td><span class="tag good">included</span> in a special Taigi piece</td></tr>
-</table></div>
-<p>When a piece is missing, the browser borrows the dot from some other font, and it usually lands in the wrong place.</p>
-<div class="note">
-  <p><strong>For websites:</strong> download the full font and put it on your own site, as this guide does. Or check carefully that the Google Fonts version really has <span class="poj">o͘</span> and <span class="poj">a̍</span>. (Checked November 2026.)</p>
+    <h3 id="avoid">Fonts to avoid for running POJ</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Font</th><th>Observed failure</th></tr></thead>
+      <tbody>
+        <tr><td><strong>EB Garamond</strong></td><td>Missing <code>U+0358</code> entirely (tofu boxes); <code>U+030D</code> unanchored; no dotless <span class="poj">i̍</span>. Listed on some Taigi font pages — <strong>not usable for <span class="poj">o͘</span></strong>.</td></tr>
+        <tr><td><strong>字咍 Taigi IVS fonts</strong> (for running POJ)</td><td>Excellent for Han-character ruby (8,021 IVS mappings), but Latin part has no <code>mark</code> table and keeps the dot under <span class="poj">i̍</span>.</td></tr>
+        <tr><td><strong>Arial</strong> (macOS copy)</td><td><code>U+0358</code> is an unanchored overstrike; because Arial has <code>mark</code>, HarfBuzz disables fallback and the dot lands after the letter.</td></tr>
+        <tr><td><strong>Helvetica, Geneva, Menlo</strong> (macOS)</td><td>No <code>mark</code> table and no dotless <span class="poj">i̍</span>; HarfBuzz fallback floats dots high on capitals <span class="poj">Ó͘ Ō͘</span>.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2 id="test">Live POJ &amp; KPL test bench</h2>
+    <p>Edit or paste any Taigi text below, copy it in <strong>NFC</strong>, <strong>NFD</strong>, or <strong>non-canonical reverse order</strong> (<code>o + U+0358 + tone</code>) to test any font on your computer, toggle <code>letter-spacing</code> to expose <code>liga</code>-based bugs, and inspect every underlying Unicode codepoint live.</p>
+
+    <div class="bench">
+      <div class="bench-toolbar">
+        <button class="btn primary" type="button" data-copy-form="NFC">Copy NFC</button>
+        <button class="btn" type="button" data-copy-form="NFD" title="Decomposed form (macOS file names, PDFs)">Copy NFD</button>
+        <button class="btn" type="button" data-copy-form="REV" title="Non-canonical order: U+0358 placed before the tone mark">Copy Reverse Order</button>
+        <button class="btn" type="button" data-preset="specimen">Short Specimen</button>
+        <button class="btn" type="button" data-preset="full">Full POJ + KPL Line</button>
+        <button class="btn" type="button" data-preset="words">Words</button>
+      </div>
+      <textarea class="bench-input" id="bench-input" spellcheck="false" aria-label="POJ test line">o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ ő͘ ǒ͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ m̌ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | i̋ ő ǎ | tńg--khì | Pe̍h-ōe-jī Lâu Ô͘-chhiû</textarea>
+      <div class="bench-controls">
+        <label>Size: <input type="range" id="bench-size" min="16" max="48" value="24"> <span id="bench-size-val">24px</span></label>
+        <label><input type="checkbox" id="bench-spacing"> Add <code>letter-spacing: 0.12em</code> (disables <code>liga</code>)</label>
+        <label><input type="checkbox" id="bench-bold"> Bold (700)</label>
+      </div>
+      <div class="cp-strip" id="cp-strip" aria-label="Live Unicode codepoint breakdown"></div>
+    </div>
+
+    <p><strong>6-point visual checklist when pasting into another font:</strong></p>
+    <ol>
+      <li><strong>No empty boxes (□)</strong> and no single letters borrowed from a mismatched fallback font.</li>
+      <li><strong>The <span class="poj">o͘</span> dot</strong> sits cleanly at the top right of every <span class="poj">o</span> — especially capitals <span class="poj">O͘ Ó͘ Ō͘ O̍͘</span> and wide accents <span class="poj">ō͘ ô͘ ŏ͘</span>.</li>
+      <li><strong><span class="poj">i̍</span> and <span class="poj">i̋</span> drop their dot</strong> cleanly under the tone mark.</li>
+      <li><strong>The 8th-tone vertical line</strong> centres cleanly over <span class="poj">a̍ e̍ o̍ u̍ m̍ n̍</span> and capitals.</li>
+      <li><strong><code>--</code> remains two separate hyphens</strong> in <span class="poj">tńg--khì</span>.</li>
+      <li><strong>NFC, NFD, and Reverse Order render identically</strong>, and adding <code>letter-spacing</code> does not break them.</li>
+    </ol>
+
+    <h2 id="survey-table">Complete 24-font survey matrix (Regular weights)</h2>
+    <p>All audited fonts below map <code>U+0358</code>, <code>U+030D</code>, <code>U+207F</code>, and <code>U+030B</code>, <strong>except EB Garamond (no <code>U+0358</code>)</strong>. “<code>mark</code>” indicates the presence of a GPOS <code>mark</code> feature.</p>
+
+    <div class="table-wrap"><table class="compact">
+      <thead><tr><th>Font</th><th>License</th><th>Technique</th><th class="center"><code>mark</code></th><th class="center">Dotless <span class="poj">i̍</span></th><th>Detailed findings</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Source Sans 3</strong> (Adobe)</td><td>OFL 1.1</td><td>A</td><td class="center">✓</td><td class="center">✓</td><td><span class="poj">ŏ͘</span> and <span class="poj">Ŏ͘</span> unanchored → dot at <code>(0,0)</code>, no fallback. Google Fonts drops marks. Rest is clean.</td></tr>
+        <tr><td><strong>POJ Chhiu-ki</strong> (aiongg)</td><td>Apache-2.0</td><td>A</td><td class="center">✓</td><td class="center">✓</td><td>Built for POJ (81 <code>U+0358</code> / 54 <code>U+030D</code> anchor bases). Clean across all clusters.</td></tr>
+        <tr><td><strong>NunitoPOJ</strong> (aiongg / taigivs IME)</td><td>OFL 1.1</td><td>B (<code>liga</code>), A, PUA</td><td class="center">✓</td><td class="center">✓</td><td>PUA <code>E400–E435</code> (55 slots). <code>liga</code> ligatures use non-canonical order and never fire in HarfBuzz; <code>ccmp</code> + anchors still render <span class="poj">o͘</span> and <span class="poj">i̍</span> cleanly even with <code>liga</code> off.</td></tr>
+        <tr><td><strong>Lesson One</strong> (But)</td><td>OFL 1.1</td><td>B (<code>ccmp</code>, both orders) + A</td><td class="center">✓</td><td class="center">✓</td><td>Best-practice reference implementation.</td></tr>
+        <tr><td><strong>TASA Explorer / Orbiter</strong></td><td>OFL 1.1</td><td>B + A</td><td class="center">✓</td><td class="center">✓</td><td>Clean from GitHub. <strong>Google Fonts web version lacks <code>U+0358</code>/<code>U+030D</code>/<code>ⁿ</code>.</strong></td></tr>
+        <tr><td><strong>jf open 粉圓 2.1 (Huninn)</strong></td><td>OFL 1.1</td><td>B + A</td><td class="center">✓</td><td class="center">✓</td><td>Clean; on Google Fonts with dedicated Taigi slice #106.</td></tr>
+        <tr><td><strong>芫荽 Iansui</strong> (But)</td><td>OFL 1.1</td><td>B + A</td><td class="center">✓</td><td class="center">✓</td><td>Clean; on Google Fonts with dedicated Taigi slice #104.</td></tr>
+        <tr><td><strong>WD-XL Lubrifont TC</strong></td><td>OFL 1.1</td><td>B (<code>ccmp</code> dynamic) + A</td><td class="center">✓</td><td class="center">✓</td><td>Clean across all test clusters; includes 24 IVS entries.</td></tr>
+        <tr><td><strong>一點明體 I.Ming</strong></td><td>IPA Font 1.0</td><td>B + A</td><td class="center">✓</td><td class="center">✓</td><td>60,597 glyphs; <code>U+0358</code> anchors only on <code>o ō</code>; <code>ccmp</code> ligatures cover the rest of the test set.</td></tr>
+        <tr><td><strong>源樣明體 GenYoMin2 TW</strong></td><td>OFL 1.1</td><td>B only</td><td class="center">✗</td><td class="center">✓</td><td>Dot drawn close to bowl (horn-like). Uncovered clusters depend on engine fallback. <strong>Used by this site.</strong></td></tr>
+        <tr><td><strong>Tāu-hū Khu-lé-iòng / Môo-tn̄g / Tauhu Oo (豆腐烏)</strong></td><td>OFL 1.1</td><td>B only</td><td class="center">✗</td><td class="center">✓</td><td>Same caveat as GenYo: clean <code>ccmp</code> coverage for standard clusters, no GPOS <code>mark</code> safety net.</td></tr>
+        <tr><td><strong>Charis / Doulos / Gentium</strong> (SIL)</td><td>OFL 1.1 (RFN)</td><td>A + C</td><td class="center">✓</td><td class="center">✓</td><td>Excellent. Spacing dot (GDEF class 1, 200–279u advance); 223 PUA glyphs. Forks must rename.</td></tr>
+        <tr><td><strong>EB Garamond</strong></td><td>OFL 1.1</td><td>A (no <code>U+0358</code>)</td><td class="center">✓</td><td class="center">✗</td><td><code>U+0358</code> is tofu; <code>U+030D</code> unanchored (misplaced tick). <strong>Not usable for <span class="poj">o͘</span>.</strong></td></tr>
+        <tr><td><strong>字咍 Taigi IVS fonts</strong> (Huninn POJ, Iansui TL)</td><td>OFL / Apache-2.0</td><td>D + IVS ruby</td><td class="center">✗</td><td class="center">✗</td><td>8,021 IVS ruby mappings per font. Weak for running POJ (no <code>mark</code>, dotted <span class="poj">i̍</span>).</td></tr>
+        <tr><td><strong>Arial</strong> (macOS copy)</td><td>Proprietary</td><td>A (<code>030D</code>) + D (<code>0358</code>)</td><td class="center">✓</td><td class="center">✓</td><td><code>U+0358</code> unanchored overstrike; HarfBuzz disables fallback because <code>mark</code> exists.</td></tr>
+        <tr><td><strong>Helvetica / Geneva / Menlo</strong> (macOS)</td><td>Proprietary</td><td>D</td><td class="center">✗</td><td class="center">✗</td><td>No GSUB/GPOS; HarfBuzz fallback floats dot on <span class="poj">Ó͘ Ō͘</span>. CoreText may differ (AAT).</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 id="not-tested">Fonts listed online but not yet tested</h3>
+    <ul>
+      <li><strong>Caivun</strong> (itch.io; page states SIL OFL) — needs direct file download and audit.</li>
+      <li><strong>Kaukhia</strong> (itch.io; <strong>CC BY 4.0</strong>) — Creative Commons advises against CC licences for fonts, though reuse is permitted.</li>
+      <li><strong>Indeciso</strong> — download site is JavaScript-only; not yet fetched.</li>
+      <li><strong>Chiron 昭源</strong> (OFL) — no POJ claim on its site (note: Chiron Hei HK and Chiron Sung HK appear in the 55 Google Fonts families that map POJ characters; see <a href="catalog.html#ready-55">Google Fonts Survey</a>).</li>
+      <li><strong>嘉市體</strong> — free to use, but <strong>no modification</strong> allowed, so not open source.</li>
+    </ul>
+
+    <h2 id="audit-explorer">Interactive 24-font HarfBuzz audit explorer</h2>
+    <p>Inspect the complete machine-generated dataset from <a href="data/poj-font-audit.json"><code>data/poj-font-audit.json</code></a>: per-font character coverage, GSUB/GPOS feature tags, <code>U+0358</code>/<code>U+030D</code> anchor counts, and every shaped cluster in NFC vs NFD.</p>
+
+    <div class="filter-bar">
+      <label for="audit-select"><strong>Select font:</strong></label>
+      <select id="audit-select"><option>Loading data/poj-font-audit.json…</option></select>
+    </div>
+    <div id="audit-detail"></div>
+
+    <h2 id="specimens">Rendered NFC vs NFD specimens</h2>
+    <p>Generated with <code>tools/poj_specimen.py</code> using HarfBuzz. For every font, the <strong>first row is NFC</strong> and the <strong>second row is NFD</strong> on the test line <code>o͘ ó͘ ò͘ ô͘ ō͘ o̍͘ ŏ͘ O͘ Ó͘ Ō͘ | a̍ i̍ m̍ n̍ n̍g I̍ | ḿ m̄ m̂ ǹ n̄ | iⁿ i̋ | Pe̍h-ōe-jī Lâu Ô͘-chhiû</code>. Click any specimen to zoom.</p>
+
+    <figure class="specimen-fig">
+      <img src="docs/img/specimen-0.png" alt="POJ Font Specimen Sheet 1 (NFC and NFD rows)" loading="lazy">
+      <figcaption><strong>Specimen 1 of 3</strong> (<code>docs/img/specimen-0.png</code>) — click image to view full resolution.</figcaption>
+    </figure>
+    <figure class="specimen-fig">
+      <img src="docs/img/specimen-1.png" alt="POJ Font Specimen Sheet 2 (NFC and NFD rows)" loading="lazy">
+      <figcaption><strong>Specimen 2 of 3</strong> (<code>docs/img/specimen-1.png</code>) — click image to view full resolution.</figcaption>
+    </figure>
+    <figure class="specimen-fig">
+      <img src="docs/img/specimen-2.png" alt="POJ Font Specimen Sheet 3 (NFC and NFD rows)" loading="lazy">
+      <figcaption><strong>Specimen 3 of 3</strong> (<code>docs/img/specimen-2.png</code>) — click image to view full resolution.</figcaption>
+    </figure>
+
+    <nav class="doc-pager" aria-label="Pagination">
+      <a class="pager-link prev" href="fonts.html">
+        <span class="pager-dir">← Previous</span>
+        <span class="pager-title">How Fonts Implement POJ</span>
+      </a>
+      <a class="pager-link next" href="catalog.html">
+        <span class="pager-dir">Next →</span>
+        <span class="pager-title">Google Fonts Survey &amp; Forks</span>
+      </a>
+    </nav>
+
+    <footer class="doc-footer">
+      PehoejiFont project · Text is set in <a href="https://github.com/ButTaiwan/genyo-font">源樣明體 GenYo Min</a> by But Ko (<a href="assets/fonts/GenYo-OFL.txt">SIL Open Font License</a>) · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">Source on GitHub</a>
+    </footer>
+  </main>
+
+  <aside class="toc" aria-label="On this page">
+    <div class="toc-title">On this page</div>
+    <ul id="toc-list"></ul>
+  </aside>
 </div>
 
-<h2 id="test">Test any font yourself</h2>
-<p>Copy this line, paste it into your app, and switch to the font you want to check.</p>
-<div class="testline">
-  <span class="text poj" id="testline">o͘ ó͘ ò͘ ô͘ ō͘ o̍͘ O͘ Ó͘ Ō͘ · a̍ e̍ i̍ o̍ u̍ m̍ n̍g · ḿ m̄ m̂ ǹ n̄ · thiⁿ hō͘ chia̍h · tńg--khì · Pe̍h-ōe-jī</span>
-  <button class="copy" data-form="NFC">Copy</button>
-  <button class="copy" data-form="NFD" title="The decomposed form Macs and PDFs sometimes produce">Copy (Mac/PDF form)</button>
-</div>
-<p>Check these things:</p>
-<ol>
-  <li><strong>No empty boxes</strong> or letters in a different style. Either means the font lacks that character.</li>
-  <li><strong>The <span class="poj">o͘</span> dot</strong> sits at the top right of each <span class="poj">o</span>, next to the tone, not on top of it and not floating high, and especially on the capitals <span class="poj">O͘ Ó͘ Ō͘</span>.</li>
-  <li><strong><span class="poj">i̍</span> has no dot</strong> under the tone line.</li>
-  <li><strong>The 8th-tone line</strong> sits centred above <span class="poj">a̍ e̍ m̍ n̍</span>.</li>
-  <li><strong><span class="poj">--</span> stays two hyphens.</strong></li>
-  <li>Paste the second copy (Mac/PDF form) too. <strong>It should look exactly the same.</strong></li>
-</ol>
-
-<div class="next"><a href="fonts.html">← How fonts draw them</a><a href="problems.html">Next: Fix problems →</a></div>
-</main>
-
-<footer class="site"><div class="wrap">
-  PehoejiFont project · Text is set in <a href="https://github.com/ButTaiwan/genyo-font">源樣明體 GenYo Min</a> by But Ko (<a href="assets/fonts/GenYo-OFL.txt">SIL Open Font License</a>) · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">Source on GitHub</a>
-</div></footer>
+<script src="assets/docs.js"></script>
 <script>
-document.querySelectorAll('button.copy').forEach(function (b) {
-  b.addEventListener('click', function () {
-    var text = document.getElementById('testline').textContent.normalize(b.dataset.form);
-    var label = b.textContent;
-    function done(msg) { b.textContent = msg; setTimeout(function () { b.textContent = label; }, 1500); }
-    try {
-      navigator.clipboard.writeText(text).then(function () { done('Copied'); }, function () { done('Select and copy by hand'); });
-    } catch (e) { done('Select and copy by hand'); }
-  });
-});
+(function () {
+  // ── Live POJ Test Bench ───────────────────────────────────────────────────
+  var PRESETS = {
+    specimen: 'o͘ ó͘ ò͘ ô͘ ō͘ o̍͘ ŏ͘ O͘ Ó͘ Ō͘ | a̍ i̍ m̍ n̍ n̍g I̍ | ḿ m̄ m̂ ǹ n̄ | iⁿ i̋ | Pe̍h-ōe-jī Lâu Ô͘-chhiû',
+    full: 'o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ ő͘ ǒ͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ m̌ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | i̋ ő ǎ | tńg--khì | Pe̍h-ōe-jī Lâu Ô͘-chhiû',
+    words: 'O͘-á hō͘ (雨) chia̍h (食) thiⁿ (天) n̂g (黃) · kun 君 kún 滾 kùn 棍 kut 骨 kûn 裙 kūn 郡 ku̍t 滑 · tńg--khì 轉去 · Pe̍h-ōe-jī 白話字'
+  };
+
+  var input = document.getElementById('bench-input');
+  var strip = document.getElementById('cp-strip');
+  var sizeRange = document.getElementById('bench-size');
+  var sizeVal = document.getElementById('bench-size-val');
+  var spacingChk = document.getElementById('bench-spacing');
+  var boldChk = document.getElementById('bench-bold');
+
+  function toReverseOrder(str) {
+    // Decompose, then move U+0358 before any preceding ccc-230 tone marks
+    var nfd = str.normalize('NFD');
+    return nfd.replace(/([\u0300-\u030D\u030B\u030C]+)\u0358/g, '\u0358$1');
+  }
+
+  function renderCodepoints() {
+    var text = input.value.slice(0, 120);
+    var cps = Array.from(text);
+    var html = cps.map(function (ch) {
+      var cp = ch.codePointAt(0);
+      var hex = 'U+' + cp.toString(16).toUpperCase().padStart(4, '0');
+      var isMark = (cp >= 0x0300 && cp <= 0x036F);
+      var disp = ch === ' ' ? '␣' : (isMark ? '◌' + ch : ch);
+      return '<span class="cp-chip' + (isMark ? ' is-mark' : '') + '">' +
+        window.POJEscapeHtml(disp) + ' ' + hex + '</span>';
+    }).join('');
+    if (input.value.length > 120) html += '<span class="muted"> … (showing first 120 codepoints)</span>';
+    strip.innerHTML = html || '<span class="muted">Type or paste POJ text above to inspect its Unicode codepoints.</span>';
+  }
+
+  if (input) {
+    input.addEventListener('input', renderCodepoints);
+    renderCodepoints();
+
+    sizeRange.addEventListener('input', function () {
+      input.style.fontSize = sizeRange.value + 'px';
+      sizeVal.textContent = sizeRange.value + 'px';
+    });
+    spacingChk.addEventListener('change', function () {
+      input.style.letterSpacing = spacingChk.checked ? '0.12em' : '';
+    });
+    boldChk.addEventListener('change', function () {
+      input.style.fontWeight = boldChk.checked ? '700' : '400';
+    });
+
+    document.querySelectorAll('[data-preset]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        input.value = PRESETS[btn.dataset.preset];
+        renderCodepoints();
+      });
+    });
+
+    document.querySelectorAll('[data-copy-form]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var form = btn.dataset.copyForm;
+        var out = form === 'REV' ? toReverseOrder(input.value) : input.value.normalize(form);
+        var orig = btn.textContent;
+        window.POJCopyText(out, function (ok) {
+          btn.textContent = ok ? 'Copied ' + form : 'Copy failed';
+          setTimeout(function () { btn.textContent = orig; }, 1400);
+        });
+      });
+    });
+  }
+
+  // ── 24-Font Audit Explorer ────────────────────────────────────────────────
+  var select = document.getElementById('audit-select');
+  var detail = document.getElementById('audit-detail');
+  var esc = window.POJEscapeHtml;
+
+  function cleanLabel(k) {
+    return k.replace('Tâi-lô', 'KPL');
+  }
+
+  function mechClass(m) {
+    if (!m) return '';
+    if (m === 'ligature' || m === 'gpos-anchor' || m === 'partial-ligature+gpos' || m === 'single') return 'cl-ok';
+    if (m.indexOf('NOTDEF') !== -1 || m.indexOf('FLOATING') !== -1 || m.indexOf('overstrike') !== -1) return 'cl-bad';
+    return 'cl-warn';
+  }
+
+  function renderFont(f) {
+    var hasRows = Object.keys(f.has).map(function (k) {
+      var ok = f.has[k];
+      return '<tr><td>' + esc(cleanLabel(k)) + '</td><td>' +
+        (ok ? '<span class="tag good">Yes</span>' : '<span class="tag bad">No</span>') + '</td></tr>';
+    }).join('');
+
+    var o358Keys = Object.keys(f['0358_on'] || {});
+    var o358Badges = o358Keys.map(function (k) {
+      var ok = f['0358_on'][k];
+      return '<span class="tag ' + (ok ? 'good' : 'neutral') + '" style="margin:2px 4px 2px 0"><span class="poj">' + esc(k) + '</span> ' + (ok ? '✓' : '✗') + '</span>';
+    }).join('');
+
+    var clusters = Object.keys(f.shaping || {}).map(function (cl) {
+      var s = f.shaping[cl];
+      var cls = mechClass(s.nfc);
+      var diff = s.same ? '' : ' <span class="tag warn">NFC≠NFD</span>';
+      return '<div class="cluster-cell ' + cls + '">' +
+        '<div class="cl-ch poj">' + esc(cl) + diff + '</div>' +
+        '<div class="cl-m">NFC: ' + esc(s.nfc) + '</div>' +
+        '<div class="cl-m">NFD: ' + esc(s.nfd) + '</div>' +
+      '</div>';
+    }).join('');
+
+    detail.innerHTML =
+      '<div class="stat-grid">' +
+        '<div class="stat-card"><div class="stat-num">' + Number(f.glyphs).toLocaleString() + '</div><div class="stat-label">Total glyphs</div></div>' +
+        '<div class="stat-card"><div class="stat-num">' + (f.mark_bases ? f.mark_bases['U+0358'] : 0) + ' / ' + (f.mark_bases ? f.mark_bases['U+030D'] : 0) + '</div><div class="stat-label">Anchor bases (<code>0358</code> / <code>030D</code>)</div></div>' +
+        '<div class="stat-card"><div class="stat-num">' + Number(f.pua_count || 0).toLocaleString() + '</div><div class="stat-label">PUA slots mapped</div></div>' +
+        '<div class="stat-card"><div class="stat-num">' + Number(f.ivs_mappings || 0).toLocaleString() + '</div><div class="stat-label">IVS ruby mappings</div></div>' +
+      '</div>' +
+      '<p><strong>File:</strong> <code>' + esc(f.file) + '</code><br>' +
+      '<strong>GSUB features:</strong> ' + (f.GSUB.length ? f.GSUB.map(function (x) { return '<code>' + esc(x) + '</code>'; }).join(' ') : '<span class="muted">none</span>') + '<br>' +
+      '<strong>GPOS features:</strong> ' + (f.GPOS.length ? f.GPOS.map(function (x) { return '<code>' + esc(x) + '</code>'; }).join(' ') : '<span class="muted">none</span>') + '<br>' +
+      '<strong>Missing precomposed letters:</strong> ' + (f.precomposed_missing ? '<span class="poj">' + esc(f.precomposed_missing) + '</span>' : '<span class="tag good">None</span>') + '</p>' +
+      '<p><strong><code>U+0358</code> GPOS anchor presence on o-bases:</strong><br>' + o358Badges + '</p>' +
+      '<details><summary>Character cmap coverage (' + Object.keys(f.has).length + ' checks)</summary>' +
+      '<div class="table-wrap"><table class="compact"><thead><tr><th>Character</th><th>Present</th></tr></thead><tbody>' + hasRows + '</tbody></table></div></details>' +
+      '<h3>Per-cluster HarfBuzz shaping (' + Object.keys(f.shaping || {}).length + ' clusters)</h3>' +
+      '<div class="cluster-grid">' + clusters + '</div>';
+  }
+
+  fetch('data/poj-font-audit.json')
+    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function (data) {
+      select.innerHTML = data.map(function (f, idx) {
+        return '<option value="' + idx + '">' + esc(f.name) + ' (' + f.glyphs + ' glyphs)</option>';
+      }).join('');
+      select.addEventListener('change', function () { renderFont(data[Number(select.value)]); });
+      renderFont(data[0]);
+    })
+    .catch(function () {
+      detail.innerHTML = '<div class="callout warn"><span class="callout-title">Local file access note</span><p>Open this documentation over HTTP (e.g. GitHub Pages or <code>python3 -m http.server</code>) to browse the interactive JSON dataset from <code>data/poj-font-audit.json</code>.</p></div>';
+    });
+})();
 </script>
 </body>
 </html>

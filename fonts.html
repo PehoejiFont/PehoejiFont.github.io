@@ -3,92 +3,231 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>How Fonts Draw POJ</title>
-<meta name="description" content="The four ways fonts place the dot of o͘ and the POJ tone marks, with pictures from real fonts.">
+<title>How Fonts Implement POJ — POJ Font Documentation</title>
+<meta name="description" content="The four OpenType techniques fonts use to draw Taigi POJ (GPOS anchors, ccmp ligatures, SIL spacing dot, overstrike/fallback), optional feature pitfalls, and the Google Fonts unicode-range audit.">
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-<header class="site"><div class="wrap">
-  <a class="brand" href="./">POJ Font Guide</a>
-  <nav>
-    <a href="./">Start</a>
-    <a href="letters.html">How letters are stored</a>
-    <a href="fonts.html" aria-current="page">How fonts draw them</a>
-    <a href="choose.html">Pick a font</a>
-    <a href="problems.html">Fix problems</a>
-    <a href="makers.html">For font makers</a>
-  </nav>
-</div></header>
+<header class="topbar">
+  <div class="topbar-inner">
+    <button class="menu-btn" id="menu-toggle" type="button" aria-label="Toggle navigation">☰</button>
+    <a class="brand" href="./">
+      <span class="brand-mark poj">o͘</span>
+      <span>PehoejiFont</span>
+      <span class="brand-badge">Docs</span>
+    </a>
+    <div class="topbar-spacer"></div>
+    <button class="search-trigger" id="search-trigger" type="button">
+      <span>⌕</span>
+      <span class="search-label">Search docs…</span>
+      <span class="kbd">⌘K</span>
+    </button>
+    <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    <a class="icon-btn" href="https://github.com/PehoejiFont/PehoejiFont.github.io">GitHub</a>
+  </div>
+</header>
 
-<main class="wrap">
-<h1>How fonts put the dot in the right place</h1>
-<p class="lead">The text says “<span class="poj">o</span> + tone + dot”. The font decides what that looks like. We found four different ways fonts do it.</p>
+<div class="sidebar-backdrop" id="sidebar-backdrop"></div>
 
-<p>In the pictures below, each <strong>box</strong> is the space a piece takes up on the line, and the <strong style="color:var(--accent)">orange</strong> part is a sticker the font placed separately. All four show <span class="poj">ó͘</span>.</p>
+<div class="doc-shell">
+  <aside class="sidebar" aria-label="Documentation navigation">
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Getting Started</div>
+      <ul>
+        <li><a href="./">Overview</a></li>
+        <li><a href="choose.html#test">Live POJ Test Bench</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Core Concepts</div>
+      <ul>
+        <li><a href="letters.html">Unicode &amp; Encoding</a></li>
+        <li><a href="fonts.html" aria-current="page">How Fonts Implement POJ</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Font Directory &amp; Data</div>
+      <ul>
+        <li><a href="choose.html">24-Font Audit &amp; Specimens</a></li>
+        <li><a href="catalog.html">Google Fonts Survey &amp; Forks</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Practical Guides</div>
+      <ul>
+        <li><a href="problems.html">Troubleshooting &amp; Platforms</a></li>
+        <li><a href="makers.html">Font Maker’s Guide</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Reference</div>
+      <ul>
+        <li><a href="tools.html">Tools, Methodology &amp; Reviews</a></li>
+      </ul>
+    </div>
+  </aside>
 
-<div class="ways">
-  <div class="way">
-    <img src="assets/img/way-a-anchor.svg" alt="ó͘ in POJ Chhiu-ki: one box, with the orange dot attached at the top right">
-    <h3>A. Snap points</h3>
-    <p>The <span class="poj">o</span> has a marked spot at its top right. The dot snaps onto it, like a magnet.</p>
-    <p><em>POJ Chhiu-ki, Source Sans 3</em></p>
-  </div>
-  <div class="way">
-    <img src="assets/img/way-b-ligature.svg" alt="ó͘ in Lesson One: one box, drawn as one piece with no orange parts">
-    <h3>B. Ready-drawn letter</h3>
-    <p>The designer drew the whole <span class="poj">ó͘</span> as one picture. The font swaps the three pieces for it.</p>
-    <p><em>Lesson One, Huninn, Iansui, TASA</em></p>
-  </div>
-  <div class="way">
-    <img src="assets/img/way-c-spacing.svg" alt="ó͘ in Charis: the orange dot has its own narrow box after the o">
-    <h3>C. Dot with its own space</h3>
-    <p>The dot takes a little room of its own after the <span class="poj">o</span>, so it can never touch the next letter.</p>
-    <p><em>Charis, Doulos, Gentium (SIL)</em></p>
-  </div>
-  <div class="way">
-    <img src="assets/img/way-d-overstrike.svg" alt="ó͘ in Arial: the orange dot sits outside the o's box, far to the right">
-    <h3>D. Printed in a fixed spot</h3>
-    <p>The dot is drawn at one fixed place, whatever letter it follows. If that place is wrong, it is wrong every time.</p>
-    <p><em>Arial, Helvetica, Menlo</em></p>
-  </div>
+  <main class="doc-main">
+    <div class="breadcrumb"><a href="./">Docs</a> › <span>Core Concepts</span> › <span>How Fonts Implement POJ</span></div>
+    <h1>How Fonts Implement POJ</h1>
+    <p class="lead">Measuring 24 fonts across 26 test clusters in NFC and NFD revealed four distinct OpenType techniques for placing the <span class="poj">o͘</span> dot and tone marks — plus critical delivery traps on the web.</p>
+
+    <h2 id="four-techniques">The four techniques at a glance</h2>
+    <p>In the diagrams below (each showing <span class="poj">ó͘</span>), shaded boxes indicate each glyph’s horizontal advance width, and <strong style="color:var(--accent)">orange</strong> marks a separate combining-mark glyph positioned by the font:</p>
+
+    <div class="ways">
+      <div class="way">
+        <img src="assets/img/way-a-anchor.svg" alt="ó͘ in POJ Chhiu-ki: one box with the orange dot attached at top right via GPOS anchor">
+        <h3>A. GPOS anchors</h3>
+        <p>Base glyph carries a <code>topright</code> snap point; <code>mark</code> attaches <code>U+0358</code> magnetically.</p>
+        <p><em>POJ Chhiu-ki, Source Sans 3</em></p>
+      </div>
+      <div class="way">
+        <img src="assets/img/way-b-ligature.svg" alt="ó͘ in Lesson One: one box drawn as a single precomposed ccmp glyph">
+        <h3>B. <code>ccmp</code> ligatures</h3>
+        <p>Designer draws the whole <span class="poj">ó͘</span> as one glyph; <code>ccmp</code> substitutes the sequence.</p>
+        <p><em>Lesson One, Huninn, Iansui, TASA, GenYo</em></p>
+      </div>
+      <div class="way">
+        <img src="assets/img/way-c-spacing.svg" alt="ó͘ in Charis: the orange dot has its own narrow advance box after the o">
+        <h3>C. Spacing dot</h3>
+        <p><code>U+0358</code> is a GDEF class-1 base glyph with its own advance width after <span class="poj">o</span>.</p>
+        <p><em>SIL Charis, Doulos, Gentium</em></p>
+      </div>
+      <div class="way">
+        <img src="assets/img/way-d-overstrike.svg" alt="ó͘ in Arial: unanchored orange dot sits outside the advance box">
+        <h3>D. Overstrike / fallback</h3>
+        <p>Fixed outline offset or shaper bounding-box guess; fails on capitals and toned vowels.</p>
+        <p><em>Arial, Helvetica, Geneva, Menlo</em></p>
+      </div>
+    </div>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>Technique</th><th>Mechanism</th><th>Examples</th><th>Pros</th><th>Cons</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>A. GPOS <code>mark</code> anchors</strong></td>
+          <td><code>o</code> + separate mark glyph(s) placed via <code>mark</code> (<code>top</code> / <code>topright</code>) and <code>mkmk</code></td>
+          <td>Source Sans 3, POJ Chhiu-ki, Arial (for <code>U+030D</code>)</td>
+          <td>Small glyph count, scales to variable fonts, works on any anchored base</td>
+          <td>Requires <code>topright</code> on <strong>every</strong> precomposed toned vowel (<span class="poj">ó ò ô ō ŏ…</span>). Easy to miss: Source Sans 3 omits <span class="poj">ŏ Ŏ</span>; I.Ming anchors only <span class="poj">o ō</span>.</td>
+        </tr>
+        <tr>
+          <td><strong>B. Precomposed <code>ccmp</code> ligatures</strong></td>
+          <td><code>o 0301 0358</code> or <code>ó 0358</code> → single glyph (e.g. <code>o_uni0301_uni0358</code>)</td>
+          <td>Lesson One, jf open 粉圓, Iansui, TASA, Tauhu, I.Ming, GenYo, WD-XL</td>
+          <td>Total artistic control over tone/dot collision; independent of mark positioning bugs</td>
+          <td>Increases glyph count; must match NFC, NFD, and reverse order; uncovered combos fall back to A; ligatures lose <code>o</code>’s kerning unless added to kerning classes.</td>
+        </tr>
+        <tr>
+          <td><strong>C. Spacing dot</strong></td>
+          <td><code>U+0358</code> is a <strong>GDEF class 1 base</strong> with non-zero advance (Gentium 200, Charis 279, Doulos 255 units)</td>
+          <td>SIL Charis, Doulos, Gentium</td>
+          <td>Dot can never collide with following letters (<span class="poj">o͘h</span>, <span class="poj">o͘ⁿ</span>)</td>
+          <td>Wider <span class="poj">o͘</span>; must remain GDEF class 1 (a class-3 mark would have its advance zeroed); PDF text extraction may insert a space after the dot.</td>
+        </tr>
+        <tr>
+          <td><strong>D. Zero-width overstrike or fallback</strong></td>
+          <td>Zero-advance mark drawn at a fixed coordinate, or no <code>mark</code> table so shaper guesses</td>
+          <td>Arial (<code>U+0358</code>), Geneva, Helvetica, Menlo, taigivs Latin, Tauhu (uncovered)</td>
+          <td>Zero implementation effort</td>
+          <td>Fits at most one base shape; breaks on capitals, toned vowels, and non-HarfBuzz engines.</td>
+        </tr>
+      </tbody>
+    </table></div>
+
+    <h2 id="technique-a">A. GPOS <code>mark</code> anchors</h2>
+    <p>Each base glyph defines invisible attachment coordinates: <code>top</code> for centred tones and <code>topright</code> for <code>U+0358</code>. The shaper snaps each mark’s corresponding <code>_top</code> or <code>_topright</code> anchor onto the base.</p>
+    <p>Because HarfBuzz normalises text to NFC before GSUB/GPOS, <span class="poj">ō͘</span> arrives as precomposed <code>ō</code> + <code>U+0358</code>. Therefore <code>topright</code> must exist not only on <code>o O</code>, but on <strong>every precomposed toned vowel</strong> (<span class="poj">ó ò ô ǒ ō ŏ ő</span> and capitals). Because HarfBuzz fallback is all-or-nothing, a single omitted anchor drops the dot to offset <code>(0, 0)</code>. Source Sans 3 illustrates this exact bug on <span class="poj">ŏ͘</span> and <span class="poj">Ŏ͘</span>:</p>
+    <div class="examples">
+      <div class="ex bad tall">
+        <div class="label"><span class="tag bad">Missing anchor</span><b>Source Sans 3</b>: <span class="poj">ō͘</span> is anchored properly, but <span class="poj">ŏ͘</span> has no <code>topright</code> anchor so the dot drops to <code>(0, 0)</code></div>
+        <img src="assets/img/sourcesans-breve.svg" alt="ō͘ and ŏ͘ in Source Sans 3: the second dot sits outside its letter">
+      </div>
+    </div>
+
+    <h2 id="technique-b">B. Precomposed glyphs via <code>ccmp</code></h2>
+    <p>The designer draws <span class="poj">o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘</span> and capitals as finished glyphs, substituting them via <code>ccmp</code> ligature rules. This allows tailored optical adjustments (narrowing wide macrons/circumflexes next to the dot, just like Vietnamese fonts narrow accents on <code>ố</code>/<code>ớ</code>).</p>
+    <p><strong>Engineering pitfalls to avoid:</strong></p>
+    <ul>
+      <li><strong>Input forms:</strong> Must match NFC (<code>oacute uni0358</code>), NFD canonical (<code>o uni0301 uni0358</code>), and non-canonical order (<code>o uni0358 uni0301</code>), with 3-glyph rules listed before 2-glyph prefixes.</li>
+      <li><strong>GDEF class:</strong> Every ligature output glyph must be classified as <strong>GDEF class 1 (base)</strong>, not class 2 (ligature), so subsequent marks can still attach cleanly if needed.</li>
+      <li><strong>Kerning:</strong> Add every precomposed <span class="poj">o͘</span> glyph to the font’s <code>o</code>/<code>O</code> kerning classes, or pairs like <span class="poj">Tō͘</span> / <span class="poj">o͘v</span> lose kerning.</li>
+      <li><strong>Safety net:</strong> Fonts that ship Technique B <em>without</em> GPOS <code>mark</code> (such as GenYo Min and the Tauhu family) look great on covered clusters, but any unlisted combination (for instance rare KPL/dialectal combinations) depends on engine fallback.</li>
+    </ul>
+
+    <h2 id="technique-c">C. Spacing dot (SIL approach)</h2>
+    <p>SIL’s Charis, Doulos, and Gentium treat <code>U+0358</code> as a GDEF class-1 base glyph with a deliberate positive advance width (<strong>200 units</strong> in Gentium, <strong>279</strong> in Charis, <strong>255</strong> in Doulos). Because the dot occupies its own slice of horizontal space, it can never collide with ascenders or superscripts in sequences like <span class="poj">o͘h</span>, <span class="poj">o͘k</span>, <span class="poj">o͘l</span>, <span class="poj">o͘t</span>, or <span class="poj">o͘ⁿ</span>.</p>
+    <p>Crucially, <code>U+0358</code> must stay GDEF class 1: classifying it as a GDEF class-3 mark causes OpenType shapers to zero its advance width. Trade-offs are slightly wider <span class="poj">o͘</span> words and occasional spurious spaces when copying text out of PDFs.</p>
+
+    <h2 id="technique-d">D. Zero-width overstrike &amp; shaper fallback</h2>
+    <p>When a font includes <code>U+0358</code> without anchors:</p>
+    <ul>
+      <li>If the font has a <code>mark</code> table for other accents (like <strong>Arial</strong>), HarfBuzz disables fallback completely and draws <code>U+0358</code> at offset <code>(0, 0)</code> — wherever its outline happens to live (in Arial, hanging in the space after the letter).</li>
+      <li>If the font has <strong>no <code>mark</code> table at all</strong> (like macOS <strong>Geneva, Helvetica, Menlo</strong>, and the Latin portion of <strong>字咍 taigivs</strong>), HarfBuzz runs bounding-box fallback. On capital <span class="poj">Ó͘</span> and <span class="poj">Ō͘</span>, fallback positions <code>U+0358</code> above the entire ink box (accent included), floating the dot far above the letter.</li>
+    </ul>
+
+    <h2 id="best-practice">Best practice: combining A + B</h2>
+    <div class="callout good">
+      <span class="callout-title">Recommended architecture: Techniques A + B together</span>
+      <p>The strongest POJ fonts ship <strong>precomposed <code>ccmp</code> glyphs (B)</strong> for all common clusters — guaranteeing optical perfection and zero collisions — backed by <strong>full GPOS <code>mark</code> / <code>mkmk</code> anchors (A)</strong> as a universal safety net for every other base and input form. <strong>Lesson One, jf open 粉圓 (Huninn), 芫荽 Iansui, TASA Explorer/Orbiter, and WD-XL Lubrifont</strong> all follow A + B.</p>
+    </div>
+
+    <h2 id="switches">Optional features &amp; hidden switches (<code>liga</code>, <code>clig</code>, <code>case</code>)</h2>
+    <p>OpenType features are not all enabled unconditionally:</p>
+    <ul>
+      <li><strong>Never place POJ glyph building in <code>liga</code> or <code>clig</code>.</strong> Under CSS Text Level 3, Chrome, Safari, and Firefox disable optional ligatures whenever <code>letter-spacing</code> is non-zero; <code>font-variant-ligatures: none</code> disables them too. Microsoft Word leaves ligatures <strong>off by default</strong> (unless enabled under <em>Font → Advanced</em>), as do many code editors. Always use <strong><code>ccmp</code></strong>.</li>
+      <li><strong><code>case</code> is off by default</strong> in browsers and Word — even CSS <code>text-transform: uppercase</code> does not activate it. Capital-form marks therefore require contextual rules inside <code>ccmp</code>, not solely in <code>case</code>.</li>
+      <li><em>Verified case study — NunitoPOJ:</em> NunitoPOJ puts ligatures in <code>liga</code> keyed in non-canonical order (<code>O 0358 030B</code>), so those rules never fire in HarfBuzz. Even with <code>liga</code> disabled, however, its <code>ccmp</code> dotless-i rule and GPOS anchors still render <span class="poj">o͘</span> and <span class="poj">i̍</span> cleanly.</li>
+    </ul>
+
+    <h2 id="google-fonts">Google Fonts web delivery &amp; <code>unicode-range</code> audit</h2>
+    <p>To minimise bandwidth, the Google Fonts CSS API (<code>fonts.googleapis.com/css2</code>) slices each font into separate <code>unicode-range</code> WOFF2 files. We audited what Chrome actually receives (verified 2026-11-20):</p>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>Family on Google Fonts</th><th>Total slices</th><th>Slice holding <code>U+0358</code> / <code>U+030D</code> / <code>U+207F</code></th><th>Result on a web page</th></tr></thead>
+      <tbody>
+        <tr><td><strong>TASA Explorer</strong></td><td>2 (<code>latin</code>, <code>latin-ext</code>)</td><td><span class="tag bad">None</span></td><td>Marks are <strong>not served at all</strong>, even though the full GitHub release has them. Every <span class="poj">o͘</span> and 8th tone falls back to a system font.</td></tr>
+        <tr><td><strong>Source Sans 3</strong></td><td>7</td><td><span class="tag bad">None</span></td><td>POJ marks are stripped from all served slices.</td></tr>
+        <tr><td><strong>EB Garamond</strong></td><td>7</td><td><span class="tag bad">None</span></td><td>Stripped — and the source font lacks <code>U+0358</code> anyway.</td></tr>
+        <tr><td><strong>芫荽 Iansui</strong></td><td>108</td><td><span class="tag good">Slice #104</span></td><td>Dedicated Taigi slice holding POJ marks, <span class="poj">ḿ ǹ ő ű ı ᴺ</span>, and base letters.</td></tr>
+        <tr><td><strong>jf open 粉圓 (Huninn)</strong></td><td>111</td><td><span class="tag good">Slice #106</span></td><td>Same dedicated Taigi slice pattern.</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="callout warn">
+      <span class="callout-title">Cross-slice fallback risk &amp; subsetting checklist</span>
+      <p>Notice that in Iansui and Huninn, plain <code>o</code> appears in both the <code>latin</code> slice and the Taigi slice; whether <code>o + U+0358</code> stays inside a single font file depends on each browser’s per-cluster fallback behaviour and should be tested in Chrome, Safari, and Firefox. Note also that 狗公會曉學台語 lists TASA Explorer/Orbiter under 線頂 Google 字體 白話字台文, so websites loading TASA from Google Fonts are directly affected. (Google Docs/Slides delivery was not tested.)</p>
+      <p><strong>For reliable POJ on the web:</strong> self-host the full font (or use the Google Fonts <code>&amp;text=</code> parameter). When subsetting with <code>pyftsubset</code> or build plugins, always preserve:</p>
+      <ul>
+        <li>Codepoints: <code>U+0358</code>, <code>U+030D</code>, <code>U+030B</code>, <code>U+030C</code>, <code>U+207F</code>, <code>U+1D3A</code>, <code>U+0131</code>, <code>U+0237</code>, <span class="poj">ḿ Ḿ ǹ Ǹ</span>, and all toned vowels;</li>
+        <li>Layout features: <code>ccmp</code>, <code>mark</code>, <code>mkmk</code> (or <code>--layout-features='*'</code>, as in <code>tools/build_site_fonts.sh</code>);</li>
+        <li>For IVS ruby fonts: preserve the <code>cmap</code> format 14 subtable.</li>
+      </ul>
+    </div>
+
+    <nav class="doc-pager" aria-label="Pagination">
+      <a class="pager-link prev" href="letters.html">
+        <span class="pager-dir">← Previous</span>
+        <span class="pager-title">Unicode &amp; Encoding</span>
+      </a>
+      <a class="pager-link next" href="choose.html">
+        <span class="pager-dir">Next →</span>
+        <span class="pager-title">24-Font Audit &amp; Specimens</span>
+      </a>
+    </nav>
+
+    <footer class="doc-footer">
+      PehoejiFont project · Text is set in <a href="https://github.com/ButTaiwan/genyo-font">源樣明體 GenYo Min</a> by But Ko (<a href="assets/fonts/GenYo-OFL.txt">SIL Open Font License</a>) · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">Source on GitHub</a>
+    </footer>
+  </main>
+
+  <aside class="toc" aria-label="On this page">
+    <div class="toc-title">On this page</div>
+    <ul id="toc-list"></ul>
+  </aside>
 </div>
 
-<h2>A. Snap points</h2>
-<p>The font designer marks an invisible point on each letter: “a tone goes here”, “the <span class="poj">o͘</span> dot goes here”. The text engine moves each sticker onto its point. Font people call these points <strong>anchors</strong>.</p>
-<p><strong>Good:</strong> one dot works with every letter that has a snap point, so the font stays small.</p>
-<p><strong>Watch out:</strong> every letter needs its own snap point, <em>including</em> the ready-made toned ones like <span class="poj">ō</span> and <span class="poj">ŏ</span>. If the designer forgets one, the dot ends up in a strange place. Source Sans 3 does this for <span class="poj">ŏ͘</span>:</p>
-<div class="examples">
-  <div class="ex bad tall"><div class="label"><span class="tag bad">Missing snap point</span><b>Source Sans 3</b>: <span class="poj">ō͘</span> is fine, but on <span class="poj">ŏ͘</span> the dot falls outside the letter</div>
-    <img src="assets/img/sourcesans-breve.svg" alt="ō͘ and ŏ͘ in Source Sans 3: the second dot sits outside its letter"></div>
-</div>
-
-<h2>B. Ready-drawn letters</h2>
-<p>The designer draws <span class="poj">o͘ ó͘ ò͘ ô͘ ō͘ o̍͘</span> and the capitals as finished pictures. When the font sees the pieces, it swaps in the finished picture.</p>
-<p><strong>Good:</strong> the designer controls every detail, so the tone and the dot never collide.</p>
-<p><strong>Watch out:</strong> the font must recognise <em>every</em> way the letter can arrive (see <a href="letters.html#same-letter">the same letter, written different ways</a>). Anything it doesn't recognise falls back to the stickers, so it still needs snap points as a safety net.</p>
-
-<h2>C. Dot with its own space</h2>
-<p>The SIL fonts treat the dot almost like a tiny letter: it takes up a little width after the <span class="poj">o</span>.</p>
-<p><strong>Good:</strong> the dot can never crash into the next letter, as in <span class="poj">o͘h</span> or <span class="poj">o͘ⁿ</span>.</p>
-<p><strong>Watch out:</strong> words with <span class="poj">o͘</span> get a bit wider. Copying text out of a PDF sometimes adds a space after the dot.</p>
-
-<h2>D. Printed in a fixed spot</h2>
-<p>The font has a dot, but no snap point for it, so the dot is drawn wherever its picture happens to sit. In Arial that is the gap after the letter. At best it suits one letter; on capitals and toned letters it lands in the wrong place.</p>
-<p>When a font has <strong>no snap points at all</strong>, Chrome and Firefox try to guess where stickers go. The guess is fine for a plain <span class="poj">o͘</span> but goes too high on <span class="poj">Ó͘</span> and <span class="poj">Ō͘</span>, as the Helvetica example on the <a href="./">start page</a> shows.</p>
-
-<h2>The best fonts use A and B together</h2>
-<div class="note">
-  <p>Ready-drawn letters (B) for the common syllables, so they look perfect, <strong>plus</strong> snap points (A) as a safety net for everything else. Lesson One, jf open 粉圓, 芫荽 Iansui, TASA and WD-XL Lubrifont all work this way.</p>
-</div>
-
-<h2>One more thing: hidden switches</h2>
-<p>Fonts can hide letter-building rules behind switches that are not always on. One of them, “ligatures”, is <strong>turned off</strong> when you add letter-spacing on a web page, and is off by default in Microsoft Word. A font that builds <span class="poj">o͘</span> only behind that switch will break in those places. Good POJ fonts use the switch that is always on.</p>
-
-<div class="next"><a href="letters.html">← How letters are stored</a><a href="choose.html">Next: Pick a font →</a></div>
-</main>
-
-<footer class="site"><div class="wrap">
-  PehoejiFont project · Text is set in <a href="https://github.com/ButTaiwan/genyo-font">源樣明體 GenYo Min</a> by But Ko (<a href="assets/fonts/GenYo-OFL.txt">SIL Open Font License</a>) · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">Source on GitHub</a>
-</div></footer>
+<script src="assets/docs.js"></script>
 </body>
 </html>

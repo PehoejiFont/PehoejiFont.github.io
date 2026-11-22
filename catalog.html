@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Google Fonts Survey &amp; 989 Forks — POJ Font Documentation</title>
+<meta name="description" content="License survey of all 2,067 Google Fonts families, interactive 1,471-family POJ shortlist explorer, 55 ready families, 989 upstream GitHub forks, and Google Fonts upstream standards efforts.">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <button class="menu-btn" id="menu-toggle" type="button" aria-label="Toggle navigation">☰</button>
+    <a class="brand" href="./">
+      <span class="brand-mark poj">o͘</span>
+      <span>PehoejiFont</span>
+      <span class="brand-badge">Docs</span>
+    </a>
+    <div class="topbar-spacer"></div>
+    <button class="search-trigger" id="search-trigger" type="button">
+      <span>⌕</span>
+      <span class="search-label">Search docs…</span>
+      <span class="kbd">⌘K</span>
+    </button>
+    <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    <a class="icon-btn" href="https://github.com/PehoejiFont/PehoejiFont.github.io">GitHub</a>
+  </div>
+</header>
+
+<div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+<div class="doc-shell">
+  <aside class="sidebar" aria-label="Documentation navigation">
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Getting Started</div>
+      <ul>
+        <li><a href="./">Overview</a></li>
+        <li><a href="choose.html#test">Live POJ Test Bench</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Core Concepts</div>
+      <ul>
+        <li><a href="letters.html">Unicode &amp; Encoding</a></li>
+        <li><a href="fonts.html">How Fonts Implement POJ</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Font Directory &amp; Data</div>
+      <ul>
+        <li><a href="choose.html">24-Font Audit &amp; Specimens</a></li>
+        <li><a href="catalog.html" aria-current="page">Google Fonts Survey &amp; Forks</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Practical Guides</div>
+      <ul>
+        <li><a href="problems.html">Troubleshooting &amp; Platforms</a></li>
+        <li><a href="makers.html">Font Maker’s Guide</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Reference</div>
+      <ul>
+        <li><a href="tools.html">Tools, Methodology &amp; Reviews</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main class="doc-main">
+    <div class="breadcrumb"><a href="./">Docs</a> › <span>Font Directory &amp; Data</span> › <span>Google Fonts Survey &amp; Forks</span></div>
+    <h1>Google Fonts Survey &amp; 989 Upstream Forks</h1>
+    <p class="lead">PehoejiFont’s mission is adding <span class="poj">Pe̍h-ōe-jī</span> (POJ) support to open-source fonts from the Google Fonts catalog and contributing those changes back upstream.</p>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-num">2,067</div><div class="stat-label">Total Google Fonts families surveyed</div></div>
+      <div class="stat-card"><div class="stat-num">1,471</div><div class="stat-label">Shortlisted (open + no RFN + GitHub)</div></div>
+      <div class="stat-card"><div class="stat-num">1,393</div><div class="stat-label">Shortlisted families missing POJ characters</div></div>
+      <div class="stat-card"><div class="stat-num">989</div><div class="stat-label">Unique GitHub repos forked into <span class="mono">PehoejiFont</span></div></div>
+    </div>
+
+    <h2 id="license-survey">License survey (2,067 families)</h2>
+    <p>Source: <a href="https://github.com/google/fonts"><code>google/fonts</code></a> at commit <code>cc5661d</code> (2026-11-19). Every family’s license permits modifying the font and releasing the derivative publicly; the critical distinction is whether a released fork may keep the original font name.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>License</th><th>Families</th><th>Released fork can keep name?</th></tr></thead>
+      <tbody>
+        <tr><td><strong>SIL OFL 1.1</strong>, no Reserved Font Name (RFN)</td><td><strong>1,460</strong></td><td><span class="tag good">Yes</span></td></tr>
+        <tr><td><strong>SIL OFL 1.1</strong>, with Reserved Font Name</td><td>558</td><td><span class="tag bad">No</span> — must be renamed</td></tr>
+        <tr><td><strong>Apache 2.0</strong></td><td><strong>44</strong></td><td><span class="tag good">Yes</span> (keep license &amp; notices, state changes)</td></tr>
+        <tr><td><strong>Ubuntu Font Licence 1.0</strong></td><td>5</td><td><span class="tag bad">No</span> — must be renamed</td></tr>
+      </tbody>
+    </table></div>
+    <p>OFL derivatives must remain under the OFL and cannot be sold by themselves. When changes are merged by the font’s own upstream maintainers, the official release keeps its original name in every case. Per-family raw metadata is stored in <a href="data/google-fonts.json"><code>data/google-fonts.json</code></a>.</p>
+
+    <h2 id="shortlist">Shortlist &amp; coverage breakdown (1,471 families)</h2>
+    <p>PehoejiFont focuses on Google Fonts families satisfying three conditions:</p>
+    <ol>
+      <li><strong>Open license</strong> (SIL OFL 1.1 or Apache 2.0).</li>
+      <li><strong>No Reserved Font Name</strong>, so modified builds can be released under the same name.</li>
+      <li><strong>Source repository hosted on GitHub</strong>, so changes can be contributed upstream as pull requests.</li>
+    </ol>
+    <p>We downloaded and checked the main font file of each of the <strong>1,471 shortlisted families</strong> for the three core POJ characters (<code>U+0358</code>, <code>U+030D</code>, <code>U+207F</code>), the five combining tone marks, and the GPOS <code>mark</code> feature:</p>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>Status</th><th>Families</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag warn">Needs work</span></td><td><strong>1,393</strong></td><td>Missing at least one required POJ character</td></tr>
+        <tr><td><span class="tag good">Has POJ characters</span></td><td><strong>55</strong></td><td>Maps all three POJ characters and all five tone marks</td></tr>
+        <tr><td><span class="tag neutral">Not Latin</span></td><td><strong>23</strong></td><td>Contains no basic Latin letters; out of scope</td></tr>
+      </tbody>
+    </table></div>
+
+    <p>Breakdown of the <strong>1,393 families that need work</strong>:</p>
+    <ul>
+      <li><strong>1,242</strong> are missing all three POJ characters (<code>U+0358</code>, <code>U+030D</code>, <code>U+207F</code>).</li>
+      <li><strong>371</strong> are also missing one or more standard combining tone marks.</li>
+      <li><strong>365</strong> have <strong>no GPOS <code>mark</code> positioning feature at all</strong>, so anchors must be built from scratch.</li>
+    </ul>
+
+    <h3 id="ready-55">The 55 shortlisted families that already map POJ characters</h3>
+    <div class="callout warn">
+      <span class="callout-title">Cmap check only — verify visually!</span>
+      <p>This automated scan only checks whether each font’s <code>cmap</code> maps the codepoints. It does <strong>not</strong> verify anchor placement, dotless <span class="poj">i̍</span>, or Google Fonts web slice delivery — always inspect visually with the <a href="choose.html#test">Test Bench</a> and <code>tools/poj_shape_test.py</code>.</p>
+    </div>
+    <p class="legend">Adobe Blank, Agbalumo, Agu Display, Arimo, Briem Hand, Cactus Classical Serif, Cardo, Chiron Hei HK, Chiron Sung HK, Chocolate Classical Sans, Cormorant, Cormorant Garamond, Cormorant Infant, Cormorant SC, Cormorant Unicase, Cousine, Danfo, Elms Sans, Freeman, Gothic A1, Great Vibes, Huninn, Iansui, Inter Tight, Iosevka Charon, Iosevka Charon Mono, Jaro, LXGW WenKai Mono TC, LXGW WenKai TC, Libertinus Math, Libertinus Mono, Libertinus Sans, Libertinus Serif, Libertinus Serif Display, M PLUS 1p, Montserrat, Montserrat Underline, Noto Sans, Noto Sans Display, Noto Sans Mono, Noto Serif, Noto Serif Display, Oi, Ojuju, Playfair, Sankofa Display, Savate, TASA Explorer, TASA Orbiter, Tac One, Tiny5, Tiny5 Duo, WDXL Lubrifont JP N, WDXL Lubrifont SC, WDXL Lubrifont TC.</p>
+
+    <h2 id="shortlist-explorer">Interactive shortlist browser (1,471 families)</h2>
+    <p>Filter and search <a href="data/shortlist.json"><code>data/shortlist.json</code></a> by name, designer, repository, POJ status, category, GPOS <code>mark</code> support, or variable-font status:</p>
+
+    <div class="filter-bar">
+      <input type="search" id="sl-search" placeholder="Search family, designer, or GitHub repo…">
+      <select id="sl-status" aria-label="Filter by status">
+        <option value="all">All statuses (1,471)</option>
+        <option value="has-poj-chars">Has POJ chars (55)</option>
+        <option value="needs-work">Needs work (1,393)</option>
+        <option value="not-latin">Not Latin (23)</option>
+      </select>
+      <select id="sl-cat" aria-label="Filter by category">
+        <option value="all">All categories</option>
+        <option value="Sans Serif">Sans Serif</option>
+        <option value="Serif">Serif</option>
+        <option value="Display">Display</option>
+        <option value="Handwriting">Handwriting</option>
+        <option value="Monospace">Monospace</option>
+      </select>
+      <select id="sl-mark" aria-label="Filter by mark feature">
+        <option value="all">Any mark feature</option>
+        <option value="yes">Has GPOS mark</option>
+        <option value="no">No GPOS mark</option>
+      </select>
+      <select id="sl-vf" aria-label="Filter by variable font">
+        <option value="all">Static &amp; Variable</option>
+        <option value="yes">Variable only</option>
+        <option value="no">Static only</option>
+      </select>
+    </div>
+    <p class="filter-status" id="sl-count">Loading data/shortlist.json…</p>
+    <div class="table-wrap"><table class="compact">
+      <thead><tr><th>Family</th><th>Status</th><th>Category</th><th>Missing POJ</th><th class="center"><code>mark</code></th><th class="center">VF</th><th>Glyphs</th><th>Upstream repo</th></tr></thead>
+      <tbody id="sl-tbody"></tbody>
+    </table></div>
+    <div class="pager" id="sl-pager"></div>
+
+    <h2 id="forks-explorer">Upstream fork directory (989 repositories)</h2>
+    <p>The 1,393 families needing work map to <strong>989 unique GitHub repositories</strong> (excluding <code>googlefonts/googlefontdirectory-hg</code>, an archive of the legacy Mercurial directory rather than an active upstream source). Each repository is forked into the <a href="https://github.com/PehoejiFont">PehoejiFont GitHub organization</a> on its default branch.</p>
+    <p>Three repository names exist under multiple upstream owners (<code>baloo2-variable</code>, <code>signika</code>, <code>wixmadefor</code>); their forks are named <code>&lt;owner&gt;-&lt;repo&gt;</code> to prevent collisions. Browse <a href="data/fork-list.tsv"><code>data/fork-list.tsv</code></a>:</p>
+
+    <div class="filter-bar">
+      <input type="search" id="fk-search" placeholder="Filter 989 forks by upstream repo, fork name, or font family…">
+    </div>
+    <p class="filter-status" id="fk-count">Loading data/fork-list.tsv…</p>
+    <div class="table-wrap"><table class="compact">
+      <thead><tr><th>Upstream repository</th><th>PehoejiFont fork</th><th>Font families</th></tr></thead>
+      <tbody id="fk-tbody"></tbody>
+    </table></div>
+    <div class="pager" id="fk-pager"></div>
+
+    <h2 id="workflow">Contribution workflow for each font</h2>
+    <ol>
+      <li><strong>Add or reuse glyphs in the fork’s sources:</strong>
+        <ul>
+          <li><code>U+030D</code>: reuse a vertical stroke or adapt the acute accent stroke weight;</li>
+          <li><code>U+0358</code>: reuse the dot from <code>U+0307</code>;</li>
+          <li><code>U+207F</code> (and <code>U+1D3A</code>): superior <code>n</code> / <code>N</code>.</li>
+        </ul>
+      </li>
+      <li><strong>Add <code>mark</code> and <code>mkmk</code> anchors</strong> (plus <code>ccmp</code> dotless-i and optional precomposed glyphs) so marks attach cleanly on <code>a e i o u m n</code> (upper and lower case) and every toned <code>o</code>. See the <a href="makers.html">Font Maker’s Guide</a>.</li>
+      <li><strong>Build with the project’s native build pipeline</strong> and validate with <a href="https://github.com/fonttools/fontbakery">fontbakery</a> plus our <a href="tools.html">POJ audit &amp; specimen tools</a>.</li>
+      <li><strong>Open an upstream pull request.</strong> Once the upstream project cuts a release, Google Fonts picks up the new version and the family keeps its original name.</li>
+    </ol>
+
+    <h2 id="upstream-standards">Upstream ecosystem efforts</h2>
+    <ul>
+      <li><a href="https://github.com/googlefonts/glyphsets/issues/5"><strong>googlefonts/glyphsets#5</strong></a> (open since 2020): proposes adding <code>U+030D</code>, <code>U+0358</code>, and <code>U+207F</code> to the <strong>GF Latin Plus</strong> glyph set. Adoption would make POJ coverage part of Google Fonts’ standard requirements.</li>
+      <li><a href="https://github.com/googlefonts/lang"><strong>googlefonts/lang</strong></a>: currently has no language definition for <strong>Taigi in Latin script (<code>nan_Latn</code>)</strong>. Adding <code>nan_Latn</code> would enable Google Fonts’ tooling and web catalog to automatically detect and report POJ support.</li>
+    </ul>
+
+    <nav class="doc-pager" aria-label="Pagination">
+      <a class="pager-link prev" href="choose.html">
+        <span class="pager-dir">← Previous</span>
+        <span class="pager-title">24-Font Audit &amp; Specimens</span>
+      </a>
+      <a class="pager-link next" href="problems.html">
+        <span class="pager-dir">Next →</span>
+        <span class="pager-title">Troubleshooting &amp; Platforms</span>
+      </a>
+    </nav>
+
+    <footer class="doc-footer">
+      PehoejiFont project · Text is set in <a href="https://github.com/ButTaiwan/genyo-font">源樣明體 GenYo Min</a> by But Ko (<a href="assets/fonts/GenYo-OFL.txt">SIL Open Font License</a>) · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">Source on GitHub</a>
+    </footer>
+  </main>
+
+  <aside class="toc" aria-label="On this page">
+    <div class="toc-title">On this page</div>
+    <ul id="toc-list"></ul>
+  </aside>
+</div>
+
+<script src="assets/docs.js"></script>
+<script>
+(function () {
+  var esc = window.POJEscapeHtml;
+  var PAGE_SIZE = 30;
+
+  // ── Shortlist Explorer ────────────────────────────────────────────────────
+  var slData = [], slPage = 1;
+  var slSearch = document.getElementById('sl-search');
+  var slStatus = document.getElementById('sl-status');
+  var slCat = document.getElementById('sl-cat');
+  var slMark = document.getElementById('sl-mark');
+  var slVf = document.getElementById('sl-vf');
+  var slCount = document.getElementById('sl-count');
+  var slTbody = document.getElementById('sl-tbody');
+  var slPager = document.getElementById('sl-pager');
+
+  function renderShortlist() {
+    var q = slSearch.value.trim().toLowerCase();
+    var st = slStatus.value, cat = slCat.value, mk = slMark.value, vf = slVf.value;
+    var filtered = slData.filter(function (x) {
+      if (st !== 'all' && x.status !== st) return false;
+      if (cat !== 'all' && x.category !== cat) return false;
+      if (mk === 'yes' && !x.mark) return false;
+      if (mk === 'no' && x.mark) return false;
+      if (vf === 'yes' && !x.variable) return false;
+      if (vf === 'no' && x.variable) return false;
+      if (q) {
+        var hay = (x.name + ' ' + x.designer + ' ' + x.repo).toLowerCase();
+        if (hay.indexOf(q) === -1) return false;
+      }
+      return true;
+    });
+    var totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+    if (slPage > totalPages) slPage = totalPages;
+    var start = (slPage - 1) * PAGE_SIZE;
+    var rows = filtered.slice(start, start + PAGE_SIZE);
+
+    slCount.textContent = 'Showing ' + (filtered.length ? (start + 1) + '–' + (start + rows.length) : '0') + ' of ' + filtered.length.toLocaleString() + ' matching families';
+    slTbody.innerHTML = rows.map(function (x) {
+      var badge = x.status === 'has-poj-chars'
+        ? '<span class="tag good">Has POJ</span>'
+        : (x.status === 'needs-work' ? '<span class="tag warn">Needs work</span>' : '<span class="tag neutral">Not Latin</span>');
+      var miss = (x.missing_poj && x.missing_poj.length) ? x.missing_poj.map(function (c) { return '<code>' + esc(c) + '</code>'; }).join(' ') : '<span class="muted">—</span>';
+      var repoShort = (x.repo || '').replace(/^https?:\/\/github\.com\//, '');
+      return '<tr>' +
+        '<td><strong>' + esc(x.name) + '</strong><br><span class="muted" style="font-size:12px">' + esc(x.designer) + '</span></td>' +
+        '<td>' + badge + '</td>' +
+        '<td>' + esc(x.category) + '</td>' +
+        '<td>' + miss + '</td>' +
+        '<td class="center">' + (x.mark ? '✓' : '✗') + '</td>' +
+        '<td class="center">' + (x.variable ? esc(x.axes || 'VF') : '—') + '</td>' +
+        '<td>' + Number(x.glyphs || 0).toLocaleString() + '</td>' +
+        '<td>' + (x.repo ? '<a href="' + esc(x.repo) + '" target="_blank" rel="noopener">' + esc(repoShort) + '</a>' : '—') + '</td>' +
+      '</tr>';
+    }).join('');
+
+    renderPager(slPager, slPage, totalPages, function (p) { slPage = p; renderShortlist(); });
+  }
+
+  [slSearch, slStatus, slCat, slMark, slVf].forEach(function (el) {
+    el.addEventListener('input', function () { slPage = 1; renderShortlist(); });
+    el.addEventListener('change', function () { slPage = 1; renderShortlist(); });
+  });
+
+  fetch('data/shortlist.json')
+    .then(function (r) { if (!r.ok) throw new Error(); return r.json(); })
+    .then(function (d) { slData = d; renderShortlist(); })
+    .catch(function () {
+      slCount.innerHTML = 'Open over HTTP (GitHub Pages or <code>python3 -m http.server</code>) to browse <code>data/shortlist.json</code> interactively.';
+    });
+
+  // ── Forks Explorer ────────────────────────────────────────────────────────
+  var fkData = [], fkPage = 1;
+  var fkSearch = document.getElementById('fk-search');
+  var fkCount = document.getElementById('fk-count');
+  var fkTbody = document.getElementById('fk-tbody');
+  var fkPager = document.getElementById('fk-pager');
+
+  function renderForks() {
+    var q = fkSearch.value.trim().toLowerCase();
+    var filtered = fkData.filter(function (r) {
+      if (!q) return true;
+      return (r.up + ' ' + r.fork + ' ' + r.fams).toLowerCase().indexOf(q) !== -1;
+    });
+    var totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+    if (fkPage > totalPages) fkPage = totalPages;
+    var start = (fkPage - 1) * PAGE_SIZE;
+    var rows = filtered.slice(start, start + PAGE_SIZE);
+
+    fkCount.textContent = 'Showing ' + (filtered.length ? (start + 1) + '–' + (start + rows.length) : '0') + ' of ' + filtered.length.toLocaleString() + ' repositories';
+    fkTbody.innerHTML = rows.map(function (r) {
+      return '<tr>' +
+        '<td><a href="https://github.com/' + esc(r.up) + '" target="_blank" rel="noopener">' + esc(r.up) + '</a></td>' +
+        '<td><a href="https://github.com/PehoejiFont/' + esc(r.fork) + '" target="_blank" rel="noopener">PehoejiFont/' + esc(r.fork) + '</a></td>' +
+        '<td>' + esc(r.fams) + '</td>' +
+      '</tr>';
+    }).join('');
+
+    renderPager(fkPager, fkPage, totalPages, function (p) { fkPage = p; renderForks(); });
+  }
+
+  fkSearch.addEventListener('input', function () { fkPage = 1; renderForks(); });
+
+  fetch('data/fork-list.tsv')
+    .then(function (r) { if (!r.ok) throw new Error(); return r.text(); })
+    .then(function (txt) {
+      fkData = txt.trim().split('\n').map(function (line) {
+        var parts = line.split('\t');
+        return { up: parts[0] || '', fork: parts[1] || '', fams: parts[2] || '' };
+      });
+      renderForks();
+    })
+    .catch(function () {
+      fkCount.innerHTML = 'Open over HTTP (GitHub Pages or <code>python3 -m http.server</code>) to browse <code>data/fork-list.tsv</code> interactively.';
+    });
+
+  function renderPager(container, page, total, onPage) {
+    container.innerHTML = '';
+    if (total <= 1) return;
+    var prev = document.createElement('button');
+    prev.className = 'btn'; prev.type = 'button'; prev.textContent = '← Prev'; prev.disabled = page <= 1;
+    prev.onclick = function () { onPage(page - 1); };
+    var info = document.createElement('span');
+    info.className = 'muted'; info.textContent = 'Page ' + page + ' of ' + total;
+    var next = document.createElement('button');
+    next.className = 'btn'; next.type = 'button'; next.textContent = 'Next →'; next.disabled = page >= total;
+    next.onclick = function () { onPage(page + 1); };
+    container.appendChild(prev); container.appendChild(info); container.appendChild(next);
+  }
+})();
+</script>
+</body>
+</html>

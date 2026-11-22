@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tools, Methodology &amp; Reviews — POJ Font Documentation</title>
+<meta name="description" content="Complete reference for PehoejiFont CLI tools (Python & Swift CoreText probes), repository data layout, open research questions, and Gemini 4 peer-review verification log.">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <button class="menu-btn" id="menu-toggle" type="button" aria-label="Toggle navigation">☰</button>
+    <a class="brand" href="./">
+      <span class="brand-mark poj">o͘</span>
+      <span>PehoejiFont</span>
+      <span class="brand-badge">Docs</span>
+    </a>
+    <div class="topbar-spacer"></div>
+    <button class="search-trigger" id="search-trigger" type="button">
+      <span>⌕</span>
+      <span class="search-label">Search docs…</span>
+      <span class="kbd">⌘K</span>
+    </button>
+    <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    <a class="icon-btn" href="https://github.com/PehoejiFont/PehoejiFont.github.io">GitHub</a>
+  </div>
+</header>
+
+<div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+<div class="doc-shell">
+  <aside class="sidebar" aria-label="Documentation navigation">
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Getting Started</div>
+      <ul>
+        <li><a href="./">Overview</a></li>
+        <li><a href="choose.html#test">Live POJ Test Bench</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Core Concepts</div>
+      <ul>
+        <li><a href="letters.html">Unicode &amp; Encoding</a></li>
+        <li><a href="fonts.html">How Fonts Implement POJ</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Font Directory &amp; Data</div>
+      <ul>
+        <li><a href="choose.html">24-Font Audit &amp; Specimens</a></li>
+        <li><a href="catalog.html">Google Fonts Survey &amp; Forks</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Practical Guides</div>
+      <ul>
+        <li><a href="problems.html">Troubleshooting &amp; Platforms</a></li>
+        <li><a href="makers.html">Font Maker’s Guide</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Reference</div>
+      <ul>
+        <li><a href="tools.html" aria-current="page">Tools, Methodology &amp; Reviews</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main class="doc-main">
+    <div class="breadcrumb"><a href="./">Docs</a> › <span>Reference</span> › <span>Tools, Methodology &amp; Reviews</span></div>
+    <h1>Tools, Methodology &amp; Model Reviews</h1>
+    <p class="lead">Every script, raw dataset, open research question, and peer-review verification record behind the PehoejiFont documentation and fork effort.</p>
+
+    <h2 id="scripts">CLI scripts in <code>tools/</code></h2>
+    <p>Scripts were written for reproducible single-run audits with paths relative to the repository root:</p>
+    <div class="table-wrap"><table class="compact">
+      <thead><tr><th>Script</th><th>Purpose</th><th>Dependencies</th></tr></thead>
+      <tbody>
+        <tr><td><code>tools/build_catalog.py</code></td><td>Builds <code>data/google-fonts.json</code> (2,067 families: license, RFN, designer, upstream repo) from a sparse checkout of <code>google/fonts</code>.</td><td>Python 3 stdlib</td></tr>
+        <tr><td><code>tools/download_fonts.py</code></td><td>Downloads one main font file per shortlisted family for coverage inspection.</td><td>Python 3</td></tr>
+        <tr><td><code>tools/check_coverage.py</code></td><td>Scans downloaded font files for POJ codepoints, combining tone marks, and GPOS <code>mark</code> feature; writes <code>data/shortlist.json</code>.</td><td><code>fonttools</code></td></tr>
+        <tr><td><code>tools/fork_repos.sh</code></td><td>Forks the 989 unique GitHub repositories listed in <code>data/fork-list.tsv</code> into the <code>PehoejiFont</code> organization (default branch only).</td><td><code>gh</code> CLI</td></tr>
+        <tr><td><code>tools/poj_font_audit.py</code></td><td>Full per-font POJ audit: <code>cmap</code> coverage, GSUB/GPOS features, <code>U+0358</code>/<code>U+030D</code> anchor bases, IVS &amp; PUA counts.</td><td><code>fonttools</code>, <code>uharfbuzz</code></td></tr>
+        <tr><td><code>tools/poj_shape_test.py</code></td><td>HarfBuzz shaping probe classifying each POJ cluster (<code>ligature</code> / <code>gpos-anchor</code> / <code>zero-width-overstrike</code> / <code>FLOATING</code> / <code>NOTDEF</code>) in NFC vs NFD.</td><td><code>uharfbuzz</code></td></tr>
+        <tr><td><code>tools/poj_specimen.py</code></td><td>Renders PNG specimen sheets (NFC row followed by NFD row) into <code>docs/img/specimen-*.png</code>.</td><td><code>fonttools</code>, <code>uharfbuzz</code>, <code>pillow</code></td></tr>
+        <tr><td><code>tools/poj_coretext.swift</code></td><td>macOS CoreText shaping &amp; PNG rendering probe; reports glyph IDs, positions, nominal advances, ink boxes, and system font fallback runs.</td><td>macOS Swift / CoreText</td></tr>
+        <tr><td><code>tools/poj_coretext_compare.py</code></td><td>Compares compiled <code>poj_coretext.swift</code> against HarfBuzz across NFC, NFD, and reverse mark order for every audited font.</td><td><code>uharfbuzz</code>, compiled Swift probe</td></tr>
+        <tr><td><code>tools/poj_guide_svg.py</code></td><td>Draws real HarfBuzz-shaped font outlines into SVG diagrams (with optional <code>--boxes</code> and <code>--mark-color</code>) for this website.</td><td><code>fonttools</code>, <code>uharfbuzz</code></td></tr>
+        <tr><td><code>tools/build_site_fonts.sh</code></td><td>Rebuilds the self-hosted GenYo Min Regular &amp; Bold WOFF2 subsets from <code>*.html</code> characters + Latin/POJ ranges, preserving GSUB closure.</td><td><code>fonttools</code>, <code>brotli</code> (<code>pyftsubset</code>)</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 id="site-font-rebuild">Rebuilding the site’s GenYo Min font subsets</h3>
+    <p>This site self-hosts cut-down Regular and Bold copies of <a href="https://github.com/ButTaiwan/genyo-font">源樣明體 GenYo Min</a> (<code>assets/fonts/GenYoMin2TW-R-site.woff2</code> and <code>GenYoMin2TW-B-site.woff2</code>). They include all Latin letters, POJ/KPL combining marks, GenYo’s <code>ccmp</code> precomposed <span class="poj">o͘</span> glyphs, and every Han character appearing in <code>*.html</code>. After adding new Han characters to any page, rebuild with:</p>
+    <div class="code-block">
+      <div class="code-head"><span>shell — Rebuild site font subsets</span><button class="copy-code-btn" type="button">Copy</button></div>
+      <pre><code>tools/build_site_fonts.sh &lt;folder-with-GenYoMin2TW-R-and-B.otf&gt;</code></pre>
+    </div>
+    <p class="legend">Note: GenYo Min has no standalone dotless <code>ı</code> (<code>U+0131</code>) or <code>ȷ</code> (<code>U+0237</code>) in its cmap, so those two standalone symbols on the Font Maker’s Guide fall back to a system font; running POJ text like <span class="poj">i̍</span> is unaffected because GenYo’s precomposed <code>ccmp</code> glyph still omits the dot.</p>
+
+    <h2 id="repo-layout">Repository data &amp; document layout</h2>
+    <div class="code-block">
+      <div class="code-head"><span>Repository structure</span><button class="copy-code-btn" type="button">Copy</button></div>
+      <pre><code>data/
+  google-fonts.json            # All 2,067 Google Fonts families (license, RFN, designer, repo)
+  shortlist.json               # 1,471 shortlisted families with POJ coverage &amp; mark-feature results
+  fork-list.tsv                # 989 rows: upstream repo → fork name → families
+  poj-font-audit.json          # Detailed audit + HarfBuzz shaping results for 24 tested fonts
+docs/
+  poj-font-implementation.md   # Full markdown research report
+  img/specimen-{0,1,2}.png     # HarfBuzz NFC vs NFD specimen sheets
+  reviews/                     # Gemini 4 XHigh peer-review transcripts and prompt
+assets/
+  site.css, docs.js            # Static documentation stylesheet &amp; interactive JS
+  fonts/                       # Self-hosted GenYo Min Regular/Bold WOFF2 subsets + OFL license
+  img/*.svg                    # Real-font HarfBuzz SVG diagrams
+tools/                         # 11 Python, Swift, and shell scripts listed above</code></pre>
+    </div>
+
+    <h2 id="open-questions">Open research questions</h2>
+    <ol>
+      <li><strong>Full CoreText &amp; DirectWrite matrix:</strong> Complete cross-engine testing on macOS (CoreText) and Windows (DirectWrite) for mark reordering, NFD recomposition, missing precomposed fallback, and unanchored <code>U+0358</code>.</li>
+      <li><strong>Google Fonts cross-slice splitting:</strong> Test whether <code>o + U+0358</code> in Iansui and Huninn can split across the <code>latin</code> and Taigi <code>unicode-range</code> slices in Chrome, Safari, and Firefox.</li>
+      <li><strong>Untested community fonts:</strong> Download and run the audit pipeline on <strong>Caivun</strong>, <strong>Kaukhia</strong>, and <strong>Indeciso</strong>.</li>
+      <li><strong>Legacy encoding prevalence:</strong> Scan real corpora (such as ChhoeTaigi datasets and older Taigi web archives) to quantify how common middle-dot, Vietnamese horn, PUA, and 8-bit encodings remain in the wild.</li>
+    </ol>
+
+    <h2 id="model-reviews">Peer-review &amp; verification log (Gemini 4)</h2>
+    <p>The initial draft of <code>docs/poj-font-implementation.md</code> was independently reviewed by two Gemini 4 XHigh models (<code>gemini-4-neon-xhigh</code> and <code>gemini-4-hydrogen-xhigh</code>) via headless <code>agy</code> without tool access; full transcripts live in <code>docs/reviews/</code>.</p>
+
+    <h3 id="confirmed">Confirmed independently by both reviews</h3>
+    <ul>
+      <li>Canonical Combining Class values (<code>ccc=230</code> vs <code>ccc=232</code>) and canonical reordering behaviour;</li>
+      <li>The Unicode 17.0 precomposed POJ/KPL table;</li>
+      <li>NFKC destruction of <code>U+207F</code> (<span class="poj">ⁿ</span> → <code>n</code>);</li>
+      <li><code>Soft_Dotted</code> dotless-i requirement for sequences like <span class="poj">i̍</span>;</li>
+      <li>HarfBuzz canonical reordering before GSUB;</li>
+      <li>CSS disabling optional <code>liga</code> under non-zero <code>letter-spacing</code>.</li>
+    </ul>
+
+    <h3 id="corrections">Verified corrections applied to the research</h3>
+    <div class="table-wrap"><table class="compact">
+      <thead><tr><th>Correction raised in review</th><th>How we verified it</th></tr></thead>
+      <tbody>
+        <tr><td>HarfBuzz fallback is all-or-nothing (disabled whenever any <code>mark</code> feature exists), explaining Arial’s <code>U+0358</code> and Source Sans 3’s <span class="poj">ŏ͘</span>.</td><td>Verified: offsets are <code>(0, 0)</code> in both fonts.</td></tr>
+        <tr><td>Lesson One, Huninn, Iansui, and WD-XL include <code>mark</code>/<code>mkmk</code> (Techniques B + A, not B only). Only GenYo, Tauhu, and taigivs lack <code>mark</code>.</td><td>Verified from GPOS feature tables in <code>data/poj-font-audit.json</code>.</td></tr>
+        <tr><td>SIL’s spacing <code>U+0358</code> is a GDEF base (class 1), not a mark.</td><td>Verified: GDEF class 1 in Charis, Doulos, and Gentium.</td></tr>
+        <tr><td><code>U+1D3A</code> is capital modifier <span class="poj">ᴺ</span>, not a legacy variant of <span class="poj">ⁿ</span>.</td><td>Verified against <code>UnicodeData.txt</code>.</td></tr>
+        <tr><td>NFC of <span class="poj">o̍͘</span> remains <code>o + 030D + 0358</code>.</td><td>Verified with Python <code>unicodedata</code>.</td></tr>
+        <tr><td>HarfBuzz also recomposes <code>o + 0301 → ó</code> before GSUB.</td><td>Verified: identical glyph runs across NFC and NFD.</td></tr>
+        <tr><td>KPL 6th-tone caron <code>U+030C</code> for dialects preserving tone 6.</td><td>Verified precomposed character set.</td></tr>
+        <tr><td>Web-font subsetting can split or drop POJ marks.</td><td><strong>Verified — worse than expected:</strong> TASA Explorer and Source Sans 3 on Google Fonts omit POJ marks completely.</td></tr>
+        <tr><td>AFDKO feature sketch fixes: longest-first ligatures, separate mark lookups, <code>languagesystem</code>, GDEF, mark filtering set, <code>uni0237</code>, <code>o_uni0358</code> &amp; <code>ő ǒ</code> bases, top-level <code>markClass</code>, <code>mkmk</code>.</td><td>Applied to the <a href="makers.html#fea-code">Font Maker’s Guide</a>.</td></tr>
+        <tr><td>Additional engineering topics: hyphens &amp; <code>--</code>, vertical metrics, <code>case</code> off by default, post-<code>o͘</code> collisions, small caps, CFF vs TrueType, variable fonts, PDF glyph names, <code>locl</code> interaction, extra legacy substitutes.</td><td>Added to documentation (not all independently bench-tested).</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 id="unverified-and-rejected">Unverified claims &amp; rejected items</h3>
+    <ul>
+      <li><strong>Flagged as unverified reviewer claims:</strong> DirectWrite composition/reordering/fallback behaviour; Microsoft Word’s ligature default; corpus frequency of extra legacy PUA/8-bit/look-alike encodings.</li>
+      <li><strong>Rejected or softened:</strong> (1) “A 2-glyph ligature listed first permanently shadows a 3-glyph one” — <code>feaLib</code> and <code>makeotf</code> sort ligatures longest-first within a lookup (Rule 2 still advises writing longest-first for portability across compilers). (2) NunitoPOJ dotless-i concern — verified that with <code>liga</code> disabled, NunitoPOJ still outputs <code>dotlessi + uni030D</code> via <code>ccmp</code>.</li>
+    </ul>
+
+    <nav class="doc-pager" aria-label="Pagination">
+      <a class="pager-link prev" href="makers.html">
+        <span class="pager-dir">← Previous</span>
+        <span class="pager-title">Font Maker’s Guide</span>
+      </a>
+      <a class="pager-link next" href="./">
+        <span class="pager-dir">Back to start →</span>
+        <span class="pager-title">Overview</span>
+      </a>
+    </nav>
+
+    <footer class="doc-footer">
+      PehoejiFont project · Text is set in <a href="https://github.com/ButTaiwan/genyo-font">源樣明體 GenYo Min</a> by But Ko (<a href="assets/fonts/GenYo-OFL.txt">SIL Open Font License</a>) · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">Source on GitHub</a>
+    </footer>
+  </main>
+
+  <aside class="toc" aria-label="On this page">
+    <div class="toc-title">On this page</div>
+    <ul id="toc-list"></ul>
+  </aside>
+</div>
+
+<script src="assets/docs.js"></script>
+</body>
+</html>

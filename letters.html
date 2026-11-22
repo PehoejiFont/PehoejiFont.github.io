@@ -3,140 +3,356 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>How POJ Letters Are Stored</title>
-<meta name="description" content="How computers store POJ letters like o͘ and a̍ as a base letter plus marks, and why the same letter can arrive in different codes.">
+<title>Unicode &amp; Encoding — POJ Font Documentation</title>
+<meta name="description" content="Complete Unicode specification for Taigi POJ and KPL: combining marks, precomposed Unicode 17.0 matrix, ccc 230 vs 232 ordering, shaping engines, Soft_Dotted i/j, NFKC, legacy PUA, IVS ruby, and hyphens.">
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-<header class="site"><div class="wrap">
-  <a class="brand" href="./">POJ Font Guide</a>
-  <nav>
-    <a href="./">Start</a>
-    <a href="letters.html" aria-current="page">How letters are stored</a>
-    <a href="fonts.html">How fonts draw them</a>
-    <a href="choose.html">Pick a font</a>
-    <a href="problems.html">Fix problems</a>
-    <a href="makers.html">For font makers</a>
-  </nav>
-</div></header>
+<header class="topbar">
+  <div class="topbar-inner">
+    <button class="menu-btn" id="menu-toggle" type="button" aria-label="Toggle navigation">☰</button>
+    <a class="brand" href="./">
+      <span class="brand-mark poj">o͘</span>
+      <span>PehoejiFont</span>
+      <span class="brand-badge">Docs</span>
+    </a>
+    <div class="topbar-spacer"></div>
+    <button class="search-trigger" id="search-trigger" type="button">
+      <span>⌕</span>
+      <span class="search-label">Search docs…</span>
+      <span class="kbd">⌘K</span>
+    </button>
+    <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    <a class="icon-btn" href="https://github.com/PehoejiFont/PehoejiFont.github.io">GitHub</a>
+  </div>
+</header>
 
-<main class="wrap">
-<h1>How the computer stores POJ letters</h1>
-<p class="lead">To a computer, <span class="poj">o͘</span> is not one letter. It is a letter plus a sticker.</p>
+<div class="sidebar-backdrop" id="sidebar-backdrop"></div>
 
-<h2>Letters and stickers</h2>
-<p>Every character on a computer has a number in a big world-wide list called <strong>Unicode</strong>. The letter <span class="poj">o</span> is number <code>U+006F</code>, for example.</p>
-<p>Some accented letters have their own number, such as <span class="poj">ó</span> (<code>U+00F3</code>). We call these <strong>ready-made</strong> letters.</p>
-<p>Others are built from a plain letter plus one or more <strong>stickers</strong>. Unicode calls these stickers <em>combining marks</em>. The sticker has no letter of its own; it attaches to the letter in front of it.</p>
+<div class="doc-shell">
+  <aside class="sidebar" aria-label="Documentation navigation">
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Getting Started</div>
+      <ul>
+        <li><a href="./">Overview</a></li>
+        <li><a href="choose.html#test">Live POJ Test Bench</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Core Concepts</div>
+      <ul>
+        <li><a href="letters.html" aria-current="page">Unicode &amp; Encoding</a></li>
+        <li><a href="fonts.html">How Fonts Implement POJ</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Font Directory &amp; Data</div>
+      <ul>
+        <li><a href="choose.html">24-Font Audit &amp; Specimens</a></li>
+        <li><a href="catalog.html">Google Fonts Survey &amp; Forks</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Practical Guides</div>
+      <ul>
+        <li><a href="problems.html">Troubleshooting &amp; Platforms</a></li>
+        <li><a href="makers.html">Font Maker’s Guide</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Reference</div>
+      <ul>
+        <li><a href="tools.html">Tools, Methodology &amp; Reviews</a></li>
+      </ul>
+    </div>
+  </aside>
 
-<div class="tiles" aria-label="o plus dot sticker makes o͘">
-  <span class="tile"><span class="ch poj">o</span><span class="cp">U+006F</span></span>
-  <span class="op">+</span>
-  <span class="tile mark"><span class="ch poj">&nbsp;͘</span><span class="cp">U+0358</span></span>
-  <span class="eq">=</span>
-  <span class="result poj">o͘</span>
+  <main class="doc-main">
+    <div class="breadcrumb"><a href="./">Docs</a> › <span>Core Concepts</span> › <span>Unicode &amp; Encoding</span></div>
+    <h1>Unicode &amp; Encoding for POJ and KPL</h1>
+    <p class="lead">An English font maps one key to one glyph. Taigi <span class="poj">Pe̍h-ōe-jī</span> (POJ) text is mostly <strong>base letter + one or two combining marks</strong>, and Unicode has no single precomposed codepoint for most of the results.</p>
+
+    <h2 id="poj-vs-english">How POJ differs from an English font</h2>
+    <p>Every character on a computer has a Unicode number: plain <span class="poj">o</span> is <code>U+006F</code>, and ready-made <span class="poj">ó</span> is <code>U+00F3</code>. For characters without a single number, Unicode attaches non-spacing <em>combining marks</em> (“stickers”) after the base letter:</p>
+
+    <div class="tiles" aria-label="o plus combining dot above right makes o͘">
+      <span class="tile"><span class="ch poj">o</span><span class="cp">U+006F</span></span>
+      <span class="op">+</span>
+      <span class="tile mark"><span class="ch poj">&nbsp;͘</span><span class="cp">U+0358</span></span>
+      <span class="eq">=</span>
+      <span class="result poj">o͘</span>
+    </div>
+    <div class="tiles" aria-label="a plus combining vertical line above makes a̍">
+      <span class="tile"><span class="ch poj">a</span><span class="cp">U+0061</span></span>
+      <span class="op">+</span>
+      <span class="tile mark"><span class="ch poj">&nbsp;̍</span><span class="cp">U+030D</span></span>
+      <span class="eq">=</span>
+      <span class="result poj">a̍</span>
+    </div>
+    <div class="tiles" aria-label="o plus acute plus dot above right makes ó͘">
+      <span class="tile"><span class="ch poj">o</span><span class="cp">U+006F</span></span>
+      <span class="op">+</span>
+      <span class="tile mark"><span class="ch poj">&nbsp;́</span><span class="cp">U+0301</span></span>
+      <span class="op">+</span>
+      <span class="tile mark"><span class="ch poj">&nbsp;͘</span><span class="cp">U+0358</span></span>
+      <span class="eq">=</span>
+      <span class="result poj">ó͘</span>
+    </div>
+
+    <p>Supporting Taigi Roman Orthography cleanly requires handling nine distinct typographic requirements:</p>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>Requirement</th><th>Why it is difficult for fonts</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong><span class="poj">o͘</span></strong> = <code>o</code> + <code>U+0358</code><br><span class="muted">COMBINING DOT ABOVE RIGHT</span></td>
+          <td>No precomposed <span class="poj">o͘</span> exists. The dot sits at the <strong>top right</strong>, not centred above the letter like standard European diacritics.</td>
+        </tr>
+        <tr>
+          <td><strong><span class="poj">o͘</span> + tone</strong><br><span class="poj">ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘</span> &amp; capitals</td>
+          <td><strong>Two combining marks at once:</strong> tone centred above, dot at top right. They must not collide with each other, and the dot must not collide with the following letter (<span class="poj">o͘h</span>, <span class="poj">o͘ⁿ</span>, <span class="poj">o͘"</span>).</td>
+        </tr>
+        <tr>
+          <td><strong>8th tone</strong> <code>U+030D</code><br><span class="muted">COMBINING VERTICAL LINE ABOVE</span></td>
+          <td>No precomposed letter has it (<span class="poj">a̍ e̍ i̍ o̍ u̍ m̍ n̍</span> are always multi-codepoint sequences). Most Latin fonts lack this glyph.</td>
+        </tr>
+        <tr>
+          <td><strong>Syllabic <span class="poj">m</span> &amp; <span class="poj">n</span> tones</strong><br><span class="poj">ḿ m̀ m̂ m̄ m̍, ń ǹ n̂ n̄ n̍g</span></td>
+          <td>Only <span class="poj">ḿ ń ǹ</span> (and capitals) are precomposed, and <span class="poj">ḿ</span>/<code>U+1E3F</code> and <span class="poj">ǹ</span>/<code>U+01F9</code> live in blocks many Latin fonts skip. The rest are built from combining marks.</td>
+        </tr>
+        <tr>
+          <td><strong><span class="poj">i</span> + tone</strong><br><span class="poj">í ì î ī ĭ i̍ i̋</span></td>
+          <td><code>i</code> has the Unicode <code>Soft_Dotted</code> property: its dot must disappear whenever an <strong>above</strong> mark sits on it. Precomposed <span class="poj">í</span> already does this; sequences like <code>i + U+030D</code> and <code>i + U+030B</code> require the font to swap in dotless <span class="poj">ı</span>.</td>
+        </tr>
+        <tr>
+          <td><strong>Nasal <span class="poj">ⁿ</span></strong> <code>U+207F</code><br><span class="muted">SUPERSCRIPT LATIN SMALL LETTER N</span></td>
+          <td>A modifier letter (<code>Lm</code>), not a combining mark. Many fonts omit it. Compatibility normalisation (NFKC) destroys it into plain <code>n</code> (<a href="#nasal">see below</a>).</td>
+        </tr>
+        <tr>
+          <td><strong>KPL (<span class="poj">Kàu-io̍k Pō͘ Lô-má-jī</span>)</strong><br><span class="muted">Same readers, same fonts</span></td>
+          <td>Adds 9th-tone double acute <code>U+030B</code> (only <span class="poj">ő ű</span> precomposed) and 6th-tone caron <code>U+030C</code> for dialects keeping tone 6 (<span class="poj">ǎ ě ǐ ǒ ǔ ň</span> precomposed; <span class="poj">m̌</span> is not), and spells <span class="poj">o͘</span>/<span class="poj">ⁿ</span> as <code>oo</code>/<code>nn</code>.</td>
+        </tr>
+        <tr>
+          <td><strong>Hyphens</strong> <code>-</code> and <code>--</code></td>
+          <td><code>-</code> joins syllables; <code>--</code> marks the neutral tone (<span class="poj">tńg--khì</span>). Fonts and editors must keep <code>--</code> as two distinct hyphens (<a href="#hyphens">see below</a>).</td>
+        </tr>
+        <tr>
+          <td><strong>Han-Lo (漢羅) &amp; Ruby</strong></td>
+          <td>The Latin portion of a CJK font must support all of the above. Ruby (POJ over Han characters) uses either IVS (<code>cmap</code> format 14) or HTML <code>&lt;ruby&gt;</code> (<a href="#ivs">see below</a>).</td>
+        </tr>
+      </tbody>
+    </table></div>
+
+    <div class="callout warn">
+      <span class="callout-title">Tone placement rules to remember when testing</span>
+      <p>In syllabic <strong>ng</strong>, the tone mark goes on the <strong>n</strong>: <span class="poj">n̍g</span>, <span class="poj">n̂g</span> — never <code>ng̍</code>. In KPL <code>oo</code>, the tone goes on the first <code>o</code> (<span class="poj">óo</span>), and with <code>nn</code> it goes on the preceding vowel (<span class="poj">ánn</span>).</p>
+    </div>
+
+    <h2 id="codepoints">Core POJ &amp; KPL character inventory</h2>
+    <p>Most Latin fonts lack three essential POJ codepoints:</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Codepoint</th><th>Character</th><th>Unicode name</th><th>Role in POJ</th></tr></thead>
+      <tbody>
+        <tr><td><code>U+0358</code></td><td class="poj big center">◌͘</td><td>COMBINING DOT ABOVE RIGHT</td><td>The vowel <span class="poj">o͘</span> (<span class="poj">Pe̍h-ōe-jī</span>, <span class="poj">o͘</span> 烏, <span class="poj">hō͘</span> 雨)</td></tr>
+        <tr><td><code>U+030D</code></td><td class="poj big center">◌̍</td><td>COMBINING VERTICAL LINE ABOVE</td><td>8th tone (<span class="poj">pe̍h</span>, <span class="poj">si̍t</span>, <span class="poj">chia̍h</span> 食, <span class="poj">ku̍t</span> 滑)</td></tr>
+        <tr><td><code>U+207F</code></td><td class="poj big center">ⁿ</td><td>SUPERSCRIPT LATIN SMALL LETTER N</td><td>Nasalisation (<span class="poj">sⁿ</span>, <span class="poj">iⁿ</span>, <span class="poj">thiⁿ</span> 天)</td></tr>
+      </tbody>
+    </table></div>
+
+    <p>Combining tone marks used across POJ and KPL:</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Tone</th><th>Codepoint</th><th>Mark</th><th>Example</th><th>Ready-made coverage</th></tr></thead>
+      <tbody>
+        <tr><td>1 &amp; 4</td><td>—</td><td>none</td><td class="poj">kun 君, kut 骨</td><td>Base letters only</td></tr>
+        <tr><td>2</td><td><code>U+0301</code></td><td class="poj big center">◌́</td><td class="poj">kún 滾</td><td>Vowels (<span class="poj">á é í ó ú</span>) + <span class="poj">ḿ ń</span></td></tr>
+        <tr><td>3</td><td><code>U+0300</code></td><td class="poj big center">◌̀</td><td class="poj">kùn 棍</td><td>Vowels + <span class="poj">ǹ</span>; <span class="poj">m̀</span> is built</td></tr>
+        <tr><td>5</td><td><code>U+0302</code></td><td class="poj big center">◌̂</td><td class="poj">kûn 裙</td><td>Vowels only; <span class="poj">m̂ n̂</span> are built</td></tr>
+        <tr><td>6 (KPL dialects)</td><td><code>U+030C</code></td><td class="poj big center">◌̌</td><td class="poj">ǎ, ň</td><td>Vowels + <span class="poj">ň</span>; <span class="poj">m̌</span> is built</td></tr>
+        <tr><td>7</td><td><code>U+0304</code></td><td class="poj big center">◌̄</td><td class="poj">kūn 郡</td><td>Vowels only; <span class="poj">m̄ n̄</span> are built</td></tr>
+        <tr><td>8</td><td><code>U+030D</code></td><td class="poj big center">◌̍</td><td class="poj">ku̍t 滑</td><td><strong>Never</strong> precomposed — always built</td></tr>
+        <tr><td>9 (POJ)</td><td><code>U+0306</code></td><td class="poj big center">◌̆</td><td class="poj">ŏ͘</td><td>Vowels only (<span class="poj">ă ĕ ĭ ŏ ŭ</span>)</td></tr>
+        <tr><td>9 (KPL)</td><td><code>U+030B</code></td><td class="poj big center">◌̋</td><td class="poj">ő, i̋</td><td>Only <span class="poj">ő ű</span> precomposed; others built</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2 id="precomposed">Precomposed Unicode 17.0 matrix</h2>
+    <p>Checked against Unicode 17.0 using Python’s <code>unicodedata</code>. Capitals follow the exact same availability pattern:</p>
+    <div class="table-wrap"><table class="compact">
+      <thead>
+        <tr>
+          <th>Base</th>
+          <th class="center">´ (2)</th>
+          <th class="center">` (3)</th>
+          <th class="center">^ (5)</th>
+          <th class="center">ˇ (6, KPL)</th>
+          <th class="center">¯ (7)</th>
+          <th class="center">&nbsp;̍ (8)</th>
+          <th class="center">˘ (9, POJ)</th>
+          <th class="center">&nbsp;̋ (9, KPL)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>a e i</code></td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td><td class="center">–</td><td class="center">✓</td><td class="center">–</td></tr>
+        <tr><td><code>o u</code></td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td><td class="center">–</td><td class="center">✓</td><td class="center">✓ <span class="poj">ő ű</span></td></tr>
+        <tr><td><code>m</code></td><td class="center">✓ <span class="poj">ḿ</span></td><td class="center">–</td><td class="center">–</td><td class="center">–</td><td class="center">–</td><td class="center">–</td><td class="center">–</td><td class="center">–</td></tr>
+        <tr><td><code>n</code></td><td class="center">✓ <span class="poj">ń</span></td><td class="center">✓ <span class="poj">ǹ</span></td><td class="center">–</td><td class="center">✓ <span class="poj">ň</span></td><td class="center">–</td><td class="center">–</td><td class="center">–</td><td class="center">–</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="callout">
+      <span class="callout-title">Will Unicode ever encode a precomposed <span class="poj">o͘</span> or <span class="poj">a̍</span>?</span>
+      <p><strong>No.</strong> Nothing with <code>U+0358</code> or <code>U+030D</code> is precomposed, and none will be added. UTC/WG2 policy forbids encoding new precomposed letters that can already be represented as base + combining mark. When POJ was proposed, Unicode encoded <code>U+0358</code> (Unicode 4.1, 2005) rather than precomposed <span class="poj">o͘</span>. Furthermore, the <strong>Normalization Stability Policy (2001)</strong> guarantees that NFC of an existing sequence never changes, so no newly assigned codepoint could ever become the NFC form of <code>o + U+0358</code>.</p>
+    </div>
+
+    <h2 id="canonical">Input forms &amp; Canonical Combining Classes</h2>
+    <p>The same visible syllable <span class="poj">ó͘</span> can reach a font as at least three distinct Unicode sequences. <strong>Every POJ font must render all of them identically:</strong></p>
+
+    <h3 id="same-letter">Three encodings of <span class="poj">ó͘</span></h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Form</th><th>Codepoint sequence</th><th>Where it comes from</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1. NFC</strong> (canonical precomposed)</td><td><code>U+00F3 ó</code> + <code>U+0358</code></td><td>Most web text, standard IMEs, NFC-normalising databases</td></tr>
+        <tr><td><strong>2. NFD</strong> (canonical decomposed)</td><td><code>U+006F o</code> + <code>U+0301</code> + <code>U+0358</code></td><td>macOS file names, some IMEs, PDF copy-out</td></tr>
+        <tr><td><strong>3. Non-canonical mark order</strong></td><td><code>U+006F o</code> + <code>U+0358</code> + <code>U+0301</code></td><td>Sequential / dead-key IMEs where the user types <span class="poj">o͘</span> as a unit, then adds the tone</td></tr>
+        <tr><td><strong>4. Mixed</strong></td><td>Any mix of 1–3 in one file</td><td>Documents edited across multiple apps or platforms</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="tiles">
+      <span class="tile"><span class="ch poj">ó</span><span class="cp">U+00F3</span></span><span class="op">+</span>
+      <span class="tile mark"><span class="ch poj">&nbsp;͘</span><span class="cp">U+0358</span></span>
+      <span class="eq">≡</span>
+      <span class="tile"><span class="ch poj">o</span><span class="cp">U+006F</span></span><span class="op">+</span>
+      <span class="tile mark"><span class="ch poj">&nbsp;́</span><span class="cp">U+0301</span></span><span class="op">+</span>
+      <span class="tile mark"><span class="ch poj">&nbsp;͘</span><span class="cp">U+0358</span></span>
+      <span class="eq">≡</span>
+      <span class="tile"><span class="ch poj">o</span><span class="cp">U+006F</span></span><span class="op">+</span>
+      <span class="tile mark"><span class="ch poj">&nbsp;͘</span><span class="cp">U+0358</span></span><span class="op">+</span>
+      <span class="tile mark"><span class="ch poj">&nbsp;́</span><span class="cp">U+0301</span></span>
+    </div>
+
+    <h3 id="ccc-table">Canonical Combining Class (ccc)</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Marks</th><th>Canonical Combining Class (ccc)</th></tr></thead>
+      <tbody>
+        <tr><td><code>U+0300</code> <code>0301</code> <code>0302</code> <code>0304</code> <code>0306</code> <code>030B</code> <code>030C</code> <strong><code>030D</code></strong></td><td><strong>230</strong> (Above)</td></tr>
+        <tr><td><strong><code>U+0358</code></strong> combining dot above right</td><td><strong>232</strong> (Above Right)</td></tr>
+      </tbody>
+    </table></div>
+
+    <p>Unicode normalisation sorts adjacent combining marks in ascending order of <code>ccc</code>. Therefore <code>o + U+0358 + U+0301</code> becomes <code>o + U+0301 + U+0358</code>, and NFC composes that into <code>ó + U+0358</code>. Key consequences:</p>
+    <ul>
+      <li>After normalisation, <strong>the tone mark always precedes the dot</strong>.</li>
+      <li>For tones 2, 3, 5, 6, 7, and 9, NFC is <strong>precomposed toned vowel + <code>U+0358</code></strong>. Fonts must attach <code>U+0358</code> to <span class="poj">ó ò ô ǒ ō ŏ ő Ó Ò Ô Ǒ Ō Ŏ Ő</span>, not only to plain <span class="poj">o O</span>.</li>
+      <li>For the 8th tone, there is no precomposed vowel, so NFC of <span class="poj">o̍͘</span> remains <code>o + U+030D + U+0358</code>.</li>
+      <li><strong>HarfBuzz</strong> reorders marks by <code>ccc</code> and recomposes through the font’s <code>cmap</code> <em>before</em> running GSUB. Verified across all 24 audited fonts: <code>o 0358 0301</code>, <code>o 0301 0358</code>, and <code>ó 0358</code> shaped identically. Thus in HarfBuzz, a ligature written only for <code>o 0358 0301</code> never fires, and <code>o acutecomb uni0358</code> never fires when the font maps <code>ó</code> — yet both rules remain essential for shapers that do not pre-normalise.</li>
+      <li>If a document mixes forms, text search for <span class="poj">hō͘</span> can miss occurrences. Normalising documents to <strong>NFC</strong> resolves this.</li>
+    </ul>
+
+    <h2 id="shapers">How shaping engines join it up</h2>
+    <h3 id="harfbuzz">HarfBuzz (Chrome, Firefox, Android, LibreOffice, Linux)</h3>
+    <p>Verified experimentally in this study and against <code>hb-ot-shape-normalize.cc</code> / <code>hb-ot-shape-fallback.cc</code>:</p>
+    <ol>
+      <li><strong>Normalise:</strong> decomposes, sorts marks by <code>ccc</code>, then recomposes wherever the font’s <code>cmap</code> maps the composite (Latin uses <code>COMPOSED_DIACRITICS</code>). If a precomposed letter is absent from <code>cmap</code>, HarfBuzz decomposes it into base + mark.</li>
+      <li><strong>GSUB <code>ccmp</code>:</strong> always enabled; cannot be disabled by users or CSS. Used for dotless-i, capital-form marks, and precomposed POJ ligatures.</li>
+      <li><strong>Other GSUB features:</strong> <code>locl</code>, <code>liga</code>, <code>case</code>, etc.</li>
+      <li><strong>GPOS <code>mark</code> / <code>mkmk</code>:</strong> anchor-based positioning.</li>
+      <li><strong>Fallback positioning — all or nothing:</strong> HarfBuzz computes geometric fallback positions from <code>ccc</code> and bounding boxes <strong>only if the font has no GPOS <code>mark</code> feature at all</strong>. If a font has <code>mark</code> but lacks an anchor for a specific base–mark pair, the mark stays at raw offset <code>(0, 0)</code>.
+        <ul>
+          <li><em>Verified — Arial:</em> has <code>mark</code>, no <code>U+0358</code> anchors → dot stays at <code>(0, 0)</code>, landing outside the advance box.</li>
+          <li><em>Verified — Source Sans 3:</em> <code>ŏ + U+0358</code> and <code>Ŏ + U+0358</code> lack anchors → <code>(0, 0)</code>.</li>
+          <li><em>Verified — Geneva, Helvetica, Menlo, and taigivs Latin:</em> no <code>mark</code> table → fallback runs and lifts <code>U+0358</code> above the entire ink box of <span class="poj">Ó</span>/<span class="poj">Ō</span> (accent included), causing the dot to float high above capitals.</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3 id="coretext-directwrite">CoreText (macOS / iOS / Safari) &amp; DirectWrite (Windows / Word)</h3>
+    <div class="callout warn">
+      <span class="callout-title">Verification status</span>
+      <p>Preliminary macOS CoreText tests were run with <code>tools/poj_coretext.swift</code> (see <a href="problems.html#platforms">Platform Differences</a>). Windows DirectWrite has <strong>not</strong> been tested directly; statements marked <em>(reviewer claim, not verified)</em> originate from our model review.</p>
+    </div>
+    <ul>
+      <li>Neither engine runs HarfBuzz-style <code>ccc</code>/bounding-box fallback positioning; unanchored marks draw at their outline coordinates <em>(reviewer claim, not verified on DirectWrite; observed on CoreText)</em>.</li>
+      <li>DirectWrite is reported not to reorder marks or recompose NFD through <code>cmap</code> the way HarfBuzz does, so <code>o + U+0301</code> may remain two glyphs and non-canonical orders may reach GSUB <em>(reviewer claim, not verified)</em>.</li>
+      <li>When a precomposed letter (e.g. <span class="poj">ḿ</span>, <span class="poj">ǹ</span>, <span class="poj">ŏ</span>) is missing from <code>cmap</code>, both engines tend to trigger <strong>system font fallback</strong> rather than decompose it, causing a single mismatched letter <em>(reviewer claim, not verified)</em>.</li>
+      <li>Apple system fonts (Geneva, Helvetica, Menlo) may rely on AAT tables (<code>morx</code>/<code>kerx</code>) under CoreText, so HarfBuzz results do not predict Pages or Safari rendering.</li>
+    </ul>
+    <p>This is why a production POJ font must map every precomposed letter in the <a href="#precomposed">Unicode 17.0 matrix</a> and cover <strong>both</strong> mark orders and <strong>both</strong> NFC and NFD inputs in GSUB <code>ccmp</code>.</p>
+
+    <h2 id="dotted-i">Soft_Dotted <span class="poj">i</span> and <span class="poj">j</span> (dotless <span class="poj">ı</span>)</h2>
+    <p>When an above-mark sits on <span class="poj">i</span>, the tittle (dot) must disappear, just as in <span class="poj">í</span>. Ready-made letters like <span class="poj">í ì î ī ĭ</span> already omit it, whereas <code>i + U+030D</code> (<span class="poj">i̍</span>) and <code>i + U+030B</code> (<span class="poj">i̋</span>) are always sequences. The font must substitute <code>i → dotlessi</code> (<code>U+0131</code>) and <code>j → uni0237</code> (<code>U+0237</code>) in <code>ccmp</code>.</p>
+    <div class="examples">
+      <div class="ex good"><div class="label"><span class="tag good">Correct</span><b><span class="poj">chi̍t</span></b> (一) in Lesson One: dotless <span class="poj">ı</span> swapped in before <code>U+030D</code></div>
+        <img src="assets/img/i8-good.svg" alt="chi̍t with dotless i"></div>
+      <div class="ex bad"><div class="label"><span class="tag bad">Wrong</span><b><span class="poj">chi̍t</span></b> in Taigi Huninn POJ (字咍): the dot stays under the 8th-tone line</div>
+        <img src="assets/img/i8-bad.svg" alt="chi̍t where the i keeps its dot"></div>
+    </div>
+
+    <h2 id="nasal">Superscript <span class="poj">ⁿ</span> (<code>U+207F</code>) &amp; Capital <span class="poj">ᴺ</span> (<code>U+1D3A</code>)</h2>
+    <ul>
+      <li><code>U+207F</code> is a modifier letter (General Category <code>Lm</code>), not a combining mark. It carries its own advance width and needs no anchors.</li>
+      <li><strong>NFKC/NFKD corruption:</strong> Its compatibility decomposition is <code>&lt;super&gt; n</code>, so <strong>NFKC/NFKD silently turns <span class="poj">hiⁿ</span> into <span class="poj">hin</span></strong> (and <span class="poj">thiⁿ</span> into <span class="poj">thin</span>). Search indices, databases, and “normalise width” pipelines frequently apply NFKC and destroy nasalisation. <strong>Always use NFC, never NFKC, for Taigi text.</strong></li>
+      <li><strong>No case mapping:</strong> Unicode defines no uppercase mapping for <code>U+207F</code>, so <code>"sⁿ".upper()</code> yields <code>Sⁿ</code>. All-caps text sometimes uses <strong><code>U+1D3A</code> <span class="poj">ᴺ</span> MODIFIER LETTER CAPITAL N</strong> (<span class="poj">SIᴺ</span>) or <code>NN</code>. POJ fonts should include <code>U+1D3A</code>.</li>
+      <li><strong><code>.case</code> form rule:</strong> A <code>.case</code> glyph for <span class="poj">ⁿ</span> may raise it to cap-height alignment, but must <strong>not</strong> swap <span class="poj">ⁿ</span> into <span class="poj">ᴺ</span>, because <code>case</code> should not alter semantic character identity.</li>
+      <li><strong>Non-font errors:</strong> HTML <code>&lt;sup&gt;n&lt;/sup&gt;</code>, subscript <code>ₙ</code> (<code>U+2099</code>), and feminine ordinal <code>ª</code> are incorrect character encodings, not font issues.</li>
+    </ul>
+
+    <h2 id="legacy">Legacy &amp; substitute encodings in real text</h2>
+    <p>Before <code>U+0358</code> was standardised in 2005 (and in older software), writers improvised with look-alike characters or private font slots:</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Method</th><th>Example</th><th>Handling / Recommendation</th></tr></thead>
+      <tbody>
+        <tr><td>Standard combining <code>U+0358</code> (Unicode 4.1, 2005)</td><td class="poj big">o͘</td><td><strong>Standard.</strong> Font provides anchors and/or <code>ccmp</code> ligatures.</td></tr>
+        <tr><td>Middle / spacing dots (<code>U+00B7</code>, <code>U+02D9</code>, <code>U+2022</code>, <code>U+30FB</code>)</td><td class="poj big">o·</td><td>Punctuation breaks word boundaries &amp; search. Convert to <code>U+0358</code> on input.</td></tr>
+        <tr><td>Vietnamese horn o (<code>U+01A1</code> ơ, ớ, ờ…)</td><td class="poj big">ơ</td><td>Distinct letter; fails POJ search. Convert to <code>o + U+0358</code> on input.</td></tr>
+        <tr><td>Dot above <code>U+0307</code> for o͘ or 8th tone; <code>U+02C8</code> <code>ˈ</code> or apostrophe for 8th tone</td><td class="poj big">ȯ, aˈ</td><td>Wrong semantics. Convert to standard POJ marks on input.</td></tr>
+        <tr><td>ASCII / typewriter / KPL spellings</td><td class="mono">oo, ou, o', nn, N</td><td><code>oo</code>/<code>nn</code> are standard KPL spellings; ASCII substitutes should be converted if POJ is desired.</td></tr>
+        <tr><td><strong>Private Use Area (PUA)</strong> &amp; 8-bit hacks</td><td><code>U+E400–E435</code> (aiongg / NunitoPOJ); legacy Windows-1252 / MacRoman <code>0x80–0xFF</code></td><td>Renders only in one specific font; becomes tofu or mojibake elsewhere. Avoid in new text; legacy fonts may retain mappings for archival documents.</td></tr>
+        <tr><td>Numbered tones (TLPA, POJ numbers)</td><td class="mono">peh8-oe7-ji7</td><td>Input shorthand; convert to Unicode marks via IME or converter.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="legend">Note: Vietnamese horn, <code>U+0307</code>/<code>U+02C8</code>, and extra 8-bit/PUA schemes were flagged by our model review; corpus prevalence in ChhoeTaigi and older web archives remains an <a href="tools.html#open-questions">open question</a>.</p>
+
+    <h2 id="ivs">Ideographic Variation Sequences (Han-Lo ruby)</h2>
+    <p>ButTaiwan’s <a href="https://github.com/ButTaiwan/taigivs"><strong>字咍 taigivs</strong></a> fonts (TaigiHuninn, TaigiIansui, TaigiKaiStd, TaigiGenRyuMin, etc.; fonts OFL 1.1, build scripts Apache-2.0) embed Taigi ruby directly into glyphs via an OpenType <code>cmap</code> format 14 table:</p>
+    <ul>
+      <li>Each Han character followed by an Ideographic Variation Selector (<code>U+E0100…</code>) selects a glyph containing the reading drawn above it — <strong>8,021 IVS mappings per font</strong>.</li>
+      <li><strong>8 variants</strong> (from the fonts’ <code>name</code> tables): <code>POJ</code> (白話字), <code>TL</code> (KPL), <code>HI</code> (方音, Taigi Phonetic Symbols), <code>KN</code> (假名, Taigi kana), and dual-reading sets <code>POJHI</code>, <code>POJKN</code>, <code>TLHI</code>, <code>TLKN</code>.</li>
+      <li>Uses <strong>IVS only, no GSUB</strong>: switching the font file switches which Roman Orthography or phonetic system appears.</li>
+      <li>This is the only plain-text way to put POJ above Han characters without HTML <code>&lt;ruby&gt;</code>, and it is a separate track from Latin POJ support.</li>
+      <li><strong>Caveats:</strong> The Latin portion of <code>taigivs</code> fonts has no GPOS <code>mark</code> table and no dotless-i swap (<span class="poj">i̍</span> keeps its dot), so running POJ relies on HarfBuzz fallback. Web subsetters and PDF generators frequently strip <code>cmap</code> format 14 tables or drop variation selectors.</li>
+    </ul>
+
+    <h2 id="hyphens">Hyphens &amp; neutral-tone double hyphen (<code>--</code>)</h2>
+    <ul>
+      <li>Single hyphen <code>-</code> (<code>U+002D</code>) joins syllables; double hyphen <code>--</code> marks the neutral tone: <span class="poj">chhù--nih</span>, <span class="poj">khòaⁿ--tio̍h</span>, <span class="poj">tńg--khì</span> (轉去).</li>
+      <li><strong>Font rule:</strong> Never ligature <code>--</code> into an en-dash via <code>liga</code> or <code>calt</code>, and keep enough sidebearing so the two hyphens do not touch.</li>
+      <li><strong>Editor rule:</strong> Auto-correct features that turn <code>--</code> into <code>–</code> corrupt POJ text and should be disabled.</li>
+      <li><strong>Line breaking:</strong> Preventing a break between the two hyphens (<code>chhù- / -nih</code>) is a layout-engine concern. <code>U+2011</code> NON-BREAKING HYPHEN is sometimes used, though many fonts omit it.</li>
+    </ul>
+
+    <nav class="doc-pager" aria-label="Pagination">
+      <a class="pager-link prev" href="./">
+        <span class="pager-dir">← Previous</span>
+        <span class="pager-title">Overview</span>
+      </a>
+      <a class="pager-link next" href="fonts.html">
+        <span class="pager-dir">Next →</span>
+        <span class="pager-title">How Fonts Implement POJ</span>
+      </a>
+    </nav>
+
+    <footer class="doc-footer">
+      PehoejiFont project · Text is set in <a href="https://github.com/ButTaiwan/genyo-font">源樣明體 GenYo Min</a> by But Ko (<a href="assets/fonts/GenYo-OFL.txt">SIL Open Font License</a>) · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">Source on GitHub</a>
+    </footer>
+  </main>
+
+  <aside class="toc" aria-label="On this page">
+    <div class="toc-title">On this page</div>
+    <ul id="toc-list"></ul>
+  </aside>
 </div>
-<div class="tiles" aria-label="a plus vertical line sticker makes a̍">
-  <span class="tile"><span class="ch poj">a</span><span class="cp">U+0061</span></span>
-  <span class="op">+</span>
-  <span class="tile mark"><span class="ch poj">&nbsp;̍</span><span class="cp">U+030D</span></span>
-  <span class="eq">=</span>
-  <span class="result poj">a̍</span>
-</div>
 
-<p>POJ needs two stickers that European languages don't use:</p>
-<ul>
-  <li>the <strong>dot at the top right</strong> of <span class="poj">o͘</span> (<code>U+0358</code>), and</li>
-  <li>the <strong>short vertical line</strong> for the 8th tone, as in <span class="poj">chia̍h</span> (<code>U+030D</code>).</li>
-</ul>
-<p>Many fonts simply don't have these two. That is the first reason POJ breaks.</p>
-
-<div class="note">
-  <p><strong>Will Unicode ever add a ready-made <span class="poj">o͘</span>?</strong> No. When POJ was added in 2005, Unicode chose to add the dot sticker instead, and its rules no longer allow new ready-made accented letters. Stickers are the only way, now and in the future.</p>
-</div>
-
-<h2>The POJ stickers</h2>
-<div class="table-wrap"><table>
-  <tr><th>Tone</th><th>Mark</th><th>Example</th><th>Ready-made letters exist?</th></tr>
-  <tr><td>1 and 4</td><td>none</td><td class="poj">kun 君, kut 骨</td><td>no mark needed</td></tr>
-  <tr><td>2</td><td class="poj big">´</td><td class="poj">kún 滾</td><td>yes for vowels (á é í ó ú), and for <span class="poj">ḿ ń</span></td></tr>
-  <tr><td>3</td><td class="poj big">`</td><td class="poj">kùn 棍</td><td>yes for vowels, and for <span class="poj">ǹ</span>; <span class="poj">m̀</span> is built</td></tr>
-  <tr><td>5</td><td class="poj big">^</td><td class="poj">kûn 裙</td><td>yes for vowels; <span class="poj">m̂ n̂</span> are built</td></tr>
-  <tr><td>7</td><td class="poj big">¯</td><td class="poj">kūn 郡</td><td>yes for vowels; <span class="poj">m̄ n̄</span> are built</td></tr>
-  <tr><td>8</td><td class="poj big">&nbsp;̍</td><td class="poj">ku̍t 滑</td><td><strong>never</strong>: always built</td></tr>
-  <tr><td>dot of <span class="poj">o͘</span></td><td class="poj big">&nbsp;͘</td><td class="poj">o͘ 烏, hō͘ 雨</td><td><strong>never</strong>: always built</td></tr>
-</table></div>
-<p>KPL (Kàu-io̍k Pō͘ Lô-má-jī), the Ministry of Education's Roman Orthography for Taigi, adds a 9th tone mark <span class="poj">&nbsp;̋</span> (as in <span class="poj">ő</span>) and sometimes a 6th tone <span class="poj">ˇ</span> (as in <span class="poj">ǎ</span>). A good POJ font usually covers KPL too.</p>
-
-<h3>Two stickers at once</h3>
-<p>A toned <span class="poj">o͘</span> carries <strong>two</strong> stickers: the tone on top and the dot at the right. The font has to place both without them bumping into each other.</p>
-<div class="tiles">
-  <span class="tile"><span class="ch poj">o</span><span class="cp">U+006F</span></span><span class="op">+</span>
-  <span class="tile mark"><span class="ch poj">&nbsp;́</span><span class="cp">U+0301</span></span><span class="op">+</span>
-  <span class="tile mark"><span class="ch poj">&nbsp;͘</span><span class="cp">U+0358</span></span>
-  <span class="eq">=</span><span class="result poj">ó͘</span>
-</div>
-
-<h2 id="same-letter">The same letter, written different ways</h2>
-<p>Here is the surprising part. <span class="poj">ó͘</span> can reach the font in at least three different codes, and <strong>they all should look the same</strong>:</p>
-
-<h3>1. Ready-made <span class="poj">ó</span> + dot <span class="legend">(most web pages and phones)</span></h3>
-<div class="tiles">
-  <span class="tile"><span class="ch poj">ó</span><span class="cp">U+00F3</span></span><span class="op">+</span>
-  <span class="tile mark"><span class="ch poj">&nbsp;͘</span><span class="cp">U+0358</span></span>
-</div>
-<h3>2. Plain <span class="poj">o</span> + tone + dot <span class="legend">(Mac file names, text copied out of PDFs)</span></h3>
-<div class="tiles">
-  <span class="tile"><span class="ch poj">o</span><span class="cp">U+006F</span></span><span class="op">+</span>
-  <span class="tile mark"><span class="ch poj">&nbsp;́</span><span class="cp">U+0301</span></span><span class="op">+</span>
-  <span class="tile mark"><span class="ch poj">&nbsp;͘</span><span class="cp">U+0358</span></span>
-</div>
-<h3>3. Plain <span class="poj">o</span> + dot + tone <span class="legend">(some keyboards, where you type <span class="poj">o͘</span> first, then the tone)</span></h3>
-<div class="tiles">
-  <span class="tile"><span class="ch poj">o</span><span class="cp">U+006F</span></span><span class="op">+</span>
-  <span class="tile mark"><span class="ch poj">&nbsp;͘</span><span class="cp">U+0358</span></span><span class="op">+</span>
-  <span class="tile mark"><span class="ch poj">&nbsp;́</span><span class="cp">U+0301</span></span>
-</div>
-
-<p>Unicode says all three mean the same thing, and it has a standard “tidy-up” that turns them into one form (form 1 above; experts call it <strong>NFC</strong>). After tidying, the tone always comes before the dot.</p>
-<p>Chrome, Firefox and Android tidy the text before the font sees it. Other programs may not, so a good font is built to handle every form itself.</p>
-<p><strong>Why you might care:</strong> if a document mixes forms, searching for <span class="poj">hō͘</span> may miss some of them. Tools that tidy text to NFC fix this.</p>
-
-<h2 id="dotted-i">The <span class="poj">i</span> must drop its dot</h2>
-<p>When a tone sits on <span class="poj">i</span>, the dot of the <span class="poj">i</span> should disappear, just like in <span class="poj">í</span>. Ready-made letters such as <span class="poj">í</span> already do this. But <span class="poj">i̍</span> (8th tone) is always built from stickers, so the <strong>font</strong> has to remove the dot.</p>
-<div class="examples">
-  <div class="ex good"><div class="label"><span class="tag good">Correct</span><b>chi̍t</b> (一) in Lesson One: no dot under the line</div>
-    <img src="assets/img/i8-good.svg" alt="chi̍t with dotless i"></div>
-  <div class="ex bad"><div class="label"><span class="tag bad">Wrong</span>the same word in Taigi Huninn POJ (字咍): the dot stays, under the tone line</div>
-    <img src="assets/img/i8-bad.svg" alt="chi̍t where the i keeps its dot"></div>
-</div>
-
-<h2 id="nasal">The small <span class="poj">ⁿ</span> is a letter, not a sticker</h2>
-<p>The nasal <span class="poj">ⁿ</span> in <span class="poj">thiⁿ</span> (天) is a letter of its own (<code>U+207F</code>). Fonts draw it easily, but two things go wrong with it:</p>
-<ul>
-  <li><strong>Some “clean-up” tools turn it into a plain <span class="poj">n</span>.</strong> A different tidy-up called <strong>NFKC</strong> (used by some search engines and databases) changes <span class="poj">thiⁿ</span> into <span class="poj">thin</span>. Use NFC, never NFKC, for Taigi text.</li>
-  <li><strong>It has no capital.</strong> Writing in ALL CAPS gives <span class="poj">THIⁿ</span>. Some people use <span class="poj">ᴺ</span> (<code>U+1D3A</code>) or <span class="poj">NN</span> instead.</li>
-</ul>
-
-<h2>Look-alikes that are not POJ</h2>
-<p>Before the dot sticker existed, people used whatever was on the keyboard. You will still find these in old text:</p>
-<div class="table-wrap"><table>
-  <tr><th>Looks like</th><th>What it really is</th><th>Problem</th></tr>
-  <tr><td class="poj big">o·</td><td>o + middle dot (<code>U+00B7</code>)</td><td>The dot is punctuation, so search and spell tools treat the word as two pieces.</td></tr>
-  <tr><td class="poj big">ơ</td><td>Vietnamese “horn” o (<code>U+01A1</code>)</td><td>A different letter. Searches for <span class="poj">o͘</span> won't find it.</td></tr>
-  <tr><td class="poj big">oo, ou</td><td>typed spellings</td><td>Fine as a choice (KPL uses <span class="poj">oo</span>), but not POJ.</td></tr>
-  <tr><td><span class="poj big">o͘</span> that only works in one font</td><td>a “private” code (Private Use Area), used by a few old POJ fonts</td><td>Turns into an empty box or a random symbol in any other font.</td></tr>
-</table></div>
-<p>If you have old text like this, convert it to the real stickers once, and it will work everywhere.</p>
-
-<h2>Hyphens</h2>
-<p>POJ joins syllables with <span class="poj">-</span> and marks the neutral tone with two hyphens: <span class="poj">tńg--khì</span> (轉去, go back). Some word processors “helpfully” turn <span class="poj">--</span> into a long dash (<span class="poj">–</span>). Turn that auto-correct option off.</p>
-
-<div class="next"><a href="./">← Start</a><a href="fonts.html">Next: How fonts draw them →</a></div>
-</main>
-
-<footer class="site"><div class="wrap">
-  PehoejiFont project · Text is set in <a href="https://github.com/ButTaiwan/genyo-font">源樣明體 GenYo Min</a> by But Ko (<a href="assets/fonts/GenYo-OFL.txt">SIL Open Font License</a>) · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">Source on GitHub</a>
-</div></footer>
+<script src="assets/docs.js"></script>
 </body>
 </html>

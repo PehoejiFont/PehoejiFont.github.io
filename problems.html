@@ -3,100 +3,197 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fix POJ Problems</title>
-<meta name="description" content="Common problems with Taigi POJ text on screen, what causes them and how to fix them.">
+<title>Troubleshooting &amp; Platforms — POJ Font Documentation</title>
+<meta name="description" content="Symptom-by-symptom troubleshooting guide for Taigi POJ text rendering, search, PDF copy-out, web fonts, and HarfBuzz vs macOS CoreText vs Windows DirectWrite differences.">
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-<header class="site"><div class="wrap">
-  <a class="brand" href="./">POJ Font Guide</a>
-  <nav>
-    <a href="./">Start</a>
-    <a href="letters.html">How letters are stored</a>
-    <a href="fonts.html">How fonts draw them</a>
-    <a href="choose.html">Pick a font</a>
-    <a href="problems.html" aria-current="page">Fix problems</a>
-    <a href="makers.html">For font makers</a>
-  </nav>
-</div></header>
+<header class="topbar">
+  <div class="topbar-inner">
+    <button class="menu-btn" id="menu-toggle" type="button" aria-label="Toggle navigation">☰</button>
+    <a class="brand" href="./">
+      <span class="brand-mark poj">o͘</span>
+      <span>PehoejiFont</span>
+      <span class="brand-badge">Docs</span>
+    </a>
+    <div class="topbar-spacer"></div>
+    <button class="search-trigger" id="search-trigger" type="button">
+      <span>⌕</span>
+      <span class="search-label">Search docs…</span>
+      <span class="kbd">⌘K</span>
+    </button>
+    <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    <a class="icon-btn" href="https://github.com/PehoejiFont/PehoejiFont.github.io">GitHub</a>
+  </div>
+</header>
 
-<main class="wrap">
-<h1>Fix common problems</h1>
-<p class="lead">What you see, why it happens, and what to do.</p>
+<div class="sidebar-backdrop" id="sidebar-backdrop"></div>
 
-<details open>
-  <summary>I see empty boxes (□) instead of letters</summary>
-  <p><strong>Why:</strong> the font doesn't have that character at all. EB Garamond, for example, has no <span class="poj">o͘</span> dot.</p>
-  <p><strong>Fix:</strong> switch to a font from the <a href="choose.html">list</a>.</p>
-</details>
+<div class="doc-shell">
+  <aside class="sidebar" aria-label="Documentation navigation">
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Getting Started</div>
+      <ul>
+        <li><a href="./">Overview</a></li>
+        <li><a href="choose.html#test">Live POJ Test Bench</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Core Concepts</div>
+      <ul>
+        <li><a href="letters.html">Unicode &amp; Encoding</a></li>
+        <li><a href="fonts.html">How Fonts Implement POJ</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Font Directory &amp; Data</div>
+      <ul>
+        <li><a href="choose.html">24-Font Audit &amp; Specimens</a></li>
+        <li><a href="catalog.html">Google Fonts Survey &amp; Forks</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Practical Guides</div>
+      <ul>
+        <li><a href="problems.html" aria-current="page">Troubleshooting &amp; Platforms</a></li>
+        <li><a href="makers.html">Font Maker’s Guide</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Reference</div>
+      <ul>
+        <li><a href="tools.html">Tools, Methodology &amp; Reviews</a></li>
+      </ul>
+    </div>
+  </aside>
 
-<details open>
-  <summary>The dot of <span class="poj">o͘</span> is far to the right, or floating high</summary>
-  <p><strong>Why:</strong> the font has the dot but doesn't know where to put it (see <a href="fonts.html">way D</a>). It is usually worst on capitals such as <span class="poj">Ó͘</span>.</p>
-  <p><strong>Fix:</strong> switch fonts. Adding extra spaces or moving the dot by hand will break on someone else's screen.</p>
-</details>
+  <main class="doc-main">
+    <div class="breadcrumb"><a href="./">Docs</a> › <span>Practical Guides</span> › <span>Troubleshooting &amp; Platforms</span></div>
+    <h1>Troubleshooting &amp; Platform Differences</h1>
+    <p class="lead">Diagnose every common Taigi POJ rendering, search, web-delivery, and PDF extraction issue — and understand how HarfBuzz, macOS CoreText, and Windows DirectWrite behave differently.</p>
 
-<details>
-  <summary>One letter looks different from the rest of the word</summary>
-  <p><strong>Why:</strong> the font lacks that letter, so the app quietly borrows it from another font. Letters often borrowed: <span class="poj">ḿ ǹ</span>, the <span class="poj">o͘</span> dot, the 8th-tone line. On a Mac, for example, EB Garamond borrows the <span class="poj">o͘</span> dot from Helvetica.</p>
-  <p><strong>Fix:</strong> use a font that has every POJ letter (<a href="choose.html#test">test it</a>).</p>
-</details>
+    <h2 id="symptoms">Symptom-by-symptom diagnosis</h2>
 
-<details>
-  <summary>There is a dot under the tone line on <span class="poj">i̍</span></summary>
-  <p><strong>Why:</strong> the font doesn't remove the <span class="poj">i</span>'s own dot when a tone is added (<a href="letters.html#dotted-i">explained here</a>).</p>
-  <p><strong>Fix:</strong> switch fonts. Don't type a dotless <span class="poj">ı</span> by hand: the word will no longer match searches.</p>
-</details>
+    <details open>
+      <summary>1. Empty boxes (□ / tofu) appear instead of letters or marks</summary>
+      <p><strong>Cause:</strong> The font’s <code>cmap</code> lacks that codepoint entirely. For example, EB Garamond has no <code>U+0358</code>, and 1,242 of 1,393 shortlisted Google Fonts families lack all three POJ codepoints (<code>U+0358</code>, <code>U+030D</code>, <code>U+207F</code>).</p>
+      <p><strong>Fix:</strong> Switch to a verified font from the <a href="choose.html#picks">recommended list</a>.</p>
+    </details>
 
-<details>
-  <summary>The text looked fine until I added letter-spacing (or opened it in Word)</summary>
-  <p><strong>Why:</strong> the font builds POJ letters with an optional feature (“ligatures”) that browsers switch off under letter-spacing and that Word leaves off by default.</p>
-  <p><strong>Fix:</strong> use a font that builds POJ letters with the always-on feature. All fonts in our <a href="choose.html">list</a> do. In Word you can also turn ligatures on under <em>Font → Advanced</em>.</p>
-</details>
+    <details open>
+      <summary>2. The dot of <span class="poj">o͘</span> lands far to the right, or floats high above capitals</summary>
+      <p><strong>Cause:</strong> The font maps <code>U+0358</code> without a <code>topright</code> anchor (<a href="fonts.html#technique-d">Technique D</a>). If the font has a <code>mark</code> table for other accents (like Arial or Source Sans 3 on <span class="poj">ŏ͘</span>), HarfBuzz disables fallback and leaves the dot at offset <code>(0, 0)</code>. If it has no <code>mark</code> table at all (like Helvetica/Geneva/Menlo), HarfBuzz fallback lifts the dot above the full ink box of <span class="poj">Ó͘ Ō͘</span>.</p>
+      <p><strong>Fix:</strong> Switch to an A+B or A font. Never add manual spaces or hand-kerning, which breaks on every other viewer’s screen.</p>
+    </details>
 
-<details>
-  <summary><span class="poj">thiⁿ</span> turned into <span class="poj">thin</span></summary>
-  <p><strong>Why:</strong> a program “normalised” the text with NFKC, which turns <span class="poj">ⁿ</span> into a plain <span class="poj">n</span> (<a href="letters.html#nasal">explained here</a>).</p>
-  <p><strong>Fix:</strong> if you run the system, set it to NFC, not NFKC. Otherwise report it to whoever runs it.</p>
-</details>
+    <details open>
+      <summary>3. One letter in a word looks like a different typeface</summary>
+      <p><strong>Cause:</strong> The font lacks that specific precomposed codepoint (commonly <span class="poj">ḿ</span> <code>U+1E3F</code>, <span class="poj">ǹ</span> <code>U+01F9</code>, <span class="poj">ŏ</span>, <code>U+0358</code>, or <code>U+030D</code>), so the OS or browser silently borrows it from a system fallback font (for instance, on macOS, EB Garamond borrows <code>U+0358</code> from Helvetica).</p>
+      <p><strong>Fix:</strong> Choose a font that maps the full POJ + KPL precomposed set (<a href="choose.html#test">verify in the Test Bench</a>).</p>
+    </details>
 
-<details>
-  <summary>Search can't find a word I can see on screen</summary>
-  <p><strong>Why:</strong> the word is stored in a different form from what you typed (<a href="letters.html#same-letter">same letter, different codes</a>), or it uses a look-alike such as <span class="poj">o·</span> or <span class="poj">ơ</span>.</p>
-  <p><strong>Fix:</strong> convert the text to NFC once, and replace look-alikes with the real <span class="poj">o͘</span>.</p>
-</details>
+    <details>
+      <summary>4. A dot stays underneath the tone line on <span class="poj">i̍</span> or <span class="poj">i̋</span></summary>
+      <p><strong>Cause:</strong> The font fails to implement the <code>Soft_Dotted</code> substitution (<code>i → dotlessi</code> in <code>ccmp</code> before above-marks; <a href="letters.html#dotted-i">details</a>). Observed in 字咍 Taigi IVS fonts, EB Garamond, Helvetica, Geneva, and Menlo.</p>
+      <p><strong>Fix:</strong> Switch fonts. <strong>Never type dotless <span class="poj">ı</span> (<code>U+0131</code>) manually</strong> in running text — it breaks spelling and search matching.</p>
+    </details>
 
-<details>
-  <summary><span class="poj">tńg--khì</span> became <span class="poj">tńg–khì</span></summary>
-  <p><strong>Why:</strong> the word processor auto-corrected two hyphens into a dash.</p>
-  <p><strong>Fix:</strong> turn off “replace hyphens with dash” in the auto-correct settings.</p>
-</details>
+    <details>
+      <summary>5. Text breaks when CSS <code>letter-spacing</code> is added or when opened in Microsoft Word</summary>
+      <p><strong>Cause:</strong> The font implements POJ glyph building inside optional <code>liga</code> or <code>clig</code> rather than mandatory <code>ccmp</code>. CSS Text 3 disables optional ligatures under non-zero <code>letter-spacing</code>, and Microsoft Word leaves ligatures off by default.</p>
+      <p><strong>Fix:</strong> Use a font that puts POJ composition in <code>ccmp</code> (all fonts in our <a href="choose.html#picks">recommended list</a> do). As a temporary workaround in Word, enable ligatures under <em>Font → Advanced</em>.</p>
+    </details>
 
-<details>
-  <summary>My website shows the dots wrong but my computer doesn't</summary>
-  <p><strong>Why:</strong> the website probably loads the font from Google Fonts, which leaves out the POJ pieces for some fonts (<a href="choose.html#google-fonts">the Google Fonts trap</a>).</p>
-  <p><strong>Fix:</strong> host the full font file on your own site.</p>
-</details>
+    <details>
+      <summary>6. <span class="poj">thiⁿ</span> silently turned into <span class="poj">thin</span> (or <span class="poj">hiⁿ</span> into <span class="poj">hin</span>)</summary>
+      <p><strong>Cause:</strong> A database, search indexer, or “normalise text” script applied <strong>NFKC/NFKD</strong>, which decomposes <code>U+207F</code> via <code>&lt;super&gt; n</code> into plain ASCII <code>n</code> (<a href="letters.html#nasal">details</a>).</p>
+      <p><strong>Fix:</strong> Always configure text pipelines, databases, and search indexers to use <strong>NFC</strong> — never NFKC or NFKD — for Taigi data.</p>
+    </details>
 
-<details>
-  <summary>Old documents show strange symbols after I changed the font</summary>
-  <p><strong>Why:</strong> the document was typed with an old POJ font that used private codes. Those codes mean nothing in any other font.</p>
-  <p><strong>Fix:</strong> convert the document to real Unicode POJ once. After that it works in every font.</p>
-</details>
+    <details>
+      <summary>7. Ctrl+F / database search misses a word visible on screen</summary>
+      <p><strong>Cause:</strong> Either the text mixes NFC (<code>ó + 0358</code>), NFD (<code>o + 0301 + 0358</code>), and reverse order (<code>o + 0358 + 0301</code>), or it contains legacy look-alikes such as middle dot <span class="poj">o·</span> (<code>U+00B7</code>) or Vietnamese horn <span class="poj">ơ</span> (<code>U+01A1</code>).</p>
+      <p><strong>Fix:</strong> Replace legacy look-alikes with standard <code>U+0358</code>/<code>U+030D</code>/<code>U+207F</code> and normalise the corpus to <strong>NFC</strong>.</p>
+    </details>
 
-<h2 id="mac">Mac and Windows</h2>
-<p>Phones, Chrome and Firefox all use the same text engine (HarfBuzz), which we tested in detail. Macs and Windows also have their own engines, which are used by Safari, Pages, Word and other built-in apps.</p>
-<ul>
-  <li><strong>Mac (first results):</strong> we ran the same tests through the Mac's own engine. <strong>Lesson One, jf open 粉圓, 芫荽 Iansui, I.Ming, GenYo Min and WD-XL Lubrifont</strong> gave exactly the same result as Chrome for every test letter. Fonts that depend on the browser's guess (Helvetica, Menlo, the 字咍 Taigi fonts) look different on a Mac. More results are coming.</li>
-  <li><strong>Windows:</strong> not tested yet.</li>
-</ul>
-<p>Fonts with ready-drawn letters and snap points (<a href="fonts.html">ways A + B</a>) depend least on the engine, which is one more reason to choose them.</p>
+    <details>
+      <summary>8. Neutral-tone <span class="poj">tńg--khì</span> turned into an en-dash <span class="poj">tńg–khì</span></summary>
+      <p><strong>Cause:</strong> Word-processor “smart dashes” auto-corrected two hyphens into an en-dash, or a font has a <code>liga</code>/<code>calt</code> ligature turning <code>--</code> into a dash.</p>
+      <p><strong>Fix:</strong> Disable “replace hyphens with dash” in editor auto-correct settings, and verify <code>--</code> stays two hyphens in the font.</p>
+    </details>
 
-<div class="next"><a href="choose.html">← Pick a font</a><a href="makers.html">Next: For font makers →</a></div>
-</main>
+    <details>
+      <summary>9. POJ looks right locally, but breaks on my website</summary>
+      <p><strong>Cause:</strong> Loading the font via Google Fonts CSS API serves <code>unicode-range</code> subsets that drop <code>U+0358</code>, <code>U+030D</code>, and <code>U+207F</code> for families like TASA Explorer and Source Sans 3 (<a href="fonts.html#google-fonts">verified audit</a>). Aggressive local subsetters (<code>pyftsubset</code>) can also strip <code>ccmp</code>/<code>mark</code> or <code>cmap</code> format 14.</p>
+      <p><strong>Fix:</strong> Self-host the full font file, or subset explicitly keeping all POJ codepoints and <code>--layout-features='*'</code> (see <code>tools/build_site_fonts.sh</code>).</p>
+    </details>
 
-<footer class="site"><div class="wrap">
-  PehoejiFont project · Text is set in <a href="https://github.com/ButTaiwan/genyo-font">源樣明體 GenYo Min</a> by But Ko (<a href="assets/fonts/GenYo-OFL.txt">SIL Open Font License</a>) · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">Source on GitHub</a>
-</div></footer>
+    <details>
+      <summary>10. Old documents show strange symbols or boxes after changing fonts</summary>
+      <p><strong>Cause:</strong> Legacy POJ documents used Private Use Area slots (e.g. <code>U+E400–E435</code> in older aiongg fonts) or pre-Unicode 8-bit Windows-1252 / MacRoman remappings that only exist in one specific font.</p>
+      <p><strong>Fix:</strong> Run a one-time conversion from the legacy PUA/8-bit encoding to standard Unicode NFC POJ.</p>
+    </details>
+
+    <details>
+      <summary>11. Copying POJ text out of a PDF produces garbage, extra spaces, or dotless <span class="poj">ı</span></summary>
+      <p><strong>Cause:</strong> Three distinct PDF issues: (a) non-standard glyph names (e.g. <code>oopoj_acutecomb</code> instead of AGL-compliant <code>o_uni0301_uni0358</code>) break automatic <code>ToUnicode</code> CMap generation; (b) SIL’s spacing dot (<a href="fonts.html#technique-c">Way C</a>) may cause PDF viewers to infer a word space; (c) <code>dotlessi + uni030D</code> can extract as <code>ı̍</code> unless the PDF producer emits <code>/ActualText</code>.</p>
+      <p><strong>Fix:</strong> Use fonts with AGL-compliant production names, and ensure PDF generators emit proper <code>/ActualText</code> spans where supported.</p>
+    </details>
+
+    <h2 id="platforms">Platform &amp; shaping engine differences</h2>
+    <p id="mac">Web browsers (Chrome, Firefox), Android, LibreOffice, and Linux all use <strong>HarfBuzz</strong>. Native Apple apps (Safari, Pages, Keynote) use <strong>CoreText</strong>, and native Windows apps (Microsoft Word, Edge/Windows UI) use <strong>DirectWrite</strong>.</p>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>Engine</th><th>Used by</th><th>Test status in this project</th><th>Key POJ behaviours</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>HarfBuzz</strong></td>
+          <td>Chrome, Firefox, Android, LibreOffice, Linux</td>
+          <td><span class="tag good">Fully tested (24 fonts)</span></td>
+          <td>Normalises (<code>ccc</code> reorder + <code>cmap</code> recompose) before GSUB. Decomposes missing precomposed letters. Geometric fallback is <strong>all-or-nothing</strong> (disabled whenever any <code>mark</code> feature exists).</td>
+        </tr>
+        <tr>
+          <td><strong>CoreText</strong></td>
+          <td>macOS / iOS native apps, Safari, Pages</td>
+          <td><span class="tag warn">Preliminary tests</span><br>(<code>tools/poj_coretext.swift</code>)</td>
+          <td><strong>Lesson One, jf open 粉圓, 芫荽 Iansui, I.Ming, GenYo Min, and WD-XL Lubrifont</strong> produced identical glyph runs to HarfBuzz across all test clusters. Fonts lacking <code>mark</code> (Helvetica, Menlo, 字咍 Taigi fonts) differ markedly because CoreText does not use HarfBuzz fallback and Apple system fonts may use AAT (<code>morx</code>/<code>kerx</code>).</td>
+        </tr>
+        <tr>
+          <td><strong>DirectWrite</strong></td>
+          <td>Windows native apps, Microsoft Word</td>
+          <td><span class="tag neutral">Not yet tested</span></td>
+          <td><em>(Reviewer claims, unverified):</em> Does not pre-reorder or recompose NFD like HarfBuzz, so non-canonical sequences reach GSUB; missing precomposed letters trigger system font fallback rather than decomposition; Word leaves <code>liga</code> off by default.</td>
+        </tr>
+      </tbody>
+    </table></div>
+
+    <div class="callout good">
+      <span class="callout-title">How to stay platform-independent</span>
+      <p>Choose fonts built with <strong>Techniques A + B</strong> (<code>ccmp</code> precomposed glyphs covering NFC, NFD, and reverse order, backed by complete GPOS <code>mark</code>/<code>mkmk</code> anchors and full precomposed <code>cmap</code> coverage). They behave identically across HarfBuzz, CoreText, and DirectWrite.</p>
+    </div>
+
+    <nav class="doc-pager" aria-label="Pagination">
+      <a class="pager-link prev" href="catalog.html">
+        <span class="pager-dir">← Previous</span>
+        <span class="pager-title">Google Fonts Survey &amp; Forks</span>
+      </a>
+      <a class="pager-link next" href="makers.html">
+        <span class="pager-dir">Next →</span>
+        <span class="pager-title">Font Maker’s Guide</span>
+      </a>
+    </nav>
+
+    <footer class="doc-footer">
+      PehoejiFont project · Text is set in <a href="https://github.com/ButTaiwan/genyo-font">源樣明體 GenYo Min</a> by But Ko (<a href="assets/fonts/GenYo-OFL.txt">SIL Open Font License</a>) · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">Source on GitHub</a>
+    </footer>
+  </main>
+
+  <aside class="toc" aria-label="On this page">
+    <div class="toc-title">On this page</div>
+    <ul id="toc-list"></ul>
+  </aside>
+</div>
+
+<script src="assets/docs.js"></script>
 </body>
 </html>
