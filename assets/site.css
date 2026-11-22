@@ -890,7 +890,7 @@ td.center, th.center { text-align: center; }
 }
 .bench-input {
   width: 100%;
-  min-height: 86px;
+  min-height: 132px;
   padding: 13px 15px;
   border: 1.5px solid var(--line-strong);
   border-radius: 7px;

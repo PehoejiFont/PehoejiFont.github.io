@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>即時 POJ 測試台 — 白話字（POJ）字型技術文件</title>
+<meta name="description" content="台語白話字（Pe̍h-ōe-jī，POJ）互動字型測試台：一鍵複製 NFC、NFD 或非正規反向順序、測試本機字型與 letter-spacing，並即時檢視每個字元的 Unicode 編號。">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="alternate" hreflang="en" href="../test.html">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <button class="menu-btn" id="menu-toggle" type="button" aria-label="開啟導覽選單">☰</button>
+    <a class="brand" href="./">
+      <span class="brand-mark poj">o͘</span>
+      <span>PehoejiFont</span>
+      <span class="brand-badge">文件</span>
+    </a>
+    <div class="topbar-spacer"></div>
+    <button class="search-trigger" id="search-trigger" type="button">
+      <span>⌕</span>
+      <span class="search-label">搜尋文件…</span>
+      <span class="kbd">⌘K</span>
+    </button>
+    <a class="icon-btn lang-switch" href="../test.html" hreflang="en" lang="en">EN</a>
+    <button class="icon-btn" id="theme-toggle" type="button">☾ 暗色</button>
+    <a class="icon-btn gh-link" href="https://github.com/PehoejiFont/PehoejiFont.github.io">GitHub</a>
+  </div>
+</header>
+
+<div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+<div class="doc-shell">
+  <aside class="sidebar" aria-label="文件導覽">
+    <div class="sidebar-group">
+      <div class="sidebar-heading">開始使用</div>
+      <ul>
+        <li><a href="./">總覽</a></li>
+        <li><a href="test.html" aria-current="page">即時 POJ 測試台</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">核心原理</div>
+      <ul>
+        <li><a href="letters.html">Unicode 與編碼結構</a></li>
+        <li><a href="fonts.html">字型如何實作 POJ</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">字型目錄與資料</div>
+      <ul>
+        <li><a href="choose.html">24 款字型實測與樣張</a></li>
+        <li><a href="catalog.html">Google Fonts 普查與 Fork</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">實務指南</div>
+      <ul>
+        <li><a href="problems.html">疑難排解與跨平台差異</a></li>
+        <li><a href="makers.html">字型開發者實作指南</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main class="doc-main">
+    <div class="breadcrumb"><a href="./">文件</a> › <span>開始使用</span> › <span>即時 POJ 測試台</span></div>
+    <h1>即時 POJ 字型測試台</h1>
+    <p class="lead">直接在瀏覽器切換本機字型或一鍵複製 NFC、NFD 與非正規反向順序字串貼至其他軟體；可開啟 <code>letter-spacing</code> 揭露誤用 <code>liga</code> 的破版，並即時拆解每個字元的 Unicode 編碼。</p>
+
+    <h2 id="bench">互動測試區與字碼檢視器</h2>
+    <div class="bench">
+      <div class="bench-toolbar">
+        <button class="btn primary" type="button" data-copy-form="NFC">複製 NFC</button>
+        <button class="btn" type="button" data-copy-form="NFD" title="macOS 檔名與部分 PDF 產生的分解形式">複製 NFD</button>
+        <button class="btn" type="button" data-copy-form="REV" title="非正規順序：U+0358 排在聲調之前">複製反向順序</button>
+        <button class="btn" type="button" data-preset="specimen">短樣張字串</button>
+        <button class="btn" type="button" data-preset="full">完整 POJ 字串</button>
+        <button class="btn" type="button" data-preset="words">常用詞範例</button>
+      </div>
+      <textarea class="bench-input" id="bench-input" spellcheck="false" aria-label="POJ 測試文字">o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | tńg--khì | Pe̍h-ōe-jī Lâu Ô͘-chhiû</textarea>
+      <div class="bench-controls">
+        <label>預覽字型：
+          <select id="bench-font" style="font:inherit;padding:4px 8px;border:1px solid var(--line-strong);border-radius:6px;background:var(--bg);color:var(--ink);">
+            <option value='"GenYo Site", "GenYo Site CJK", serif'>源樣明體（本站字型）</option>
+            <option value='Arial, sans-serif'>Arial（本機）</option>
+            <option value='Helvetica, sans-serif'>Helvetica（本機）</option>
+            <option value='Georgia, serif'>Georgia（本機）</option>
+            <option value='Times New Roman, serif'>Times New Roman（本機）</option>
+            <option value='Menlo, Consolas, monospace'>Menlo / Consolas（本機）</option>
+            <option value='system-ui, sans-serif'>系統預設字型</option>
+          </select>
+        </label>
+        <label>輸入本機字型名稱：
+          <input type="text" id="bench-custom-font" placeholder="例：Lesson One, Iansui" style="font:inherit;padding:4px 8px;width:170px;border:1px solid var(--line-strong);border-radius:6px;background:var(--bg);color:var(--ink);">
+        </label>
+        <label>字級：<input type="range" id="bench-size" min="16" max="48" value="26"> <span id="bench-size-val">26px</span></label>
+        <label><input type="checkbox" id="bench-spacing"> 加上 <code>letter-spacing: 0.12em</code>（會停用 <code>liga</code>）</label>
+        <label><input type="checkbox" id="bench-bold"> 粗體（700）</label>
+      </div>
+      <div class="cp-strip" id="cp-strip" aria-label="即時 Unicode 字碼拆解"></div>
+    </div>
+
+    <h2 id="checklist">六項快速目視檢查</h2>
+    <p>切換上方預覽字型（或貼到 Word、Pages、Illustrator 等軟體）後，依序檢查以下六點：</p>
+    <ol>
+      <li><strong>沒有空白方框（□）</strong>，也沒有個別字母突然變成另一款字型（特別留意 <span class="poj">ḿ ǹ</span>、<span class="poj">o͘</span> 的圓點與第八調豎線）。</li>
+      <li><strong><span class="poj">o͘</span> 的圓點</strong>穩穩落在右上方，尤其檢查大寫 <span class="poj">O͘ Ó͘ Ō͘ O̍͘</span> 與寬調號 <span class="poj">ō͘ ô͘ ŏ͘</span>。</li>
+      <li><strong><span class="poj">i̍</span> 乾淨去點</strong>，第八調短豎線下方沒有殘留圓點（<a href="letters.html#dotted-i">原理說明</a>）。</li>
+      <li><strong>第八調短豎線</strong>居中對齊於 <span class="poj">a̍ e̍ o̍ u̍ m̍ n̍</span> 與大寫字母正上方。</li>
+      <li><strong><span class="poj">tńg--khì</span> 中的 <code>--</code> 維持兩條獨立連字號</strong>，未合併成破折號。</li>
+      <li><strong>NFC、NFD 與反向順序外觀完全一致</strong>，且加上 <code>letter-spacing</code> 不會破版（<a href="fonts.html#switches">隱藏開關陷阱</a>）。</li>
+    </ol>
+
+    <h2 id="three-forms">為什麼要測試三種 Unicode 編碼？</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>按鈕</th><th>範例（<span class="poj">ó͘</span>）</th><th>測試目的</th></tr></thead>
+      <tbody>
+        <tr><td><strong>複製 NFC</strong></td><td><code>U+00F3 ó</code> + <code>U+0358</code></td><td>多數網頁與輸入法輸出的標準預組形式；驗證字型是否在預組帶調母音上正確設妥 <code>topright</code> 錨點或 <code>ccmp</code>。</td></tr>
+        <tr><td><strong>複製 NFD</strong></td><td><code>U+006F o</code> + <code>U+0301</code> + <code>U+0358</code></td><td>macOS 檔名與 PDF 複製常產生的分解形式；驗證兩個附加符號同時掛載時不會互相碰撞。</td></tr>
+        <tr><td><strong>複製反向順序</strong></td><td><code>U+006F o</code> + <code>U+0358</code> + <code>U+0301</code></td><td>部分序列式輸入法輸出的非正規順序；驗證在不預先依 <code>ccc</code> 重排的引擎下是否仍正確顯示。</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="callout info">
+      <span class="callout-title">想直接選用已通過全部實測的免費字型？</span>
+      <p>請前往<a href="choose.html">24 款字型實測與樣張</a>瀏覽推薦清單、HarfBuzz 互動檢驗器與高解析度樣張。</p>
+    </div>
+
+    <nav class="doc-pager" aria-label="上下頁導覽">
+      <a class="pager-link prev" href="./">
+        <span class="pager-dir">← 上一頁</span>
+        <span class="pager-title">總覽</span>
+      </a>
+      <a class="pager-link next" href="letters.html">
+        <span class="pager-dir">下一頁 →</span>
+        <span class="pager-title">Unicode 與編碼結構</span>
+      </a>
+    </nav>
+
+    <footer class="doc-footer">
+      PehoejiFont 計畫 · 全站文字採用 But Ko 製作之 <a href="https://github.com/ButTaiwan/genyo-font">源樣明體（GenYo Min）</a>（<a href="../assets/fonts/GenYo-OFL.txt">SIL Open Font License</a>） · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">GitHub 原始碼</a>
+    </footer>
+  </main>
+
+  <aside class="toc" aria-label="本頁目錄">
+    <div class="toc-title">本頁目錄</div>
+    <ul id="toc-list"></ul>
+  </aside>
+</div>
+
+<script src="../assets/docs.js"></script>
+<script>
+(function () {
+  var PRESETS = {
+    specimen: 'o͘ ó͘ ò͘ ô͘ ō͘ o̍͘ ŏ͘ O͘ Ó͘ Ō͘ | a̍ i̍ m̍ n̍ n̍g I̍ | ḿ m̄ m̂ ǹ n̄ | iⁿ | Pe̍h-ōe-jī Lâu Ô͘-chhiû',
+    full: 'o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | tńg--khì | Pe̍h-ōe-jī Lâu Ô͘-chhiû',
+    words: 'O͘-á hō͘（雨）chia̍h（食）thiⁿ（天）n̂g（黃）· kun 君 kún 滾 kùn 棍 kut 骨 kûn 裙 kūn 郡 ku̍t 滑 · tńg--khì 轉去 · Pe̍h-ōe-jī 白話字'
+  };
+
+  var input = document.getElementById('bench-input');
+  var strip = document.getElementById('cp-strip');
+  var fontSel = document.getElementById('bench-font');
+  var customFont = document.getElementById('bench-custom-font');
+  var sizeRange = document.getElementById('bench-size');
+  var sizeVal = document.getElementById('bench-size-val');
+  var spacingChk = document.getElementById('bench-spacing');
+  var boldChk = document.getElementById('bench-bold');
+
+  function toReverseOrder(str) {
+    var nfd = str.normalize('NFD');
+    return nfd.replace(/([\u0300-\u0306\u030D]+)\u0358/g, '\u0358$1');
+  }
+
+  function renderCodepoints() {
+    var text = input.value.slice(0, 140);
+    var cps = Array.from(text);
+    var html = cps.map(function (ch) {
+      var cp = ch.codePointAt(0);
+      var hex = 'U+' + cp.toString(16).toUpperCase().padStart(4, '0');
+      var isMark = (cp >= 0x0300 && cp <= 0x036F);
+      var disp = ch === ' ' ? '␣' : (isMark ? '◌' + ch : ch);
+      return '<span class="cp-chip' + (isMark ? ' is-mark' : '') + '">' +
+        window.POJEscapeHtml(disp) + ' ' + hex + '</span>';
+    }).join('');
+    if (input.value.length > 140) html += '<span class="muted"> …（僅顯示前 140 個字碼）</span>';
+    strip.innerHTML = html || '<span class="muted">請在上方輸入或貼上 POJ 文字以檢視 Unicode 字碼。</span>';
+  }
+
+  function applyFont() {
+    var custom = customFont.value.trim();
+    input.style.fontFamily = custom ? ('"' + custom.replace(/"/g, '') + '", sans-serif') : fontSel.value;
+  }
+
+  input.style.fontSize = sizeRange.value + 'px';
+  input.addEventListener('input', renderCodepoints);
+  renderCodepoints();
+
+  fontSel.addEventListener('change', function () { customFont.value = ''; applyFont(); });
+  customFont.addEventListener('input', applyFont);
+  sizeRange.addEventListener('input', function () {
+    input.style.fontSize = sizeRange.value + 'px';
+    sizeVal.textContent = sizeRange.value + 'px';
+  });
+  spacingChk.addEventListener('change', function () {
+    input.style.letterSpacing = spacingChk.checked ? '0.12em' : '';
+  });
+  boldChk.addEventListener('change', function () {
+    input.style.fontWeight = boldChk.checked ? '700' : '400';
+  });
+
+  document.querySelectorAll('[data-preset]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      input.value = PRESETS[btn.dataset.preset];
+      renderCodepoints();
+    });
+  });
+
+  document.querySelectorAll('[data-copy-form]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var form = btn.dataset.copyForm;
+      var out = form === 'REV' ? toReverseOrder(input.value) : input.value.normalize(form);
+      var orig = btn.textContent;
+      window.POJCopyText(out, function (ok) {
+        btn.textContent = ok ? '已複製' : '複製失敗';
+        setTimeout(function () { btn.textContent = orig; }, 1400);
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>

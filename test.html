@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Live POJ Test Bench — POJ Font Documentation</title>
+<meta name="description" content="Interactive Taigi Pe̍h-ōe-jī (POJ) font test bench: copy NFC, NFD, or reverse-order strings, test letter-spacing and installed fonts, and inspect live Unicode codepoints.">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="alternate" hreflang="zh-Hant-TW" href="zh-tw/test.html">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <button class="menu-btn" id="menu-toggle" type="button" aria-label="Toggle navigation">☰</button>
+    <a class="brand" href="./">
+      <span class="brand-mark poj">o͘</span>
+      <span>PehoejiFont</span>
+      <span class="brand-badge">Docs</span>
+    </a>
+    <div class="topbar-spacer"></div>
+    <button class="search-trigger" id="search-trigger" type="button">
+      <span>⌕</span>
+      <span class="search-label">Search docs…</span>
+      <span class="kbd">⌘K</span>
+    </button>
+    <a class="icon-btn lang-switch" href="zh-tw/test.html" hreflang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</a>
+    <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    <a class="icon-btn gh-link" href="https://github.com/PehoejiFont/PehoejiFont.github.io">GitHub</a>
+  </div>
+</header>
+
+<div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+<div class="doc-shell">
+  <aside class="sidebar" aria-label="Documentation navigation">
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Getting Started</div>
+      <ul>
+        <li><a href="./">Overview</a></li>
+        <li><a href="test.html" aria-current="page">Live POJ Test Bench</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Core Concepts</div>
+      <ul>
+        <li><a href="letters.html">Unicode &amp; Encoding</a></li>
+        <li><a href="fonts.html">How Fonts Implement POJ</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Font Directory &amp; Data</div>
+      <ul>
+        <li><a href="choose.html">24-Font Audit &amp; Specimens</a></li>
+        <li><a href="catalog.html">Google Fonts Survey &amp; Forks</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Practical Guides</div>
+      <ul>
+        <li><a href="problems.html">Troubleshooting &amp; Platforms</a></li>
+        <li><a href="makers.html">Font Maker’s Guide</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main class="doc-main">
+    <div class="breadcrumb"><a href="./">Docs</a> › <span>Getting Started</span> › <span>Live POJ Test Bench</span></div>
+    <h1>Live POJ Test Bench</h1>
+    <p class="lead">Test any font on your computer or in your browser across NFC, NFD, and non-canonical reverse mark order, toggle <code>letter-spacing</code> to expose <code>liga</code> bugs, and inspect every underlying Unicode codepoint live.</p>
+
+    <h2 id="bench">Interactive tester &amp; codepoint inspector</h2>
+    <div class="bench">
+      <div class="bench-toolbar">
+        <button class="btn primary" type="button" data-copy-form="NFC">Copy NFC</button>
+        <button class="btn" type="button" data-copy-form="NFD" title="Decomposed form (macOS file names, PDFs)">Copy NFD</button>
+        <button class="btn" type="button" data-copy-form="REV" title="Non-canonical order: U+0358 placed before the tone mark">Copy Reverse Order</button>
+        <button class="btn" type="button" data-preset="specimen">Short Specimen</button>
+        <button class="btn" type="button" data-preset="full">Full POJ Line</button>
+        <button class="btn" type="button" data-preset="words">Words</button>
+      </div>
+      <textarea class="bench-input" id="bench-input" spellcheck="false" aria-label="POJ test line">o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | tńg--khì | Pe̍h-ōe-jī Lâu Ô͘-chhiû</textarea>
+      <div class="bench-controls">
+        <label>Preview font:
+          <select id="bench-font" style="font:inherit;padding:4px 8px;border:1px solid var(--line-strong);border-radius:6px;background:var(--bg);color:var(--ink);">
+            <option value='"GenYo Site", "GenYo Site CJK", serif'>GenYo Min (site font)</option>
+            <option value='Arial, sans-serif'>Arial (local)</option>
+            <option value='Helvetica, sans-serif'>Helvetica (local)</option>
+            <option value='Georgia, serif'>Georgia (local)</option>
+            <option value='Times New Roman, serif'>Times New Roman (local)</option>
+            <option value='Menlo, Consolas, monospace'>Menlo / Consolas (local)</option>
+            <option value='system-ui, sans-serif'>System UI</option>
+          </select>
+        </label>
+        <label>Custom font:
+          <input type="text" id="bench-custom-font" placeholder="e.g. Lesson One, Iansui" style="font:inherit;padding:4px 8px;width:170px;border:1px solid var(--line-strong);border-radius:6px;background:var(--bg);color:var(--ink);">
+        </label>
+        <label>Size: <input type="range" id="bench-size" min="16" max="48" value="26"> <span id="bench-size-val">26px</span></label>
+        <label><input type="checkbox" id="bench-spacing"> Add <code>letter-spacing: 0.12em</code> (disables <code>liga</code>)</label>
+        <label><input type="checkbox" id="bench-bold"> Bold (700)</label>
+      </div>
+      <div class="cp-strip" id="cp-strip" aria-label="Live Unicode codepoint breakdown"></div>
+    </div>
+
+    <h2 id="checklist">6-point visual checklist</h2>
+    <p>After switching the preview font above (or pasting into Word, Pages, Illustrator, or your editor), check all six items:</p>
+    <ol>
+      <li><strong>No empty boxes (□)</strong> and no single letters borrowed from a mismatched fallback font (watch <span class="poj">ḿ ǹ</span>, the <span class="poj">o͘</span> dot, and the 8th-tone line).</li>
+      <li><strong>The <span class="poj">o͘</span> dot</strong> sits cleanly at the top right of every <span class="poj">o</span> — especially capitals <span class="poj">O͘ Ó͘ Ō͘ O̍͘</span> and wide accents <span class="poj">ō͘ ô͘ ŏ͘</span>.</li>
+      <li><strong><span class="poj">i̍</span> drops its dot</strong> cleanly under the 8th-tone vertical line (<a href="letters.html#dotted-i">why this matters</a>).</li>
+      <li><strong>The 8th-tone vertical line</strong> centres cleanly over <span class="poj">a̍ e̍ o̍ u̍ m̍ n̍</span> and capitals.</li>
+      <li><strong><code>--</code> remains two separate hyphens</strong> in <span class="poj">tńg--khì</span>.</li>
+      <li><strong>NFC, NFD, and Reverse Order render identically</strong>, and enabling <code>letter-spacing</code> does not break composition (<a href="fonts.html#switches">hidden feature switches</a>).</li>
+    </ol>
+
+    <h2 id="three-forms">Why copy all three Unicode forms?</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Button</th><th>Example (<span class="poj">ó͘</span>)</th><th>What it tests</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Copy NFC</strong></td><td><code>U+00F3 ó</code> + <code>U+0358</code></td><td>Standard precomposed form used by most websites and IMEs. Verifies <code>topright</code> anchors and <code>ccmp</code> rules on precomposed toned vowels.</td></tr>
+        <tr><td><strong>Copy NFD</strong></td><td><code>U+006F o</code> + <code>U+0301</code> + <code>U+0358</code></td><td>Decomposed form produced by macOS file names and PDF copy-out. Verifies both marks attach cleanly without colliding.</td></tr>
+        <tr><td><strong>Copy Reverse Order</strong></td><td><code>U+006F o</code> + <code>U+0358</code> + <code>U+0301</code></td><td>Non-canonical mark order from sequential keyboards. Verifies engines and fonts that do not reorder marks by <code>ccc</code>.</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="callout info">
+      <span class="callout-title">Looking for fonts that already pass every test?</span>
+      <p>Browse our curated picks, full 24-font HarfBuzz audit explorer, and rendered PNG specimens in <a href="choose.html">24-Font Audit &amp; Specimens</a>.</p>
+    </div>
+
+    <nav class="doc-pager" aria-label="Pagination">
+      <a class="pager-link prev" href="./">
+        <span class="pager-dir">← Previous</span>
+        <span class="pager-title">Overview</span>
+      </a>
+      <a class="pager-link next" href="letters.html">
+        <span class="pager-dir">Next →</span>
+        <span class="pager-title">Unicode &amp; Encoding</span>
+      </a>
+    </nav>
+
+    <footer class="doc-footer">
+      PehoejiFont project · Text is set in <a href="https://github.com/ButTaiwan/genyo-font">源樣明體 GenYo Min</a> by But Ko (<a href="assets/fonts/GenYo-OFL.txt">SIL Open Font License</a>) · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">Source on GitHub</a>
+    </footer>
+  </main>
+
+  <aside class="toc" aria-label="On this page">
+    <div class="toc-title">On this page</div>
+    <ul id="toc-list"></ul>
+  </aside>
+</div>
+
+<script src="assets/docs.js"></script>
+<script>
+(function () {
+  var PRESETS = {
+    specimen: 'o͘ ó͘ ò͘ ô͘ ō͘ o̍͘ ŏ͘ O͘ Ó͘ Ō͘ | a̍ i̍ m̍ n̍ n̍g I̍ | ḿ m̄ m̂ ǹ n̄ | iⁿ | Pe̍h-ōe-jī Lâu Ô͘-chhiû',
+    full: 'o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | tńg--khì | Pe̍h-ōe-jī Lâu Ô͘-chhiû',
+    words: 'O͘-á hō͘ (雨) chia̍h (食) thiⁿ (天) n̂g (黃) · kun 君 kún 滾 kùn 棍 kut 骨 kûn 裙 kūn 郡 ku̍t 滑 · tńg--khì 轉去 · Pe̍h-ōe-jī 白話字'
+  };
+
+  var input = document.getElementById('bench-input');
+  var strip = document.getElementById('cp-strip');
+  var fontSel = document.getElementById('bench-font');
+  var customFont = document.getElementById('bench-custom-font');
+  var sizeRange = document.getElementById('bench-size');
+  var sizeVal = document.getElementById('bench-size-val');
+  var spacingChk = document.getElementById('bench-spacing');
+  var boldChk = document.getElementById('bench-bold');
+
+  function toReverseOrder(str) {
+    var nfd = str.normalize('NFD');
+    return nfd.replace(/([\u0300-\u0306\u030D]+)\u0358/g, '\u0358$1');
+  }
+
+  function renderCodepoints() {
+    var text = input.value.slice(0, 140);
+    var cps = Array.from(text);
+    var html = cps.map(function (ch) {
+      var cp = ch.codePointAt(0);
+      var hex = 'U+' + cp.toString(16).toUpperCase().padStart(4, '0');
+      var isMark = (cp >= 0x0300 && cp <= 0x036F);
+      var disp = ch === ' ' ? '␣' : (isMark ? '◌' + ch : ch);
+      return '<span class="cp-chip' + (isMark ? ' is-mark' : '') + '">' +
+        window.POJEscapeHtml(disp) + ' ' + hex + '</span>';
+    }).join('');
+    if (input.value.length > 140) html += '<span class="muted"> … (showing first 140 codepoints)</span>';
+    strip.innerHTML = html || '<span class="muted">Type or paste POJ text above to inspect its Unicode codepoints.</span>';
+  }
+
+  function applyFont() {
+    var custom = customFont.value.trim();
+    input.style.fontFamily = custom ? ('"' + custom.replace(/"/g, '') + '", sans-serif') : fontSel.value;
+  }
+
+  input.style.fontSize = sizeRange.value + 'px';
+  input.addEventListener('input', renderCodepoints);
+  renderCodepoints();
+
+  fontSel.addEventListener('change', function () { customFont.value = ''; applyFont(); });
+  customFont.addEventListener('input', applyFont);
+  sizeRange.addEventListener('input', function () {
+    input.style.fontSize = sizeRange.value + 'px';
+    sizeVal.textContent = sizeRange.value + 'px';
+  });
+  spacingChk.addEventListener('change', function () {
+    input.style.letterSpacing = spacingChk.checked ? '0.12em' : '';
+  });
+  boldChk.addEventListener('change', function () {
+    input.style.fontWeight = boldChk.checked ? '700' : '400';
+  });
+
+  document.querySelectorAll('[data-preset]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      input.value = PRESETS[btn.dataset.preset];
+      renderCodepoints();
+    });
+  });
+
+  document.querySelectorAll('[data-copy-form]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var form = btn.dataset.copyForm;
+      var out = form === 'REV' ? toReverseOrder(input.value) : input.value.normalize(form);
+      var orig = btn.textContent;
+      window.POJCopyText(out, function (ok) {
+        btn.textContent = ok ? 'Copied ' + form : 'Copy failed';
+        setTimeout(function () { btn.textContent = orig; }, 1400);
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>

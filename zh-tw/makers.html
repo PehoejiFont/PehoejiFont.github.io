@@ -37,7 +37,7 @@
       <div class="sidebar-heading">開始使用</div>
       <ul>
         <li><a href="./">總覽</a></li>
-        <li><a href="choose.html#test">即時 POJ 測試台</a></li>
+        <li><a href="test.html">即時 POJ 測試台</a></li>
       </ul>
     </div>
     <div class="sidebar-group">
@@ -192,7 +192,7 @@ feature mkmk {
     <h2 id="testing">6. 目視 QA 驗收清單</h2>
     <p>請於實際跨平台環境目視驗收每款編譯完成的字型：</p>
     <ol>
-      <li>將<a href="choose.html#test">完整 POJ 測試字串</a>（NFC、NFD 與反向順序）貼入 <strong>Chrome／Firefox</strong>（HarfBuzz）、<strong>Safari／Pages</strong>（CoreText）與 <strong>Microsoft Word</strong>（DirectWrite）逐一檢查。</li>
+      <li>將<a href="test.html">完整 POJ 測試字串</a>（NFC、NFD 與反向順序）貼入 <strong>Chrome／Firefox</strong>（HarfBuzz）、<strong>Safari／Pages</strong>（CoreText）與 <strong>Microsoft Word</strong>（DirectWrite）逐一檢查。</li>
       <li>在瀏覽器中加上 <code>letter-spacing: 0.1em</code>，確認完全不依賴選用 <code>liga</code>。</li>
       <li>檢查所有字重與可變軸極端值——特別是粗體下的寬調號（<span class="poj">ō͘ ô͘ ŏ͘</span>）與大寫（<span class="poj">O͘ Ó͘ Ō͘ O̍͘</span>）。</li>
       <li>若預計上架 Google Fonts，務必確認實際送出的 CSS <code>unicode-range</code> 切塊確實包含 <code>U+0358</code>、<code>U+030D</code> 與 <code>U+207F</code>。</li>
