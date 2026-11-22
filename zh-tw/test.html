@@ -78,7 +78,7 @@
         <button class="btn" type="button" data-preset="full">完整 POJ 字串</button>
         <button class="btn" type="button" data-preset="words">常用詞範例</button>
       </div>
-      <textarea class="bench-input" id="bench-input" spellcheck="false" aria-label="POJ 測試文字">o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | tńg--khì | Pe̍h-ōe-jī Mi̍h-kiāⁿ</textarea>
+      <textarea class="bench-input" id="bench-input" spellcheck="false" aria-label="POJ 測試文字">o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | tńg--khì-o͘h | Pe̍h-ōe-jī Mi̍h-kiāⁿ</textarea>
       <div class="bench-controls">
         <label>預覽字型：
           <select id="bench-font" style="font:inherit;padding:4px 8px;border:1px solid var(--line-strong);border-radius:6px;background:var(--bg);color:var(--ink);">
@@ -108,7 +108,7 @@
       <li><strong><span class="poj">o͘</span> 的圓點</strong>穩穩落在右上方，尤其檢查大寫 <span class="poj">O͘ Ó͘ Ō͘ O̍͘</span> 與寬調號 <span class="poj">ō͘ ô͘ ŏ͘</span>。</li>
       <li><strong><span class="poj">i̍</span> 乾淨去點</strong>，第八調短豎線下方沒有殘留圓點（<a href="letters.html#dotted-i">原理說明</a>）。</li>
       <li><strong>第八調短豎線</strong>居中對齊於 <span class="poj">a̍ e̍ o̍ u̍ m̍ n̍</span> 與大寫字母正上方。</li>
-      <li><strong><span class="poj">tńg--khì</span> 中的 <code>--</code> 維持兩條獨立連字號</strong>，未合併成破折號。</li>
+      <li><strong><span class="poj">tńg--khì-o͘h</span> 中的 <code>--</code> 維持兩條獨立連字號</strong>，未合併成破折號。</li>
       <li><strong>NFC、NFD 與反向順序外觀完全一致</strong>，且加上 <code>letter-spacing</code> 不會破版（<a href="fonts.html#switches">隱藏開關陷阱</a>）。</li>
     </ol>
 
@@ -154,8 +154,8 @@
 (function () {
   var PRESETS = {
     specimen: 'o͘ ó͘ ò͘ ô͘ ō͘ o̍͘ ŏ͘ O͘ Ó͘ Ō͘ | a̍ i̍ m̍ n̍ n̍g I̍ | ḿ m̄ m̂ ǹ n̄ | iⁿ | Pe̍h-ōe-jī Mi̍h-kiāⁿ',
-    full: 'o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | tńg--khì | Pe̍h-ōe-jī Mi̍h-kiāⁿ',
-    words: 'Ō͘-á O͘-sek Hō͘-sòaⁿ Hô͘-chio-piáⁿ · Mi̍h-kiāⁿ Ji̍t-thâu Gō͘-cha̍p Pe̍h-ōe-jī · chia̍h-pn̄g m̄-chai N̂g-sek ǹg-bāng · khòaⁿ--tio̍h tńg--khì pēⁿ-īⁿ'
+    full: 'o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | tńg--khì-o͘h | Pe̍h-ōe-jī Mi̍h-kiāⁿ',
+    words: 'Ō͘-á O͘-sek Hō͘-sòaⁿ Hô͘-chio-piáⁿ · Mi̍h-kiāⁿ Ji̍t-thâu Gō͘-cha̍p Pe̍h-ōe-jī · chia̍h-pn̄g m̄-chai N̂g-sek ǹg-bāng · khòaⁿ--tio̍h tńg--khì-o͘h pēⁿ-īⁿ'
   };
 
   var input = document.getElementById('bench-input');

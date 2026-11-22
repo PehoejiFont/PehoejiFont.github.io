@@ -78,7 +78,7 @@
         <button class="btn" type="button" data-preset="full">Full POJ Line</button>
         <button class="btn" type="button" data-preset="words">Words</button>
       </div>
-      <textarea class="bench-input" id="bench-input" spellcheck="false" aria-label="POJ test line">o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | tńg--khì | Pe̍h-ōe-jī Mi̍h-kiāⁿ</textarea>
+      <textarea class="bench-input" id="bench-input" spellcheck="false" aria-label="POJ test line">o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | tńg--khì-o͘h | Pe̍h-ōe-jī Mi̍h-kiāⁿ</textarea>
       <div class="bench-controls">
         <label>Preview font:
           <select id="bench-font" style="font:inherit;padding:4px 8px;border:1px solid var(--line-strong);border-radius:6px;background:var(--bg);color:var(--ink);">
@@ -108,7 +108,7 @@
       <li><strong>The <span class="poj">o͘</span> dot</strong> sits cleanly at the top right of every <span class="poj">o</span> — especially capitals <span class="poj">O͘ Ó͘ Ō͘ O̍͘</span> and wide accents <span class="poj">ō͘ ô͘ ŏ͘</span>.</li>
       <li><strong><span class="poj">i̍</span> drops its dot</strong> cleanly under the 8th-tone vertical line (<a href="letters.html#dotted-i">why this matters</a>).</li>
       <li><strong>The 8th-tone vertical line</strong> centres cleanly over <span class="poj">a̍ e̍ o̍ u̍ m̍ n̍</span> and capitals.</li>
-      <li><strong><code>--</code> remains two separate hyphens</strong> in <span class="poj">tńg--khì</span>.</li>
+      <li><strong><code>--</code> remains two separate hyphens</strong> in <span class="poj">tńg--khì-o͘h</span>.</li>
       <li><strong>NFC, NFD, and Reverse Order render identically</strong>, and enabling <code>letter-spacing</code> does not break composition (<a href="fonts.html#switches">hidden feature switches</a>).</li>
     </ol>
 
@@ -154,8 +154,8 @@
 (function () {
   var PRESETS = {
     specimen: 'o͘ ó͘ ò͘ ô͘ ō͘ o̍͘ ŏ͘ O͘ Ó͘ Ō͘ | a̍ i̍ m̍ n̍ n̍g I̍ | ḿ m̄ m̂ ǹ n̄ | iⁿ | Pe̍h-ōe-jī Mi̍h-kiāⁿ',
-    full: 'o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | tńg--khì | Pe̍h-ōe-jī Mi̍h-kiāⁿ',
-    words: 'Ō͘-á O͘-sek Hō͘-sòaⁿ Hô͘-chio-piáⁿ · Mi̍h-kiāⁿ Ji̍t-thâu Gō͘-cha̍p Pe̍h-ōe-jī · chia̍h-pn̄g m̄-chai N̂g-sek ǹg-bāng · khòaⁿ--tio̍h tńg--khì pēⁿ-īⁿ'
+    full: 'o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | tńg--khì-o͘h | Pe̍h-ōe-jī Mi̍h-kiāⁿ',
+    words: 'Ō͘-á O͘-sek Hō͘-sòaⁿ Hô͘-chio-piáⁿ · Mi̍h-kiāⁿ Ji̍t-thâu Gō͘-cha̍p Pe̍h-ōe-jī · chia̍h-pn̄g m̄-chai N̂g-sek ǹg-bāng · khòaⁿ--tio̍h tńg--khì-o͘h pēⁿ-īⁿ'
   };
 
   var input = document.getElementById('bench-input');
