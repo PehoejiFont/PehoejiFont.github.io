@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>白話字（POJ）字型技術文件 — PehoejiFont</title>
-<meta name="description" content="台語白話字（Pe̍h-ōe-jī，POJ）與教育部羅馬字（KPL）字型完整技術文件：Unicode 編碼、OpenType 組字原理、24 款字型實測、Google Fonts 普查與字型開發指南。">
+<meta name="description" content="台語白話字（Pe̍h-ōe-jī，POJ）字型完整技術文件：Unicode 編碼、OpenType 組字原理、24 款字型實測、Google Fonts 普查與字型開發指南。">
 <link rel="stylesheet" href="../assets/site.css">
 <link rel="alternate" hreflang="en" href="../">
 </head>
@@ -61,18 +61,12 @@
         <li><a href="makers.html">字型開發者實作指南</a></li>
       </ul>
     </div>
-    <div class="sidebar-group">
-      <div class="sidebar-heading">參考資料</div>
-      <ul>
-        <li><a href="tools.html">檢測工具、方法與審查紀錄</a></li>
-      </ul>
-    </div>
   </aside>
 
   <main class="doc-main">
     <div class="breadcrumb"><span>開始使用</span> › <span>總覽</span></div>
     <h1>台語<span class="poj">白話字（Pe̍h-ōe-jī，POJ）</span>字型技術文件</h1>
-    <p class="lead">在電腦、手機與網頁上正確顯示台語（Taigi）<span class="poj">白話字（Pe̍h-ōe-jī，POJ）</span>與<span class="poj">教育部羅馬字（KPL，Kàu-io̍k Pō͘ Lô-má-jī）</span>的完整技術手冊——同時記錄我們對整個 Google Fonts 開源字型庫的普查與上游貢獻計畫。</p>
+    <p class="lead">在電腦、手機與網頁上正確顯示台語（Taigi）<span class="poj">白話字（Pe̍h-ōe-jī，POJ）</span>的完整技術手冊——同時記錄我們對整個 Google Fonts 開源字型庫的普查與上游貢獻計畫。</p>
 
     <div class="meta-row">
       <span class="meta-pill">24 款字型逐字實測</span>
@@ -125,12 +119,12 @@
         <img src="../assets/img/sample-genyo.svg" alt="源樣明體正確顯示 O͘-á hō͘ chia̍h thiⁿ n̂g">
       </div>
     </div>
-    <p class="legend">以上 SVG 皆由 <code>tools/poj_guide_svg.py</code> 依據 HarfBuzz 實際定位與字型輪廓繪製。macOS CoreText 在缺乏 OpenType <code>mark</code> 表的字型上表現可能不同，詳見<a href="problems.html#platforms">跨平台差異</a>。</p>
+    <p class="legend">以上圖示皆依據 HarfBuzz 實際定位與各字型真實輪廓繪製。macOS CoreText 在缺乏 OpenType <code>mark</code> 表的字型上表現可能不同，詳見<a href="problems.html#platforms">跨平台差異</a>。</p>
 
     <h2 id="why-it-happens">三個根本原因，看懂 POJ 為什麼常破版</h2>
     <ol>
       <li><strong>Unicode 沒有預組好的 <span class="poj">o͘</span> 與第八調字母。</strong>電腦是將 <span class="poj">o͘</span> 存成 <span class="poj">o</span> 加上「右上圓點」組合附加符號（<code>U+0358</code>），把 <span class="poj">a̍</span> 存成 <span class="poj">a</span> 加上「上方短豎線」（<code>U+030D</code>）。再加上鼻化上標 <span class="poj">ⁿ</span>（<code>U+207F</code>），多數歐文字型根本沒有這些字元。<a href="letters.html">深入了解 Unicode 編碼 →</a></li>
-      <li><strong>只補上字碼還不夠。</strong>字型必須知道如何把 <code>U+0358</code> 精準定位到每一個帶調的 <span class="poj">o</span> 右上方（包含預組的 <span class="poj">ó ò ô ō ŏ ő</span> 與大寫）、在 <code>U+030D</code> 下方把 <span class="poj">i</span> 換成無點 <span class="poj">ı</span>，而且所有組字規則都必須寫在必定啟用的 <code>ccmp</code>（絕不能放在可關閉的 <code>liga</code>）。<a href="fonts.html">字型實作方式 →</a></li>
+      <li><strong>只補上字碼還不夠。</strong>字型必須知道如何把 <code>U+0358</code> 精準定位到每一個帶調的 <span class="poj">o</span> 右上方（包含預組的 <span class="poj">ó ò ô ō ŏ</span> 與大寫）、在 <code>U+030D</code> 下方把 <span class="poj">i</span> 換成無點 <span class="poj">ı</span>，而且所有組字規則都必須寫在必定啟用的 <code>ccmp</code>（絕不能放在可關閉的 <code>liga</code>）。<a href="fonts.html">字型實作方式 →</a></li>
       <li><strong>同一個字面上的音節，背後可能有好幾種 Unicode 編碼順序。</strong>NFC（<code>ó + U+0358</code>）、NFD（<code>o + U+0301 + U+0358</code>）以及非正規順序（<code>o + U+0358 + U+0301</code>），在 HarfBuzz、CoreText 與 DirectWrite 上都必須呈現完全一致的外觀。<a href="letters.html#canonical">標準組合類別與順序 →</a></li>
     </ol>
 
@@ -144,7 +138,7 @@
         <tr><td>在網站上載入 POJ 字型</td><td>請自行託管完整字型檔（或子集化時完整保留所有 POJ 字碼與 <code>ccmp/mark/mkmk</code>）。Google Fonts 的 <code>unicode-range</code> 切塊會將 TASA Explorer 與 Source Sans 3 的 POJ 調號直接刪掉。<a href="fonts.html#google-fonts">查看實測結果 →</a></td></tr>
         <tr><td>快速檢測任何字型是否支援 POJ</td><td>使用本站的<a href="choose.html#test">即時 POJ 測試台</a>，複製 NFC、NFD 與反向順序字串，並測試開啟 <code>letter-spacing</code>。</td></tr>
         <tr><td>排除破版、亂碼或搜尋不到的問題</td><td>請查閱<a href="problems.html">疑難排解與跨平台差異</a>。</td></tr>
-        <tr><td>為字型加入 POJ 與 KPL 支援</td><td>請遵循<a href="makers.html">字型開發者實作指南</a>中的字形、錨點、AFDKO/<code>feaLib</code> 程式碼範本與自動化檢測流程。</td></tr>
+        <tr><td>為字型加入 POJ 支援</td><td>請遵循<a href="makers.html">字型開發者實作指南</a>中的字形、錨點、AFDKO/<code>feaLib</code> 程式碼範本與目視驗收清單。</td></tr>
         <tr><td>查詢 Google Fonts 普查與 989 個 Fork</td><td>在<a href="catalog.html">Google Fonts 普查與 Fork</a> 直接搜尋全部 1,471 款候選家族與 989 個上游專案。</td></tr>
       </tbody>
     </table></div>
@@ -153,7 +147,7 @@
     <div class="card-grid">
       <a class="doc-card" href="letters.html">
         <h3>1. Unicode 與編碼結構</h3>
-        <p>完整 POJ 與 KPL 字碼清單、Unicode 17.0 預組字表、ccc 230 與 232 排序機制、三大整形引擎、Soft_Dotted i/j、NFKC 破壞 ⁿ 的風險、舊式 PUA 編碼、IVS 注音與雙連字號。</p>
+        <p>完整 POJ 字碼清單、Unicode 17.0 預組字表、ccc 230 與 232 排序機制、三大整形引擎、Soft_Dotted i/j、NFKC 破壞 ⁿ 的風險、舊式 PUA 編碼、IVS 注音與雙連字號。</p>
       </a>
       <a class="doc-card" href="fonts.html">
         <h3>2. 字型如何實作 POJ</h3>
@@ -173,11 +167,7 @@
       </a>
       <a class="doc-card" href="makers.html">
         <h3>6. 字型開發者實作指南</h3>
-        <p>完整工程配方：字形與 <code>cmap</code>、錨點配置、可直接複製的 AFDKO/<code>feaLib</code> 功能碼範本、8 條 OpenType 規則、垂直度量、CFF 與 TrueType 差異、可變字型與測試指令。</p>
-      </a>
-      <a class="doc-card" href="tools.html">
-        <h3>7. 檢測工具、方法與審查紀錄</h3>
-        <p><code>tools/</code> 底下全部 11 支 Python／Swift／Shell 腳本說明、專案檔案結構、待驗證研究問題，以及 Gemini 4 同儕審查的查證紀錄。</p>
+        <p>完整工程配方：字形與 <code>cmap</code>、錨點配置、可直接複製的 AFDKO/<code>feaLib</code> 功能碼範本、8 條 OpenType 規則、垂直度量、CFF 與 TrueType 差異、可變字型與目視檢查。</p>
       </a>
     </div>
 
@@ -185,7 +175,7 @@
     <div class="callout info">
       <span class="callout-title">關於本研究與用語規範</span>
       <p>24 款字型的逐字檢驗完成於 2026 年 11 月，取材自 <a href="https://oh.taigi.info/siataibun/jithe/">狗公會曉學台語 › 字體（font）</a> 所整理的免費字型清單，並與完整 <a href="https://github.com/google/fonts">google/fonts</a> 目錄（commit <code>cc5661d</code>，2026-11-19）交叉比對。所有整形數據皆以 HarfBuzz（<code>uharfbuzz</code>）程式實測驗證，並輔以 macOS CoreText 初步測試。</p>
-      <p>本文件統一採用以下名稱：語言稱為<strong>台語（Taigi）</strong>，拉丁字母書寫系統稱為<strong>羅馬字正書法（Roman Orthography）</strong>，傳統教會白話字稱為<strong>白話字（Pe̍h-ōe-jī，POJ）</strong>，教育部頒布之系統稱為<strong>教育部羅馬字（KPL，Kàu-io̍k Pō͘ Lô-má-jī）</strong>。</p>
+      <p>本文件統一採用以下名稱：語言稱為<strong>台語（Taigi）</strong>，拉丁字母書寫系統稱為<strong>羅馬字正書法（Roman Orthography）</strong>，即<strong>白話字（Pe̍h-ōe-jī，POJ）</strong>。</p>
     </div>
 
     <nav class="doc-pager" aria-label="上下頁導覽">

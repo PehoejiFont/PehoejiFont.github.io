@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Font Maker’s Implementation Guide — POJ Font Documentation</title>
-<meta name="description" content="Complete engineering recipe for adding Taigi POJ and KPL support to a font: glyphs, cmap, anchors, AFDKO/feaLib feature code, OpenType rules, vertical metrics, CFF vs TTF, variable fonts, and QA testing.">
+<meta name="description" content="Complete engineering recipe for adding Taigi POJ support to a font: glyphs, cmap, anchors, AFDKO/feaLib feature code, OpenType rules, vertical metrics, CFF vs TTF, variable fonts, and QA testing.">
 <link rel="stylesheet" href="assets/site.css">
 <link rel="alternate" hreflang="zh-Hant-TW" href="zh-tw/makers.html">
 </head>
@@ -61,12 +61,6 @@
         <li><a href="makers.html" aria-current="page">Font Maker’s Guide</a></li>
       </ul>
     </div>
-    <div class="sidebar-group">
-      <div class="sidebar-heading">Reference</div>
-      <ul>
-        <li><a href="tools.html">Tools, Methodology &amp; Reviews</a></li>
-      </ul>
-    </div>
   </aside>
 
   <main class="doc-main">
@@ -81,21 +75,19 @@
       <tbody>
         <tr><td><code>uni0358</code> (<span class="poj">◌͘</span>)</td><td><code>U+0358</code></td><td>Reuse the dot of <code>U+0307</code>. GDEF class 3 mark with zero advance (or a deliberate SIL-style GDEF class 1 spacing base).</td></tr>
         <tr><td><code>uni030D</code> (<span class="poj">◌̍</span>)</td><td><code>U+030D</code></td><td>Short vertical stroke sitting in the same vertical height band as <code>U+0301</code> (acute).</td></tr>
-        <tr><td><code>uni030B</code> (<span class="poj">◌̋</span>)</td><td><code>U+030B</code></td><td>Double acute (KPL 9th tone); usually already present in Latin fonts.</td></tr>
-        <tr><td><code>uni030C</code> (<span class="poj">◌̌</span>)</td><td><code>U+030C</code></td><td>Caron (KPL 6th tone in dialects keeping tone 6); usually already present.</td></tr>
         <tr><td><code>uni207F</code> (<span class="poj">ⁿ</span>)</td><td><code>U+207F</code></td><td>Superior <code>n</code> (~55–65% scale, weight-compensated). Reuse <code>n.sups</code> if the font has <code>sups</code>.</td></tr>
         <tr><td><code>uni1D3A</code> (<span class="poj">ᴺ</span>)</td><td><code>U+1D3A</code></td><td>Superior capital <code>N</code>, for all-caps nasalisation (<span class="poj">SIᴺ</span>).</td></tr>
-        <tr><td><code>dotlessi</code>, <code>uni0237</code></td><td><code>U+0131</code>, <code>U+0237</code></td><td>Dotless <code>ı</code> and dotless <code>ȷ</code> for the <code>Soft_Dotted</code> swap before above-marks (<span class="poj">i̍</span>, <span class="poj">i̋</span>).</td></tr>
+        <tr><td><code>dotlessi</code>, <code>uni0237</code></td><td><code>U+0131</code>, <code>U+0237</code></td><td>Dotless <code>ı</code> and dotless <code>ȷ</code> for the <code>Soft_Dotted</code> swap before above-marks (<span class="poj">i̍</span>).</td></tr>
         <tr><td><code>*.case</code> marks</td><td>— (unencoded)</td><td>Flattened/raised capital-form marks, triggered contextually inside <code>ccmp</code> (not only <code>case</code>).</td></tr>
-        <tr><td>Precomposed composites</td><td><span class="poj">ḿ Ḿ ǹ Ǹ ń Ń ň Ň ŏ Ŏ ĭ Ĭ ă Ă ĕ Ĕ ŭ Ŭ ā ē ī ō ū Ā Ē Ī Ō Ū ő Ő ű Ű ǎ ě ǐ ǒ ǔ Ǎ Ě Ǐ Ǒ Ǔ</span></td><td>Map every precomposed POJ &amp; KPL letter in Unicode 17.0 so engines that do not decompose (CoreText/DirectWrite) never trigger system font fallback.</td></tr>
+        <tr><td>Precomposed composites</td><td><span class="poj">ḿ Ḿ ǹ Ǹ ń Ń ŏ Ŏ ĭ Ĭ ă Ă ĕ Ĕ ŭ Ŭ ā ē ī ō ū Ā Ē Ī Ō Ū</span></td><td>Map every precomposed POJ letter in Unicode 17.0 so engines that do not decompose (CoreText/DirectWrite) never trigger system font fallback.</td></tr>
       </tbody>
     </table></div>
 
     <h2 id="anchors">2. Anchors (<code>mark</code> &amp; <code>mkmk</code>)</h2>
     <ul>
       <li><strong><code>top</code> anchor</strong> on every base that can receive a tone: <code>a e dotlessi o u m n</code> (plus <code>j</code>/<code>uni0237</code>), all capitals, and any <code>ccmp</code> ligature that can still take a stacked tone (such as <code>o_uni0358</code>).</li>
-      <li><strong><code>topright</code> anchor</strong> on <code>o O</code> <strong>and on every precomposed toned o</strong>: <span class="poj">ó ò ô ǒ ō ŏ ő</span> and <span class="poj">Ó Ò Ô Ǒ Ō Ŏ Ő</span>. Because NFC sends <code>ó + U+0358</code> (not <code>o + U+0301 + U+0358</code>), omitting even one toned base drops the dot to <code>(0, 0)</code>.</li>
-      <li><strong>Wide accents &amp; bold weights:</strong> Inspect <span class="poj">ō͘ ô͘ ŏ͘ ő͘</span> in Bold/Black masters. Shift <code>topright</code> slightly right/down or supply narrowed accents in precomposed ligatures (similar to Vietnamese <code>ố</code>/<code>ớ</code>).</li>
+      <li><strong><code>topright</code> anchor</strong> on <code>o O</code> <strong>and on every precomposed toned o</strong>: <span class="poj">ó ò ô ō ŏ</span> and <span class="poj">Ó Ò Ô Ō Ŏ</span>. Because NFC sends <code>ó + U+0358</code> (not <code>o + U+0301 + U+0358</code>), omitting even one toned base drops the dot to <code>(0, 0)</code>.</li>
+      <li><strong>Wide accents &amp; bold weights:</strong> Inspect <span class="poj">ō͘ ô͘ ŏ͘</span> in Bold/Black masters. Shift <code>topright</code> slightly right/down or supply narrowed accents in precomposed ligatures (similar to Vietnamese <code>ố</code>/<code>ớ</code>).</li>
       <li><strong>Base attachment, not mark-to-mark:</strong> <code>U+0358</code> attaches to the <strong>base glyph</strong> via <code>mark</code> (<code>topright</code> / <code>_topright</code>), never stacked on top of the tone mark via <code>mkmk</code>.</li>
       <li><strong>Mark anchors:</strong> <code>_top</code> on all combining tone marks, <code>_topright</code> on <code>uni0358</code>, and <code>top</code> on tone marks for <code>mkmk</code> stacking.</li>
       <li><strong>Syllabic <code>ng</code>:</strong> Tone marks sit on <code>n</code> (<span class="poj">n̍g</span>, <span class="poj">n̂g</span>), so <code>g</code> needs no special anchors.</li>
@@ -114,15 +106,15 @@
 languagesystem latn dflt;
 # Keep any existing languagesystem lines (latn TRK, hani, ...) and register lookups under all of them
 
-@TopMarks = [uni0300 uni0301 uni0302 uni0303 uni0304 uni0306 uni0307 uni0308 uni030A uni030B uni030C uni030D];
+@TopMarks = [uni0300 uni0301 uni0302 uni0303 uni0304 uni0306 uni0307 uni0308 uni030A uni030D];
 @AllMarks = [@TopMarks uni0358 uni0323];
 
-markClass [uni0300 uni0301 uni0302 uni0304 uni0306 uni030B uni030C uni030D] &lt;anchor 0 500&gt; @MC_top;
+markClass [uni0300 uni0301 uni0302 uni0304 uni0306 uni030D] &lt;anchor 0 500&gt; @MC_top;
 markClass uni0358 &lt;anchor 0 450&gt; @MC_topright;
 
 table GDEF {
     GlyphClassDef
-        [a e i o u m n dotlessi uni0237 oacute ograve ocircumflex omacron obreve ohungarumlaut ocaron
+        [a e i o u m n dotlessi uni0237 oacute ograve ocircumflex omacron obreve
          o_uni0358 oacute_uni0358 o_uni030D_uni0358],   # bases (ligature outputs are BASES, not class 2)
         ,                                               # ligatures
         [@AllMarks],                                    # marks
@@ -145,7 +137,7 @@ lookup POJLigatures {
     sub o uni0358 uni030D by o_uni030D_uni0358;
     sub oacute uni0358 by oacute_uni0358;         # NFC
     sub o uni0358 by o_uni0358;                   # 2-glyph prefix comes LAST
-    # ... repeat for ò ô ǒ ō ŏ ő and capitals
+    # ... repeat for ò ô ō ŏ and capitals
 } POJLigatures;
 
 feature ccmp {
@@ -161,7 +153,7 @@ lookup MarkTop {
 } MarkTop;
 
 lookup MarkTopRight {
-    pos base [o oacute ograve ocircumflex ocaron omacron obreve ohungarumlaut] &lt;anchor 470 420&gt; mark @MC_topright;
+    pos base [o oacute ograve ocircumflex omacron obreve] &lt;anchor 470 420&gt; mark @MC_topright;
     # ... capitals
 } MarkTopRight;
 
@@ -171,7 +163,7 @@ feature mark {
 } mark;
 
 feature mkmk {
-    pos mark [uni0300 uni0301 uni0302 uni0304 uni0306 uni030B uni030C uni030D] &lt;anchor 0 700&gt; mark @MC_top;
+    pos mark [uni0300 uni0301 uni0302 uni0304 uni0306 uni030D] &lt;anchor 0 700&gt; mark @MC_top;
 } mkmk;</code></pre>
     </div>
 
@@ -189,7 +181,7 @@ feature mkmk {
 
     <h2 id="engineering-checks">5. Additional engineering checks</h2>
     <ul>
-      <li><strong>Vertical metrics:</strong> <span class="poj">O̍͘</span>, <span class="poj">Ő</span>, <span class="poj">M̍</span>, and <span class="poj">Ó͘</span> reach higher than standard Western European diacritics. Raise <code>OS/2.usWinAscent</code> and <code>hhea.ascender</code> enough to prevent clipping on Windows and inside tight CSS line boxes.</li>
+      <li><strong>Vertical metrics:</strong> <span class="poj">O̍͘</span>, <span class="poj">M̍</span>, and <span class="poj">Ó͘</span> reach higher than standard Western European diacritics. Raise <code>OS/2.usWinAscent</code> and <code>hhea.ascender</code> enough to prevent clipping on Windows and inside tight CSS line boxes.</li>
       <li><strong>Collision after <span class="poj">o͘</span>:</strong> A zero-width dot can clash with tall following glyphs in <span class="poj">o͘h</span>, <span class="poj">o͘k</span>, <span class="poj">o͘l</span>, <span class="poj">o͘t</span>, <span class="poj">o͘ⁿ</span>, <span class="poj">o͘"</span>, and <span class="poj">o͘’</span>. Add modest right sidebearing to precomposed <span class="poj">o͘</span> ligatures, or add contextual kerning after <code>uni0358</code>.</li>
       <li><strong>Small caps (<code>smcp</code> / <code>c2sc</code>):</strong> Provide <code>.sc</code> versions of precomposed POJ ligatures, or carefully order <code>ccmp</code> vs <code>smcp</code> lookups so small caps retain proper anchors and dots.</li>
       <li><strong>CFF / CFF2 vs TrueType (<code>glyf</code>):</strong> TrueType composites make Technique B very cheap in file size. CFF/CFF2 has no glyph components, so every precomposed ligature duplicates outline data across every master. Carefully hint the thin vertical stroke of <code>U+030D</code> so it does not drop out at small screen sizes.</li>
@@ -197,33 +189,12 @@ feature mkmk {
       <li><strong>Double hyphen (<code>--</code>):</strong> Ensure no <code>liga</code> or <code>calt</code> rule converts <code>--</code> into an en-dash, and keep sidebearings open so the two hyphens do not touch.</li>
     </ul>
 
-    <h2 id="testing">6. Automated testing &amp; visual QA</h2>
-    <p>Run the repository’s Python &amp; Swift verification suite on every built font:</p>
-
-    <div class="code-block">
-      <div class="code-head">
-        <span>shell — Automated POJ font audit &amp; specimen generation</span>
-        <button class="copy-code-btn" type="button">Copy</button>
-      </div>
-      <pre><code>python3 -m venv venv &amp;&amp; venv/bin/pip install fonttools uharfbuzz pillow
-
-# 1. Cmap coverage, GSUB/GPOS features, U+0358/U+030D anchors, IVS &amp; PUA counts
-venv/bin/python -I tools/poj_font_audit.py Font.ttf &gt; audit.json
-
-# 2. Per-cluster HarfBuzz shaping mechanism, NFC vs NFD equivalence
-venv/bin/python -I tools/poj_shape_test.py Font.ttf &gt; shape.json
-
-# 3. Visual PNG specimen (NFC row followed by NFD row)
-venv/bin/python -I tools/poj_specimen.py out_dir Font.ttf
-
-# 4. Standard Google Fonts QA (note: does not check POJ clusters yet)
-fontbakery check-googlefonts Font.ttf</code></pre>
-    </div>
-
-    <p>Then verify by eye across real platforms:</p>
+    <h2 id="testing">6. Visual QA checklist</h2>
+    <p>Verify every built font by eye across real platforms:</p>
     <ol>
-      <li>Paste the <a href="choose.html#test">full POJ + KPL test line</a> (NFC, NFD, and reverse order) in <strong>Chrome / Firefox</strong> (HarfBuzz), <strong>Safari / Pages</strong> (CoreText), and <strong>Microsoft Word</strong> (DirectWrite).</li>
+      <li>Paste the <a href="choose.html#test">full POJ test line</a> (NFC, NFD, and reverse order) in <strong>Chrome / Firefox</strong> (HarfBuzz), <strong>Safari / Pages</strong> (CoreText), and <strong>Microsoft Word</strong> (DirectWrite).</li>
       <li>Test in a browser with <code>letter-spacing: 0.1em</code> to verify zero dependence on optional <code>liga</code>.</li>
+      <li>Check all weights and masters — especially wide accents (<span class="poj">ō͘ ô͘ ŏ͘</span>) and capitals (<span class="poj">O͘ Ó͘ Ō͘ O̍͘</span>) in Bold.</li>
       <li>If publishing to Google Fonts, verify the live CSS <code>unicode-range</code> slices actually deliver <code>U+0358</code>, <code>U+030D</code>, and <code>U+207F</code>.</li>
     </ol>
 
@@ -232,9 +203,9 @@ fontbakery check-googlefonts Font.ttf</code></pre>
         <span class="pager-dir">← Previous</span>
         <span class="pager-title">Troubleshooting &amp; Platforms</span>
       </a>
-      <a class="pager-link next" href="tools.html">
-        <span class="pager-dir">Next →</span>
-        <span class="pager-title">Tools, Methodology &amp; Reviews</span>
+      <a class="pager-link next" href="./">
+        <span class="pager-dir">Back to start →</span>
+        <span class="pager-title">Overview</span>
       </a>
     </nav>
 

@@ -61,12 +61,6 @@
         <li><a href="makers.html">字型開發者實作指南</a></li>
       </ul>
     </div>
-    <div class="sidebar-group">
-      <div class="sidebar-heading">參考資料</div>
-      <ul>
-        <li><a href="tools.html">檢測工具、方法與審查紀錄</a></li>
-      </ul>
-    </div>
   </aside>
 
   <main class="doc-main">
@@ -122,7 +116,7 @@
     <h3 id="ready-55">55 款已收錄 POJ 字元的候選字型家族</h3>
     <div class="callout warn">
       <span class="callout-title">僅為 cmap 字碼掃描 — 仍須目視驗證！</span>
-      <p>此自動檢查僅確認字型的 <code>cmap</code> 是否收錄字碼，<strong>並未保證</strong>錨點定位正確、無點 <span class="poj">i̍</span> 正常或 Google Fonts 網頁切塊有保留調號——實際使用前請務必透過<a href="choose.html#test">測試台</a>與 <code>tools/poj_shape_test.py</code> 查驗。</p>
+      <p>此自動檢查僅確認字型的 <code>cmap</code> 是否收錄字碼，<strong>並未保證</strong>錨點定位正確、無點 <span class="poj">i̍</span> 正常或 Google Fonts 網頁切塊有保留調號——實際使用前請務必透過<a href="choose.html#test">測試台</a>目視查驗。</p>
     </div>
     <p class="legend">Adobe Blank, Agbalumo, Agu Display, Arimo, Briem Hand, Cactus Classical Serif, Cardo, Chiron Hei HK, Chiron Sung HK, Chocolate Classical Sans, Cormorant, Cormorant Garamond, Cormorant Infant, Cormorant SC, Cormorant Unicase, Cousine, Danfo, Elms Sans, Freeman, Gothic A1, Great Vibes, Huninn, Iansui, Inter Tight, Iosevka Charon, Iosevka Charon Mono, Jaro, LXGW WenKai Mono TC, LXGW WenKai TC, Libertinus Math, Libertinus Mono, Libertinus Sans, Libertinus Serif, Libertinus Serif Display, M PLUS 1p, Montserrat, Montserrat Underline, Noto Sans, Noto Sans Display, Noto Sans Mono, Noto Serif, Noto Serif Display, Oi, Ojuju, Playfair, Sankofa Display, Savate, TASA Explorer, TASA Orbiter, Tac One, Tiny5, Tiny5 Duo, WDXL Lubrifont JP N, WDXL Lubrifont SC, WDXL Lubrifont TC。</p>
 
@@ -187,7 +181,7 @@
         </ul>
       </li>
       <li><strong>補齊 <code>mark</code> 與 <code>mkmk</code> 錨點</strong>（以及 <code>ccmp</code> 無點 i 與選用預繪字形），使調號能準確附著於 <code>a e i o u m n</code> 大小寫與全部帶調 <code>o</code>。詳見<a href="makers.html">字型開發者實作指南</a>。</li>
-      <li><strong>以該專案原有建置流程編譯字型</strong>，並使用 <a href="https://github.com/fonttools/fontbakery">fontbakery</a> 與本站的<a href="tools.html">POJ 檢測與樣張腳本</a>驗證。</li>
+      <li><strong>以該專案原有建置流程編譯字型</strong>，並於各瀏覽器與平台驗證 POJ 音節渲染結果。</li>
       <li><strong>向上游開立 Pull Request。</strong>待上游專案發布新版後，Google Fonts 即會自動收錄更新，並保有原本的字型名稱。</li>
     </ol>
 

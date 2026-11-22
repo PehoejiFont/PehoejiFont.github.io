@@ -61,18 +61,12 @@
         <li><a href="makers.html">Font Maker’s Guide</a></li>
       </ul>
     </div>
-    <div class="sidebar-group">
-      <div class="sidebar-heading">Reference</div>
-      <ul>
-        <li><a href="tools.html">Tools, Methodology &amp; Reviews</a></li>
-      </ul>
-    </div>
   </aside>
 
   <main class="doc-main">
     <div class="breadcrumb"><a href="./">Docs</a> › <span>Font Directory &amp; Data</span> › <span>24-Font Audit &amp; Specimens</span></div>
     <h1>24-Font Audit, Recommendations &amp; Specimens</h1>
-    <p class="lead">Free and open fonts tested across all POJ and KPL clusters in NFC and NFD, an interactive test bench, the full 24-font HarfBuzz audit explorer, and rendered PNG specimens.</p>
+    <p class="lead">Free and open fonts tested across all POJ clusters in NFC and NFD, an interactive test bench, the full 24-font HarfBuzz audit explorer, and rendered PNG specimens.</p>
 
     <h2 id="picks">Recommended free &amp; open fonts</h2>
     <h3 id="running-poj">For running POJ text</h3>
@@ -111,7 +105,7 @@
       </tbody>
     </table></div>
 
-    <h2 id="test">Live POJ &amp; KPL test bench</h2>
+    <h2 id="test">Live POJ test bench</h2>
     <p>Edit or paste any Taigi text below, copy it in <strong>NFC</strong>, <strong>NFD</strong>, or <strong>non-canonical reverse order</strong> (<code>o + U+0358 + tone</code>) to test any font on your computer, toggle <code>letter-spacing</code> to expose <code>liga</code>-based bugs, and inspect every underlying Unicode codepoint live.</p>
 
     <div class="bench">
@@ -120,10 +114,10 @@
         <button class="btn" type="button" data-copy-form="NFD" title="Decomposed form (macOS file names, PDFs)">Copy NFD</button>
         <button class="btn" type="button" data-copy-form="REV" title="Non-canonical order: U+0358 placed before the tone mark">Copy Reverse Order</button>
         <button class="btn" type="button" data-preset="specimen">Short Specimen</button>
-        <button class="btn" type="button" data-preset="full">Full POJ + KPL Line</button>
+        <button class="btn" type="button" data-preset="full">Full POJ Line</button>
         <button class="btn" type="button" data-preset="words">Words</button>
       </div>
-      <textarea class="bench-input" id="bench-input" spellcheck="false" aria-label="POJ test line">o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ ő͘ ǒ͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ m̌ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | i̋ ő ǎ | tńg--khì | Pe̍h-ōe-jī Lâu Ô͘-chhiû</textarea>
+      <textarea class="bench-input" id="bench-input" spellcheck="false" aria-label="POJ test line">o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | tńg--khì | Pe̍h-ōe-jī Lâu Ô͘-chhiû</textarea>
       <div class="bench-controls">
         <label>Size: <input type="range" id="bench-size" min="16" max="48" value="24"> <span id="bench-size-val">24px</span></label>
         <label><input type="checkbox" id="bench-spacing"> Add <code>letter-spacing: 0.12em</code> (disables <code>liga</code>)</label>
@@ -136,14 +130,14 @@
     <ol>
       <li><strong>No empty boxes (□)</strong> and no single letters borrowed from a mismatched fallback font.</li>
       <li><strong>The <span class="poj">o͘</span> dot</strong> sits cleanly at the top right of every <span class="poj">o</span> — especially capitals <span class="poj">O͘ Ó͘ Ō͘ O̍͘</span> and wide accents <span class="poj">ō͘ ô͘ ŏ͘</span>.</li>
-      <li><strong><span class="poj">i̍</span> and <span class="poj">i̋</span> drop their dot</strong> cleanly under the tone mark.</li>
+      <li><strong><span class="poj">i̍</span> drops its dot</strong> cleanly under the tone line.</li>
       <li><strong>The 8th-tone vertical line</strong> centres cleanly over <span class="poj">a̍ e̍ o̍ u̍ m̍ n̍</span> and capitals.</li>
       <li><strong><code>--</code> remains two separate hyphens</strong> in <span class="poj">tńg--khì</span>.</li>
       <li><strong>NFC, NFD, and Reverse Order render identically</strong>, and adding <code>letter-spacing</code> does not break them.</li>
     </ol>
 
     <h2 id="survey-table">Complete 24-font survey matrix (Regular weights)</h2>
-    <p>All audited fonts below map <code>U+0358</code>, <code>U+030D</code>, <code>U+207F</code>, and <code>U+030B</code>, <strong>except EB Garamond (no <code>U+0358</code>)</strong>. “<code>mark</code>” indicates the presence of a GPOS <code>mark</code> feature.</p>
+    <p>All audited fonts below map <code>U+0358</code>, <code>U+030D</code>, and <code>U+207F</code>, <strong>except EB Garamond (no <code>U+0358</code>)</strong>. “<code>mark</code>” indicates the presence of a GPOS <code>mark</code> feature.</p>
 
     <div class="table-wrap"><table class="compact">
       <thead><tr><th>Font</th><th>License</th><th>Technique</th><th class="center"><code>mark</code></th><th class="center">Dotless <span class="poj">i̍</span></th><th>Detailed findings</th></tr></thead>
@@ -161,7 +155,7 @@
         <tr><td><strong>Tāu-hū Khu-lé-iòng / Môo-tn̄g / Tauhu Oo (豆腐烏)</strong></td><td>OFL 1.1</td><td>B only</td><td class="center">✗</td><td class="center">✓</td><td>Same caveat as GenYo: clean <code>ccmp</code> coverage for standard clusters, no GPOS <code>mark</code> safety net.</td></tr>
         <tr><td><strong>Charis / Doulos / Gentium</strong> (SIL)</td><td>OFL 1.1 (RFN)</td><td>A + C</td><td class="center">✓</td><td class="center">✓</td><td>Excellent. Spacing dot (GDEF class 1, 200–279u advance); 223 PUA glyphs. Forks must rename.</td></tr>
         <tr><td><strong>EB Garamond</strong></td><td>OFL 1.1</td><td>A (no <code>U+0358</code>)</td><td class="center">✓</td><td class="center">✗</td><td><code>U+0358</code> is tofu; <code>U+030D</code> unanchored (misplaced tick). <strong>Not usable for <span class="poj">o͘</span>.</strong></td></tr>
-        <tr><td><strong>字咍 Taigi IVS fonts</strong> (Huninn POJ, Iansui TL)</td><td>OFL / Apache-2.0</td><td>D + IVS ruby</td><td class="center">✗</td><td class="center">✗</td><td>8,021 IVS ruby mappings per font. Weak for running POJ (no <code>mark</code>, dotted <span class="poj">i̍</span>).</td></tr>
+        <tr><td><strong>字咍 Taigi IVS fonts</strong></td><td>OFL / Apache-2.0</td><td>D + IVS ruby</td><td class="center">✗</td><td class="center">✗</td><td>8,021 IVS ruby mappings per font. Weak for running POJ (no <code>mark</code>, dotted <span class="poj">i̍</span>).</td></tr>
         <tr><td><strong>Arial</strong> (macOS copy)</td><td>Proprietary</td><td>A (<code>030D</code>) + D (<code>0358</code>)</td><td class="center">✓</td><td class="center">✓</td><td><code>U+0358</code> unanchored overstrike; HarfBuzz disables fallback because <code>mark</code> exists.</td></tr>
         <tr><td><strong>Helvetica / Geneva / Menlo</strong> (macOS)</td><td>Proprietary</td><td>D</td><td class="center">✗</td><td class="center">✗</td><td>No GSUB/GPOS; HarfBuzz fallback floats dot on <span class="poj">Ó͘ Ō͘</span>. CoreText may differ (AAT).</td></tr>
       </tbody>
@@ -186,7 +180,7 @@
     <div id="audit-detail"></div>
 
     <h2 id="specimens">Rendered NFC vs NFD specimens</h2>
-    <p>Generated with <code>tools/poj_specimen.py</code> using HarfBuzz. For every font, the <strong>first row is NFC</strong> and the <strong>second row is NFD</strong> on the test line <code>o͘ ó͘ ò͘ ô͘ ō͘ o̍͘ ŏ͘ O͘ Ó͘ Ō͘ | a̍ i̍ m̍ n̍ n̍g I̍ | ḿ m̄ m̂ ǹ n̄ | iⁿ i̋ | Pe̍h-ōe-jī Lâu Ô͘-chhiû</code>. Click any specimen to zoom.</p>
+    <p>Rendered with HarfBuzz. For every font, the <strong>first row is NFC</strong> and the <strong>second row is NFD</strong> on our POJ test line. Click any specimen to zoom.</p>
 
     <figure class="specimen-fig">
       <img src="docs/img/specimen-0.png" alt="POJ Font Specimen Sheet 1 (NFC and NFD rows)" loading="lazy">
@@ -228,8 +222,8 @@
 (function () {
   // ── Live POJ Test Bench ───────────────────────────────────────────────────
   var PRESETS = {
-    specimen: 'o͘ ó͘ ò͘ ô͘ ō͘ o̍͘ ŏ͘ O͘ Ó͘ Ō͘ | a̍ i̍ m̍ n̍ n̍g I̍ | ḿ m̄ m̂ ǹ n̄ | iⁿ i̋ | Pe̍h-ōe-jī Lâu Ô͘-chhiû',
-    full: 'o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ ő͘ ǒ͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ m̌ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | i̋ ő ǎ | tńg--khì | Pe̍h-ōe-jī Lâu Ô͘-chhiû',
+    specimen: 'o͘ ó͘ ò͘ ô͘ ō͘ o̍͘ ŏ͘ O͘ Ó͘ Ō͘ | a̍ i̍ m̍ n̍ n̍g I̍ | ḿ m̄ m̂ ǹ n̄ | iⁿ | Pe̍h-ōe-jī Lâu Ô͘-chhiû',
+    full: 'o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | tńg--khì | Pe̍h-ōe-jī Lâu Ô͘-chhiû',
     words: 'O͘-á hō͘ (雨) chia̍h (食) thiⁿ (天) n̂g (黃) · kun 君 kún 滾 kùn 棍 kut 骨 kûn 裙 kūn 郡 ku̍t 滑 · tńg--khì 轉去 · Pe̍h-ōe-jī 白話字'
   };
 
@@ -243,7 +237,7 @@
   function toReverseOrder(str) {
     // Decompose, then move U+0358 before any preceding ccc-230 tone marks
     var nfd = str.normalize('NFD');
-    return nfd.replace(/([\u0300-\u030D\u030B\u030C]+)\u0358/g, '\u0358$1');
+    return nfd.replace(/([\u0300-\u0306\u030D]+)\u0358/g, '\u0358$1');
   }
 
   function renderCodepoints() {
@@ -301,10 +295,6 @@
   var detail = document.getElementById('audit-detail');
   var esc = window.POJEscapeHtml;
 
-  function cleanLabel(k) {
-    return k.replace('Tâi-lô', 'KPL');
-  }
-
   function mechClass(m) {
     if (!m) return '';
     if (m === 'ligature' || m === 'gpos-anchor' || m === 'partial-ligature+gpos' || m === 'single') return 'cl-ok';
@@ -313,9 +303,10 @@
   }
 
   function renderFont(f) {
-    var hasRows = Object.keys(f.has).map(function (k) {
+    var hasKeys = Object.keys(f.has).filter(function (k) { return k.indexOf('U+030B') === -1; });
+    var hasRows = hasKeys.map(function (k) {
       var ok = f.has[k];
-      return '<tr><td>' + esc(cleanLabel(k)) + '</td><td>' +
+      return '<tr><td>' + esc(k) + '</td><td>' +
         (ok ? '<span class="tag good">Yes</span>' : '<span class="tag bad">No</span>') + '</td></tr>';
     }).join('');
 
@@ -325,7 +316,8 @@
       return '<span class="tag ' + (ok ? 'good' : 'neutral') + '" style="margin:2px 4px 2px 0"><span class="poj">' + esc(k) + '</span> ' + (ok ? '✓' : '✗') + '</span>';
     }).join('');
 
-    var clusters = Object.keys(f.shaping || {}).map(function (cl) {
+    var clusterKeys = Object.keys(f.shaping || {}).filter(function (cl) { return cl !== 'i\u030b'; });
+    var clusters = clusterKeys.map(function (cl) {
       var s = f.shaping[cl];
       var cls = mechClass(s.nfc);
       var diff = s.same ? '' : ' <span class="tag warn">NFC≠NFD</span>';
@@ -343,20 +335,20 @@
         '<div class="stat-card"><div class="stat-num">' + Number(f.pua_count || 0).toLocaleString() + '</div><div class="stat-label">PUA slots mapped</div></div>' +
         '<div class="stat-card"><div class="stat-num">' + Number(f.ivs_mappings || 0).toLocaleString() + '</div><div class="stat-label">IVS ruby mappings</div></div>' +
       '</div>' +
-      '<p><strong>File:</strong> <code>' + esc(f.file) + '</code><br>' +
-      '<strong>GSUB features:</strong> ' + (f.GSUB.length ? f.GSUB.map(function (x) { return '<code>' + esc(x) + '</code>'; }).join(' ') : '<span class="muted">none</span>') + '<br>' +
+      '<p><strong>GSUB features:</strong> ' + (f.GSUB.length ? f.GSUB.map(function (x) { return '<code>' + esc(x) + '</code>'; }).join(' ') : '<span class="muted">none</span>') + '<br>' +
       '<strong>GPOS features:</strong> ' + (f.GPOS.length ? f.GPOS.map(function (x) { return '<code>' + esc(x) + '</code>'; }).join(' ') : '<span class="muted">none</span>') + '<br>' +
       '<strong>Missing precomposed letters:</strong> ' + (f.precomposed_missing ? '<span class="poj">' + esc(f.precomposed_missing) + '</span>' : '<span class="tag good">None</span>') + '</p>' +
       '<p><strong><code>U+0358</code> GPOS anchor presence on o-bases:</strong><br>' + o358Badges + '</p>' +
-      '<details><summary>Character cmap coverage (' + Object.keys(f.has).length + ' checks)</summary>' +
+      '<details><summary>Character cmap coverage (' + hasKeys.length + ' checks)</summary>' +
       '<div class="table-wrap"><table class="compact"><thead><tr><th>Character</th><th>Present</th></tr></thead><tbody>' + hasRows + '</tbody></table></div></details>' +
-      '<h3>Per-cluster HarfBuzz shaping (' + Object.keys(f.shaping || {}).length + ' clusters)</h3>' +
+      '<h3>Per-cluster HarfBuzz shaping (' + clusterKeys.length + ' clusters)</h3>' +
       '<div class="cluster-grid">' + clusters + '</div>';
   }
 
   fetch('data/poj-font-audit.json')
     .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-    .then(function (data) {
+    .then(function (raw) {
+      var data = raw.filter(function (f) { return f.name.indexOf(' TL ') === -1; });
       select.innerHTML = data.map(function (f, idx) {
         return '<option value="' + idx + '">' + esc(f.name) + ' (' + f.glyphs + ' glyphs)</option>';
       }).join('');

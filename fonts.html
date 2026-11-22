@@ -61,12 +61,6 @@
         <li><a href="makers.html">Font Maker’s Guide</a></li>
       </ul>
     </div>
-    <div class="sidebar-group">
-      <div class="sidebar-heading">Reference</div>
-      <ul>
-        <li><a href="tools.html">Tools, Methodology &amp; Reviews</a></li>
-      </ul>
-    </div>
   </aside>
 
   <main class="doc-main">
@@ -140,7 +134,7 @@
 
     <h2 id="technique-a">A. GPOS <code>mark</code> anchors</h2>
     <p>Each base glyph defines invisible attachment coordinates: <code>top</code> for centred tones and <code>topright</code> for <code>U+0358</code>. The shaper snaps each mark’s corresponding <code>_top</code> or <code>_topright</code> anchor onto the base.</p>
-    <p>Because HarfBuzz normalises text to NFC before GSUB/GPOS, <span class="poj">ō͘</span> arrives as precomposed <code>ō</code> + <code>U+0358</code>. Therefore <code>topright</code> must exist not only on <code>o O</code>, but on <strong>every precomposed toned vowel</strong> (<span class="poj">ó ò ô ǒ ō ŏ ő</span> and capitals). Because HarfBuzz fallback is all-or-nothing, a single omitted anchor drops the dot to offset <code>(0, 0)</code>. Source Sans 3 illustrates this exact bug on <span class="poj">ŏ͘</span> and <span class="poj">Ŏ͘</span>:</p>
+    <p>Because HarfBuzz normalises text to NFC before GSUB/GPOS, <span class="poj">ō͘</span> arrives as precomposed <code>ō</code> + <code>U+0358</code>. Therefore <code>topright</code> must exist not only on <code>o O</code>, but on <strong>every precomposed toned vowel</strong> (<span class="poj">ó ò ô ō ŏ</span> and capitals). Because HarfBuzz fallback is all-or-nothing, a single omitted anchor drops the dot to offset <code>(0, 0)</code>. Source Sans 3 illustrates this exact bug on <span class="poj">ŏ͘</span> and <span class="poj">Ŏ͘</span>:</p>
     <div class="examples">
       <div class="ex bad tall">
         <div class="label"><span class="tag bad">Missing anchor</span><b>Source Sans 3</b>: <span class="poj">ō͘</span> is anchored properly, but <span class="poj">ŏ͘</span> has no <code>topright</code> anchor so the dot drops to <code>(0, 0)</code></div>
@@ -155,7 +149,7 @@
       <li><strong>Input forms:</strong> Must match NFC (<code>oacute uni0358</code>), NFD canonical (<code>o uni0301 uni0358</code>), and non-canonical order (<code>o uni0358 uni0301</code>), with 3-glyph rules listed before 2-glyph prefixes.</li>
       <li><strong>GDEF class:</strong> Every ligature output glyph must be classified as <strong>GDEF class 1 (base)</strong>, not class 2 (ligature), so subsequent marks can still attach cleanly if needed.</li>
       <li><strong>Kerning:</strong> Add every precomposed <span class="poj">o͘</span> glyph to the font’s <code>o</code>/<code>O</code> kerning classes, or pairs like <span class="poj">Tō͘</span> / <span class="poj">o͘v</span> lose kerning.</li>
-      <li><strong>Safety net:</strong> Fonts that ship Technique B <em>without</em> GPOS <code>mark</code> (such as GenYo Min and the Tauhu family) look great on covered clusters, but any unlisted combination (for instance rare KPL/dialectal combinations) depends on engine fallback.</li>
+      <li><strong>Safety net:</strong> Fonts that ship Technique B <em>without</em> GPOS <code>mark</code> (such as GenYo Min and the Tauhu family) look great on covered clusters, but any unlisted combination depends on engine fallback.</li>
     </ul>
 
     <h2 id="technique-c">C. Spacing dot (SIL approach)</h2>
@@ -180,7 +174,7 @@
     <ul>
       <li><strong>Never place POJ glyph building in <code>liga</code> or <code>clig</code>.</strong> Under CSS Text Level 3, Chrome, Safari, and Firefox disable optional ligatures whenever <code>letter-spacing</code> is non-zero; <code>font-variant-ligatures: none</code> disables them too. Microsoft Word leaves ligatures <strong>off by default</strong> (unless enabled under <em>Font → Advanced</em>), as do many code editors. Always use <strong><code>ccmp</code></strong>.</li>
       <li><strong><code>case</code> is off by default</strong> in browsers and Word — even CSS <code>text-transform: uppercase</code> does not activate it. Capital-form marks therefore require contextual rules inside <code>ccmp</code>, not solely in <code>case</code>.</li>
-      <li><em>Verified case study — NunitoPOJ:</em> NunitoPOJ puts ligatures in <code>liga</code> keyed in non-canonical order (<code>O 0358 030B</code>), so those rules never fire in HarfBuzz. Even with <code>liga</code> disabled, however, its <code>ccmp</code> dotless-i rule and GPOS anchors still render <span class="poj">o͘</span> and <span class="poj">i̍</span> cleanly.</li>
+      <li><em>Verified case study — NunitoPOJ:</em> NunitoPOJ puts some ligatures in <code>liga</code> keyed in non-canonical order, so those rules never fire in HarfBuzz. Even with <code>liga</code> disabled, however, its <code>ccmp</code> dotless-i rule and GPOS anchors still render <span class="poj">o͘</span> and <span class="poj">i̍</span> cleanly.</li>
     </ul>
 
     <h2 id="google-fonts">Google Fonts web delivery &amp; <code>unicode-range</code> audit</h2>
@@ -192,7 +186,7 @@
         <tr><td><strong>TASA Explorer</strong></td><td>2 (<code>latin</code>, <code>latin-ext</code>)</td><td><span class="tag bad">None</span></td><td>Marks are <strong>not served at all</strong>, even though the full GitHub release has them. Every <span class="poj">o͘</span> and 8th tone falls back to a system font.</td></tr>
         <tr><td><strong>Source Sans 3</strong></td><td>7</td><td><span class="tag bad">None</span></td><td>POJ marks are stripped from all served slices.</td></tr>
         <tr><td><strong>EB Garamond</strong></td><td>7</td><td><span class="tag bad">None</span></td><td>Stripped — and the source font lacks <code>U+0358</code> anyway.</td></tr>
-        <tr><td><strong>芫荽 Iansui</strong></td><td>108</td><td><span class="tag good">Slice #104</span></td><td>Dedicated Taigi slice holding POJ marks, <span class="poj">ḿ ǹ ő ű ı ᴺ</span>, and base letters.</td></tr>
+        <tr><td><strong>芫荽 Iansui</strong></td><td>108</td><td><span class="tag good">Slice #104</span></td><td>Dedicated Taigi slice holding POJ marks, <span class="poj">ḿ ǹ ı ᴺ</span>, and base letters.</td></tr>
         <tr><td><strong>jf open 粉圓 (Huninn)</strong></td><td>111</td><td><span class="tag good">Slice #106</span></td><td>Same dedicated Taigi slice pattern.</td></tr>
       </tbody>
     </table></div>
@@ -202,8 +196,8 @@
       <p>Notice that in Iansui and Huninn, plain <code>o</code> appears in both the <code>latin</code> slice and the Taigi slice; whether <code>o + U+0358</code> stays inside a single font file depends on each browser’s per-cluster fallback behaviour and should be tested in Chrome, Safari, and Firefox. Note also that 狗公會曉學台語 lists TASA Explorer/Orbiter under 線頂 Google 字體 白話字台文, so websites loading TASA from Google Fonts are directly affected. (Google Docs/Slides delivery was not tested.)</p>
       <p><strong>For reliable POJ on the web:</strong> self-host the full font (or use the Google Fonts <code>&amp;text=</code> parameter). When subsetting with <code>pyftsubset</code> or build plugins, always preserve:</p>
       <ul>
-        <li>Codepoints: <code>U+0358</code>, <code>U+030D</code>, <code>U+030B</code>, <code>U+030C</code>, <code>U+207F</code>, <code>U+1D3A</code>, <code>U+0131</code>, <code>U+0237</code>, <span class="poj">ḿ Ḿ ǹ Ǹ</span>, and all toned vowels;</li>
-        <li>Layout features: <code>ccmp</code>, <code>mark</code>, <code>mkmk</code> (or <code>--layout-features='*'</code>, as in <code>tools/build_site_fonts.sh</code>);</li>
+        <li>Codepoints: <code>U+0358</code>, <code>U+030D</code>, <code>U+207F</code>, <code>U+1D3A</code>, <code>U+0131</code>, <code>U+0237</code>, <span class="poj">ḿ Ḿ ǹ Ǹ</span>, and all toned vowels;</li>
+        <li>Layout features: <code>ccmp</code>, <code>mark</code>, <code>mkmk</code> (or <code>--layout-features='*'</code>);</li>
         <li>For IVS ruby fonts: preserve the <code>cmap</code> format 14 subtable.</li>
       </ul>
     </div>

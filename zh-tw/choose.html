@@ -61,12 +61,6 @@
         <li><a href="makers.html">字型開發者實作指南</a></li>
       </ul>
     </div>
-    <div class="sidebar-group">
-      <div class="sidebar-heading">參考資料</div>
-      <ul>
-        <li><a href="tools.html">檢測工具、方法與審查紀錄</a></li>
-      </ul>
-    </div>
   </aside>
 
   <main class="doc-main">
@@ -111,7 +105,7 @@
       </tbody>
     </table></div>
 
-    <h2 id="test">即時 POJ / KPL 字型測試台</h2>
+    <h2 id="test">即時 POJ 字型測試台</h2>
     <p>在下方輸入或貼上任何台語文字，一鍵複製 <strong>NFC</strong>、<strong>NFD</strong> 或<strong>非正規反向順序</strong>（<code>o + U+0358 + 聲調</code>）貼入其他軟體測試；也可以勾選 <code>letter-spacing</code> 檢驗是否誤用 <code>liga</code>，並即時檢視每個字元的 Unicode 編號。</p>
 
     <div class="bench">
@@ -120,10 +114,10 @@
         <button class="btn" type="button" data-copy-form="NFD" title="macOS 檔名與部分 PDF 產生的分解形式">複製 NFD</button>
         <button class="btn" type="button" data-copy-form="REV" title="非正規順序：U+0358 排在聲調之前">複製反向順序</button>
         <button class="btn" type="button" data-preset="specimen">短樣張字串</button>
-        <button class="btn" type="button" data-preset="full">完整 POJ + KPL</button>
+        <button class="btn" type="button" data-preset="full">完整 POJ 字串</button>
         <button class="btn" type="button" data-preset="words">常用詞範例</button>
       </div>
-      <textarea class="bench-input" id="bench-input" spellcheck="false" aria-label="POJ 測試文字">o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ ő͘ ǒ͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ m̌ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | i̋ ő ǎ | tńg--khì | Pe̍h-ōe-jī Lâu Ô͘-chhiû</textarea>
+      <textarea class="bench-input" id="bench-input" spellcheck="false" aria-label="POJ 測試文字">o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | tńg--khì | Pe̍h-ōe-jī Lâu Ô͘-chhiû</textarea>
       <div class="bench-controls">
         <label>字級：<input type="range" id="bench-size" min="16" max="48" value="24"> <span id="bench-size-val">24px</span></label>
         <label><input type="checkbox" id="bench-spacing"> 加上 <code>letter-spacing: 0.12em</code>（會停用 <code>liga</code>）</label>
@@ -136,14 +130,14 @@
     <ol>
       <li><strong>沒有空白方框（□）</strong>，也沒有個別字母突然變成另一款字型。</li>
       <li><strong><span class="poj">o͘</span> 的圓點</strong>穩穩落在右上方，尤其檢查大寫 <span class="poj">O͘ Ó͘ Ō͘ O̍͘</span> 與寬調號 <span class="poj">ō͘ ô͘ ŏ͘</span>。</li>
-      <li><strong><span class="poj">i̍</span> 與 <span class="poj">i̋</span> 乾淨去點</strong>，豎線或雙銳音符下方沒有殘留圓點。</li>
+      <li><strong><span class="poj">i̍</span> 乾淨去點</strong>，第八調短豎線下方沒有殘留圓點。</li>
       <li><strong>第八調短豎線</strong>居中對齊於 <span class="poj">a̍ e̍ o̍ u̍ m̍ n̍</span> 與大寫字母正上方。</li>
       <li><strong><span class="poj">tńg--khì</span> 中的 <code>--</code> 維持兩條獨立連字號</strong>，未合併成破折號。</li>
       <li><strong>NFC、NFD 與反向順序外觀完全一致</strong>，且加上 <code>letter-spacing</code> 不會破版。</li>
     </ol>
 
     <h2 id="survey-table">24 款字型完整實測總表（Regular 字重）</h2>
-    <p>下列字型除 <strong>EB Garamond（缺少 <code>U+0358</code>）</strong>之外，全數皆有收錄 <code>U+0358</code>、<code>U+030D</code>、<code>U+207F</code> 與 <code>U+030B</code>。「<code>mark</code>」欄表示是否具備 GPOS <code>mark</code> 定位功能。</p>
+    <p>下列字型除 <strong>EB Garamond（缺少 <code>U+0358</code>）</strong>之外，全數皆有收錄 <code>U+0358</code>、<code>U+030D</code> 與 <code>U+207F</code>。「<code>mark</code>」欄表示是否具備 GPOS <code>mark</code> 定位功能。</p>
 
     <div class="table-wrap"><table class="compact">
       <thead><tr><th>字型</th><th>授權</th><th>技術</th><th class="center"><code>mark</code></th><th class="center">無點 <span class="poj">i̍</span></th><th>詳細實測觀察</th></tr></thead>
@@ -161,7 +155,7 @@
         <tr><td><strong>豆腐烏家族</strong>（Khu-lé-iòng／Môo-tn̄g／Tauhu Oo）</td><td>OFL 1.1</td><td>僅 B</td><td class="center">✗</td><td class="center">✓</td><td>與源樣明體相同：常見組合由 <code>ccmp</code> 妥善覆蓋，但無 GPOS <code>mark</code> 安全網。</td></tr>
         <tr><td><strong>Charis / Doulos / Gentium</strong>（SIL）</td><td>OFL 1.1 (RFN)</td><td>A + C</td><td class="center">✓</td><td class="center">✓</td><td>表現卓越；獨立佔位圓點（GDEF 類別 1，寬 200–279u）；含 223 個 PUA 字形。分支需更名。</td></tr>
         <tr><td><strong>EB Garamond</strong></td><td>OFL 1.1</td><td>A（缺 <code>U+0358</code>）</td><td class="center">✓</td><td class="center">✗</td><td><code>U+0358</code> 顯示豆腐字；<code>U+030D</code> 未設錨點偏移。<strong>不可用於 <span class="poj">o͘</span>。</strong></td></tr>
-        <tr><td><strong>字咍 Taigi IVS 字型</strong>（Huninn POJ、Iansui TL）</td><td>OFL / Apache-2.0</td><td>D + IVS 注音</td><td class="center">✗</td><td class="center">✗</td><td>每款含 8,021 筆漢字 IVS 注音；純 POJ 內文較弱（無 <code>mark</code>、<span class="poj">i̍</span> 留點）。</td></tr>
+        <tr><td><strong>字咍 Taigi IVS 字型</strong></td><td>OFL / Apache-2.0</td><td>D + IVS 注音</td><td class="center">✗</td><td class="center">✗</td><td>每款含 8,021 筆漢字 IVS 注音；純 POJ 內文較弱（無 <code>mark</code>、<span class="poj">i̍</span> 留點）。</td></tr>
         <tr><td><strong>Arial</strong>（macOS 版）</td><td>專有授權</td><td>A（<code>030D</code>）+ D（<code>0358</code>）</td><td class="center">✓</td><td class="center">✓</td><td><code>U+0358</code> 為無錨點疊印；因具 <code>mark</code> 表，HarfBuzz 關閉備援。</td></tr>
         <tr><td><strong>Helvetica / Geneva / Menlo</strong>（macOS）</td><td>專有授權</td><td>D</td><td class="center">✗</td><td class="center">✗</td><td>無 GSUB/GPOS；HarfBuzz 備援使 <span class="poj">Ó͘ Ō͘</span> 圓點浮空。CoreText 結果可能不同（AAT）。</td></tr>
       </tbody>
@@ -186,7 +180,7 @@
     <div id="audit-detail"></div>
 
     <h2 id="specimens">高解析度 NFC vs NFD 渲染樣張</h2>
-    <p>由 <code>tools/poj_specimen.py</code> 透過 HarfBuzz 渲染產生。每款字型皆並列兩行：<strong>第一行為 NFC</strong>、<strong>第二行為 NFD</strong>，測試字串為 <code>o͘ ó͘ ò͘ ô͘ ō͘ o̍͘ ŏ͘ O͘ Ó͘ Ō͘ | a̍ i̍ m̍ n̍ n̍g I̍ | ḿ m̄ m̂ ǹ n̄ | iⁿ i̋ | Pe̍h-ōe-jī Lâu Ô͘-chhiû</code>。點擊圖片可放大檢視。</p>
+    <p>透過 HarfBuzz 渲染產生。每款字型皆並列兩行：<strong>第一行為 NFC</strong>、<strong>第二行為 NFD</strong>，呈現標準 POJ 測試字串。點擊圖片可放大檢視。</p>
 
     <figure class="specimen-fig">
       <img src="../docs/img/specimen-0.png" alt="POJ 字型樣張第 1 頁（NFC 與 NFD 對照）" loading="lazy">
@@ -227,8 +221,8 @@
 <script>
 (function () {
   var PRESETS = {
-    specimen: 'o͘ ó͘ ò͘ ô͘ ō͘ o̍͘ ŏ͘ O͘ Ó͘ Ō͘ | a̍ i̍ m̍ n̍ n̍g I̍ | ḿ m̄ m̂ ǹ n̄ | iⁿ i̋ | Pe̍h-ōe-jī Lâu Ô͘-chhiû',
-    full: 'o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ ő͘ ǒ͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ m̌ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | i̋ ő ǎ | tńg--khì | Pe̍h-ōe-jī Lâu Ô͘-chhiû',
+    specimen: 'o͘ ó͘ ò͘ ô͘ ō͘ o̍͘ ŏ͘ O͘ Ó͘ Ō͘ | a̍ i̍ m̍ n̍ n̍g I̍ | ḿ m̄ m̂ ǹ n̄ | iⁿ | Pe̍h-ōe-jī Lâu Ô͘-chhiû',
+    full: 'o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | tńg--khì | Pe̍h-ōe-jī Lâu Ô͘-chhiû',
     words: 'O͘-á hō͘（雨）chia̍h（食）thiⁿ（天）n̂g（黃）· kun 君 kún 滾 kùn 棍 kut 骨 kûn 裙 kūn 郡 ku̍t 滑 · tńg--khì 轉去 · Pe̍h-ōe-jī 白話字'
   };
 
@@ -241,7 +235,7 @@
 
   function toReverseOrder(str) {
     var nfd = str.normalize('NFD');
-    return nfd.replace(/([\u0300-\u030D\u030B\u030C]+)\u0358/g, '\u0358$1');
+    return nfd.replace(/([\u0300-\u0306\u030D]+)\u0358/g, '\u0358$1');
   }
 
   function renderCodepoints() {
@@ -306,8 +300,7 @@
     'U+0300 grave': 'U+0300 重音符（第三調）',
     'U+0302 circumflex': 'U+0302 揚抑符（第五調）',
     'U+0304 macron': 'U+0304 長音符（第七調）',
-    'U+0306 breve (POJ t9)': 'U+0306 短音符（POJ 第九調）',
-    'U+030B double acute (Tâi-lô t9)': 'U+030B 雙銳音符（KPL 第九調）',
+    'U+0306 breve (POJ t9)': 'U+0306 短音符（第九調）',
     'U+0131 dotless i': 'U+0131 無點 ı',
     'U+00B7 middle dot (o· fallback)': 'U+00B7 中圓點（o· 舊式替代）',
     'U+1D3A/ᴺ cap superscript N': 'U+1D3A 大寫鼻化上標 ᴺ'
@@ -321,7 +314,8 @@
   }
 
   function renderFont(f) {
-    var hasRows = Object.keys(f.has).map(function (k) {
+    var hasKeys = Object.keys(f.has).filter(function (k) { return k.indexOf('U+030B') === -1; });
+    var hasRows = hasKeys.map(function (k) {
       var ok = f.has[k];
       return '<tr><td>' + esc(LABEL_MAP[k] || k) + '</td><td>' +
         (ok ? '<span class="tag good">有</span>' : '<span class="tag bad">無</span>') + '</td></tr>';
@@ -333,7 +327,8 @@
       return '<span class="tag ' + (ok ? 'good' : 'neutral') + '" style="margin:2px 4px 2px 0"><span class="poj">' + esc(k) + '</span> ' + (ok ? '✓' : '✗') + '</span>';
     }).join('');
 
-    var clusters = Object.keys(f.shaping || {}).map(function (cl) {
+    var clusterKeys = Object.keys(f.shaping || {}).filter(function (cl) { return cl !== 'i\u030b'; });
+    var clusters = clusterKeys.map(function (cl) {
       var s = f.shaping[cl];
       var cls = mechClass(s.nfc);
       var diff = s.same ? '' : ' <span class="tag warn">NFC≠NFD</span>';
@@ -351,20 +346,20 @@
         '<div class="stat-card"><div class="stat-num">' + Number(f.pua_count || 0).toLocaleString() + '</div><div class="stat-label">私用區（PUA）字數</div></div>' +
         '<div class="stat-card"><div class="stat-num">' + Number(f.ivs_mappings || 0).toLocaleString() + '</div><div class="stat-label">IVS 注音對應筆數</div></div>' +
       '</div>' +
-      '<p><strong>檔案路徑：</strong><code>' + esc(f.file) + '</code><br>' +
-      '<strong>GSUB 功能：</strong>' + (f.GSUB.length ? f.GSUB.map(function (x) { return '<code>' + esc(x) + '</code>'; }).join(' ') : '<span class="muted">無</span>') + '<br>' +
+      '<p><strong>GSUB 功能：</strong>' + (f.GSUB.length ? f.GSUB.map(function (x) { return '<code>' + esc(x) + '</code>'; }).join(' ') : '<span class="muted">無</span>') + '<br>' +
       '<strong>GPOS 功能：</strong>' + (f.GPOS.length ? f.GPOS.map(function (x) { return '<code>' + esc(x) + '</code>'; }).join(' ') : '<span class="muted">無</span>') + '<br>' +
       '<strong>缺少的預組字母：</strong>' + (f.precomposed_missing ? '<span class="poj">' + esc(f.precomposed_missing) + '</span>' : '<span class="tag good">無缺漏</span>') + '</p>' +
       '<p><strong><code>U+0358</code> 於各 o 類基礎字的 GPOS 錨點：</strong><br>' + o358Badges + '</p>' +
-      '<details><summary>字元 cmap 收錄檢查（' + Object.keys(f.has).length + ' 項）</summary>' +
+      '<details><summary>字元 cmap 收錄檢查（' + hasKeys.length + ' 項）</summary>' +
       '<div class="table-wrap"><table class="compact"><thead><tr><th>字元</th><th>收錄</th></tr></thead><tbody>' + hasRows + '</tbody></table></div></details>' +
-      '<h3>HarfBuzz 逐音節整形結果（' + Object.keys(f.shaping || {}).length + ' 個測試組合）</h3>' +
+      '<h3>HarfBuzz 逐音節整形結果（' + clusterKeys.length + ' 個測試組合）</h3>' +
       '<div class="cluster-grid">' + clusters + '</div>';
   }
 
   fetch('../data/poj-font-audit.json')
     .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-    .then(function (data) {
+    .then(function (raw) {
+      var data = raw.filter(function (f) { return f.name.indexOf(' TL ') === -1; });
       select.innerHTML = data.map(function (f, idx) {
         return '<option value="' + idx + '">' + esc(f.name) + '（' + f.glyphs + ' 字形）</option>';
       }).join('');

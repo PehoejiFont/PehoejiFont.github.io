@@ -61,12 +61,6 @@
         <li><a href="makers.html">字型開發者實作指南</a></li>
       </ul>
     </div>
-    <div class="sidebar-group">
-      <div class="sidebar-heading">參考資料</div>
-      <ul>
-        <li><a href="tools.html">檢測工具、方法與審查紀錄</a></li>
-      </ul>
-    </div>
   </aside>
 
   <main class="doc-main">
@@ -91,11 +85,11 @@
     <details open>
       <summary>3. 一個字詞裡有個別字母長得像別款字型</summary>
       <p><strong>原因：</strong>字型缺少該預組字碼（最常缺 <span class="poj">ḿ</span> <code>U+1E3F</code>、<span class="poj">ǹ</span> <code>U+01F9</code>、<span class="poj">ŏ</span>、<code>U+0358</code> 或 <code>U+030D</code>），系統於是悄悄借用其他字型補字（例如 macOS 上 EB Garamond 會借用 Helvetica 的 <code>U+0358</code>）。</p>
-      <p><strong>解法：</strong>選擇完整涵蓋 POJ 與 KPL 預組字集的字型（可至<a href="choose.html#test">測試台</a>驗證）。</p>
+      <p><strong>解法：</strong>選擇完整涵蓋 POJ 預組字集的字型（可至<a href="choose.html#test">測試台</a>驗證）。</p>
     </details>
 
     <details>
-      <summary>4. <span class="poj">i̍</span> 或 <span class="poj">i̋</span> 的聲調下方還留著 i 本身的圓點</summary>
+      <summary>4. <span class="poj">i̍</span> 的聲調下方還留著 i 本身的圓點</summary>
       <p><strong>原因：</strong>字型未在 <code>ccmp</code> 實作 <code>Soft_Dotted</code> 規則（上方附加符號前將 <code>i → dotlessi</code>；<a href="letters.html#dotted-i">見說明</a>）。字咍 Taigi IVS 字型、EB Garamond、Helvetica、Geneva 與 Menlo 皆有此現象。</p>
       <p><strong>解法：</strong>更換字型。<strong>切勿手動輸入無點 <span class="poj">ı</span>（<code>U+0131</code>）</strong>，否則將破壞拼寫正確性與搜尋比對。</p>
     </details>
@@ -127,7 +121,7 @@
     <details>
       <summary>9. 本機電腦顯示正常，放到網站上圓點就壞掉</summary>
       <p><strong>原因：</strong>網站可能從 Google Fonts CSS API 載入字型，而 Google Fonts 的 <code>unicode-range</code> 切塊會將 TASA Explorer 與 Source Sans 3 的 POJ 調號完全刪除（<a href="fonts.html#google-fonts">詳見實測</a>）；過度精簡的本機子集化工具也可能誤刪 <code>ccmp</code>／<code>mark</code> 或 <code>cmap</code> format 14。</p>
-      <p><strong>解法：</strong>將完整字型檔自行託管在網站上，或使用子集工具時明確保留所有 POJ 字碼與 <code>--layout-features='*'</code>（可參考 <code>tools/build_site_fonts.sh</code>）。</p>
+      <p><strong>解法：</strong>將完整字型檔自行託管在網站上，或使用子集工具時明確保留所有 POJ 字碼與 <code>--layout-features='*'</code>。</p>
     </details>
 
     <details>
@@ -157,7 +151,7 @@
         <tr>
           <td><strong>CoreText</strong></td>
           <td>macOS / iOS 原生軟體、Safari、Pages</td>
-          <td><span class="tag warn">初步實測完成</span><br>（<code>tools/poj_coretext.swift</code>）</td>
+          <td><span class="tag warn">初步實測完成</span></td>
           <td><strong>Lesson One、jf open 粉圓、芫荽 Iansui、一點明體、源樣明體與 WD-XL 滑油字</strong>在所有測試音節的輸出皆與 HarfBuzz 完全一致。無 <code>mark</code> 表的字型（Helvetica、Menlo、字咍 Taigi 字型）與 HarfBuzz 差異顯著，因 CoreText 不做 HarfBuzz 式備援，且 Apple 系統字型可能使用 AAT（<code>morx</code>/<code>kerx</code>）。</td>
         </tr>
         <tr>

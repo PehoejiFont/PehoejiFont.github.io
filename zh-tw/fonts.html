@@ -61,12 +61,6 @@
         <li><a href="makers.html">字型開發者實作指南</a></li>
       </ul>
     </div>
-    <div class="sidebar-group">
-      <div class="sidebar-heading">參考資料</div>
-      <ul>
-        <li><a href="tools.html">檢測工具、方法與審查紀錄</a></li>
-      </ul>
-    </div>
   </aside>
 
   <main class="doc-main">
@@ -140,7 +134,7 @@
 
     <h2 id="technique-a">A. GPOS <code>mark</code> 錨點</h2>
     <p>字型設計師在每個基礎字母上標記看不見的座標點：<code>top</code> 供居中聲調使用，<code>topright</code> 供 <code>U+0358</code> 使用；整形引擎再把符號的 <code>_top</code>／<code>_topright</code> 錨點對齊吸附上去。</p>
-    <p>由於 HarfBuzz 在進入 GSUB/GPOS 前會先轉為 NFC，<span class="poj">ō͘</span> 抵達時是預組的 <code>ō</code>＋<code>U+0358</code>，因此<strong>所有預組帶調母音</strong>（<span class="poj">ó ò ô ǒ ō ŏ ő</span> 與大寫）都必須具備 <code>topright</code> 錨點。又因為 HarfBuzz 的備援定位是「全有或全無」，只要漏掉其中一個，該圓點就會直接掉到 <code>(0, 0)</code>。Source Sans 3 在 <span class="poj">ŏ͘</span> 與 <span class="poj">Ŏ͘</span> 正好呈現這個錯誤：</p>
+    <p>由於 HarfBuzz 在進入 GSUB/GPOS 前會先轉為 NFC，<span class="poj">ō͘</span> 抵達時是預組的 <code>ō</code>＋<code>U+0358</code>，因此<strong>所有預組帶調母音</strong>（<span class="poj">ó ò ô ō ŏ</span> 與大寫）都必須具備 <code>topright</code> 錨點。又因為 HarfBuzz 的備援定位是「全有或全無」，只要漏掉其中一個，該圓點就會直接掉到 <code>(0, 0)</code>。Source Sans 3 在 <span class="poj">ŏ͘</span> 與 <span class="poj">Ŏ͘</span> 正好呈現這個錯誤：</p>
     <div class="examples">
       <div class="ex bad tall">
         <div class="label"><span class="tag bad">漏設錨點</span><b>Source Sans 3</b>：<span class="poj">ō͘</span> 定位正確，但 <span class="poj">ŏ͘</span> 缺少 <code>topright</code> 錨點，圓點掉到 <code>(0, 0)</code></div>
@@ -180,7 +174,7 @@
     <ul>
       <li><strong>絕不可把 POJ 組字放進 <code>liga</code> 或 <code>clig</code>。</strong>依 CSS Text Level 3 規範，只要網頁設定了非零的 <code>letter-spacing</code>，Chrome、Safari 與 Firefox 都會自動停用選用連字；<code>font-variant-ligatures: none</code> 亦同。Microsoft Word 預設也將連字功能<strong>關閉</strong>（需至「字型 → 進階」手動開啟），許多程式碼編輯器亦然。POJ 組字一律必須放在 <strong><code>ccmp</code></strong>。</li>
       <li><strong><code>case</code> 在瀏覽器與 Word 中預設關閉</strong>——即使套用 CSS <code>text-transform: uppercase</code> 也不會啟用 <code>case</code>。因此大寫專用調號必須在 <code>ccmp</code> 中撰寫上下文替換規則，不能只寫在 <code>case</code>。</li>
-      <li><em>實測案例 — NunitoPOJ：</em>NunitoPOJ 將部分連字寫在 <code>liga</code> 並採非正規順序（<code>O 0358 030B</code>），因此在 HarfBuzz 中從未觸發；但實測確認即使關閉 <code>liga</code>，其 <code>ccmp</code> 無點 i 與 GPOS 錨點仍能正確顯示 <span class="poj">o͘</span> 與 <span class="poj">i̍</span>。</li>
+      <li><em>實測案例 — NunitoPOJ：</em>NunitoPOJ 將部分連字寫在 <code>liga</code> 並採非正規順序，因此在 HarfBuzz 中從未觸發；但實測確認即使關閉 <code>liga</code>，其 <code>ccmp</code> 無點 i 與 GPOS 錨點仍能正確顯示 <span class="poj">o͘</span> 與 <span class="poj">i̍</span>。</li>
     </ul>
 
     <h2 id="google-fonts">Google Fonts 網頁切塊（<code>unicode-range</code>）實測</h2>
@@ -192,7 +186,7 @@
         <tr><td><strong>TASA Explorer</strong></td><td>2（<code>latin</code>、<code>latin-ext</code>）</td><td><span class="tag bad">無</span></td><td><strong>完全沒有傳送 POJ 調號</strong>，即使 GitHub 完整版有收錄；網頁上所有 <span class="poj">o͘</span> 與第八調都會退回系統補字。</td></tr>
         <tr><td><strong>Source Sans 3</strong></td><td>7</td><td><span class="tag bad">無</span></td><td>所有網頁切塊皆移除了 POJ 符號。</td></tr>
         <tr><td><strong>EB Garamond</strong></td><td>7</td><td><span class="tag bad">無</span></td><td>切塊未含，且原字型本來就缺少 <code>U+0358</code>。</td></tr>
-        <tr><td><strong>芫荽 Iansui</strong></td><td>108</td><td><span class="tag good">切塊 #104</span></td><td>內含專屬台語切塊，收錄 POJ 符號、<span class="poj">ḿ ǹ ő ű ı ᴺ</span> 與基礎字母。</td></tr>
+        <tr><td><strong>芫荽 Iansui</strong></td><td>108</td><td><span class="tag good">切塊 #104</span></td><td>內含專屬台語切塊，收錄 POJ 符號、<span class="poj">ḿ ǹ ı ᴺ</span> 與基礎字母。</td></tr>
         <tr><td><strong>jf open 粉圓（Huninn）</strong></td><td>111</td><td><span class="tag good">切塊 #106</span></td><td>同上，具備專屬台語切塊。</td></tr>
       </tbody>
     </table></div>
@@ -202,8 +196,8 @@
       <p>在芫荽與粉圓中，普通 <code>o</code> 同時存在於 <code>latin</code> 切塊與台語切塊；<code>o + U+0358</code> 能否留在同一個字型檔內取決於各瀏覽器的叢集補字機制，上線前應於 Chrome、Safari、Firefox 實測。此外，狗公會曉學台語將 TASA Explorer／Orbiter 列在「線頂 Google 字體 白話字台文」底下，直接載入 Google Fonts 的網站均會受影響。（Google Docs／Slides 的傳遞機制尚未實測。）</p>
       <p><strong>網頁部署建議：</strong>自行託管完整字型檔（或使用 Google Fonts 的 <code>&amp;text=</code> 參數）。若使用 <code>pyftsubset</code> 或建置外掛做字型子集化，務必保留：</p>
       <ul>
-        <li>字碼：<code>U+0358</code>、<code>U+030D</code>、<code>U+030B</code>、<code>U+030C</code>、<code>U+207F</code>、<code>U+1D3A</code>、<code>U+0131</code>、<code>U+0237</code>、<span class="poj">ḿ Ḿ ǹ Ǹ</span> 與全部帶調母音；</li>
-        <li>排版功能：<code>ccmp</code>、<code>mark</code>、<code>mkmk</code>（或比照 <code>tools/build_site_fonts.sh</code> 加上 <code>--layout-features='*'</code>）；</li>
+        <li>字碼：<code>U+0358</code>、<code>U+030D</code>、<code>U+207F</code>、<code>U+1D3A</code>、<code>U+0131</code>、<code>U+0237</code>、<span class="poj">ḿ Ḿ ǹ Ǹ</span> 與全部帶調母音；</li>
+        <li>排版功能：<code>ccmp</code>、<code>mark</code>、<code>mkmk</code>（或加上 <code>--layout-features='*'</code>）；</li>
         <li>若為 IVS 注音字型：務必保留 <code>cmap</code> format 14 子表。</li>
       </ul>
     </div>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>POJ Font Documentation — PehoejiFont</title>
-<meta name="description" content="Complete technical documentation for Taigi Pe̍h-ōe-jī (POJ) and KPL fonts: Unicode encoding, OpenType shaping, 24-font audit, Google Fonts survey, and font implementation guide.">
+<meta name="description" content="Complete technical documentation for Taigi Pe̍h-ōe-jī (POJ) fonts: Unicode encoding, OpenType shaping, 24-font audit, Google Fonts survey, and font implementation guide.">
 <link rel="stylesheet" href="assets/site.css">
 <link rel="alternate" hreflang="zh-Hant-TW" href="zh-tw/">
 </head>
@@ -61,18 +61,12 @@
         <li><a href="makers.html">Font Maker’s Guide</a></li>
       </ul>
     </div>
-    <div class="sidebar-group">
-      <div class="sidebar-heading">Reference</div>
-      <ul>
-        <li><a href="tools.html">Tools, Methodology &amp; Reviews</a></li>
-      </ul>
-    </div>
   </aside>
 
   <main class="doc-main">
     <div class="breadcrumb"><span>Getting Started</span> › <span>Overview</span></div>
     <h1>Taigi <span class="poj">Pe̍h-ōe-jī</span> (POJ) Font Documentation</h1>
-    <p class="lead">Complete guide and technical reference for writing Taigi (台語) in <span class="poj">Pe̍h-ōe-jī</span> (白話字, POJ) and KPL (<span class="poj">Kàu-io̍k Pō͘ Lô-má-jī</span>) on computers, phones, and the web — plus our open-source survey and upstream effort across the Google Fonts catalog.</p>
+    <p class="lead">Complete guide and technical reference for writing Taigi (台語) in <span class="poj">Pe̍h-ōe-jī</span> (白話字, POJ) on computers, phones, and the web — plus our open-source survey and upstream effort across the Google Fonts catalog.</p>
 
     <div class="meta-row">
       <span class="meta-pill">24 fonts audited letter-by-letter</span>
@@ -125,12 +119,12 @@
         <img src="assets/img/sample-genyo.svg" alt="The same words in GenYo Min: the dot is close to the o">
       </div>
     </div>
-    <p class="legend">SVGs are rendered with <code>tools/poj_guide_svg.py</code> using real HarfBuzz shaping positions and font outlines. macOS CoreText can differ for fonts without OpenType <code>mark</code> tables; see <a href="problems.html#platforms">Platform Differences</a>.</p>
+    <p class="legend">Diagrams show real HarfBuzz shaping positions and outlines from each font. macOS CoreText can differ for fonts without OpenType <code>mark</code> tables; see <a href="problems.html#platforms">Platform Differences</a>.</p>
 
     <h2 id="why-it-happens">Why POJ breaks, in three principles</h2>
     <ol>
       <li><strong>Unicode has no ready-made <span class="poj">o͘</span> or 8th-tone letters.</strong> Computers store <span class="poj">o͘</span> as <span class="poj">o</span> + combining dot above right (<code>U+0358</code>) and <span class="poj">a̍</span> as <span class="poj">a</span> + combining vertical line above (<code>U+030D</code>). Together with superscript <span class="poj">ⁿ</span> (<code>U+207F</code>), most Latin fonts simply lack these characters. <a href="letters.html">Unicode &amp; Encoding →</a></li>
-      <li><strong>Mapping the codepoint is not enough.</strong> Fonts must position <code>U+0358</code> at the top right of every toned <span class="poj">o</span> (including precomposed <span class="poj">ó ò ô ō ŏ ő</span> and capitals), swap <span class="poj">i</span> to dotless <span class="poj">ı</span> before <code>U+030D</code>, and run composition in <code>ccmp</code> (never optional <code>liga</code>). <a href="fonts.html">How Fonts Implement POJ →</a></li>
+      <li><strong>Mapping the codepoint is not enough.</strong> Fonts must position <code>U+0358</code> at the top right of every toned <span class="poj">o</span> (including precomposed <span class="poj">ó ò ô ō ŏ</span> and capitals), swap <span class="poj">i</span> to dotless <span class="poj">ı</span> before <code>U+030D</code>, and run composition in <code>ccmp</code> (never optional <code>liga</code>). <a href="fonts.html">How Fonts Implement POJ →</a></li>
       <li><strong>The same visible syllable arrives in multiple Unicode sequences.</strong> NFC (<code>ó + U+0358</code>), NFD (<code>o + U+0301 + U+0358</code>), and non-canonical input order (<code>o + U+0358 + U+0301</code>) must all shape identically across HarfBuzz, CoreText, and DirectWrite. <a href="letters.html#canonical">Canonical Ordering →</a></li>
     </ol>
 
@@ -144,7 +138,7 @@
         <tr><td>Load a POJ font on a website</td><td>Self-host the full font (or subset with all POJ codepoints and <code>ccmp/mark/mkmk</code> intact). Google Fonts’ <code>unicode-range</code> slices strip POJ marks from TASA Explorer and Source Sans 3. <a href="fonts.html#google-fonts">Google Fonts audit →</a></td></tr>
         <tr><td>Test any font quickly</td><td>Paste or inspect text in our <a href="choose.html#test">Live POJ Test Bench</a>, copying NFC, NFD, and reverse-order forms and toggling <code>letter-spacing</code>.</td></tr>
         <tr><td>Diagnose broken text or search misses</td><td>Check the symptom-by-symptom guide in <a href="problems.html">Troubleshooting &amp; Platforms</a>.</td></tr>
-        <tr><td>Add POJ &amp; KPL support to a font</td><td>Follow the full glyph, anchor, AFDKO/<code>feaLib</code> code, and QA recipe in <a href="makers.html">Font Maker’s Guide</a>.</td></tr>
+        <tr><td>Add POJ support to a font</td><td>Follow the full glyph, anchor, AFDKO/<code>feaLib</code> code, and QA recipe in <a href="makers.html">Font Maker’s Guide</a>.</td></tr>
         <tr><td>Browse Google Fonts coverage &amp; forks</td><td>Search all 1,471 shortlisted families and 989 forked repositories in <a href="catalog.html">Google Fonts Survey &amp; Forks</a>.</td></tr>
       </tbody>
     </table></div>
@@ -153,7 +147,7 @@
     <div class="card-grid">
       <a class="doc-card" href="letters.html">
         <h3>1. Unicode &amp; Encoding</h3>
-        <p>Full POJ &amp; KPL codepoint inventory, Unicode 17.0 precomposed matrix, ccc 230 vs 232 reordering, shaping engines, Soft_Dotted i/j, NFKC loss of ⁿ, legacy/PUA encodings, IVS ruby, and double hyphens.</p>
+        <p>Full POJ codepoint inventory, Unicode 17.0 precomposed matrix, ccc 230 vs 232 reordering, shaping engines, Soft_Dotted i/j, NFKC loss of ⁿ, legacy/PUA encodings, IVS ruby, and double hyphens.</p>
       </a>
       <a class="doc-card" href="fonts.html">
         <h3>2. How Fonts Implement POJ</h3>
@@ -173,11 +167,7 @@
       </a>
       <a class="doc-card" href="makers.html">
         <h3>6. Font Maker’s Guide</h3>
-        <p>Complete engineering recipe: glyphs &amp; <code>cmap</code>, anchors, copy-ready AFDKO/<code>feaLib</code> feature sketch, 8 OpenType rules, vertical metrics, CFF vs TTF, variable fonts, and testing commands.</p>
-      </a>
-      <a class="doc-card" href="tools.html">
-        <h3>7. Tools, Methodology &amp; Reviews</h3>
-        <p>Documentation for all 11 scripts in <code>tools/</code> (including the Swift CoreText probe), repository layout, open research questions, and verified corrections from the Gemini 4 peer reviews.</p>
+        <p>Complete engineering recipe: glyphs &amp; <code>cmap</code>, anchors, copy-ready AFDKO/<code>feaLib</code> feature sketch, 8 OpenType rules, vertical metrics, CFF vs TTF, variable fonts, and visual QA.</p>
       </a>
     </div>
 
@@ -185,7 +175,7 @@
     <div class="callout info">
       <span class="callout-title">About this research &amp; naming</span>
       <p>The 24-font audit was conducted in November 2026 based on the free font list maintained by <a href="https://oh.taigi.info/siataibun/jithe/">狗公會曉學台語 › 字體（font）</a>, cross-checked against the full <a href="https://github.com/google/fonts">google/fonts</a> catalog (commit <code>cc5661d</code>, 2026-11-19). Every shaping result is verified programmatically with HarfBuzz (<code>uharfbuzz</code>) and supplemented by macOS CoreText testing.</p>
-      <p>Throughout this documentation, we refer to the language as <strong>Taigi</strong> (台語), its Latin-script writing systems as <strong>Roman Orthography</strong>, the classic church-originated orthography as <strong>Pe̍h-ōe-jī (白話字, POJ)</strong>, and the Ministry of Education orthography as <strong>KPL (Kàu-io̍k Pō͘ Lô-má-jī)</strong>.</p>
+      <p>Throughout this documentation, we refer to the language as <strong>Taigi</strong> (台語), its Latin-script writing system as <strong>Roman Orthography</strong>, and the classic orthography as <strong>Pe̍h-ōe-jī (白話字, POJ)</strong>.</p>
     </div>
 
     <nav class="doc-pager" aria-label="Pagination">

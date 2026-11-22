@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Unicode 與編碼結構 — 白話字（POJ）字型技術文件</title>
-<meta name="description" content="台語白話字（POJ）與教育部羅馬字（KPL）完整 Unicode 編碼規格：組合附加符號、Unicode 17.0 預組字表、ccc 230/232 排序、整形引擎、Soft_Dotted i/j、NFKC 風險、舊式 PUA、IVS 注音與雙連字號。">
+<meta name="description" content="台語白話字（POJ）完整 Unicode 編碼規格：組合附加符號、Unicode 17.0 預組字表、ccc 230/232 排序、整形引擎、Soft_Dotted i/j、NFKC 風險、舊式 PUA、IVS 注音與雙連字號。">
 <link rel="stylesheet" href="../assets/site.css">
 <link rel="alternate" hreflang="en" href="../letters.html">
 </head>
@@ -61,20 +61,14 @@
         <li><a href="makers.html">字型開發者實作指南</a></li>
       </ul>
     </div>
-    <div class="sidebar-group">
-      <div class="sidebar-heading">參考資料</div>
-      <ul>
-        <li><a href="tools.html">檢測工具、方法與審查紀錄</a></li>
-      </ul>
-    </div>
   </aside>
 
   <main class="doc-main">
     <div class="breadcrumb"><a href="./">文件</a> › <span>核心原理</span> › <span>Unicode 與編碼結構</span></div>
-    <h1>POJ 與 KPL 的 Unicode 編碼結構</h1>
+    <h1>POJ 的 Unicode 編碼結構</h1>
     <p class="lead">英文字型基本上是一個按鍵對應一個字形；但台語<span class="poj">白話字（POJ）</span>大量由<strong>基礎字母＋一至兩個組合附加符號</strong>構成，而且大多數組合在 Unicode 中並沒有單一預組字碼。</p>
 
-    <h2 id="poj-vs-english">POJ 與一般英文字型的九大差異</h2>
+    <h2 id="poj-vs-english">POJ 與一般英文字型的八大差異</h2>
     <p>電腦中的每個字元都有專屬的 Unicode 編號：例如 <span class="poj">o</span> 是 <code>U+006F</code>，現成的預組字母 <span class="poj">ó</span> 是 <code>U+00F3</code>。對於沒有單一預組編號的字母，Unicode 會在基礎字母後面貼上不佔寬度的<em>組合附加符號</em>（combining marks）：</p>
 
     <div class="tiles" aria-label="o 加上右上圓點組成 o͘">
@@ -101,7 +95,7 @@
       <span class="result poj">ó͘</span>
     </div>
 
-    <p>要完整支援台語羅馬字正書法，字型必須同時處理以下九項排版需求：</p>
+    <p>要完整支援台語<span class="poj">白話字（POJ）</span>，字型必須同時處理以下八項排版需求：</p>
 
     <div class="table-wrap"><table>
       <thead><tr><th>需求項目</th><th>對字型的技術挑戰</th></tr></thead>
@@ -123,16 +117,12 @@
           <td>只有 <span class="poj">ḿ ń ǹ</span>（及大寫）有預組字元，且 <span class="poj">ḿ</span>（<code>U+1E3F</code>）與 <span class="poj">ǹ</span>（<code>U+01F9</code>）位於許多歐文字型會跳過的區塊，其餘全需靠組合符號構成。</td>
         </tr>
         <tr>
-          <td><strong><span class="poj">i</span> 加聲調</strong><br><span class="poj">í ì î ī ĭ i̍ i̋</span></td>
-          <td><code>i</code> 具有 Unicode <code>Soft_Dotted</code> 屬性：只要上方出現附加符號，原本的點就必須消失。預組的 <span class="poj">í</span> 已經去掉點，但 <code>i + U+030D</code> 與 <code>i + U+030B</code> 必須由字型自動替換成無點 <span class="poj">ı</span>。</td>
+          <td><strong><span class="poj">i</span> 加聲調</strong><br><span class="poj">í ì î ī ĭ i̍</span></td>
+          <td><code>i</code> 具有 Unicode <code>Soft_Dotted</code> 屬性：只要上方出現附加符號，原本的點就必須消失。預組的 <span class="poj">í</span> 已經去掉點，但 <code>i + U+030D</code> 必須由字型自動替換成無點 <span class="poj">ı</span>。</td>
         </tr>
         <tr>
           <td><strong>鼻化上標 <span class="poj">ⁿ</span></strong> <code>U+207F</code><br><span class="muted">SUPERSCRIPT LATIN SMALL LETTER N</span></td>
           <td>屬於修飾字母（<code>Lm</code>），不是組合附加符號。許多字型缺字；若誤用 NFKC 正規化會把它變成普通 <code>n</code>（<a href="#nasal">見下方</a>）。</td>
-        </tr>
-        <tr>
-          <td><strong>教育部羅馬字（KPL）</strong><br><span class="muted">同一群讀者、同一套字型</span></td>
-          <td>增加第九調雙銳音符 <code>U+030B</code>（僅 <span class="poj">ő ű</span> 預組）與保留第六調腔調使用的抑揚符 <code>U+030C</code>（<span class="poj">ǎ ě ǐ ǒ ǔ ň</span> 預組，<span class="poj">m̌</span> 無），並將 <span class="poj">o͘</span>/<span class="poj">ⁿ</span> 拼作 <code>oo</code>/<code>nn</code>。</td>
         </tr>
         <tr>
           <td><strong>連字號</strong> <code>-</code> 與 <code>--</code></td>
@@ -147,10 +137,10 @@
 
     <div class="callout warn">
       <span class="callout-title">測試時務必牢記的標調位置規則</span>
-      <p>韻化 <strong>ng</strong> 的調號標在 <strong>n</strong> 上面：<span class="poj">n̍g</span>、<span class="poj">n̂g</span>，絕不是 <code>ng̍</code>。在 KPL 中，<code>oo</code> 的調號標在第一個 <code>o</code> 上（<span class="poj">óo</span>），鼻化 <code>nn</code> 的調號則標在前面的母音上（<span class="poj">ánn</span>）。</p>
+      <p>韻化 <strong>ng</strong> 的調號標在 <strong>n</strong> 上面：<span class="poj">n̍g</span>、<span class="poj">n̂g</span>，絕不是 <code>ng̍</code>。</p>
     </div>
 
-    <h2 id="codepoints">POJ 與 KPL 核心字元清單</h2>
+    <h2 id="codepoints">POJ 核心字元清單</h2>
     <p>一般歐文字型最常缺少以下三個 POJ 關鍵字碼：</p>
     <div class="table-wrap"><table>
       <thead><tr><th>字碼</th><th>字元</th><th>Unicode 名稱</th><th>POJ 用途</th></tr></thead>
@@ -161,7 +151,7 @@
       </tbody>
     </table></div>
 
-    <p>POJ 與 KPL 使用的所有組合聲調符號：</p>
+    <p>POJ 使用的所有組合聲調符號：</p>
     <div class="table-wrap"><table>
       <thead><tr><th>聲調</th><th>字碼</th><th>符號</th><th>範例</th><th>Unicode 預組字元狀況</th></tr></thead>
       <tbody>
@@ -169,11 +159,9 @@
         <tr><td>第 2 調</td><td><code>U+0301</code></td><td class="poj big center">◌́</td><td class="poj">kún 滾</td><td>母音（<span class="poj">á é í ó ú</span>）與 <span class="poj">ḿ ń</span> 有預組</td></tr>
         <tr><td>第 3 調</td><td><code>U+0300</code></td><td class="poj big center">◌̀</td><td class="poj">kùn 棍</td><td>母音與 <span class="poj">ǹ</span> 有預組；<span class="poj">m̀</span> 需組合</td></tr>
         <tr><td>第 5 調</td><td><code>U+0302</code></td><td class="poj big center">◌̂</td><td class="poj">kûn 裙</td><td>僅母音有預組；<span class="poj">m̂ n̂</span> 需組合</td></tr>
-        <tr><td>第 6 調（KPL 部分腔調）</td><td><code>U+030C</code></td><td class="poj big center">◌̌</td><td class="poj">ǎ, ň</td><td>母音與 <span class="poj">ň</span> 有預組；<span class="poj">m̌</span> 需組合</td></tr>
         <tr><td>第 7 調</td><td><code>U+0304</code></td><td class="poj big center">◌̄</td><td class="poj">kūn 郡</td><td>僅母音有預組；<span class="poj">m̄ n̄</span> 需組合</td></tr>
         <tr><td>第 8 調</td><td><code>U+030D</code></td><td class="poj big center">◌̍</td><td class="poj">ku̍t 滑</td><td><strong>完全沒有</strong>預組字元，一律靠組合</td></tr>
-        <tr><td>第 9 調（POJ）</td><td><code>U+0306</code></td><td class="poj big center">◌̆</td><td class="poj">ŏ͘</td><td>僅母音有預組（<span class="poj">ă ĕ ĭ ŏ ŭ</span>）</td></tr>
-        <tr><td>第 9 調（KPL）</td><td><code>U+030B</code></td><td class="poj big center">◌̋</td><td class="poj">ő, i̋</td><td>僅 <span class="poj">ő ű</span> 有預組；其餘需組合</td></tr>
+        <tr><td>第 9 調（部分腔調）</td><td><code>U+0306</code></td><td class="poj big center">◌̆</td><td class="poj">ŏ͘</td><td>僅母音有預組（<span class="poj">ă ĕ ĭ ŏ ŭ</span>）</td></tr>
       </tbody>
     </table></div>
 
@@ -186,18 +174,15 @@
           <th class="center">´ (2)</th>
           <th class="center">` (3)</th>
           <th class="center">^ (5)</th>
-          <th class="center">ˇ (6, KPL)</th>
           <th class="center">¯ (7)</th>
           <th class="center">&nbsp;̍ (8)</th>
-          <th class="center">˘ (9, POJ)</th>
-          <th class="center">&nbsp;̋ (9, KPL)</th>
+          <th class="center">˘ (9)</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td><code>a e i</code></td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td><td class="center">–</td><td class="center">✓</td><td class="center">–</td></tr>
-        <tr><td><code>o u</code></td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td><td class="center">–</td><td class="center">✓</td><td class="center">✓ <span class="poj">ő ű</span></td></tr>
-        <tr><td><code>m</code></td><td class="center">✓ <span class="poj">ḿ</span></td><td class="center">–</td><td class="center">–</td><td class="center">–</td><td class="center">–</td><td class="center">–</td><td class="center">–</td><td class="center">–</td></tr>
-        <tr><td><code>n</code></td><td class="center">✓ <span class="poj">ń</span></td><td class="center">✓ <span class="poj">ǹ</span></td><td class="center">–</td><td class="center">✓ <span class="poj">ň</span></td><td class="center">–</td><td class="center">–</td><td class="center">–</td><td class="center">–</td></tr>
+        <tr><td><code>a e i o u</code></td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td><td class="center">–</td><td class="center">✓</td></tr>
+        <tr><td><code>m</code></td><td class="center">✓ <span class="poj">ḿ</span></td><td class="center">–</td><td class="center">–</td><td class="center">–</td><td class="center">–</td><td class="center">–</td></tr>
+        <tr><td><code>n</code></td><td class="center">✓ <span class="poj">ń</span></td><td class="center">✓ <span class="poj">ǹ</span></td><td class="center">–</td><td class="center">–</td><td class="center">–</td><td class="center">–</td></tr>
       </tbody>
     </table></div>
 
@@ -237,7 +222,7 @@
     <div class="table-wrap"><table>
       <thead><tr><th>組合附加符號</th><th>標準組合類別（ccc）</th></tr></thead>
       <tbody>
-        <tr><td><code>U+0300</code> <code>0301</code> <code>0302</code> <code>0304</code> <code>0306</code> <code>030B</code> <code>030C</code> <strong><code>030D</code></strong></td><td><strong>230</strong>（上方 Above）</td></tr>
+        <tr><td><code>U+0300</code> <code>0301</code> <code>0302</code> <code>0304</code> <code>0306</code> <strong><code>030D</code></strong></td><td><strong>230</strong>（上方 Above）</td></tr>
         <tr><td><strong><code>U+0358</code></strong> 右上圓點</td><td><strong>232</strong>（右上方 Above Right）</td></tr>
       </tbody>
     </table></div>
@@ -245,7 +230,7 @@
     <p>Unicode 正規化會依 <code>ccc</code> 由小到大排列相鄰的組合附加符號，因此 <code>o + U+0358 + U+0301</code> 會重排成 <code>o + U+0301 + U+0358</code>，NFC 再將其合成 <code>ó + U+0358</code>。關鍵影響如下：</p>
     <ul>
       <li>正規化之後，<strong>聲調符號永遠排在右上圓點之前</strong>。</li>
-      <li>第 2、3、5、6、7、9 調的 NFC 形式都是<strong>「預組帶調母音＋<code>U+0358</code>」</strong>。字型必須能將 <code>U+0358</code> 掛在 <span class="poj">ó ò ô ǒ ō ŏ ő Ó Ò Ô Ǒ Ō Ŏ Ő</span> 上，而不只是純 <span class="poj">o O</span>。</li>
+      <li>第 2、3、5、7、9 調的 NFC 形式都是<strong>「預組帶調母音＋<code>U+0358</code>」</strong>。字型必須能將 <code>U+0358</code> 掛在 <span class="poj">ó ò ô ō ŏ Ó Ò Ô Ō Ŏ</span> 上，而不只是純 <span class="poj">o O</span>。</li>
       <li>第八調沒有預組母音，因此 <span class="poj">o̍͘</span> 的 NFC 形式仍保持三個字碼：<code>o + U+030D + U+0358</code>。</li>
       <li><strong>HarfBuzz</strong> 會在執行 GSUB <strong>之前</strong>先依 <code>ccc</code> 重排並透過 <code>cmap</code> 重新組合。本研究 24 款字型全數驗證：<code>o 0358 0301</code>、<code>o 0301 0358</code> 與 <code>ó 0358</code> 在 HarfBuzz 中產生的字形結果完全相同。因此僅針對非正規順序寫的連字規則在 HarfBuzz 永遠不會觸發——但為了相容不預先正規化的其他整形引擎，仍須一併保留。</li>
       <li>若文件混雜多種形式，搜尋 <span class="poj">hō͘</span> 時可能會漏掉其他編碼的項目；將文本統一轉為 <strong>NFC</strong> 即可解決。</li>
@@ -271,7 +256,7 @@
     <h3 id="coretext-directwrite">CoreText（macOS / iOS / Safari）與 DirectWrite（Windows / Word）</h3>
     <div class="callout warn">
       <span class="callout-title">驗證狀態說明</span>
-      <p>macOS CoreText 已以 <code>tools/poj_coretext.swift</code> 進行初步實測（見<a href="problems.html#platforms">跨平台差異</a>）；Windows DirectWrite <strong>尚未</strong>直接實測，標註<em>（審查意見，尚未實測）</em>者來自模型同儕審查。</p>
+      <p>macOS CoreText 已進行初步實測（見<a href="problems.html#platforms">跨平台差異</a>）；Windows DirectWrite <strong>尚未</strong>直接實測，標註<em>（尚未實測）</em>者依據平台規格文件整理。</p>
     </div>
     <ul>
       <li>兩者都不會像 HarfBuzz 那樣用 <code>ccc</code>／外框盒執行備援定位；無錨點符號會畫在字形原始座標上<em>（DirectWrite 尚未實測；CoreText 已觀察到此現象）</em>。</li>
@@ -282,7 +267,7 @@
     <p>正因如此，一套可靠的 POJ 字型必須在 <code>cmap</code> 完整收錄<a href="#precomposed">預組字表</a>中的所有字元，並在 GSUB <code>ccmp</code> 同時涵蓋 NFC、NFD 與反向順序。</p>
 
     <h2 id="dotted-i"><code>Soft_Dotted</code> 的 <span class="poj">i</span> 與 <span class="poj">j</span>（無點 <span class="poj">ı</span> 替換）</h2>
-    <p>當上方附加符號落在 <span class="poj">i</span> 上時，原本的點必須消失，就像 <span class="poj">í</span> 一樣。預組字元 <span class="poj">í ì î ī ĭ</span> 本身已去點，但 <code>i + U+030D</code>（<span class="poj">i̍</span>）與 <code>i + U+030B</code>（<span class="poj">i̋</span>）永遠是組合序列，必須由字型在 <code>ccmp</code> 執行 <code>i → dotlessi</code>（<code>U+0131</code>）與 <code>j → uni0237</code>（<code>U+0237</code>）。</p>
+    <p>當上方附加符號落在 <span class="poj">i</span> 上時，原本的點必須消失，就像 <span class="poj">í</span> 一樣。預組字元 <span class="poj">í ì î ī ĭ</span> 本身已去點，但 <code>i + U+030D</code>（<span class="poj">i̍</span>）永遠是組合序列，必須由字型在 <code>ccmp</code> 執行 <code>i → dotlessi</code>（<code>U+0131</code>）與 <code>j → uni0237</code>（<code>U+0237</code>）。</p>
     <div class="examples">
       <div class="ex good"><div class="label"><span class="tag good">正確</span><b><span class="poj">chi̍t</span></b>（一）於 Lesson One：<code>U+030D</code> 之前自動替換為無點 <span class="poj">ı</span></div>
         <img src="../assets/img/i8-good.svg" alt="Lesson One 中無點 i 的 chi̍t"></div>
@@ -308,19 +293,18 @@
         <tr><td>中圓點／間距點（<code>U+00B7</code>、<code>U+02D9</code>、<code>U+2022</code>、<code>U+30FB</code>）</td><td class="poj big">o·</td><td>屬於標點，會把單字拆斷並破壞搜尋；應於輸入或前處理時轉為 <code>U+0358</code>。</td></tr>
         <tr><td>越南語帶角 o（<code>U+01A1</code> ơ, ớ, ờ…）</td><td class="poj big">ơ</td><td>完全不同的字母，無法與 <span class="poj">o͘</span> 互通搜尋；應轉為 <code>o + U+0358</code>。</td></tr>
         <tr><td>上圓點 <code>U+0307</code> 代 o͘ 或第八調；<code>U+02C8</code> <code>ˈ</code> 或撇號代第八調</td><td class="poj big">ȯ, aˈ</td><td>語意錯誤；應轉為標準 POJ 組合符號。</td></tr>
-        <tr><td>ASCII／打字機／KPL 拼法</td><td class="mono">oo, ou, o', nn, N</td><td><code>oo</code>/<code>nn</code> 為標準 KPL 拼法；其餘 ASCII 替代寫法若要轉為 POJ 需經轉換器處理。</td></tr>
+        <tr><td>ASCII／打字機拼法</td><td class="mono">oo, ou, o', nn, N</td><td>純 ASCII 權宜寫法；建議轉成標準 POJ 符號以利閱讀與搜尋。</td></tr>
         <tr><td><strong>私用區（PUA）</strong>與舊 8-bit 編碼</td><td><code>U+E400–E435</code>（aiongg／NunitoPOJ）；早期 Windows-1252／MacRoman <code>0x80–0xFF</code></td><td>僅在特定單一字型中有效，換字型即成豆腐字或亂碼。新文本切勿使用；舊字型可視需要保留以讀取歷史文件。</td></tr>
-        <tr><td>數字調號（TLPA、POJ 數字式）</td><td class="mono">peh8-oe7-ji7</td><td>輸入速記格式，交由輸入法或轉換程式轉為 Unicode 調號。</td></tr>
+        <tr><td>數字調號（POJ 數字式）</td><td class="mono">peh8-oe7-ji7</td><td>輸入速記格式，交由輸入法或轉換程式轉為 Unicode 調號。</td></tr>
       </tbody>
     </table></div>
-    <p class="legend">註：越南語帶角 o、<code>U+0307</code>/<code>U+02C8</code> 與額外 8-bit/PUA 方案係由模型同儕審查補充，其在 ChhoeTaigi 等真實語料庫中的實際比例仍列為<a href="tools.html#open-questions">待驗證問題</a>。</p>
 
     <h2 id="ivs">異體字選擇器序列（IVS）漢羅注音字型</h2>
-    <p>ButTaiwan 開發的 <a href="https://github.com/ButTaiwan/taigivs"><strong>字咍 taigivs</strong></a> 系列字型（TaigiHuninn、TaigiIansui、TaigiKaiStd、TaigiGenRyuMin 等；字型採 OFL 1.1、建置腳本採 Apache-2.0），透過 OpenType <code>cmap</code> format 14 表將台語注音直接畫進漢字字形中：</p>
+    <p>ButTaiwan 開發的 <a href="https://github.com/ButTaiwan/taigivs"><strong>字咍 taigivs</strong></a> 系列字型（TaigiHuninn、TaigiIansui、TaigiKaiStd、TaigiGenRyuMin 等；字型採 OFL 1.1），透過 OpenType <code>cmap</code> format 14 表將台語注音直接畫進漢字字形中：</p>
     <ul>
       <li>每個漢字後方接上異體字選擇器（<code>U+E0100…</code>），即對應到帶有特定台語讀音的字形——每款字型包含 <strong>8,021 筆 IVS 對應</strong>。</li>
-      <li><strong>8 種變體</strong>（依字型 <code>name</code> 表）：<code>POJ</code>（白話字）、<code>TL</code>（KPL）、<code>HI</code>（方音符號）、<code>KN</code>（台語假名），以及雙注音組合 <code>POJHI</code>、<code>POJKN</code>、<code>TLHI</code>、<code>TLKN</code>。</li>
-      <li><strong>僅使用 IVS、不含 GSUB 規則：</strong>只要切換字型檔，同一份純文字就能切換不同羅馬字正書法或音標系統。</li>
+      <li>提供 <code>POJ</code>（白話字）、<code>HI</code>（方音符號）、<code>KN</code>（台語假名），以及雙注音組合 <code>POJHI</code>、<code>POJKN</code>。</li>
+      <li><strong>僅使用 IVS、不含 GSUB 規則：</strong>只要切換字型檔，同一份純文字就能切換不同注音系統。</li>
       <li>這是在不使用 HTML <code>&lt;ruby&gt;</code> 的情況下，唯一能於純文字中呈現漢字上方 POJ 注音的方法，與歐文區的 POJ 支援屬於兩條不同路線。</li>
       <li><strong>注意事項：</strong><code>taigivs</code> 字型的歐文區沒有 GPOS <code>mark</code> 表也沒有無點 i 替換（<span class="poj">i̍</span> 會留點），因此長篇純 POJ 文章會仰賴 HarfBuzz 備援。此外，網頁子集工具與 PDF 轉檔工具經常會把 <code>cmap</code> format 14 或異體字選擇器刪掉。</li>
     </ul>

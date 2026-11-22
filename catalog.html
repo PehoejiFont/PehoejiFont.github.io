@@ -61,12 +61,6 @@
         <li><a href="makers.html">Font Maker’s Guide</a></li>
       </ul>
     </div>
-    <div class="sidebar-group">
-      <div class="sidebar-heading">Reference</div>
-      <ul>
-        <li><a href="tools.html">Tools, Methodology &amp; Reviews</a></li>
-      </ul>
-    </div>
   </aside>
 
   <main class="doc-main">
@@ -122,7 +116,7 @@
     <h3 id="ready-55">The 55 shortlisted families that already map POJ characters</h3>
     <div class="callout warn">
       <span class="callout-title">Cmap check only — verify visually!</span>
-      <p>This automated scan only checks whether each font’s <code>cmap</code> maps the codepoints. It does <strong>not</strong> verify anchor placement, dotless <span class="poj">i̍</span>, or Google Fonts web slice delivery — always inspect visually with the <a href="choose.html#test">Test Bench</a> and <code>tools/poj_shape_test.py</code>.</p>
+      <p>This automated scan only checks whether each font’s <code>cmap</code> maps the codepoints. It does <strong>not</strong> verify anchor placement, dotless <span class="poj">i̍</span>, or Google Fonts web slice delivery — always inspect visually with the <a href="choose.html#test">Test Bench</a>.</p>
     </div>
     <p class="legend">Adobe Blank, Agbalumo, Agu Display, Arimo, Briem Hand, Cactus Classical Serif, Cardo, Chiron Hei HK, Chiron Sung HK, Chocolate Classical Sans, Cormorant, Cormorant Garamond, Cormorant Infant, Cormorant SC, Cormorant Unicase, Cousine, Danfo, Elms Sans, Freeman, Gothic A1, Great Vibes, Huninn, Iansui, Inter Tight, Iosevka Charon, Iosevka Charon Mono, Jaro, LXGW WenKai Mono TC, LXGW WenKai TC, Libertinus Math, Libertinus Mono, Libertinus Sans, Libertinus Serif, Libertinus Serif Display, M PLUS 1p, Montserrat, Montserrat Underline, Noto Sans, Noto Sans Display, Noto Sans Mono, Noto Serif, Noto Serif Display, Oi, Ojuju, Playfair, Sankofa Display, Savate, TASA Explorer, TASA Orbiter, Tac One, Tiny5, Tiny5 Duo, WDXL Lubrifont JP N, WDXL Lubrifont SC, WDXL Lubrifont TC.</p>
 
@@ -187,7 +181,7 @@
         </ul>
       </li>
       <li><strong>Add <code>mark</code> and <code>mkmk</code> anchors</strong> (plus <code>ccmp</code> dotless-i and optional precomposed glyphs) so marks attach cleanly on <code>a e i o u m n</code> (upper and lower case) and every toned <code>o</code>. See the <a href="makers.html">Font Maker’s Guide</a>.</li>
-      <li><strong>Build with the project’s native build pipeline</strong> and validate with <a href="https://github.com/fonttools/fontbakery">fontbakery</a> plus our <a href="tools.html">POJ audit &amp; specimen tools</a>.</li>
+      <li><strong>Build with the project’s native build pipeline</strong> and validate the rendered POJ syllables across browsers and platforms.</li>
       <li><strong>Open an upstream pull request.</strong> Once the upstream project cuts a release, Google Fonts picks up the new version and the family keeps its original name.</li>
     </ol>
 

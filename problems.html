@@ -61,12 +61,6 @@
         <li><a href="makers.html">Font Maker’s Guide</a></li>
       </ul>
     </div>
-    <div class="sidebar-group">
-      <div class="sidebar-heading">Reference</div>
-      <ul>
-        <li><a href="tools.html">Tools, Methodology &amp; Reviews</a></li>
-      </ul>
-    </div>
   </aside>
 
   <main class="doc-main">
@@ -91,11 +85,11 @@
     <details open>
       <summary>3. One letter in a word looks like a different typeface</summary>
       <p><strong>Cause:</strong> The font lacks that specific precomposed codepoint (commonly <span class="poj">ḿ</span> <code>U+1E3F</code>, <span class="poj">ǹ</span> <code>U+01F9</code>, <span class="poj">ŏ</span>, <code>U+0358</code>, or <code>U+030D</code>), so the OS or browser silently borrows it from a system fallback font (for instance, on macOS, EB Garamond borrows <code>U+0358</code> from Helvetica).</p>
-      <p><strong>Fix:</strong> Choose a font that maps the full POJ + KPL precomposed set (<a href="choose.html#test">verify in the Test Bench</a>).</p>
+      <p><strong>Fix:</strong> Choose a font that maps the full POJ precomposed set (<a href="choose.html#test">verify in the Test Bench</a>).</p>
     </details>
 
     <details>
-      <summary>4. A dot stays underneath the tone line on <span class="poj">i̍</span> or <span class="poj">i̋</span></summary>
+      <summary>4. A dot stays underneath the tone line on <span class="poj">i̍</span></summary>
       <p><strong>Cause:</strong> The font fails to implement the <code>Soft_Dotted</code> substitution (<code>i → dotlessi</code> in <code>ccmp</code> before above-marks; <a href="letters.html#dotted-i">details</a>). Observed in 字咍 Taigi IVS fonts, EB Garamond, Helvetica, Geneva, and Menlo.</p>
       <p><strong>Fix:</strong> Switch fonts. <strong>Never type dotless <span class="poj">ı</span> (<code>U+0131</code>) manually</strong> in running text — it breaks spelling and search matching.</p>
     </details>
@@ -127,7 +121,7 @@
     <details>
       <summary>9. POJ looks right locally, but breaks on my website</summary>
       <p><strong>Cause:</strong> Loading the font via Google Fonts CSS API serves <code>unicode-range</code> subsets that drop <code>U+0358</code>, <code>U+030D</code>, and <code>U+207F</code> for families like TASA Explorer and Source Sans 3 (<a href="fonts.html#google-fonts">verified audit</a>). Aggressive local subsetters (<code>pyftsubset</code>) can also strip <code>ccmp</code>/<code>mark</code> or <code>cmap</code> format 14.</p>
-      <p><strong>Fix:</strong> Self-host the full font file, or subset explicitly keeping all POJ codepoints and <code>--layout-features='*'</code> (see <code>tools/build_site_fonts.sh</code>).</p>
+      <p><strong>Fix:</strong> Self-host the full font file, or subset explicitly keeping all POJ codepoints and <code>--layout-features='*'</code>.</p>
     </details>
 
     <details>
@@ -157,7 +151,7 @@
         <tr>
           <td><strong>CoreText</strong></td>
           <td>macOS / iOS native apps, Safari, Pages</td>
-          <td><span class="tag warn">Preliminary tests</span><br>(<code>tools/poj_coretext.swift</code>)</td>
+          <td><span class="tag warn">Preliminary tests</span></td>
           <td><strong>Lesson One, jf open 粉圓, 芫荽 Iansui, I.Ming, GenYo Min, and WD-XL Lubrifont</strong> produced identical glyph runs to HarfBuzz across all test clusters. Fonts lacking <code>mark</code> (Helvetica, Menlo, 字咍 Taigi fonts) differ markedly because CoreText does not use HarfBuzz fallback and Apple system fonts may use AAT (<code>morx</code>/<code>kerx</code>).</td>
         </tr>
         <tr>

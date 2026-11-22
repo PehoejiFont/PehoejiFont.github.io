@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>字型開發者實作指南 — 白話字（POJ）字型技術文件</title>
-<meta name="description" content="為字型新增台語白話字（POJ）與教育部羅馬字（KPL）支援的完整工程配方：字形與 cmap、錨點、AFDKO/feaLib 程式碼範本、8 條 OpenType 規則、垂直度量與自動化測試。">
+<meta name="description" content="為字型新增台語白話字（POJ）支援的完整工程配方：字形與 cmap、錨點、AFDKO/feaLib 程式碼範本、8 條 OpenType 規則、垂直度量與目視 QA 檢查。">
 <link rel="stylesheet" href="../assets/site.css">
 <link rel="alternate" hreflang="en" href="../makers.html">
 </head>
@@ -61,12 +61,6 @@
         <li><a href="makers.html" aria-current="page">字型開發者實作指南</a></li>
       </ul>
     </div>
-    <div class="sidebar-group">
-      <div class="sidebar-heading">參考資料</div>
-      <ul>
-        <li><a href="tools.html">檢測工具、方法與審查紀錄</a></li>
-      </ul>
-    </div>
   </aside>
 
   <main class="doc-main">
@@ -81,21 +75,19 @@
       <tbody>
         <tr><td><code>uni0358</code>（<span class="poj">◌͘</span>）</td><td><code>U+0358</code></td><td>沿用 <code>U+0307</code> 的圓點。設為 GDEF 類別 3 零寬附加符號（或明確採用 SIL 風格的 GDEF 類別 1 佔位基礎字形）。</td></tr>
         <tr><td><code>uni030D</code>（<span class="poj">◌̍</span>）</td><td><code>U+030D</code></td><td>短豎線，垂直高度帶應與 <code>U+0301</code>（銳音符）一致。</td></tr>
-        <tr><td><code>uni030B</code>（<span class="poj">◌̋</span>）</td><td><code>U+030B</code></td><td>雙銳音符（KPL 第九調），一般歐文字型多已內建。</td></tr>
-        <tr><td><code>uni030C</code>（<span class="poj">◌̌</span>）</td><td><code>U+030C</code></td><td>抑揚符（KPL 保留第六調之腔調用），一般歐文字型多已內建。</td></tr>
         <tr><td><code>uni207F</code>（<span class="poj">ⁿ</span>）</td><td><code>U+207F</code></td><td>上標 <code>n</code>（約縮放 55–65% 並補償筆粗）；若字型已有 <code>sups</code> 可直接重用 <code>n.sups</code>。</td></tr>
         <tr><td><code>uni1D3A</code>（<span class="poj">ᴺ</span>）</td><td><code>U+1D3A</code></td><td>上標大寫 <code>N</code>，供全大寫鼻化標題（<span class="poj">SIᴺ</span>）使用。</td></tr>
-        <tr><td><code>dotlessi</code>、<code>uni0237</code></td><td><code>U+0131</code>、<code>U+0237</code></td><td>無點 <code>ı</code> 與無點 <code>ȷ</code>，供上方附加符號前執行 <code>Soft_Dotted</code> 替換（<span class="poj">i̍</span>、<span class="poj">i̋</span>）。</td></tr>
+        <tr><td><code>dotlessi</code>、<code>uni0237</code></td><td><code>U+0131</code>、<code>U+0237</code></td><td>無點 <code>ı</code> 與無點 <code>ȷ</code>，供上方附加符號前執行 <code>Soft_Dotted</code> 替換（<span class="poj">i̍</span>）。</td></tr>
         <tr><td><code>*.case</code> 調號</td><td>—（不編碼）</td><td>大寫專用的壓扁／抬高調號，請在 <code>ccmp</code> 以上下文觸發（切勿只寫在 <code>case</code>）。</td></tr>
-        <tr><td>預組複合字元</td><td><span class="poj">ḿ Ḿ ǹ Ǹ ń Ń ň Ň ŏ Ŏ ĭ Ĭ ă Ă ĕ Ĕ ŭ Ŭ ā ē ī ō ū Ā Ē Ī Ō Ū ő Ő ű Ű ǎ ě ǐ ǒ ǔ Ǎ Ě Ǐ Ǒ Ǔ</span></td><td>完整收錄 Unicode 17.0 所有 POJ 與 KPL 預組字母，避免不會自動分解的引擎（CoreText／DirectWrite）觸發系統補字。</td></tr>
+        <tr><td>預組複合字元</td><td><span class="poj">ḿ Ḿ ǹ Ǹ ń Ń ŏ Ŏ ĭ Ĭ ă Ă ĕ Ĕ ŭ Ŭ ā ē ī ō ū Ā Ē Ī Ō Ū</span></td><td>完整收錄 Unicode 17.0 所有 POJ 預組字母，避免不會自動分解的引擎（CoreText／DirectWrite）觸發系統補字。</td></tr>
       </tbody>
     </table></div>
 
     <h2 id="anchors">2. 錨點配置（<code>mark</code> 與 <code>mkmk</code>）</h2>
     <ul>
       <li><strong><code>top</code> 錨點：</strong>設於所有可標聲調的基礎字母：<code>a e dotlessi o u m n</code>（以及 <code>j</code>／<code>uni0237</code>）、全部大寫字母，以及仍可能加標聲調的 <code>ccmp</code> 連字（如 <code>o_uni0358</code>）。</li>
-      <li><strong><code>topright</code> 錨點：</strong>設於 <code>o O</code> <strong>以及每一個預組帶調 o</strong>：<span class="poj">ó ò ô ǒ ō ŏ ő</span> 與 <span class="poj">Ó Ò Ô Ǒ Ō Ŏ Ő</span>。因 NFC 送入的是 <code>ó + U+0358</code>，只要漏掉任一個帶調基礎字，圓點就會掉到 <code>(0, 0)</code>。</li>
-      <li><strong>寬調號與粗體字重：</strong>務必檢查 Bold／Black 字重下的 <span class="poj">ō͘ ô͘ ŏ͘ ő͘</span>；必要時微調 <code>topright</code> 往右下偏移，或在預繪連字中略微收窄調號（仿越南文 <code>ố</code>／<code>ớ</code>）。</li>
+      <li><strong><code>topright</code> 錨點：</strong>設於 <code>o O</code> <strong>以及每一個預組帶調 o</strong>：<span class="poj">ó ò ô ō ŏ</span> 與 <span class="poj">Ó Ò Ô Ō Ŏ</span>。因 NFC 送入的是 <code>ó + U+0358</code>，只要漏掉任一個帶調基礎字，圓點就會掉到 <code>(0, 0)</code>。</li>
+      <li><strong>寬調號與粗體字重：</strong>務必檢查 Bold／Black 字重下的 <span class="poj">ō͘ ô͘ ŏ͘</span>；必要時微調 <code>topright</code> 往右下偏移，或在預繪連字中略微收窄調號（仿越南文 <code>ố</code>／<code>ớ</code>）。</li>
       <li><strong>直接掛在基礎字上，非 <code>mkmk</code>：</strong><code>U+0358</code> 必須透過 <code>mark</code>（<code>topright</code>／<code>_topright</code>）掛在<strong>基礎字母</strong>上，切勿用 <code>mkmk</code> 疊在聲調符號上方。</li>
       <li><strong>附加符號端錨點：</strong>各組合聲調設 <code>_top</code>、<code>uni0358</code> 設 <code>_topright</code>，並在聲調上加設 <code>top</code> 供 <code>mkmk</code> 堆疊。</li>
       <li><strong>韻化 <code>ng</code>：</strong>聲調落在 <code>n</code> 上（<span class="poj">n̍g</span>、<span class="poj">n̂g</span>），<code>g</code> 不需額外錨點。</li>
@@ -114,15 +106,15 @@
 languagesystem latn dflt;
 # 請保留原字型既有的 languagesystem（如 latn TRK、hani 等）並於其下註冊 lookups
 
-@TopMarks = [uni0300 uni0301 uni0302 uni0303 uni0304 uni0306 uni0307 uni0308 uni030A uni030B uni030C uni030D];
+@TopMarks = [uni0300 uni0301 uni0302 uni0303 uni0304 uni0306 uni0307 uni0308 uni030A uni030D];
 @AllMarks = [@TopMarks uni0358 uni0323];
 
-markClass [uni0300 uni0301 uni0302 uni0304 uni0306 uni030B uni030C uni030D] &lt;anchor 0 500&gt; @MC_top;
+markClass [uni0300 uni0301 uni0302 uni0304 uni0306 uni030D] &lt;anchor 0 500&gt; @MC_top;
 markClass uni0358 &lt;anchor 0 450&gt; @MC_topright;
 
 table GDEF {
     GlyphClassDef
-        [a e i o u m n dotlessi uni0237 oacute ograve ocircumflex omacron obreve ohungarumlaut ocaron
+        [a e i o u m n dotlessi uni0237 oacute ograve ocircumflex omacron obreve
          o_uni0358 oacute_uni0358 o_uni030D_uni0358],   # 基礎字形（預繪連字成品須為類別 1 base，非類別 2）
         ,                                               # ligatures
         [@AllMarks],                                    # marks
@@ -145,7 +137,7 @@ lookup POJLigatures {
     sub o uni0358 uni030D by o_uni030D_uni0358;
     sub oacute uni0358 by oacute_uni0358;         # NFC
     sub o uni0358 by o_uni0358;                   # 2 字形規則排在最後
-    # ... 依序補齊 ò ô ǒ ō ŏ ő 與所有大寫
+    # ... 依序補齊 ò ô ō ŏ 與所有大寫
 } POJLigatures;
 
 feature ccmp {
@@ -161,7 +153,7 @@ lookup MarkTop {
 } MarkTop;
 
 lookup MarkTopRight {
-    pos base [o oacute ograve ocircumflex ocaron omacron obreve ohungarumlaut] &lt;anchor 470 420&gt; mark @MC_topright;
+    pos base [o oacute ograve ocircumflex omacron obreve] &lt;anchor 470 420&gt; mark @MC_topright;
     # ... 大寫字母
 } MarkTopRight;
 
@@ -171,7 +163,7 @@ feature mark {
 } mark;
 
 feature mkmk {
-    pos mark [uni0300 uni0301 uni0302 uni0304 uni0306 uni030B uni030C uni030D] &lt;anchor 0 700&gt; mark @MC_top;
+    pos mark [uni0300 uni0301 uni0302 uni0304 uni0306 uni030D] &lt;anchor 0 700&gt; mark @MC_top;
 } mkmk;</code></pre>
     </div>
 
@@ -189,7 +181,7 @@ feature mkmk {
 
     <h2 id="engineering-checks">5. 其他進階工程檢查</h2>
     <ul>
-      <li><strong>垂直度量（Vertical Metrics）：</strong><span class="poj">O̍͘</span>、<span class="poj">Ő</span>、<span class="poj">M̍</span>、<span class="poj">Ó͘</span> 比一般西歐重音更高；請適度拉高 <code>OS/2.usWinAscent</code> 與 <code>hhea.ascender</code>，避免在 Windows 或較緊的 CSS 行高被截切。</li>
+      <li><strong>垂直度量（Vertical Metrics）：</strong><span class="poj">O̍͘</span>、<span class="poj">M̍</span>、<span class="poj">Ó͘</span> 比一般西歐重音更高；請適度拉高 <code>OS/2.usWinAscent</code> 與 <code>hhea.ascender</code>，避免在 Windows 或較緊的 CSS 行高被截切。</li>
       <li><strong><span class="poj">o͘</span> 後方的碰撞避讓：</strong>零寬圓點容易撞到 <span class="poj">o͘h</span>、<span class="poj">o͘k</span>、<span class="poj">o͘l</span>、<span class="poj">o͘t</span>、<span class="poj">o͘ⁿ</span>、<span class="poj">o͘"</span>、<span class="poj">o͘’</span> 等高筆畫字元；請為預繪 <span class="poj">o͘</span> 字形增加些許右側留白，或在 <code>uni0358</code> 後加入上下文微調字距。</li>
       <li><strong>小型大寫（<code>smcp</code> / <code>c2sc</code>）：</strong>請提供 <code>.sc</code> 版預繪連字，或妥善安排 <code>ccmp</code> 與 <code>smcp</code> 順序。</li>
       <li><strong>CFF / CFF2 與 TrueType（<code>glyf</code>）：</strong>TrueType 複合組件（composites）讓方式 B 幾乎不增加檔體大小；CFF／CFF2 沒有組件機制，每個預繪連字在每個 Master 都會複製一份輪廓。此外請細心微調細長 <code>U+030D</code> 的 hinting，避免小字號消失。</li>
@@ -197,33 +189,12 @@ feature mkmk {
       <li><strong>雙連字號（<code>--</code>）：</strong>確認無任何 <code>liga</code>／<code>calt</code> 將 <code>--</code> 轉為破折號，且兩條連字號間保留明確間距。</li>
     </ul>
 
-    <h2 id="testing">6. 自動化檢測與目視 QA</h2>
-    <p>請對每款編譯完成的字型執行本專案的 Python 與 Swift 檢測套件：</p>
-
-    <div class="code-block">
-      <div class="code-head">
-        <span>shell — POJ 字型自動化檢測與樣張輸出</span>
-        <button class="copy-code-btn" type="button">複製</button>
-      </div>
-      <pre><code>python3 -m venv venv &amp;&amp; venv/bin/pip install fonttools uharfbuzz pillow
-
-# 1. 檢查 cmap 收錄、GSUB/GPOS 功能、U+0358/U+030D 錨點、IVS 與 PUA 統計
-venv/bin/python -I tools/poj_font_audit.py Font.ttf &gt; audit.json
-
-# 2. HarfBuzz 逐音節整形分析，驗證 NFC 與 NFD 一致性
-venv/bin/python -I tools/poj_shape_test.py Font.ttf &gt; shape.json
-
-# 3. 輸出目視檢驗用 PNG 樣張（上方 NFC、下方 NFD）
-venv/bin/python -I tools/poj_specimen.py out_dir Font.ttf
-
-# 4. 執行標準 Google Fonts QA（註：尚未內建 POJ 音節檢查）
-fontbakery check-googlefonts Font.ttf</code></pre>
-    </div>
-
-    <p>接著於實際環境目視驗收：</p>
+    <h2 id="testing">6. 目視 QA 驗收清單</h2>
+    <p>請於實際跨平台環境目視驗收每款編譯完成的字型：</p>
     <ol>
-      <li>將<a href="choose.html#test">完整 POJ + KPL 測試字串</a>（NFC、NFD 與反向順序）貼入 <strong>Chrome／Firefox</strong>（HarfBuzz）、<strong>Safari／Pages</strong>（CoreText）與 <strong>Microsoft Word</strong>（DirectWrite）逐一檢查。</li>
+      <li>將<a href="choose.html#test">完整 POJ 測試字串</a>（NFC、NFD 與反向順序）貼入 <strong>Chrome／Firefox</strong>（HarfBuzz）、<strong>Safari／Pages</strong>（CoreText）與 <strong>Microsoft Word</strong>（DirectWrite）逐一檢查。</li>
       <li>在瀏覽器中加上 <code>letter-spacing: 0.1em</code>，確認完全不依賴選用 <code>liga</code>。</li>
+      <li>檢查所有字重與可變軸極端值——特別是粗體下的寬調號（<span class="poj">ō͘ ô͘ ŏ͘</span>）與大寫（<span class="poj">O͘ Ó͘ Ō͘ O̍͘</span>）。</li>
       <li>若預計上架 Google Fonts，務必確認實際送出的 CSS <code>unicode-range</code> 切塊確實包含 <code>U+0358</code>、<code>U+030D</code> 與 <code>U+207F</code>。</li>
     </ol>
 
@@ -232,9 +203,9 @@ fontbakery check-googlefonts Font.ttf</code></pre>
         <span class="pager-dir">← 上一頁</span>
         <span class="pager-title">疑難排解與跨平台差異</span>
       </a>
-      <a class="pager-link next" href="tools.html">
-        <span class="pager-dir">下一頁 →</span>
-        <span class="pager-title">檢測工具、方法與審查紀錄</span>
+      <a class="pager-link next" href="./">
+        <span class="pager-dir">回到開頭 →</span>
+        <span class="pager-title">總覽</span>
       </a>
     </nav>
 

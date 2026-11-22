@@ -60,63 +60,60 @@
   // ── 2. Site-wide search index (EN & zh-TW) ────────────────────────────────
   var SEARCH_INDEX_EN = [
     { page: './', section: 'Overview', title: 'POJ Font Documentation — Overview', desc: 'Why Taigi Pe̍h-ōe-jī letters like o͘ and a̍ break, visual font comparison, short answers, and documentation map.', tags: 'start home poj o͘ hō͘ chia̍h thiⁿ n̂g genyo lesson one arial helvetica eb garamond' },
-    { page: 'letters.html', section: 'Core Concepts', title: 'Unicode & Encoding for POJ and KPL', desc: 'How computers store POJ letters as base + combining marks, precomposed Unicode 17.0 matrix, ccc ordering, shaping engines.', tags: 'u+0358 u+030d u+207f u+1d3a u+030b u+030c unicode nfc nfd combining marks' },
-    { page: 'letters.html#precomposed', section: 'Unicode & Encoding', title: 'Precomposed Unicode 17.0 Matrix & Stability Policy', desc: 'Which POJ and KPL combinations exist precomposed, why Unicode will never add precomposed o͘ (2001/2005 policies).', tags: 'precomposed unicodedata ḿ ǹ ő ű ǎ stability policy 2005' },
+    { page: 'letters.html', section: 'Core Concepts', title: 'Unicode & Encoding for POJ', desc: 'How computers store POJ letters as base + combining marks, precomposed Unicode 17.0 matrix, ccc ordering, shaping engines.', tags: 'u+0358 u+030d u+207f u+1d3a unicode nfc nfd combining marks' },
+    { page: 'letters.html#precomposed', section: 'Unicode & Encoding', title: 'Precomposed Unicode 17.0 Matrix & Stability Policy', desc: 'Which POJ combinations exist precomposed, why Unicode will never add precomposed o͘ (2001/2005 policies).', tags: 'precomposed unicodedata ḿ ǹ stability policy 2005' },
     { page: 'letters.html#canonical', section: 'Unicode & Encoding', title: 'Canonical Combining Classes (ccc 230 vs 232) & Mark Order', desc: 'Why tone marks (ccc=230) sort before U+0358 (ccc=232), NFC of o̍͘, and how HarfBuzz normalises before GSUB.', tags: 'ccc 230 232 canonical ordering nfc nfd o̍͘ ó͘' },
     { page: 'letters.html#shapers', section: 'Unicode & Encoding', title: 'Shaping Engines: HarfBuzz, CoreText & DirectWrite', desc: 'HarfBuzz 5-stage pipeline, all-or-nothing fallback positioning rule, CoreText AAT tables, DirectWrite differences, optional liga/case switches.', tags: 'harfbuzz coretext directwrite fallback ccmp liga clig case letter-spacing word' },
-    { page: 'letters.html#dotted-i', section: 'Unicode & Encoding', title: 'Soft_Dotted i & j (Dotless ı Swap)', desc: 'Why i̍ and i̋ must drop the dot via dotlessi (U+0131) and uni0237 (U+0237) in ccmp.', tags: 'dotless i u+0131 u+0237 soft_dotted i̍ chi̍t' },
+    { page: 'letters.html#dotted-i', section: 'Unicode & Encoding', title: 'Soft_Dotted i & j (Dotless ı Swap)', desc: 'Why i̍ must drop the dot via dotlessi (U+0131) and uni0237 (U+0237) in ccmp.', tags: 'dotless i u+0131 u+0237 soft_dotted i̍ chi̍t' },
     { page: 'letters.html#nasal', section: 'Unicode & Encoding', title: 'Superscript ⁿ (U+207F), Capital ᴺ (U+1D3A) & NFKC Danger', desc: 'Why NFKC corrupts thiⁿ into thin, why ⁿ has no uppercase mapping, and .case alignment rules.', tags: 'nasal u+207f u+1d3a nfkc nfc thiⁿ thin' },
-    { page: 'letters.html#legacy', section: 'Unicode & Encoding', title: 'Legacy & Substitute Encodings (PUA, o·, ơ, ASCII)', desc: 'Middle dot U+00B7, Vietnamese horn U+01A1, PUA U+E400-E435, Windows-1252/MacRoman, numbered tones.', tags: 'legacy pua e400 middle dot horn vietnamese ơ tlpa' },
-    { page: 'letters.html#ivs', section: 'Unicode & Encoding', title: 'Ideographic Variation Sequences (IVS) for Han-Lo Ruby', desc: 'ButTaiwan 字咍 taigivs cmap format 14, 8,021 IVS mappings, 8 variants (POJ, TL/KPL, HI, KN), subsetter caveats.', tags: 'ivs ruby taigivs cmap format 14 漢羅 字咍 方音 假名' },
+    { page: 'letters.html#legacy', section: 'Unicode & Encoding', title: 'Legacy & Substitute Encodings (PUA, o·, ơ, ASCII)', desc: 'Middle dot U+00B7, Vietnamese horn U+01A1, PUA U+E400-E435, Windows-1252/MacRoman, numbered tones.', tags: 'legacy pua e400 middle dot horn vietnamese ơ' },
+    { page: 'letters.html#ivs', section: 'Unicode & Encoding', title: 'Ideographic Variation Sequences (IVS) for Han-Lo Ruby', desc: 'ButTaiwan 字咍 taigivs cmap format 14, 8,021 IVS mappings for POJ ruby above Han characters, subsetter caveats.', tags: 'ivs ruby taigivs cmap format 14 漢羅 字咍 方音 假名' },
     { page: 'letters.html#hyphens', section: 'Unicode & Encoding', title: 'Hyphens & Neutral-Tone Double Hyphen (--)', desc: 'Why -- (tńg--khì) must never become an en-dash, U+2011 non-breaking hyphen, smart-dash editor bugs.', tags: 'hyphen double hyphen neutral tone u+002d u+2011 tńg--khì' },
     { page: 'fonts.html', section: 'Core Concepts', title: 'How Fonts Implement POJ (Techniques A, B, C, D)', desc: 'Snap points (GPOS mark), precomposed ccmp ligatures, SIL spacing dot (GDEF class 1), and zero-width overstrike/fallback.', tags: 'techniques anchor ligature ccmp gpos mark gdef sil charis source sans' },
     { page: 'fonts.html#switches', section: 'How Fonts Implement POJ', title: 'Optional Features & Hidden Switches (liga, clig, case)', desc: 'Why POJ glyph building must live in ccmp and never in liga/clig, and why capital marks need contextual ccmp.', tags: 'liga clig case ccmp letter-spacing word css' },
     { page: 'fonts.html#google-fonts', section: 'How Fonts Implement POJ', title: 'Google Fonts Web Delivery & unicode-range Audit', desc: 'Verified slice audit: TASA Explorer & Source Sans 3 drop POJ marks on Google Fonts; Iansui & Huninn carry a Taigi slice; pyftsubset checklist.', tags: 'google fonts unicode-range subset pyftsubset tasa source sans iansui huninn' },
     { page: 'choose.html', section: 'Font Directory & Data', title: '24-Font Audit, Recommendations & Live Test Bench', desc: 'Free & open picks for running POJ and Han-Lo, fonts to avoid, live interactive POJ test bench, full 24-font audit matrix, and PNG specimens.', tags: 'choose pick recommend lesson one chhiu-ki charis doulos gentium tasa huninn iansui wd-xl iming genyo tauhu' },
-    { page: 'choose.html#test', section: 'Font Directory & Data', title: 'Interactive POJ & KPL Test Bench', desc: 'Live editable specimen with font-size & letter-spacing controls, NFC/NFD/Reverse copy buttons, and real-time Unicode codepoint inspector.', tags: 'test bench copy nfc nfd inspector letter-spacing' },
-    { page: 'choose.html#audit-explorer', section: 'Font Directory & Data', title: 'Interactive 24-Font HarfBuzz Audit Explorer', desc: 'Inspect every audited font from data/poj-font-audit.json: cmap coverage, GSUB/GPOS features, U+0358 anchors, and all 25 shaped clusters.', tags: 'audit json explorer shaping clusters gpos gsub' },
-    { page: 'choose.html#specimens', section: 'Font Directory & Data', title: 'Rendered NFC vs NFD Font Specimens', desc: 'High-resolution PNG specimens comparing NFC and NFD rows across all 24 tested fonts.', tags: 'specimen png visual comparison nfc nfd' },
+    { page: 'choose.html#test', section: 'Font Directory & Data', title: 'Interactive POJ Test Bench', desc: 'Live editable specimen with font-size & letter-spacing controls, NFC/NFD/Reverse copy buttons, and real-time Unicode codepoint inspector.', tags: 'test bench copy nfc nfd inspector letter-spacing' },
+    { page: 'choose.html#audit-explorer', section: 'Font Directory & Data', title: 'Interactive 24-Font HarfBuzz Audit Explorer', desc: 'Inspect every audited font: cmap coverage, GSUB/GPOS features, U+0358 anchors, and all shaped POJ clusters.', tags: 'audit json explorer shaping clusters gpos gsub' },
+    { page: 'choose.html#specimens', section: 'Font Directory & Data', title: 'Rendered NFC vs NFD Font Specimens', desc: 'High-resolution PNG specimens comparing NFC and NFD rows across all tested fonts.', tags: 'specimen png visual comparison nfc nfd' },
     { page: 'catalog.html', section: 'Font Directory & Data', title: 'Google Fonts Survey (2,067 Families) & 989 Forks', desc: 'License survey of google/fonts, 1,471-family shortlist, interactive searchable table, 55 ready families, 989 forked repos, upstream efforts.', tags: 'catalog survey license ofl rfn apache ufl shortlist forks 989 glyphsets lang nan_latn' },
     { page: 'catalog.html#shortlist-explorer', section: 'Google Fonts Survey', title: 'Interactive Shortlist Browser (1,471 Families)', desc: 'Search and filter all 1,471 open-licensed Google Fonts families by POJ status, category, variable axes, and mark feature.', tags: 'shortlist filter search google fonts noto montserrat cormorant libertinus wenkai' },
     { page: 'catalog.html#forks-explorer', section: 'Google Fonts Survey', title: 'Upstream Fork Directory (989 Repositories)', desc: 'Browse all 989 repositories forked into github.com/PehoejiFont with upstream links and family lists.', tags: 'forks tsv github upstream pull request' },
     { page: 'problems.html', section: 'Practical Guides', title: 'Troubleshooting & Platform Differences', desc: 'Symptom-by-symptom diagnosis for tofu boxes, floating dots, borrowed glyphs, dotted i̍, NFKC loss, search misses, and macOS/Windows differences.', tags: 'problems fix troubleshoot tofu box mac coretext windows directwrite pdf' },
-    { page: 'makers.html', section: 'Practical Guides', title: 'Font Maker’s Implementation Guide', desc: 'Complete recipe for adding POJ & KPL to a font: glyph table, anchors, full AFDKO/feaLib code, 8 OpenType rules, vertical metrics, CFF vs TTF, variable fonts.', tags: 'makers recipe afdko fealib opentype anchors ccmp mark mkmk gdef metrics variable cff' },
-    { page: 'makers.html#fea-code', section: 'Font Maker’s Guide', title: 'AFDKO / feaLib OpenType Feature Code Sketch', desc: 'Copy-ready OpenType feature code for DotlessI, POJLigatures (NFC/NFD/reverse), MarkTop, MarkTopRight, GDEF, and mkmk.', tags: 'fea afdko fealib code sketch ccmp mark mkmk gdef' },
-    { page: 'tools.html', section: 'Reference', title: 'Tools, Methodology, Open Questions & Model Reviews', desc: 'All 11 CLI scripts in tools/ (audit, shape, specimen, CoreText Swift probe, SVG generator, site font builder), open questions, and Gemini 4 review log.', tags: 'tools scripts python swift coretext fonttools uharfbuzz fontbakery review methodology open questions' }
+    { page: 'makers.html', section: 'Practical Guides', title: 'Font Maker’s Implementation Guide', desc: 'Complete recipe for adding POJ to a font: glyph table, anchors, full AFDKO/feaLib code, 8 OpenType rules, vertical metrics, CFF vs TTF, variable fonts.', tags: 'makers recipe afdko fealib opentype anchors ccmp mark mkmk gdef metrics variable cff' },
+    { page: 'makers.html#fea-code', section: 'Font Maker’s Guide', title: 'AFDKO / feaLib OpenType Feature Code Sketch', desc: 'Copy-ready OpenType feature code for DotlessI, POJLigatures (NFC/NFD/reverse), MarkTop, MarkTopRight, GDEF, and mkmk.', tags: 'fea afdko fealib code sketch ccmp mark mkmk gdef' }
   ];
 
   var SEARCH_INDEX_ZH = [
     { page: './', section: '總覽', title: '台語白話字（POJ）字型技術文件 — 總覽', desc: '為什麼 o͘ 與 a̍ 在許多字型會破版？五款字型實測對照、快速解答與完整文件導覽。', tags: '首頁 總覽 白話字 poj o͘ hō͘ chia̍h thiⁿ n̂g 源樣明體 lesson one arial helvetica eb garamond' },
-    { page: 'letters.html', section: '核心原理', title: 'Unicode 編碼與字元結構（POJ 與 KPL）', desc: '電腦如何以基礎字母＋組合附加符號儲存白話字、Unicode 17.0 預組字表、ccc 排序與整形引擎流程。', tags: 'u+0358 u+030d u+207f u+1d3a u+030b u+030c unicode nfc nfd 組合附加符號 教育部羅馬字' },
-    { page: 'letters.html#precomposed', section: 'Unicode 與編碼', title: 'Unicode 17.0 預組字元矩陣與穩定性政策', desc: 'POJ 與 KPL 哪些調號字母有預組字元，以及為何 Unicode 永遠不會新增預組 o͘（2001/2005 政策）。', tags: '預組字元 unicodedata ḿ ǹ ő ű ǎ 穩定性政策 2005' },
+    { page: 'letters.html', section: '核心原理', title: 'Unicode 編碼與字元結構（POJ）', desc: '電腦如何以基礎字母＋組合附加符號儲存白話字、Unicode 17.0 預組字表、ccc 排序與整形引擎流程。', tags: 'u+0358 u+030d u+207f u+1d3a unicode nfc nfd 組合附加符號' },
+    { page: 'letters.html#precomposed', section: 'Unicode 與編碼', title: 'Unicode 17.0 預組字元矩陣與穩定性政策', desc: 'POJ 哪些調號字母有預組字元，以及為何 Unicode 永遠不會新增預組 o͘（2001/2005 政策）。', tags: '預組字元 unicodedata ḿ ǹ 穩定性政策 2005' },
     { page: 'letters.html#canonical', section: 'Unicode 與編碼', title: '標準組合類別（ccc 230 與 232）與調號順序', desc: '為什麼聲調（ccc=230）排在右點 U+0358（ccc=232）之前、o̍͘ 的 NFC 形式，以及 HarfBuzz 的預正規化。', tags: 'ccc 230 232 正規化 順序 nfc nfd o̍͘ ó͘' },
     { page: 'letters.html#shapers', section: 'Unicode 與編碼', title: '整形引擎比較：HarfBuzz、CoreText 與 DirectWrite', desc: 'HarfBuzz 五階段管線、全有或全無的備援定位規則、macOS CoreText AAT 與 Windows DirectWrite 差異。', tags: 'harfbuzz coretext directwrite 備援 定位 ccmp liga clig case letter-spacing word' },
-    { page: 'letters.html#dotted-i', section: 'Unicode 與編碼', title: 'Soft_Dotted i 與 j（無點 ı 替換）', desc: '為什麼 i̍ 與 i̋ 必須透過 ccmp 替換為無點 dotlessi（U+0131）與 uni0237（U+0237）。', tags: '無點 dotless i u+0131 u+0237 soft_dotted i̍ chi̍t' },
+    { page: 'letters.html#dotted-i', section: 'Unicode 與編碼', title: 'Soft_Dotted i 與 j（無點 ı 替換）', desc: '為什麼 i̍ 必須透過 ccmp 替換為無點 dotlessi（U+0131）與 uni0237（U+0237）。', tags: '無點 dotless i u+0131 u+0237 soft_dotted i̍ chi̍t' },
     { page: 'letters.html#nasal', section: 'Unicode 與編碼', title: '鼻化上標 ⁿ（U+207F）、大寫 ᴺ（U+1D3A）與 NFKC 風險', desc: '為什麼 NFKC 會把 thiⁿ 變成 thin、無大寫對應問題與 .case 對齊規範。', tags: '鼻化 u+207f u+1d3a nfkc nfc thiⁿ thin' },
-    { page: 'letters.html#legacy', section: 'Unicode 與編碼', title: '舊式與替代編碼（PUA、o·、ơ、ASCII）', desc: '中圓點 U+00B7、越南語帶角 o（U+01A1）、私用區 U+E400–E435、舊 8-bit 編碼與數字調號。', tags: '舊編碼 pua e400 中圓點 越南 ơ tlpa 私用區' },
-    { page: 'letters.html#ivs', section: 'Unicode 與編碼', title: '異體字選擇器序列（IVS）漢羅注音字型', desc: 'ButTaiwan 字咍 taigivs 的 cmap format 14、8,021 筆 IVS 對應與 8 種變體（POJ、KPL/TL、方音、假名）。', tags: 'ivs ruby taigivs cmap format 14 漢羅 字咍 方音 假名 注音' },
+    { page: 'letters.html#legacy', section: 'Unicode 與編碼', title: '舊式與替代編碼（PUA、o·、ơ、ASCII）', desc: '中圓點 U+00B7、越南語帶角 o（U+01A1）、私用區 U+E400–E435、舊 8-bit 編碼與數字調號。', tags: '舊編碼 pua e400 中圓點 越南 ơ 私用區' },
+    { page: 'letters.html#ivs', section: 'Unicode 與編碼', title: '異體字選擇器序列（IVS）漢羅注音字型', desc: 'ButTaiwan 字咍 taigivs 的 cmap format 14、8,021 筆 IVS 對應（白話字、方音、假名）。', tags: 'ivs ruby taigivs cmap format 14 漢羅 字咍 方音 假名 注音' },
     { page: 'letters.html#hyphens', section: 'Unicode 與編碼', title: '連字號與輕聲雙連字號（--）', desc: '為什麼 tńg--khì 的 -- 絕不能變成破折號、U+2011 不換行連字號與文書軟體自動取代問題。', tags: '連字號 雙連字號 輕聲 u+002d u+2011 tńg--khì' },
     { page: 'fonts.html', section: '核心原理', title: '字型實作白話字的四種技術（A、B、C、D）', desc: 'GPOS 錨點、ccmp 預繪連字、SIL 佔位圓點（GDEF 類別 1）與固定疊印／引擎備援。', tags: '實作 技術 錨點 連字 ccmp gpos mark gdef sil charis source sans' },
     { page: 'fonts.html#switches', section: '字型實作方式', title: '可關閉的隱藏開關（liga、clig、case）', desc: '為什麼 POJ 組字絕不能放在 liga/clig，以及為什麼大寫調號不能只靠 case。', tags: 'liga clig case ccmp letter-spacing word css 字距' },
     { page: 'fonts.html#google-fonts', section: '字型實作方式', title: 'Google Fonts 網頁切塊（unicode-range）實測', desc: 'TASA Explorer 與 Source Sans 3 在 Google Fonts 被刪掉 POJ 調號；芫荽與粉圓內含台語切塊；pyftsubset 保留清單。', tags: 'google fonts unicode-range 子集化 pyftsubset tasa source sans 芫荽 粉圓' },
     { page: 'choose.html', section: '字型目錄與資料', title: '24 款字型實測、推薦清單與即時測試台', desc: '純白話字與漢羅開源字型推薦、避雷清單、即時測試台、24 款字型完整檢驗與 NFC/NFD 樣張。', tags: '推薦 選字型 lesson one chhiu-ki charis doulos gentium tasa 粉圓 芫荽 滑油字 一點明體 源樣明體 豆腐烏' },
-    { page: 'choose.html#test', section: '字型目錄與資料', title: '即時 POJ / KPL 字型測試台與編碼檢視器', desc: '支援即時編輯、字級與 letter-spacing 切換、NFC／NFD／反向順序複製與逐字 U+XXXX 檢視。', tags: '測試台 複製 nfc nfd 編碼檢視器 letter-spacing' },
-    { page: 'choose.html#audit-explorer', section: '字型目錄與資料', title: '24 款字型 HarfBuzz 互動檢驗器', desc: '直接查詢 data/poj-font-audit.json：cmap 覆蓋、GSUB/GPOS 功能、U+0358 錨點與 25 個音節實測結果。', tags: 'audit json 互動 檢驗 整形 音節 gpos gsub' },
+    { page: 'choose.html#test', section: '字型目錄與資料', title: '即時 POJ 字型測試台與編碼檢視器', desc: '支援即時編輯、字級與 letter-spacing 切換、NFC／NFD／反向順序複製與逐字 U+XXXX 檢視。', tags: '測試台 複製 nfc nfd 編碼檢視器 letter-spacing' },
+    { page: 'choose.html#audit-explorer', section: '字型目錄與資料', title: '24 款字型 HarfBuzz 互動檢驗器', desc: '直接查詢每款字型的 cmap 覆蓋、GSUB/GPOS 功能、U+0358 錨點與各 POJ 音節實測結果。', tags: 'audit json 互動 檢驗 整形 音節 gpos gsub' },
     { page: 'choose.html#specimens', section: '字型目錄與資料', title: '高解析度 NFC vs NFD 渲染樣張', desc: '三張完整 PNG 樣張，逐字型並列對照 NFC 與 NFD 兩行渲染結果。', tags: '樣張 specimen png 對照 nfc nfd' },
     { page: 'catalog.html', section: '字型目錄與資料', title: 'Google Fonts 普查（2,067 款）與 989 個上游 Fork', desc: '授權與保留名稱普查、1,471 款候選清單互動搜尋、55 款已有字元清單、989 個 GitHub Fork 與上游標準推動。', tags: '普查 授權 ofl rfn apache ufl 候選清單 forks 989 glyphsets lang nan_latn' },
     { page: 'catalog.html#shortlist-explorer', section: 'Google Fonts 普查', title: '1,471 款候選字型互動篩選表', desc: '依 POJ 狀態、分類、可變字型軸與 GPOS mark 篩選全部 1,471 款開源 Google Fonts 字型。', tags: '候選清單 篩選 搜尋 google fonts noto montserrat cormorant libertinus wenkai' },
     { page: 'catalog.html#forks-explorer', section: 'Google Fonts 普查', title: '989 個上游 Fork 儲存庫清單', desc: '瀏覽 PehoejiFont 組織底下全部 989 個 Fork 與對應上游字型專案。', tags: 'forks tsv github 上游 pull request' },
     { page: 'problems.html', section: '實務指南', title: '疑難排解與跨平台（Mac / Windows）差異', desc: '11 種常見故障症狀診斷：豆腐字、浮動圓點、單字補字、i̍ 殘留點、字距破版、NFKC 遺失鼻化、PDF 亂碼與引擎差異。', tags: '疑難排解 故障 豆腐字 mac coretext windows directwrite pdf 搜尋' },
-    { page: 'makers.html', section: '實務指南', title: '字型開發者實作指南（OpenType 配方）', desc: '新增 POJ 與 KPL 支援的完整配方：字形與 cmap、錨點、AFDKO/feaLib 程式碼範本、8 條規則、垂直度量與測試流程。', tags: '字型開發 配方 afdko fealib opentype 錨點 ccmp mark mkmk gdef 度量 可變字型 cff' },
-    { page: 'makers.html#fea-code', section: '字型開發者指南', title: 'AFDKO / feaLib OpenType 功能程式碼範本', desc: '可直接複製的 DotlessI、POJLigatures（NFC/NFD/反向）、MarkTop、MarkTopRight、GDEF 與 mkmk 範本。', tags: 'fea afdko fealib 程式碼 範本 ccmp mark mkmk gdef' },
-    { page: 'tools.html', section: '參考資料', title: '檢測工具、研究方法、待驗證問題與審查紀錄', desc: 'tools/ 目錄全部 11 支腳本（含 Swift CoreText 探針）、檔案結構、待驗證議題與 Gemini 4 審查紀錄。', tags: '工具 腳本 python swift coretext fonttools uharfbuzz fontbakery 審查 研究方法' }
+    { page: 'makers.html', section: '實務指南', title: '字型開發者實作指南（OpenType 配方）', desc: '新增 POJ 支援的完整配方：字形與 cmap、錨點、AFDKO/feaLib 程式碼範本、8 條規則、垂直度量與測試流程。', tags: '字型開發 配方 afdko fealib opentype 錨點 ccmp mark mkmk gdef 度量 可變字型 cff' },
+    { page: 'makers.html#fea-code', section: '字型開發者指南', title: 'AFDKO / feaLib OpenType 功能程式碼範本', desc: '可直接複製的 DotlessI、POJLigatures（NFC/NFD/反向）、MarkTop、MarkTopRight、GDEF 與 mkmk 範本。', tags: 'fea afdko fealib 程式碼 範本 ccmp mark mkmk gdef' }
   ];
 
   var SEARCH_INDEX = IS_ZH ? SEARCH_INDEX_ZH : SEARCH_INDEX_EN;
 
   // ── 3. DOM Ready Initialization ───────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', function () {
-    // Theme toggle
     var themeBtn = document.getElementById('theme-toggle');
     updateThemeBtn(themeBtn);
     if (themeBtn) {
@@ -128,7 +125,6 @@
       });
     }
 
-    // Preserve hash fragment when toggling language
     document.querySelectorAll('a.lang-switch').forEach(function (a) {
       a.addEventListener('click', function () {
         if (window.location.hash && a.href.indexOf('#') === -1) {
@@ -137,7 +133,6 @@
       });
     });
 
-    // Mobile sidebar drawer
     var menuBtn = document.getElementById('menu-toggle');
     var backdrop = document.getElementById('sidebar-backdrop');
     function closeNav() { document.body.classList.remove('nav-open'); }
@@ -148,7 +143,6 @@
     }
     if (backdrop) backdrop.addEventListener('click', closeNav);
 
-    // Heading anchors + Right TOC generation
     var main = document.querySelector('.doc-main');
     var tocList = document.getElementById('toc-list');
     if (main) {
@@ -181,7 +175,6 @@
         }
       });
 
-      // Scroll-spy for TOC
       if (tocLinks.length && 'IntersectionObserver' in window) {
         var activeId = tocLinks[0].id;
         var setActive = function (id) {
@@ -200,7 +193,6 @@
       }
     }
 
-    // Copy buttons for .code-block
     document.querySelectorAll('.copy-code-btn').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var block = btn.closest('.code-block');
@@ -214,10 +206,7 @@
       });
     });
 
-    // Search modal
     initSearch();
-
-    // Specimen lightbox
     initLightbox();
   });
 
