@@ -30,7 +30,7 @@ An English font maps one key to one glyph. POJ text is mostly **base letter + on
 | **i + tone** (í ì î ī ĭ i̍ i̋) | `i` is Soft_Dotted: its dot must go when an **above** mark sits on it. Precomposed í etc. already do this. The **sequences** i + U+030D and i + U+030B need the font to swap in dotless ı. |
 | **ⁿ** U+207F | A letter (Lm), not a mark. Many fonts lack it. NFKC turns it into plain `n` (§2.4). |
 | **Tâi-lô** (same readers, same fonts) | Adds 9th tone U+030B double acute (only ő ű precomposed), the 6th-tone caron U+030C used for dialects that keep tone 6 (ǎ ě ǐ ǒ ǔ ň precomposed, m̌ not), and spells o͘/ⁿ as `oo`/`nn`. |
-| **Hyphens** | `-` joins syllables, `--` marks the neutral tone (`lâi--khì`). `--` must stay two hyphens (§2.7). |
+| **Hyphens** | `-` joins syllables, `--` marks the neutral tone (`tńg--khì`). `--` must stay two hyphens (§2.7). |
 | **Han-Lo** (漢羅) | The Latin part of a CJK font has to support all of the above. Ruby (POJ over Hanji) needs IVS or HTML `<ruby>` (§2.6). |
 
 Test line used for the specimens (the shaping test also covers e̍ o̍ u̍ and the other capitals):
@@ -42,7 +42,7 @@ o͘ ó͘ ò͘ ô͘ ō͘ o̍͘ ŏ͘ O͘ Ó͘ Ō͘ | a̍ i̍ m̍ n̍ n̍g I̍ | �
 Fuller line to use in future tests:
 
 ```
-o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ ő͘ ǒ͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ m̌ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | i̋ ő ǎ | lâi--khì | Pe̍h-ōe-jī Lâu Ô͘-chhiû
+o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ ő͘ ǒ͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ m̌ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | i̋ ő ǎ | tńg--khì | Pe̍h-ōe-jī Lâu Ô͘-chhiû
 ```
 
 > POJ rule to remember when testing: in syllabic **ng** the tone goes on the **n**: `n̍g`, `n̂g`, not `ng̍`. In Tâi-lô `oo` the tone goes on the first `o` (`óo`), and with `nn` it goes on the vowel before it (`ánn`).
