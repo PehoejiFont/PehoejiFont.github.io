@@ -1,10 +1,8 @@
-/* Lesson One (OFL, by But Ko) is self-hosted so every POJ letter on these pages draws correctly. */
-@font-face { font-family: "Lesson One"; src: url("fonts/LessonOne-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: "Lesson One"; src: url("fonts/LessonOne-Bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
-@font-face { font-family: "Lesson One"; src: url("fonts/LessonOne-Italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
-/* 芫荽 Iansui (OFL, by But Ko) for the Han characters, cut down to the ones these pages use.
+/* 源樣明體 GenYo Min (GenYoMin2 TW, OFL, by But Ko) for all text, self-hosted so every POJ letter
+   draws correctly. Subsets: Latin + POJ marks + the Han characters the pages use.
    Rebuild with tools/build_site_fonts.sh after adding new Han characters. */
-@font-face { font-family: "Iansui Site"; src: url("fonts/Iansui-SiteSubset.woff2") format("woff2"); font-weight: 400 700; font-display: swap; }
+@font-face { font-family: "GenYo Site"; src: url("fonts/GenYoMin2TW-R-site.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "GenYo Site"; src: url("fonts/GenYoMin2TW-B-site.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
 
 :root {
   --bg: #fbfaf7;
@@ -43,7 +41,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family: "Lesson One", "Iansui Site", system-ui, -apple-system, "Segoe UI", "PingFang TC", "Noto Sans TC", sans-serif;
+  font-family: "GenYo Site", "Noto Serif TC", "Songti TC", serif;
   font-size: 18px;
   line-height: 1.65;
 }
@@ -68,7 +66,7 @@ h2 { font-size: 25px; line-height: 1.3; margin: 44px 0 10px; }
 h3 { font-size: 20px; margin: 28px 0 6px; }
 p.lead { font-size: 20px; color: var(--muted); margin-top: 0; }
 
-.poj { font-family: "Lesson One", "Iansui Site", sans-serif; }
+.poj { font-family: "GenYo Site", serif; }
 .big { font-size: 1.6em; }
 code, kbd {
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>POJ for Font Makers</title>
-<meta name="description" content="A checklist for adding Taiwanese POJ support to a font: glyphs, anchors, ccmp rules and testing.">
+<meta name="description" content="A checklist for adding Taigi POJ support to a font: glyphs, anchors, ccmp rules and testing.">
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
@@ -30,7 +30,7 @@
   <tr><td><code>U+0358</code> <span class="poj">&nbsp;͘</span></td><td>the <span class="poj">o͘</span> dot (zero-width mark)</td></tr>
   <tr><td><code>U+030D</code> <span class="poj">&nbsp;̍</span></td><td>8th tone</td></tr>
   <tr><td><code>U+207F</code> <span class="poj">ⁿ</span>, <code>U+1D3A</code> <span class="poj">ᴺ</span></td><td>nasal, and its all-caps form</td></tr>
-  <tr><td><code>U+030B</code>, <code>U+030C</code></td><td>Tâi-lô 9th and 6th tones</td></tr>
+  <tr><td><code>U+030B</code>, <code>U+030C</code></td><td>KPL 9th and 6th tones</td></tr>
   <tr><td><span class="poj">ı</span> <code>U+0131</code>, <span class="poj">ȷ</span> <code>U+0237</code></td><td>dotless forms for <span class="poj">i̍</span></td></tr>
   <tr><td><span class="poj">ḿ Ḿ ǹ Ǹ ń Ń ň Ň ŏ Ŏ ő ű ǎ ě ǐ ǒ ǔ</span>…</td><td>ready-made letters, so no app has to borrow them</td></tr>
 </table></div>
@@ -64,14 +64,14 @@ tools/poj_specimen.py    out/ Font.ttf   # picture to check by eye</code></pre>
 <h2>Help fix it upstream</h2>
 <ul>
   <li><a href="https://github.com/googlefonts/glyphsets/issues/5">googlefonts/glyphsets#5</a> asks Google Fonts to require <code>U+0358</code>, <code>U+030D</code> and <code>U+207F</code> in its Latin set.</li>
-  <li><a href="https://github.com/googlefonts/lang">googlefonts/lang</a> has no entry for Taiwanese in Latin script yet. Adding one would let Google's tools check fonts for POJ.</li>
+  <li><a href="https://github.com/googlefonts/lang">googlefonts/lang</a> has no entry for Taigi in Latin script yet. Adding one would let Google's tools check fonts for POJ.</li>
 </ul>
 
 <div class="next"><a href="problems.html">← Fix problems</a><a href="./">Back to start</a></div>
 </main>
 
 <footer class="site"><div class="wrap">
-  PehoejiFont project · Text is set in <a href="https://github.com/ButTaiwan/LessonOne">Lesson One</a> and <a href="https://github.com/ButTaiwan/iansui">芫荽 Iansui</a> by But Ko (SIL Open Font License: <a href="assets/fonts/LessonOne-OFL.txt">Lesson One</a>, <a href="assets/fonts/Iansui-OFL.txt">Iansui</a>) · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">Source on GitHub</a>
+  PehoejiFont project · Text is set in <a href="https://github.com/ButTaiwan/genyo-font">源樣明體 GenYo Min</a> by But Ko (<a href="assets/fonts/GenYo-OFL.txt">SIL Open Font License</a>) · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">Source on GitHub</a>
 </div></footer>
 </body>
 </html>

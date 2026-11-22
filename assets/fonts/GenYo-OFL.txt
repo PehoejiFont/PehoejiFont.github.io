@@ -1,12 +1,11 @@
-Copyright (c) 2022 But Ko (https://github.com/ButTaiwan/LessonOne)
-with Reserved Font Names "Lesson One".
+Copyright 2014-2019 Adobe (http://www.adobe.com/), with Reserved Font
+Name 'Source'. Source is a trademark of Adobe in the United States
+and/or other countries.
 
-Copyright (c) 2004-2022 SIL International  (http://www.sil.org/)
-with Reserved Font Names "Andika" and "SIL".
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
 This license is copied below, and is also available with a FAQ at:
-https://scripts.sil.org/OFL
+http://scripts.sil.org/OFL
 
 
 -----------------------------------------------------------

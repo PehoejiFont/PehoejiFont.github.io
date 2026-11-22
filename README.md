@@ -115,6 +115,8 @@ tools/
   poj_font_audit.py   per-font POJ audit: cmap, features, anchors, IVS, PUA (needs fonttools, uharfbuzz)
   poj_shape_test.py   HarfBuzz test: how each POJ cluster is built, NFC vs NFD
   poj_specimen.py     renders a PNG specimen (needs pillow)
+  poj_guide_svg.py    draws the website's example pictures as SVG (needs fonttools, uharfbuzz)
+  build_site_fonts.sh rebuilds the website's GenYo Min font subsets
 ```
 
 The scripts were written for a single run, and their input and output paths are hard-coded relative to the working directory.

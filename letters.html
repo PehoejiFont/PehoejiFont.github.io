@@ -66,7 +66,7 @@
   <tr><td>8</td><td class="poj big">&nbsp;̍</td><td class="poj">ku̍t 滑</td><td><strong>never</strong>: always built</td></tr>
   <tr><td>dot of <span class="poj">o͘</span></td><td class="poj big">&nbsp;͘</td><td class="poj">o͘ 烏, hō͘ 雨</td><td><strong>never</strong>: always built</td></tr>
 </table></div>
-<p>Tâi-lô, the other common Taiwanese spelling, adds a 9th tone mark <span class="poj">&nbsp;̋</span> (as in <span class="poj">ő</span>) and sometimes a 6th tone <span class="poj">ˇ</span> (as in <span class="poj">ǎ</span>). A good POJ font usually covers Tâi-lô too.</p>
+<p>KPL (Kàu-io̍k Pō͘ Lô-má-jī), the Ministry of Education's Roman Orthography for Taigi, adds a 9th tone mark <span class="poj">&nbsp;̋</span> (as in <span class="poj">ő</span>) and sometimes a 6th tone <span class="poj">ˇ</span> (as in <span class="poj">ǎ</span>). A good POJ font usually covers KPL too.</p>
 
 <h3>Two stickers at once</h3>
 <p>A toned <span class="poj">o͘</span> carries <strong>two</strong> stickers: the tone on top and the dot at the right. The font has to place both without them bumping into each other.</p>
@@ -114,7 +114,7 @@
 <h2 id="nasal">The small <span class="poj">ⁿ</span> is a letter, not a sticker</h2>
 <p>The nasal <span class="poj">ⁿ</span> in <span class="poj">thiⁿ</span> (天) is a letter of its own (<code>U+207F</code>). Fonts draw it easily, but two things go wrong with it:</p>
 <ul>
-  <li><strong>Some “clean-up” tools turn it into a plain <span class="poj">n</span>.</strong> A different tidy-up called <strong>NFKC</strong> (used by some search engines and databases) changes <span class="poj">thiⁿ</span> into <span class="poj">thin</span>. Use NFC, never NFKC, for Taiwanese text.</li>
+  <li><strong>Some “clean-up” tools turn it into a plain <span class="poj">n</span>.</strong> A different tidy-up called <strong>NFKC</strong> (used by some search engines and databases) changes <span class="poj">thiⁿ</span> into <span class="poj">thin</span>. Use NFC, never NFKC, for Taigi text.</li>
   <li><strong>It has no capital.</strong> Writing in ALL CAPS gives <span class="poj">THIⁿ</span>. Some people use <span class="poj">ᴺ</span> (<code>U+1D3A</code>) or <span class="poj">NN</span> instead.</li>
 </ul>
 
@@ -124,7 +124,7 @@
   <tr><th>Looks like</th><th>What it really is</th><th>Problem</th></tr>
   <tr><td class="poj big">o·</td><td>o + middle dot (<code>U+00B7</code>)</td><td>The dot is punctuation, so search and spell tools treat the word as two pieces.</td></tr>
   <tr><td class="poj big">ơ</td><td>Vietnamese “horn” o (<code>U+01A1</code>)</td><td>A different letter. Searches for <span class="poj">o͘</span> won't find it.</td></tr>
-  <tr><td class="poj big">oo, ou</td><td>typed spellings</td><td>Fine as a choice (Tâi-lô uses <span class="poj">oo</span>), but not POJ.</td></tr>
+  <tr><td class="poj big">oo, ou</td><td>typed spellings</td><td>Fine as a choice (KPL uses <span class="poj">oo</span>), but not POJ.</td></tr>
   <tr><td><span class="poj big">o͘</span> that only works in one font</td><td>a “private” code (Private Use Area), used by a few old POJ fonts</td><td>Turns into an empty box or a random symbol in any other font.</td></tr>
 </table></div>
 <p>If you have old text like this, convert it to the real stickers once, and it will work everywhere.</p>
@@ -136,7 +136,7 @@
 </main>
 
 <footer class="site"><div class="wrap">
-  PehoejiFont project · Text is set in <a href="https://github.com/ButTaiwan/LessonOne">Lesson One</a> and <a href="https://github.com/ButTaiwan/iansui">芫荽 Iansui</a> by But Ko (SIL Open Font License: <a href="assets/fonts/LessonOne-OFL.txt">Lesson One</a>, <a href="assets/fonts/Iansui-OFL.txt">Iansui</a>) · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">Source on GitHub</a>
+  PehoejiFont project · Text is set in <a href="https://github.com/ButTaiwan/genyo-font">源樣明體 GenYo Min</a> by But Ko (<a href="assets/fonts/GenYo-OFL.txt">SIL Open Font License</a>) · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">Source on GitHub</a>
 </div></footer>
 </body>
 </html>
