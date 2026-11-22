@@ -87,6 +87,10 @@ Three repo names exist under more than one owner (`baloo2-variable`, `signika`, 
 - [googlefonts/glyphsets#5](https://github.com/googlefonts/glyphsets/issues/5) has been open since 2020. It asks to add U+030D, U+0358 and U+207F to the GF Latin Plus glyph set. If they were added, POJ support would become part of Google Fonts' own requirements.
 - [googlefonts/lang](https://github.com/googlefonts/lang) has no language definition for Taiwanese in Latin script (`nan_Latn`). Adding one would let Google Fonts' tools report which fonts support POJ.
 
+## Research notes
+
+[`docs/poj-font-implementation.md`](docs/poj-font-implementation.md) explains how POJ differs from an English font, every Unicode form POJ text arrives in (NFC, NFD, mark order, ⁿ/NFKC, PUA, IVS), the four ways existing fonts implement it, a survey of the free fonts listed on [oh.taigi.info › 字體](https://oh.taigi.info/siataibun/jithe/), and a recipe for the forks. Model reviews are in `docs/reviews/`.
+
 ## Repository layout
 
 ```
@@ -94,11 +98,19 @@ data/
   google-fonts.json   every Google Fonts family: license, reserved name, designer, upstream repo
   shortlist.json      the 1,471 shortlisted families with POJ coverage results
   fork-list.tsv       upstream repo → fork name → families
+  poj-font-audit.json audit + HarfBuzz shaping results for the fonts in docs/poj-font-implementation.md
+docs/
+  poj-font-implementation.md  research report
+  img/                specimens (NFC and NFD rows per font)
+  reviews/            agy (Gemini 4) reviews of the report and the prompt used
 tools/
   build_catalog.py    builds google-fonts.json from a sparse checkout of google/fonts
   download_fonts.py   downloads one main font file per family
   check_coverage.py   checks POJ characters and the mark feature (needs fonttools)
   fork_repos.sh       forks the repos in fork-list.tsv into the org
+  poj_font_audit.py   per-font POJ audit: cmap, features, anchors, IVS, PUA (needs fonttools, uharfbuzz)
+  poj_shape_test.py   HarfBuzz test: how each POJ cluster is built, NFC vs NFD
+  poj_specimen.py     renders a PNG specimen (needs pillow)
 ```
 
 The scripts were written for a single run, and their input and output paths are hard-coded relative to the working directory.

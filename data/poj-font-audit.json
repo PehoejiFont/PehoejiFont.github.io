@@ -1,0 +1,4285 @@
+[
+ {
+  "file": "poj/POJChhiuKi-Regular.otf",
+  "name": "POJ ChhiuKi",
+  "glyphs": 307,
+  "has": {
+   "U+0358 dot above right (o͘)": true,
+   "U+030D vertical line (tone 8)": true,
+   "U+207F superscript n (ⁿ)": true,
+   "U+0301 acute": true,
+   "U+0300 grave": true,
+   "U+0302 circumflex": true,
+   "U+0304 macron": true,
+   "U+0306 breve (POJ t9)": true,
+   "U+030B double acute (Tâi-lô t9)": true,
+   "U+0131 dotless i": true,
+   "U+00B7 middle dot (o· fallback)": true,
+   "U+1D3A/ᴺ cap superscript N": false
+  },
+  "precomposed_missing": "",
+  "pua_count": 0,
+  "ivs_mappings": 0,
+  "GSUB": [
+   "ccmp",
+   "frac",
+   "liga"
+  ],
+  "GPOS": [
+   "kern",
+   "mark"
+  ],
+  "mark_bases": {
+   "U+0358": 81,
+   "U+030D": 54
+  },
+  "0358_on": {
+   "o": true,
+   "O": true,
+   "ó": true,
+   "ò": true,
+   "ô": true,
+   "ō": true,
+   "ŏ": true,
+   "Ó": true,
+   "Ō": true
+  },
+  "shaping": {
+   "o͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "O͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "ó͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ò͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ô͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ō͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ŏ͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "o̍͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "Ó͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "Ō͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "O̍͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "a̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "i̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "m̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "I̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "M̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "N̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "ḿ": {
+    "nfc": "single",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̄": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "m̂": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̂": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̄": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "i̋": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "iⁿ": {
+    "nfc": "single",
+    "nfd": "single",
+    "same": true
+   }
+  }
+ },
+ {
+  "file": "taigivs/fonts/NunitoPOJ-Regular.ttf",
+  "name": "Nunito POJ Regular",
+  "glyphs": 1155,
+  "has": {
+   "U+0358 dot above right (o͘)": true,
+   "U+030D vertical line (tone 8)": true,
+   "U+207F superscript n (ⁿ)": true,
+   "U+0301 acute": true,
+   "U+0300 grave": true,
+   "U+0302 circumflex": true,
+   "U+0304 macron": true,
+   "U+0306 breve (POJ t9)": true,
+   "U+030B double acute (Tâi-lô t9)": true,
+   "U+0131 dotless i": true,
+   "U+00B7 middle dot (o· fallback)": true,
+   "U+1D3A/ᴺ cap superscript N": false
+  },
+  "precomposed_missing": "",
+  "pua_count": 55,
+  "ivs_mappings": 0,
+  "GSUB": [
+   "aalt",
+   "case",
+   "ccmp",
+   "dnom",
+   "frac",
+   "liga",
+   "locl",
+   "numr",
+   "onum",
+   "ordn",
+   "salt",
+   "ss01",
+   "subs",
+   "sups"
+  ],
+  "GPOS": [
+   "kern",
+   "mark",
+   "mkmk"
+  ],
+  "mark_bases": {
+   "U+0358": 476,
+   "U+030D": 476
+  },
+  "0358_on": {
+   "o": true,
+   "O": true,
+   "ó": true,
+   "ò": true,
+   "ô": true,
+   "ō": true,
+   "ŏ": true,
+   "Ó": true,
+   "Ō": true
+  },
+  "shaping": {
+   "o͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "O͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ó͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ò͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ô͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ō͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ŏ͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "o̍͘": {
+    "nfc": "partial-ligature+overstrike",
+    "nfd": "partial-ligature+overstrike",
+    "same": true
+   },
+   "Ó͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "Ō͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "O̍͘": {
+    "nfc": "partial-ligature+overstrike",
+    "nfd": "partial-ligature+overstrike",
+    "same": true
+   },
+   "a̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "i̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "I̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "M̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "N̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ḿ": {
+    "nfc": "single",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̄": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̂": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̂": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̄": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "i̋": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "iⁿ": {
+    "nfc": "single",
+    "nfd": "single",
+    "same": true
+   }
+  }
+ },
+ {
+  "file": "charis/Charis-7.000/Charis-Regular.ttf",
+  "name": "Charis",
+  "glyphs": 3954,
+  "has": {
+   "U+0358 dot above right (o͘)": true,
+   "U+030D vertical line (tone 8)": true,
+   "U+207F superscript n (ⁿ)": true,
+   "U+0301 acute": true,
+   "U+0300 grave": true,
+   "U+0302 circumflex": true,
+   "U+0304 macron": true,
+   "U+0306 breve (POJ t9)": true,
+   "U+030B double acute (Tâi-lô t9)": true,
+   "U+0131 dotless i": true,
+   "U+00B7 middle dot (o· fallback)": true,
+   "U+1D3A/ᴺ cap superscript N": true
+  },
+  "precomposed_missing": "",
+  "pua_count": 223,
+  "ivs_mappings": 0,
+  "GSUB": [
+   "aalt",
+   "c2sc",
+   "ccmp",
+   "cv13",
+   "cv17",
+   "cv19",
+   "cv20",
+   "cv25",
+   "cv28",
+   "cv37",
+   "cv43",
+   "cv44",
+   "cv46",
+   "cv47",
+   "cv49",
+   "cv55",
+   "cv57",
+   "cv62",
+   "cv68",
+   "cv69",
+   "cv70",
+   "cv71",
+   "cv75",
+   "cv76",
+   "cv77",
+   "cv79",
+   "cv80",
+   "cv81",
+   "cv82",
+   "cv84",
+   "cv90",
+   "cv91",
+   "cv92",
+   "cv98",
+   "frac",
+   "liga",
+   "lnum",
+   "locl",
+   "onum",
+   "smcp",
+   "ss01",
+   "ss04",
+   "ss05",
+   "ss11",
+   "ss12",
+   "subs",
+   "sups"
+  ],
+  "GPOS": [
+   "kern",
+   "mark",
+   "mkmk"
+  ],
+  "mark_bases": {
+   "U+030D": 3003
+  },
+  "shaping": {
+   "o͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "O͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "ó͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "ò͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "ô͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "ō͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "ŏ͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "o̍͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "Ó͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "Ō͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "O̍͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "a̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "i̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "m̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "I̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "M̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "N̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "ḿ": {
+    "nfc": "single",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̄": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "m̂": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̂": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̄": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "i̋": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "iⁿ": {
+    "nfc": "single",
+    "nfd": "single",
+    "same": true
+   }
+  }
+ },
+ {
+  "file": "doulos/DoulosSIL-7.000/DoulosSIL-Regular.ttf",
+  "name": "Doulos SIL",
+  "glyphs": 3944,
+  "has": {
+   "U+0358 dot above right (o͘)": true,
+   "U+030D vertical line (tone 8)": true,
+   "U+207F superscript n (ⁿ)": true,
+   "U+0301 acute": true,
+   "U+0300 grave": true,
+   "U+0302 circumflex": true,
+   "U+0304 macron": true,
+   "U+0306 breve (POJ t9)": true,
+   "U+030B double acute (Tâi-lô t9)": true,
+   "U+0131 dotless i": true,
+   "U+00B7 middle dot (o· fallback)": true,
+   "U+1D3A/ᴺ cap superscript N": true
+  },
+  "precomposed_missing": "",
+  "pua_count": 223,
+  "ivs_mappings": 0,
+  "GSUB": [
+   "aalt",
+   "c2sc",
+   "ccmp",
+   "cv13",
+   "cv17",
+   "cv19",
+   "cv20",
+   "cv25",
+   "cv28",
+   "cv37",
+   "cv43",
+   "cv44",
+   "cv46",
+   "cv47",
+   "cv49",
+   "cv55",
+   "cv57",
+   "cv62",
+   "cv68",
+   "cv69",
+   "cv70",
+   "cv71",
+   "cv75",
+   "cv76",
+   "cv77",
+   "cv79",
+   "cv80",
+   "cv81",
+   "cv82",
+   "cv84",
+   "cv90",
+   "cv91",
+   "cv92",
+   "cv98",
+   "frac",
+   "liga",
+   "locl",
+   "smcp",
+   "ss01",
+   "ss04",
+   "ss05",
+   "ss11",
+   "ss12",
+   "subs",
+   "sups"
+  ],
+  "GPOS": [
+   "mark",
+   "mkmk"
+  ],
+  "mark_bases": {
+   "U+030D": 3002
+  },
+  "shaping": {
+   "o͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "O͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "ó͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "ò͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "ô͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "ō͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "ŏ͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "o̍͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "Ó͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "Ō͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "O̍͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "a̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "i̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "m̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "I̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "M̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "N̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "ḿ": {
+    "nfc": "single",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̄": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "m̂": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̂": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̄": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "i̋": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "iⁿ": {
+    "nfc": "single",
+    "nfd": "single",
+    "same": true
+   }
+  }
+ },
+ {
+  "file": "gentium/Gentium-7.000/Gentium-Regular.ttf",
+  "name": "Gentium",
+  "glyphs": 4760,
+  "has": {
+   "U+0358 dot above right (o͘)": true,
+   "U+030D vertical line (tone 8)": true,
+   "U+207F superscript n (ⁿ)": true,
+   "U+0301 acute": true,
+   "U+0300 grave": true,
+   "U+0302 circumflex": true,
+   "U+0304 macron": true,
+   "U+0306 breve (POJ t9)": true,
+   "U+030B double acute (Tâi-lô t9)": true,
+   "U+0131 dotless i": true,
+   "U+00B7 middle dot (o· fallback)": true,
+   "U+1D3A/ᴺ cap superscript N": true
+  },
+  "precomposed_missing": "",
+  "pua_count": 223,
+  "ivs_mappings": 0,
+  "GSUB": [
+   "aalt",
+   "c2sc",
+   "ccmp",
+   "cv13",
+   "cv14",
+   "cv17",
+   "cv19",
+   "cv20",
+   "cv25",
+   "cv28",
+   "cv37",
+   "cv43",
+   "cv44",
+   "cv46",
+   "cv47",
+   "cv49",
+   "cv55",
+   "cv57",
+   "cv62",
+   "cv68",
+   "cv69",
+   "cv70",
+   "cv71",
+   "cv75",
+   "cv76",
+   "cv77",
+   "cv78",
+   "cv79",
+   "cv80",
+   "cv81",
+   "cv82",
+   "cv83",
+   "cv84",
+   "cv90",
+   "cv91",
+   "cv92",
+   "cv98",
+   "frac",
+   "liga",
+   "lnum",
+   "locl",
+   "onum",
+   "smcp",
+   "ss01",
+   "ss04",
+   "ss05",
+   "ss07",
+   "ss11",
+   "ss12",
+   "subs",
+   "sups"
+  ],
+  "GPOS": [
+   "kern",
+   "mark",
+   "mkmk"
+  ],
+  "mark_bases": {
+   "U+030D": 3389
+  },
+  "shaping": {
+   "o͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "O͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "ó͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "ò͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "ô͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "ō͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "ŏ͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "o̍͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "Ó͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "Ō͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "O̍͘": {
+    "nfc": "FLOATING",
+    "nfd": "FLOATING",
+    "same": true
+   },
+   "a̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "i̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "m̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "I̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "M̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "N̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "ḿ": {
+    "nfc": "single",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̄": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "m̂": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̂": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̄": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "i̋": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "iⁿ": {
+    "nfc": "single",
+    "nfd": "single",
+    "same": true
+   }
+  }
+ },
+ {
+  "file": "ebg/EBGaramond.ttf",
+  "name": "EB Garamond Regular",
+  "glyphs": 3247,
+  "has": {
+   "U+0358 dot above right (o͘)": false,
+   "U+030D vertical line (tone 8)": true,
+   "U+207F superscript n (ⁿ)": true,
+   "U+0301 acute": true,
+   "U+0300 grave": true,
+   "U+0302 circumflex": true,
+   "U+0304 macron": true,
+   "U+0306 breve (POJ t9)": true,
+   "U+030B double acute (Tâi-lô t9)": true,
+   "U+0131 dotless i": true,
+   "U+00B7 middle dot (o· fallback)": true,
+   "U+1D3A/ᴺ cap superscript N": true
+  },
+  "precomposed_missing": "",
+  "pua_count": 4,
+  "ivs_mappings": 0,
+  "GSUB": [
+   "aalt",
+   "c2pc",
+   "c2sc",
+   "case",
+   "dlig",
+   "dnom",
+   "frac",
+   "hist",
+   "hlig",
+   "liga",
+   "lnum",
+   "locl",
+   "numr",
+   "onum",
+   "ordn",
+   "pcap",
+   "pnum",
+   "rlig",
+   "sinf",
+   "smcp",
+   "ss01",
+   "ss02",
+   "ss03",
+   "ss04",
+   "ss05",
+   "ss06",
+   "ss07",
+   "subs",
+   "sups",
+   "swsh",
+   "tnum"
+  ],
+  "GPOS": [
+   "kern",
+   "mark"
+  ],
+  "mark_bases": {},
+  "shaping": {
+   "o͘": {
+    "nfc": "NOTDEF",
+    "nfd": "NOTDEF",
+    "same": true
+   },
+   "O͘": {
+    "nfc": "NOTDEF",
+    "nfd": "NOTDEF",
+    "same": true
+   },
+   "ó͘": {
+    "nfc": "NOTDEF",
+    "nfd": "NOTDEF",
+    "same": true
+   },
+   "ò͘": {
+    "nfc": "NOTDEF",
+    "nfd": "NOTDEF",
+    "same": true
+   },
+   "ô͘": {
+    "nfc": "NOTDEF",
+    "nfd": "NOTDEF",
+    "same": true
+   },
+   "ō͘": {
+    "nfc": "NOTDEF",
+    "nfd": "NOTDEF",
+    "same": true
+   },
+   "ŏ͘": {
+    "nfc": "NOTDEF",
+    "nfd": "NOTDEF",
+    "same": true
+   },
+   "o̍͘": {
+    "nfc": "NOTDEF",
+    "nfd": "NOTDEF",
+    "same": true
+   },
+   "Ó͘": {
+    "nfc": "NOTDEF",
+    "nfd": "NOTDEF",
+    "same": true
+   },
+   "Ō͘": {
+    "nfc": "NOTDEF",
+    "nfd": "NOTDEF",
+    "same": true
+   },
+   "O̍͘": {
+    "nfc": "NOTDEF",
+    "nfd": "NOTDEF",
+    "same": true
+   },
+   "a̍": {
+    "nfc": "zero-width-overstrike",
+    "nfd": "zero-width-overstrike",
+    "same": true
+   },
+   "i̍": {
+    "nfc": "zero-width-overstrike",
+    "nfd": "zero-width-overstrike",
+    "same": true
+   },
+   "m̍": {
+    "nfc": "zero-width-overstrike",
+    "nfd": "zero-width-overstrike",
+    "same": true
+   },
+   "n̍": {
+    "nfc": "zero-width-overstrike",
+    "nfd": "zero-width-overstrike",
+    "same": true
+   },
+   "I̍": {
+    "nfc": "zero-width-overstrike",
+    "nfd": "zero-width-overstrike",
+    "same": true
+   },
+   "M̍": {
+    "nfc": "zero-width-overstrike",
+    "nfd": "zero-width-overstrike",
+    "same": true
+   },
+   "N̍": {
+    "nfc": "zero-width-overstrike",
+    "nfd": "zero-width-overstrike",
+    "same": true
+   },
+   "ḿ": {
+    "nfc": "single",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̄": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "m̂": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̂": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̄": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "i̋": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "iⁿ": {
+    "nfc": "single",
+    "nfd": "single",
+    "same": true
+   }
+  }
+ },
+ {
+  "file": "sourcesans/TTF/SourceSans3-Regular.ttf",
+  "name": "Source Sans 3",
+  "glyphs": 2478,
+  "has": {
+   "U+0358 dot above right (o͘)": true,
+   "U+030D vertical line (tone 8)": true,
+   "U+207F superscript n (ⁿ)": true,
+   "U+0301 acute": true,
+   "U+0300 grave": true,
+   "U+0302 circumflex": true,
+   "U+0304 macron": true,
+   "U+0306 breve (POJ t9)": true,
+   "U+030B double acute (Tâi-lô t9)": true,
+   "U+0131 dotless i": true,
+   "U+00B7 middle dot (o· fallback)": true,
+   "U+1D3A/ᴺ cap superscript N": true
+  },
+  "precomposed_missing": "",
+  "pua_count": 0,
+  "ivs_mappings": 0,
+  "GSUB": [
+   "aalt",
+   "c2sc",
+   "case",
+   "ccmp",
+   "cv01",
+   "cv02",
+   "cv03",
+   "cv04",
+   "cv05",
+   "cv06",
+   "cv07",
+   "cv08",
+   "cv09",
+   "cv10",
+   "cv11",
+   "cv12",
+   "cv13",
+   "cv14",
+   "cv15",
+   "cv16",
+   "cv17",
+   "cv18",
+   "cv19",
+   "dlig",
+   "dnom",
+   "frac",
+   "hlig",
+   "liga",
+   "locl",
+   "numr",
+   "onum",
+   "ordn",
+   "pnum",
+   "salt",
+   "sinf",
+   "smcp",
+   "ss01",
+   "ss02",
+   "ss03",
+   "ss04",
+   "ss05",
+   "ss06",
+   "ss07",
+   "ss08",
+   "ss09",
+   "ss10",
+   "subs",
+   "sups",
+   "titl",
+   "zero"
+  ],
+  "GPOS": [
+   "kern",
+   "mark",
+   "mkmk",
+   "size"
+  ],
+  "mark_bases": {
+   "U+030D": 523,
+   "U+0358": 49
+  },
+  "0358_on": {
+   "o": true,
+   "O": true,
+   "ó": true,
+   "ò": true,
+   "ô": true,
+   "ō": true,
+   "ŏ": false,
+   "Ó": true,
+   "Ō": true
+  },
+  "shaping": {
+   "o͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "O͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "ó͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ò͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ô͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ō͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ŏ͘": {
+    "nfc": "zero-width-overstrike",
+    "nfd": "partial-ligature+overstrike",
+    "same": true
+   },
+   "o̍͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "Ó͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "Ō͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "O̍͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "a̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "i̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "m̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "I̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "M̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "N̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "ḿ": {
+    "nfc": "single",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̄": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "m̂": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̂": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̄": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "i̋": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "iⁿ": {
+    "nfc": "single",
+    "nfd": "single",
+    "same": true
+   }
+  }
+ },
+ {
+  "file": "tasa/TASA-Typeface-Collection-v2.012/fonts/TASAExplorer/ttf/TASAExplorer-Regular.ttf",
+  "name": "TASA Explorer Regular",
+  "glyphs": 659,
+  "has": {
+   "U+0358 dot above right (o͘)": true,
+   "U+030D vertical line (tone 8)": true,
+   "U+207F superscript n (ⁿ)": true,
+   "U+0301 acute": true,
+   "U+0300 grave": true,
+   "U+0302 circumflex": true,
+   "U+0304 macron": true,
+   "U+0306 breve (POJ t9)": true,
+   "U+030B double acute (Tâi-lô t9)": true,
+   "U+0131 dotless i": true,
+   "U+00B7 middle dot (o· fallback)": true,
+   "U+1D3A/ᴺ cap superscript N": true
+  },
+  "precomposed_missing": "",
+  "pua_count": 0,
+  "ivs_mappings": 0,
+  "GSUB": [
+   "aalt",
+   "case",
+   "ccmp",
+   "dnom",
+   "frac",
+   "locl",
+   "numr",
+   "ordn",
+   "pnum",
+   "sinf",
+   "subs",
+   "sups",
+   "tnum",
+   "zero"
+  ],
+  "GPOS": [
+   "kern",
+   "mark",
+   "mkmk"
+  ],
+  "mark_bases": {
+   "U+030D": 342,
+   "U+0358": 92
+  },
+  "0358_on": {
+   "o": true,
+   "O": true,
+   "ó": true,
+   "ò": true,
+   "ô": true,
+   "ō": true,
+   "ŏ": true,
+   "Ó": true,
+   "Ō": true
+  },
+  "shaping": {
+   "o͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "O͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ó͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ò͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ô͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ō͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ŏ͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "o̍͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "Ó͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "Ō͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "O̍͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "a̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "i̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "m̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "I̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "M̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "N̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "ḿ": {
+    "nfc": "single",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̄": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̂": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̂": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̄": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "i̋": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "iⁿ": {
+    "nfc": "single",
+    "nfd": "single",
+    "same": true
+   }
+  }
+ },
+ {
+  "file": "tasa/TASA-Typeface-Collection-v2.012/fonts/TASAOrbiter/ttf/TASAOrbiter-Regular.ttf",
+  "name": "TASA Orbiter Regular",
+  "glyphs": 698,
+  "has": {
+   "U+0358 dot above right (o͘)": true,
+   "U+030D vertical line (tone 8)": true,
+   "U+207F superscript n (ⁿ)": true,
+   "U+0301 acute": true,
+   "U+0300 grave": true,
+   "U+0302 circumflex": true,
+   "U+0304 macron": true,
+   "U+0306 breve (POJ t9)": true,
+   "U+030B double acute (Tâi-lô t9)": true,
+   "U+0131 dotless i": true,
+   "U+00B7 middle dot (o· fallback)": true,
+   "U+1D3A/ᴺ cap superscript N": true
+  },
+  "precomposed_missing": "",
+  "pua_count": 0,
+  "ivs_mappings": 0,
+  "GSUB": [
+   "aalt",
+   "case",
+   "ccmp",
+   "dnom",
+   "frac",
+   "locl",
+   "numr",
+   "ordn",
+   "pnum",
+   "sinf",
+   "ss01",
+   "subs",
+   "sups",
+   "tnum",
+   "zero"
+  ],
+  "GPOS": [
+   "kern",
+   "mark",
+   "mkmk"
+  ],
+  "mark_bases": {
+   "U+030D": 390,
+   "U+0358": 99
+  },
+  "0358_on": {
+   "o": true,
+   "O": true,
+   "ó": true,
+   "ò": true,
+   "ô": true,
+   "ō": true,
+   "ŏ": true,
+   "Ó": true,
+   "Ō": true
+  },
+  "shaping": {
+   "o͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "O͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ó͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ò͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ô͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ō͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ŏ͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "o̍͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "Ó͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "Ō͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "O̍͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "a̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "i̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "m̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "I̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "M̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "N̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "ḿ": {
+    "nfc": "single",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̄": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̂": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̂": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̄": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "i̋": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "iⁿ": {
+    "nfc": "single",
+    "nfd": "single",
+    "same": true
+   }
+  }
+ },
+ {
+  "file": "lessonone/LessonOne-Regular.ttf",
+  "name": "Lesson One Regular",
+  "glyphs": 538,
+  "has": {
+   "U+0358 dot above right (o͘)": true,
+   "U+030D vertical line (tone 8)": true,
+   "U+207F superscript n (ⁿ)": true,
+   "U+0301 acute": true,
+   "U+0300 grave": true,
+   "U+0302 circumflex": true,
+   "U+0304 macron": true,
+   "U+0306 breve (POJ t9)": true,
+   "U+030B double acute (Tâi-lô t9)": true,
+   "U+0131 dotless i": true,
+   "U+00B7 middle dot (o· fallback)": true,
+   "U+1D3A/ᴺ cap superscript N": true
+  },
+  "precomposed_missing": "",
+  "pua_count": 0,
+  "ivs_mappings": 0,
+  "GSUB": [
+   "aalt",
+   "ccmp",
+   "sinf",
+   "subs",
+   "sups"
+  ],
+  "GPOS": [
+   "kern",
+   "mark",
+   "mkmk"
+  ],
+  "mark_bases": {
+   "U+0358": 458,
+   "U+030D": 458
+  },
+  "0358_on": {
+   "o": true,
+   "O": true,
+   "ó": true,
+   "ò": true,
+   "ô": true,
+   "ō": true,
+   "ŏ": true,
+   "Ó": true,
+   "Ō": true
+  },
+  "shaping": {
+   "o͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "O͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ó͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ò͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ô͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ō͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ŏ͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "o̍͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "Ó͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "Ō͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "O̍͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "a̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "i̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "I̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "M̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "N̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ḿ": {
+    "nfc": "single",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̄": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̂": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̂": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̄": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "i̋": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "iⁿ": {
+    "nfc": "single",
+    "nfd": "single",
+    "same": true
+   }
+  }
+ },
+ {
+  "file": "tauhu/TauhuKhuleiong2507.otf",
+  "name": "Tāu-hū Khu-lé-iòng 25.07",
+  "glyphs": 313,
+  "has": {
+   "U+0358 dot above right (o͘)": true,
+   "U+030D vertical line (tone 8)": true,
+   "U+207F superscript n (ⁿ)": true,
+   "U+0301 acute": true,
+   "U+0300 grave": true,
+   "U+0302 circumflex": true,
+   "U+0304 macron": true,
+   "U+0306 breve (POJ t9)": true,
+   "U+030B double acute (Tâi-lô t9)": true,
+   "U+0131 dotless i": false,
+   "U+00B7 middle dot (o· fallback)": false,
+   "U+1D3A/ᴺ cap superscript N": true
+  },
+  "precomposed_missing": "",
+  "pua_count": 0,
+  "ivs_mappings": 0,
+  "GSUB": [
+   "aalt",
+   "calt",
+   "ccmp",
+   "sups",
+   "tnum"
+  ],
+  "GPOS": [
+   "kern"
+  ],
+  "mark_bases": {},
+  "shaping": {
+   "o͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "O͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ó͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ò͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ô͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ō͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ŏ͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "o̍͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "Ó͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "Ō͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "O̍͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "a̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "i̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "I̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "M̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "N̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ḿ": {
+    "nfc": "single",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̄": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̂": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̂": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̄": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "i̋": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "iⁿ": {
+    "nfc": "single",
+    "nfd": "single",
+    "same": true
+   }
+  }
+ },
+ {
+  "file": "tauhu/tauhu-mootng-master/TauhuMootng20.05-Regular.otf",
+  "name": "Tauhu Mootng 20.05 Regular",
+  "glyphs": 253,
+  "has": {
+   "U+0358 dot above right (o͘)": true,
+   "U+030D vertical line (tone 8)": true,
+   "U+207F superscript n (ⁿ)": true,
+   "U+0301 acute": false,
+   "U+0300 grave": true,
+   "U+0302 circumflex": true,
+   "U+0304 macron": true,
+   "U+0306 breve (POJ t9)": true,
+   "U+030B double acute (Tâi-lô t9)": true,
+   "U+0131 dotless i": false,
+   "U+00B7 middle dot (o· fallback)": false,
+   "U+1D3A/ᴺ cap superscript N": false
+  },
+  "precomposed_missing": "",
+  "pua_count": 0,
+  "ivs_mappings": 0,
+  "GSUB": [
+   "ccmp"
+  ],
+  "GPOS": [],
+  "mark_bases": {},
+  "shaping": {
+   "o͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "O͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ó͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ò͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ô͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ō͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ŏ͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "o̍͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "Ó͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "Ō͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "O̍͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "a̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "i̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "I̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "M̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "N̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ḿ": {
+    "nfc": "single",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̄": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̂": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̂": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̄": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "i̋": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "iⁿ": {
+    "nfc": "single",
+    "nfd": "single",
+    "same": true
+   }
+  }
+ },
+ {
+  "file": "tauhu/TauhuOo20.05-Regular.otf",
+  "name": "Tauhu Oo 20.05 Regular",
+  "glyphs": 13858,
+  "has": {
+   "U+0358 dot above right (o͘)": true,
+   "U+030D vertical line (tone 8)": true,
+   "U+207F superscript n (ⁿ)": true,
+   "U+0301 acute": false,
+   "U+0300 grave": true,
+   "U+0302 circumflex": true,
+   "U+0304 macron": true,
+   "U+0306 breve (POJ t9)": true,
+   "U+030B double acute (Tâi-lô t9)": true,
+   "U+0131 dotless i": false,
+   "U+00B7 middle dot (o· fallback)": true,
+   "U+1D3A/ᴺ cap superscript N": false
+  },
+  "precomposed_missing": "",
+  "pua_count": 1,
+  "ivs_mappings": 0,
+  "GSUB": [
+   "aalt",
+   "ccmp",
+   "vert"
+  ],
+  "GPOS": [
+   "kern"
+  ],
+  "mark_bases": {},
+  "shaping": {
+   "o͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "O͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ó͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ò͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ô͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ō͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ŏ͘": {
+    "nfc": "zero-width-overstrike",
+    "nfd": "partial-ligature+overstrike",
+    "same": true
+   },
+   "o̍͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "Ó͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "Ō͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "O̍͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "a̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "i̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "I̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "M̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "N̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ḿ": {
+    "nfc": "single",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̄": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̂": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̂": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̄": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "i̋": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "iⁿ": {
+    "nfc": "single",
+    "nfd": "single",
+    "same": true
+   }
+  }
+ },
+ {
+  "file": "huninn/jf-openhuninn-2.1.ttf",
+  "name": "jf-openhuninn-2.1",
+  "glyphs": 12260,
+  "has": {
+   "U+0358 dot above right (o͘)": true,
+   "U+030D vertical line (tone 8)": true,
+   "U+207F superscript n (ⁿ)": true,
+   "U+0301 acute": true,
+   "U+0300 grave": true,
+   "U+0302 circumflex": true,
+   "U+0304 macron": true,
+   "U+0306 breve (POJ t9)": true,
+   "U+030B double acute (Tâi-lô t9)": true,
+   "U+0131 dotless i": true,
+   "U+00B7 middle dot (o· fallback)": true,
+   "U+1D3A/ᴺ cap superscript N": true
+  },
+  "precomposed_missing": "",
+  "pua_count": 1,
+  "ivs_mappings": 0,
+  "GSUB": [
+   "aalt",
+   "case",
+   "ccmp",
+   "dlig",
+   "dnom",
+   "frac",
+   "fwid",
+   "hwid",
+   "liga",
+   "locl",
+   "numr",
+   "ordn",
+   "pnum",
+   "sinf",
+   "subs",
+   "sups",
+   "tnum",
+   "vert",
+   "vkna",
+   "vrt2"
+  ],
+  "GPOS": [
+   "kern",
+   "mark",
+   "mkmk"
+  ],
+  "mark_bases": {
+   "U+0358": 572,
+   "U+030D": 572
+  },
+  "0358_on": {
+   "o": true,
+   "O": true,
+   "ó": true,
+   "ò": true,
+   "ô": true,
+   "ō": true,
+   "ŏ": true,
+   "Ó": true,
+   "Ō": true
+  },
+  "shaping": {
+   "o͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "O͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ó͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ò͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ô͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ō͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ŏ͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "o̍͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "Ó͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "Ō͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "O̍͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "a̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "i̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "I̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "M̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "N̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ḿ": {
+    "nfc": "single",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̄": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̂": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̂": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̄": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "i̋": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "iⁿ": {
+    "nfc": "single",
+    "nfd": "single",
+    "same": true
+   }
+  }
+ },
+ {
+  "file": "iansui/Iansui-Regular.ttf",
+  "name": "Iansui Regular",
+  "glyphs": 15215,
+  "has": {
+   "U+0358 dot above right (o͘)": true,
+   "U+030D vertical line (tone 8)": true,
+   "U+207F superscript n (ⁿ)": true,
+   "U+0301 acute": true,
+   "U+0300 grave": true,
+   "U+0302 circumflex": true,
+   "U+0304 macron": true,
+   "U+0306 breve (POJ t9)": true,
+   "U+030B double acute (Tâi-lô t9)": true,
+   "U+0131 dotless i": true,
+   "U+00B7 middle dot (o· fallback)": true,
+   "U+1D3A/ᴺ cap superscript N": true
+  },
+  "precomposed_missing": "",
+  "pua_count": 0,
+  "ivs_mappings": 0,
+  "GSUB": [
+   "aalt",
+   "afrc",
+   "ccmp",
+   "dlig",
+   "dnom",
+   "frac",
+   "fwid",
+   "hkna",
+   "hwid",
+   "ital",
+   "liga",
+   "nalt",
+   "numr",
+   "ordn",
+   "pwid",
+   "qwid",
+   "ruby",
+   "salt",
+   "sinf",
+   "subs",
+   "sups",
+   "twid",
+   "vert",
+   "vkna",
+   "zero"
+  ],
+  "GPOS": [
+   "abvm",
+   "halt",
+   "kern",
+   "mark",
+   "mkmk",
+   "palt",
+   "vhal",
+   "vkrn",
+   "vpal"
+  ],
+  "mark_bases": {
+   "U+030D": 146
+  },
+  "shaping": {
+   "o͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "O͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ó͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ò͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ô͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ō͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ŏ͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "o̍͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "Ó͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "Ō͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "O̍͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "a̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "i̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "I̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "M̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "N̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ḿ": {
+    "nfc": "single",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̄": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̂": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̂": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̄": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "i̋": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "iⁿ": {
+    "nfc": "single",
+    "nfd": "single",
+    "same": true
+   }
+  }
+ },
+ {
+  "file": "iming/I.Ming-8.10.ttf",
+  "name": "I.Ming",
+  "glyphs": 60597,
+  "has": {
+   "U+0358 dot above right (o͘)": true,
+   "U+030D vertical line (tone 8)": true,
+   "U+207F superscript n (ⁿ)": true,
+   "U+0301 acute": true,
+   "U+0300 grave": true,
+   "U+0302 circumflex": true,
+   "U+0304 macron": true,
+   "U+0306 breve (POJ t9)": true,
+   "U+030B double acute (Tâi-lô t9)": true,
+   "U+0131 dotless i": true,
+   "U+00B7 middle dot (o· fallback)": true,
+   "U+1D3A/ᴺ cap superscript N": true
+  },
+  "precomposed_missing": "",
+  "pua_count": 5,
+  "ivs_mappings": 16,
+  "GSUB": [
+   "aalt",
+   "calt",
+   "ccmp",
+   "dlig",
+   "dnom",
+   "frac",
+   "fwid",
+   "hwid",
+   "liga",
+   "nalt",
+   "numr",
+   "pwid",
+   "ruby",
+   "smcp",
+   "ss01",
+   "ss02",
+   "ss03",
+   "ss18",
+   "ss19",
+   "ss20",
+   "subs",
+   "sups",
+   "vert",
+   "zero"
+  ],
+  "GPOS": [
+   "halt",
+   "kern",
+   "mark",
+   "mkmk",
+   "palt",
+   "vhal",
+   "vpal"
+  ],
+  "mark_bases": {
+   "U+030D": 544,
+   "U+0358": 155
+  },
+  "0358_on": {
+   "o": true,
+   "O": false,
+   "ó": false,
+   "ò": false,
+   "ô": false,
+   "ō": true,
+   "ŏ": false,
+   "Ó": false,
+   "Ō": false
+  },
+  "shaping": {
+   "o͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "O͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ó͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ò͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ô͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ō͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ŏ͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "o̍͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "Ó͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "Ō͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "O̍͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "a̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "i̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "I̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "M̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "N̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ḿ": {
+    "nfc": "single",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̄": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̂": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̂": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̄": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "i̋": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "iⁿ": {
+    "nfc": "single",
+    "nfd": "single",
+    "same": true
+   }
+  }
+ },
+ {
+  "file": "genyo/GenYoMin2TW-R.otf",
+  "name": "GenYoMin2 TW R",
+  "glyphs": 37684,
+  "has": {
+   "U+0358 dot above right (o͘)": true,
+   "U+030D vertical line (tone 8)": true,
+   "U+207F superscript n (ⁿ)": true,
+   "U+0301 acute": true,
+   "U+0300 grave": true,
+   "U+0302 circumflex": true,
+   "U+0304 macron": true,
+   "U+0306 breve (POJ t9)": true,
+   "U+030B double acute (Tâi-lô t9)": true,
+   "U+0131 dotless i": false,
+   "U+00B7 middle dot (o· fallback)": true,
+   "U+1D3A/ᴺ cap superscript N": true
+  },
+  "precomposed_missing": "",
+  "pua_count": 0,
+  "ivs_mappings": 0,
+  "GSUB": [
+   "aalt",
+   "ccmp",
+   "dlig",
+   "fwid",
+   "hwid",
+   "liga",
+   "pwid",
+   "vert"
+  ],
+  "GPOS": [
+   "halt",
+   "kern",
+   "palt",
+   "vhal",
+   "vkrn",
+   "vpal"
+  ],
+  "mark_bases": {},
+  "shaping": {
+   "o͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "O͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ó͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ò͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ô͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ō͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ŏ͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "o̍͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "Ó͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "Ō͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "O̍͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "a̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "i̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "I̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "M̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "N̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ḿ": {
+    "nfc": "single",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̄": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̂": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̂": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̄": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "i̋": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "iⁿ": {
+    "nfc": "single",
+    "nfd": "single",
+    "same": true
+   }
+  }
+ },
+ {
+  "file": "wdxl/WD-XLLubrifontTC-Regular.otf",
+  "name": "WD-XL Lubrifont TC",
+  "glyphs": 18082,
+  "has": {
+   "U+0358 dot above right (o͘)": true,
+   "U+030D vertical line (tone 8)": true,
+   "U+207F superscript n (ⁿ)": true,
+   "U+0301 acute": true,
+   "U+0300 grave": true,
+   "U+0302 circumflex": true,
+   "U+0304 macron": true,
+   "U+0306 breve (POJ t9)": true,
+   "U+030B double acute (Tâi-lô t9)": true,
+   "U+0131 dotless i": true,
+   "U+00B7 middle dot (o· fallback)": true,
+   "U+1D3A/ᴺ cap superscript N": true
+  },
+  "precomposed_missing": "",
+  "pua_count": 0,
+  "ivs_mappings": 24,
+  "GSUB": [
+   "aalt",
+   "ccmp",
+   "dlig",
+   "jp04",
+   "jp83",
+   "jp90",
+   "liga",
+   "locl",
+   "salt",
+   "smpl",
+   "ss01",
+   "ss18",
+   "ss19",
+   "ss20",
+   "sups",
+   "trad",
+   "vert",
+   "vrt2"
+  ],
+  "GPOS": [
+   "chws",
+   "halt",
+   "mark",
+   "mkmk",
+   "vchw",
+   "vhal"
+  ],
+  "mark_bases": {
+   "U+0358": 201,
+   "U+030D": 201
+  },
+  "0358_on": {
+   "o": true,
+   "O": true,
+   "ó": true,
+   "ò": true,
+   "ô": true,
+   "ō": true,
+   "ŏ": true,
+   "Ó": true,
+   "Ō": true
+  },
+  "shaping": {
+   "o͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "O͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ó͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ò͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ô͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ō͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ŏ͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "o̍͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "Ó͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "Ō͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "O̍͘": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "a̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "i̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "I̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "M̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "N̍": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "ḿ": {
+    "nfc": "single",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̄": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̂": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̂": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "n̄": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "i̋": {
+    "nfc": "ligature",
+    "nfd": "ligature",
+    "same": true
+   },
+   "iⁿ": {
+    "nfc": "single",
+    "nfd": "single",
+    "same": true
+   }
+  }
+ },
+ {
+  "file": "taigivs/TaigiHuninn-POJ-R.ttf",
+  "name": "Taigi Huninn POJ R",
+  "glyphs": 17128,
+  "has": {
+   "U+0358 dot above right (o͘)": true,
+   "U+030D vertical line (tone 8)": true,
+   "U+207F superscript n (ⁿ)": true,
+   "U+0301 acute": true,
+   "U+0300 grave": true,
+   "U+0302 circumflex": true,
+   "U+0304 macron": true,
+   "U+0306 breve (POJ t9)": true,
+   "U+030B double acute (Tâi-lô t9)": true,
+   "U+0131 dotless i": false,
+   "U+00B7 middle dot (o· fallback)": true,
+   "U+1D3A/ᴺ cap superscript N": false
+  },
+  "precomposed_missing": "",
+  "pua_count": 0,
+  "ivs_mappings": 8021,
+  "GSUB": [
+   "aalt",
+   "ccmp",
+   "vert",
+   "vrt2"
+  ],
+  "GPOS": [],
+  "mark_bases": {},
+  "shaping": {
+   "o͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "O͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "ó͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ò͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ô͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ō͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ŏ͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "o̍͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "Ó͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "Ō͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "O̍͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "a̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "i̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "m̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "I̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "M̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "N̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "ḿ": {
+    "nfc": "single",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̄": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "m̂": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̂": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̄": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "i̋": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "iⁿ": {
+    "nfc": "single",
+    "nfd": "single",
+    "same": true
+   }
+  }
+ },
+ {
+  "file": "taigivs/TaigiIansui-TL-R.ttf",
+  "name": "Taigi Iansui TL R",
+  "glyphs": 17156,
+  "has": {
+   "U+0358 dot above right (o͘)": true,
+   "U+030D vertical line (tone 8)": true,
+   "U+207F superscript n (ⁿ)": true,
+   "U+0301 acute": true,
+   "U+0300 grave": true,
+   "U+0302 circumflex": true,
+   "U+0304 macron": true,
+   "U+0306 breve (POJ t9)": true,
+   "U+030B double acute (Tâi-lô t9)": true,
+   "U+0131 dotless i": false,
+   "U+00B7 middle dot (o· fallback)": true,
+   "U+1D3A/ᴺ cap superscript N": false
+  },
+  "precomposed_missing": "",
+  "pua_count": 0,
+  "ivs_mappings": 8021,
+  "GSUB": [
+   "aalt",
+   "ccmp",
+   "vert",
+   "vrt2"
+  ],
+  "GPOS": [],
+  "mark_bases": {},
+  "shaping": {
+   "o͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "O͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "ó͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ò͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ô͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ō͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ŏ͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "o̍͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "Ó͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "Ō͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "O̍͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "a̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "i̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "m̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "I̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "M̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "N̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "ḿ": {
+    "nfc": "single",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̄": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "m̂": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̂": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̄": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "i̋": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "iⁿ": {
+    "nfc": "single",
+    "nfd": "single",
+    "same": true
+   }
+  }
+ },
+ {
+  "file": "/System/Library/Fonts/Supplemental/Arial.ttf",
+  "name": "Arial",
+  "glyphs": 3381,
+  "has": {
+   "U+0358 dot above right (o͘)": true,
+   "U+030D vertical line (tone 8)": true,
+   "U+207F superscript n (ⁿ)": true,
+   "U+0301 acute": true,
+   "U+0300 grave": true,
+   "U+0302 circumflex": true,
+   "U+0304 macron": true,
+   "U+0306 breve (POJ t9)": true,
+   "U+030B double acute (Tâi-lô t9)": true,
+   "U+0131 dotless i": true,
+   "U+00B7 middle dot (o· fallback)": true,
+   "U+1D3A/ᴺ cap superscript N": true
+  },
+  "precomposed_missing": "",
+  "pua_count": 0,
+  "ivs_mappings": 0,
+  "GSUB": [
+   "ccmp",
+   "dlig",
+   "fina",
+   "init",
+   "isol",
+   "liga",
+   "locl",
+   "medi",
+   "rlig"
+  ],
+  "GPOS": [
+   "kern",
+   "mark",
+   "mkmk"
+  ],
+  "mark_bases": {
+   "U+030D": 733
+  },
+  "shaping": {
+   "o͘": {
+    "nfc": "zero-width-overstrike",
+    "nfd": "zero-width-overstrike",
+    "same": true
+   },
+   "O͘": {
+    "nfc": "zero-width-overstrike",
+    "nfd": "zero-width-overstrike",
+    "same": true
+   },
+   "ó͘": {
+    "nfc": "zero-width-overstrike",
+    "nfd": "partial-ligature+overstrike",
+    "same": true
+   },
+   "ò͘": {
+    "nfc": "zero-width-overstrike",
+    "nfd": "partial-ligature+overstrike",
+    "same": true
+   },
+   "ô͘": {
+    "nfc": "zero-width-overstrike",
+    "nfd": "partial-ligature+overstrike",
+    "same": true
+   },
+   "ō͘": {
+    "nfc": "zero-width-overstrike",
+    "nfd": "partial-ligature+overstrike",
+    "same": true
+   },
+   "ŏ͘": {
+    "nfc": "zero-width-overstrike",
+    "nfd": "partial-ligature+overstrike",
+    "same": true
+   },
+   "o̍͘": {
+    "nfc": "gpos-partial",
+    "nfd": "gpos-partial",
+    "same": true
+   },
+   "Ó͘": {
+    "nfc": "zero-width-overstrike",
+    "nfd": "partial-ligature+overstrike",
+    "same": true
+   },
+   "Ō͘": {
+    "nfc": "zero-width-overstrike",
+    "nfd": "partial-ligature+overstrike",
+    "same": true
+   },
+   "O̍͘": {
+    "nfc": "gpos-partial",
+    "nfd": "gpos-partial",
+    "same": true
+   },
+   "a̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "i̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "m̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "I̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "M̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "N̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "ḿ": {
+    "nfc": "single",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̄": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "m̂": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̂": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̄": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "i̋": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "iⁿ": {
+    "nfc": "single",
+    "nfd": "single",
+    "same": true
+   }
+  }
+ },
+ {
+  "file": "/System/Library/Fonts/Geneva.ttf",
+  "name": "Geneva",
+  "glyphs": 3742,
+  "has": {
+   "U+0358 dot above right (o͘)": true,
+   "U+030D vertical line (tone 8)": true,
+   "U+207F superscript n (ⁿ)": true,
+   "U+0301 acute": true,
+   "U+0300 grave": true,
+   "U+0302 circumflex": true,
+   "U+0304 macron": true,
+   "U+0306 breve (POJ t9)": true,
+   "U+030B double acute (Tâi-lô t9)": true,
+   "U+0131 dotless i": true,
+   "U+00B7 middle dot (o· fallback)": true,
+   "U+1D3A/ᴺ cap superscript N": true
+  },
+  "precomposed_missing": "",
+  "pua_count": 1,
+  "ivs_mappings": 0,
+  "GSUB": [],
+  "GPOS": [],
+  "mark_bases": {},
+  "shaping": {
+   "o͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "O͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "ó͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ò͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ô͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ō͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ŏ͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "o̍͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "Ó͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "Ō͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "O̍͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "a̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "i̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "m̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "I̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "M̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "N̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "ḿ": {
+    "nfc": "single",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̄": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "m̂": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̂": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̄": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "i̋": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "iⁿ": {
+    "nfc": "single",
+    "nfd": "single",
+    "same": true
+   }
+  }
+ },
+ {
+  "file": "/System/Library/Fonts/Helvetica.ttc",
+  "name": "Helvetica",
+  "glyphs": 2252,
+  "has": {
+   "U+0358 dot above right (o͘)": true,
+   "U+030D vertical line (tone 8)": true,
+   "U+207F superscript n (ⁿ)": true,
+   "U+0301 acute": true,
+   "U+0300 grave": true,
+   "U+0302 circumflex": true,
+   "U+0304 macron": true,
+   "U+0306 breve (POJ t9)": true,
+   "U+030B double acute (Tâi-lô t9)": true,
+   "U+0131 dotless i": true,
+   "U+00B7 middle dot (o· fallback)": true,
+   "U+1D3A/ᴺ cap superscript N": false
+  },
+  "precomposed_missing": "",
+  "pua_count": 11,
+  "ivs_mappings": 0,
+  "GSUB": [],
+  "GPOS": [],
+  "mark_bases": {},
+  "shaping": {
+   "o͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "O͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "ó͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ò͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ô͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ō͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ŏ͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "o̍͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "Ó͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "Ō͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "O̍͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "a̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "i̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "m̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "I̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "M̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "N̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "ḿ": {
+    "nfc": "single",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̄": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "m̂": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̂": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̄": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "i̋": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "iⁿ": {
+    "nfc": "single",
+    "nfd": "single",
+    "same": true
+   }
+  }
+ },
+ {
+  "file": "/System/Library/Fonts/Menlo.ttc",
+  "name": "Menlo Regular",
+  "glyphs": 3157,
+  "has": {
+   "U+0358 dot above right (o͘)": true,
+   "U+030D vertical line (tone 8)": true,
+   "U+207F superscript n (ⁿ)": true,
+   "U+0301 acute": true,
+   "U+0300 grave": true,
+   "U+0302 circumflex": true,
+   "U+0304 macron": true,
+   "U+0306 breve (POJ t9)": true,
+   "U+030B double acute (Tâi-lô t9)": true,
+   "U+0131 dotless i": true,
+   "U+00B7 middle dot (o· fallback)": true,
+   "U+1D3A/ᴺ cap superscript N": true
+  },
+  "precomposed_missing": "",
+  "pua_count": 1,
+  "ivs_mappings": 0,
+  "GSUB": [],
+  "GPOS": [],
+  "mark_bases": {},
+  "shaping": {
+   "o͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "O͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "ó͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ò͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ô͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ō͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "ŏ͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "o̍͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "Ó͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "Ō͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "partial-ligature+gpos",
+    "same": true
+   },
+   "O̍͘": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "a̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "i̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "m̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "I̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "M̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "N̍": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "ḿ": {
+    "nfc": "single",
+    "nfd": "ligature",
+    "same": true
+   },
+   "m̄": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "m̂": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̂": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "n̄": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "i̋": {
+    "nfc": "gpos-anchor",
+    "nfd": "gpos-anchor",
+    "same": true
+   },
+   "iⁿ": {
+    "nfc": "single",
+    "nfd": "single",
+    "same": true
+   }
+  }
+ }
+]

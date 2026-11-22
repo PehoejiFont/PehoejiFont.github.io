@@ -1,0 +1,244 @@
+You are reviewing a research report. DO NOT modify any files; reply with text only.
+
+Do not use any tools or read any files: the full report is pasted below between <report> tags. Answer from your own expertise.
+It explains how fonts implement Pe̍h-ōe-jī (POJ, Taiwanese Hokkien romanization) and how Unicode combining sequences reach a font.
+
+Check it as a font-engineering and Unicode expert. For each point give: VERDICT (correct / wrong / incomplete / unverifiable), and a short reason with sources (Unicode spec section, OpenType spec, HarfBuzz/CoreText/DirectWrite behaviour) where you can.
+Focus on:
+1. Unicode facts: canonical combining classes (U+0358=232, U+030D=230), canonical reordering, precomposed table in §2.1, the claim that no new precomposed letters will be encoded, NFKC of U+207F, Soft_Dotted handling of i.
+2. Shaping-engine behaviour: does HarfBuzz reorder marks before GSUB; HarfBuzz compose/decompose via cmap; fallback mark positioning in HarfBuzz vs CoreText vs DirectWrite; browsers disabling `liga` when letter-spacing is non-zero.
+3. Are there POJ/Tâi-lô input encodings or font techniques the report MISSES (e.g. other PUA conventions, IMEs that emit specific forms, Tâi-lô specific marks, uppercase/all-caps issues, hyphen/double-hyphen, `case`, `locl`, Vietnamese-style stacking, variable fonts, CFF vs TrueType, web fonts subsetting dropping marks, PDF text extraction)?
+4. Errors or risky advice in the feature-file sketch in §4.3 (syntax and logic).
+5. Anything in the survey table that looks inconsistent.
+End with a prioritized list of concrete corrections/additions.
+
+<report>
+# How POJ fonts work: research notes
+
+Research date: 2026-11-20. Source list: [狗公會曉學台語 › 字體（font）](https://oh.taigi.info/siataibun/jithe/).
+Tools and raw data: `tools/poj_font_audit.py`, `tools/poj_shape_test.py`, `tools/poj_specimen.py`, `data/poj-font-audit.json`, `docs/img/specimen-*.png`.
+
+All shaping results below come from **HarfBuzz** (uharfbuzz), the shaping engine in Chrome, Firefox, Android, LibreOffice, and Linux desktops. CoreText (macOS/iOS, Safari) and DirectWrite (Windows, Word) were not tested directly. Where they are known to differ, this report says so.
+
+---
+
+## 1. How POJ differs from an English font
+
+An English font maps one key to one glyph. POJ text is mostly **base letter + one or two combining marks**, and Unicode has no single code point for most of the results:
+
+| Need | Why it is hard |
+|---|---|
+| **o͘** = `o` + U+0358 COMBINING DOT ABOVE RIGHT | There is no precomposed o͘. The dot goes at the **top right**, not centred like other accents. |
+| **o͘ + tone** (ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘, and capitals) | The letter carries **two marks at once**: the tone mark centred above, the dot at the top right. They must not collide. |
+| **8th tone** U+030D COMBINING VERTICAL LINE ABOVE | No precomposed letter has it (a̍ e̍ i̍ o̍ u̍ m̍ n̍ are always sequences). Most Latin fonts don't have the glyph at all. |
+| **Tones on m and n** (syllabic ḿ m̀ m̂ m̄ m̍, ń ǹ n̂ n̄ n̍g) | Only ḿ ń ǹ (and capitals) exist precomposed. m̀ m̂ m̄ n̂ n̄ have to be built from marks. |
+| **i + tone** (í ì î ī ĭ i̍) | `i` is Soft_Dotted. Its dot must go when a mark sits on it, so i̍ shows **ı + ̍**, not i with a dot under the line. Precomposed í etc. already do this. The **sequence** i + U+030D needs the font to swap in dotless ı. |
+| **ⁿ** U+207F SUPERSCRIPT LATIN SMALL LETTER N | It is a separate letter (category Lm), not a mark. Many fonts lack it. Its NFKC form is plain `n` (see §2.4). |
+| **Tâi-lô** as well (same readers, same fonts) | Tâi-lô adds 9th tone U+030B double acute (only ő ű are precomposed) and uses `oo`/`nn` instead of o͘/ⁿ. |
+| **Han-Lo** (漢羅) mixed text | The Latin part of a CJK font has to support all of the above, and ruby (POJ over Han characters) needs IVS or HTML ruby (§2.6). |
+
+A test line that covers the hard cases:
+
+```
+o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ O͘ Ó͘ Ō͘ O̍͘ | a̍ i̍ m̍ n̍g I̍ M̍ | ḿ m̀ m̂ m̄ ǹ n̂ n̄ | iⁿ sⁿ | i̋ ő | Pe̍h-ōe-jī Lâu Ô͘-chhiû
+```
+
+> POJ rule to remember when testing: in syllabic **ng** the tone mark goes on the **n**: `n̍g`, `n̂g`, not `ng̍`. (My first test used `ng̍` by mistake, which made a misleading result in the Tauhu Khu-lé-iòng font.)
+
+---
+
+## 2. How Unicode combines characters (every input form a font must accept)
+
+The same visible syllable can reach the font in several byte sequences. **A POJ font has to render all of them the same way.**
+
+### 2.1 Precomposed (NFC) and decomposed (NFD)
+
+| Form | ó͘ (o + acute + dot) | Who produces it |
+|---|---|---|
+| NFC | `U+00F3 ó` + `U+0358` | Most text on the web, macOS input, most IMEs, NFC-normalising databases |
+| NFD | `U+006F o` + `U+0301` + `U+0358` | macOS file names (HFS+/APFS legacy), some IMEs, copy from PDFs |
+| Mixed | Either of the above inside one document | Any text edited by several tools |
+
+Which POJ letters have a precomposed code point (Unicode 17.0):
+
+| base | ´ 2 | ` 3 | ^ 5 | ¯ 7 | ˘ 9 | ̍ 8 | ̋ (TL 9) | ͘ (o͘) |
+|---|---|---|---|---|---|---|---|---|
+| a e i | ✓ | ✓ | ✓ | ✓ | ✓ | – | – | – |
+| o u | ✓ | ✓ | ✓ | ✓ | ✓ | – | ✓ (ő ű) | – |
+| m | ✓ ḿ | – | – | – | – | – | – | n/a |
+| n | ✓ ń | ✓ ǹ | – | – | – | – | – | n/a |
+
+Capitals follow the same pattern. **No letter with U+030D or U+0358 is precomposed, and none ever will be**: Unicode's stability policy closed the door to new precomposed letters in 2001. Every o͘ and every 8th tone is always a combining sequence.
+
+### 2.2 Canonical ordering (mark order)
+
+Every combining mark has a Canonical Combining Class (ccc):
+
+| Mark | ccc |
+|---|---|
+| U+0300 0301 0302 0304 0306 030B **030D** | 230 (above) |
+| **U+0358** dot above right | **232** (above right) |
+
+Normalisation sorts marks by ccc, so `o + U+0358 + U+0301` (dot typed first) normalises to `o + U+0301 + U+0358` → NFC `ó + U+0358`. In practice:
+
+- After any normalisation, **the tone mark always comes before the dot**, and the NFC form is a **precomposed toned vowel + U+0358**. A font **must** be able to attach U+0358 to `óòôōŏ ÓÒÔŌŎ`, not just to `o O`.
+- HarfBuzz reorders marks by ccc before applying GSUB (verified: `o 0358 0301` and `o 0301 0358` shaped identically in every font tested). So a GSUB ligature written for the non-canonical order (`o 0358 0301`) **never matches** in HarfBuzz. NunitoPOJ has 32 such ligatures under `liga`. They only look fine because GPOS anchors cover the same cases.
+- U+030D and the other tone marks share ccc 230, so their relative order is kept. `o̍͘` is `o 030D 0358`.
+
+### 2.3 How shaping engines join it up
+
+A shaping engine (HarfBuzz, CoreText, DirectWrite/Uniscribe) does roughly this for each cluster:
+
+1. **Normalise / reorder** marks (HarfBuzz: canonical reordering by ccc).
+2. **Compose or decompose by cmap**: if the font has a glyph for the precomposed code point (ó), use it. If it doesn't, decompose (o + ◌́). HarfBuzz prefers composed forms when the font has them, then uses decomposed forms as fallback.
+3. **GSUB `ccmp`** (always on, cannot be switched off by the user or CSS): the font's own decompose/compose rules, dotless-i swap, capital-form marks, and precomposed ligatures for clusters such as `o 0301 0358`.
+4. Other GSUB features (`locl`, `liga`, `case`, …). **`liga` can be turned off**: CSS `font-variant-ligatures: none`, and Chrome/Safari disable optional ligatures when `letter-spacing` ≠ 0. The Kaukhia font's devlog "Browser Ligature Issue" is probably this. **POJ glyph building must never live in `liga`.**
+5. **GPOS `mark`** (mark-to-base anchors) and **`mkmk`** (mark-to-mark, stacking) position the marks.
+6. **Fallback**: if the font has no GPOS `mark`, HarfBuzz places marks by ccc on its own. CoreText and DirectWrite **do not** do this the same way, so text that looks right in Chrome can collide or float in Word or Pages. Geneva, Helvetica and Menlo (macOS system fonts with no `mark` feature) render through HarfBuzz fallback, and the dot on `Ó͘ Ō͘` jumps far above the capital (see specimen-0.png).
+
+### 2.4 Superscript ⁿ (U+207F)
+
+- It is a letter (Lm), not a mark. It takes its own advance width and needs no anchors.
+- Its compatibility decomposition is `<super> n`, so **NFKC/NFKD turn `hiⁿ` into `hin`**. Search engines, some databases and "normalize width" functions do this, and the nasal mark is lost. Fonts can't fix this. Text pipelines must use **NFC, never NFKC**.
+- `"sⁿ".upper()` is `Sⁿ`: there is no capital ⁿ. In all-caps text people write `Sⁿ` or `SNN`. A font can give ⁿ a `.case` form in `case` if the designer wants it.
+- Some old text uses `ⁿ` = U+1D3A or a styled `n` (HTML `<sup>n</sup>`). Those are input problems, not font problems.
+
+### 2.5 Legacy and substitute encodings seen in real text
+
+| Method | Example | Font behaviour needed |
+|---|---|---|
+| Combining U+0358 (standard since Unicode 4.1, 2005) | `o͘` | Anchors or ccmp ligatures (§3) |
+| Middle dot U+00B7 / U+02D9 / `o·` | `o·` | Nothing (spacing punctuation). Should be converted to U+0358 on input. |
+| Typewriter / ASCII substitutes | `oo`, `ou`, `o'`, `nn`, `N` | Nothing. These are spellings, not glyphs. `oo`/`nn` are also the Tâi-lô spellings. |
+| **Private Use Area** | aiongg's POJ fonts / NunitoPOJ: U+E400–E435 = precomposed o͘ forms for "legacy software that does not support OpenType" | PUA works only with that exact font. Avoid in new text. A font can still map these slots so old documents render. |
+| Numbered tones (TLPA/POJ numbers) | `peh8-oe7-ji7` | Nothing. A converter or IME turns them into marks. |
+
+### 2.6 Ideographic Variation Sequences (Han-Lo ruby)
+
+ButTaiwan's **字咍 taigivs** fonts (TaigiHuninn/TaigiIansui/TaigiKaiStd, OFL) use the cmap format 14 (Unicode Variation Sequences) table: a Han character + a variation selector (U+E0100…) selects a glyph that has the Taigi reading drawn **inside** the glyph as ruby (8,021 IVS mappings per font). The font variants (from the fonts' `name` tables) are POJ (白話字), TL (台羅 Tâi-lô), HI (方音, Taiwanese Phonetic Symbols, bopomofo-style), KN (假名, Taiwanese kana), and two-reading combinations POJHI, POJKN, TLHI, TLKN. Their README says the Taiwanese version uses **IVS only, not GSUB**. Switching the font file changes the romanisation shown.
+
+This is the only way to get "POJ above Hanji" in plain text without HTML `<ruby>`. It is a separate track from Latin POJ support. Note that the Latin part of these fonts has **no GPOS `mark` feature and does not swap in dotless i** (i̍ keeps its dot), so their running POJ text relies on HarfBuzz fallback.
+
+---
+
+## 3. How the fonts implement POJ: four techniques
+
+Measured on the free fonts from the list (HarfBuzz, NFC and NFD of 26 test clusters per font):
+
+| Technique | What happens | Examples | Pros | Cons |
+|---|---|---|---|---|
+| **A. GPOS mark anchors** | `o` + separate mark glyph(s), positioned by `mark` (top / topright anchors) and `mkmk` | Source Sans 3, POJ Chhiu-ki, Arial (030D) | Small, scalable to any base, standard OpenType | Needs a `topright` anchor on **every** base the dot can follow, including precomposed `óòôōŏ ÓÒÔŌŎ`. Easy to miss (I.Ming has the anchor on `o ō` only). |
+| **B. Precomposed glyphs via `ccmp` ligatures** | `o 0301 0358` → one glyph `oopoj_acutecomb` | Lesson One, jf open 粉圓 2.1, Iansui, TASA (partly), Tauhu, I.Ming, GenYo, WD-XL Lubrifont | Designer controls every shape. Works even where mark positioning is weak (old apps, some PDF tools). | Glyph count grows. Must list **both mark orders** and **both NFC and NFD inputs** (Lesson One does). Any uncovered combination falls back to technique A, so anchors are still needed. |
+| **C. Spacing dot** | U+0358 is given its own advance width (Gentium 200, Charis 279, Doulos 255) and placed by GPOS | SIL Charis, Doulos, Gentium | Dot never collides with the next letter | Wider `o͘`. Not what Unicode's "combining" suggests, but SIL ship it deliberately and it looks right. |
+| **D. Zero-width overstrike / shaper fallback** | Mark glyph has 0 advance and is drawn at a fixed spot, or the font has no `mark` at all and the shaper guesses | Arial (U+0358), Geneva, Helvetica, Menlo, the taigivs IVS fonts' Latin | Nothing to build | Correct only for the one base it was drawn for. Capitals, toned vowels and other engines go wrong. |
+
+**What good POJ fonts combine:** A + B. Precomposed `ccmp` ligatures for the common clusters (all o͘ + tone forms, a̍ e̍ i̍ o̍ u̍ m̍ n̍ and capitals), plus anchors as a safety net for anything else.
+
+### Survey results (Regular weights)
+
+Coverage legend: all fonts below have U+0358, U+030D, U+207F and U+030B **except EB Garamond (no U+0358)**.
+
+| Font | License | Technique | Dotless i̍ | Notes from shaping/specimen |
+|---|---|---|---|---|
+| Source Sans 3 (Adobe) | OFL | A | ✓ | Anchors on o and all toned o except `ŏ`. Clean. |
+| POJ Chhiu-ki (aiongg) | Apache-2.0 (per release LICENSE) | A | ✓ | Built specifically for POJ. Clean. |
+| NunitoPOJ (aiongg, bundled with taigivs IME) | OFL | B (in `liga`!) + A + PUA E400–E435 | ✓ (ligature) | Ligatures in non-canonical order and in `liga`: fragile, see §2.2. |
+| Lesson One (But) | OFL | B (`ccmp`, both orders) | ✓ | Best-practice ccmp design. |
+| TASA Explorer / Orbiter | OFL | B + A | ✓ | Also on Google Fonts. |
+| jf open 粉圓 2.1 (Huninn) | OFL | B | ✓ | Also on Google Fonts. |
+| 芫荽 Iansui (But) | OFL | B | ✓ | Also on Google Fonts. |
+| Tāu-hū Khu-lé-iòng / Môo-tn̄g / 豆腐烏 | OFL | B | ✓ | No `mark` feature at all, so uncovered combinations fall back. |
+| WD-XL Lubrifont TC | OFL | B (`ccmp` "dynamic composition", per its site) | ✓ | |
+| 源樣明體 GenYoMin2 TW | OFL | B | ✓ | Dot drawn close to the bowl (horn-like). |
+| 一點明體 I.Ming | IPA Font License 1.0 | B + A | ✓ | Anchor for U+0358 only on `o ō`. Other bases rely on ligatures. |
+| Charis / Doulos / Gentium (SIL) | OFL with Reserved Font Names | A + C | ✓ | Spacing dot. Excellent overall. |
+| EB Garamond | OFL | — | ✗ | **No U+0358** (tofu). U+030D drawn as a misplaced tick. Listed on the site but **not usable for o͘**. |
+| 字咍 Taigi IVS fonts | OFL (fonts), Apache-2.0 (scripts) | D + IVS ruby | ✗ | Great for Hanji ruby. Weak for running POJ text. |
+| Arial / Helvetica / Geneva / Menlo (macOS, proprietary) | — | D | mixed | Listed on the site as POJ-capable. They have the code points but depend on the engine's fallback. |
+
+Not tested (no direct download or not a single file): **Caivun** (itch.io, "SIL OFL" per page), **Kaukhia** (itch.io, **CC BY 4.0**, not a font licence), **Indeciso** (site is JS-only), **Chiron 昭源** (OFL, no POJ claim on its site), **嘉市體** (free to use but **no modification**, so not open).
+
+Free & open picks for POJ running text: **Source Sans 3, Lesson One, TASA Explorer/Orbiter, Charis/Doulos/Gentium, jf open 粉圓, 芫荽 Iansui, POJ Chhiu-ki**. For Han-Lo: **jf open 粉圓, 芫荽, 源樣明體, WD-XL Lubrifont, 豆腐烏 family**.
+
+Specimens (outline rendering, NFC row then NFD row): `docs/img/specimen-0.png`, `-1.png`, `-2.png`.
+
+---
+
+## 4. Recipe for adding POJ to a font (what this project's forks should do)
+
+### 4.1 Glyphs
+
+| Glyph | Code point | Build from |
+|---|---|---|
+| `uni0358` dot above right | U+0358 | the dot of `dotaccentcomb` (U+0307). Zero advance. |
+| `uni030D` vertical line above | U+030D | a short vertical stroke, same height band as `acutecomb` |
+| `uni030B` double acute (Tâi-lô) | U+030B | usually already present (`hungarumlautcomb`) |
+| `uni207F` ⁿ | U+207F | superior `n` (scaled 55–65 %, weight-compensated). If the font has `sups`, reuse `n.sups`. |
+| `dotlessi`, `dotlessj` | U+0131, U+0237 | for the Soft_Dotted swap |
+| `.case` variants of the marks | — | for capitals (`case`/`ccmp` context), optional but recommended |
+
+### 4.2 Anchors
+
+- On **every** base letter that can take a tone: `a e i(ı) o u m n` and capitals → `top`.
+- On `o O` **and on the precomposed toned vowels** `ó ò ô ō ŏ ő Ó Ò Ô Ō Ŏ Ő`, plus `ı`-based combos if built → `topright` (for U+0358). The dot sits beside the tone mark, so the topright anchor on a toned vowel is usually the same as on the bare `o`.
+- On mark glyphs: `_top` on tone marks, `_topright` on U+0358, `top` on tone marks for `mkmk` stacking.
+- `ng`: tone goes on `n`, so nothing special on `g`.
+
+### 4.3 Features (AFDKO feature syntax sketch)
+
+```fea
+# Soft-dotted i: remove the dot when a top mark follows (always-on ccmp)
+@TopMarks = [gravecomb acutecomb circumflexcomb macroncomb brevecomb uni030B uni030D uni0358];
+lookup DotlessI {
+    sub i' @TopMarks by dotlessi;
+    sub j' @TopMarks by dotlessj;
+} DotlessI;
+
+# Optional: precomposed POJ glyphs, canonical order only (HarfBuzz reorders first),
+# plus the NFC spelling (precomposed toned vowel + 0358).
+lookup POJLigatures {
+    sub o uni0358 by o_uni0358;
+    sub oacute uni0358 by oacute_uni0358;
+    sub o acutecomb uni0358 by oacute_uni0358;
+    sub o uni030D uni0358 by o_uni030D_uni0358;
+    # ... same for ò ô ō ŏ and capitals
+    # Also add the non-canonical order (o uni0358 acutecomb) for engines that don't reorder.
+} POJLigatures;
+
+feature ccmp { lookup DotlessI; lookup POJLigatures; } ccmp;
+
+feature mark {
+    markClass [gravecomb acutecomb circumflexcomb macroncomb brevecomb uni030B uni030D] <anchor 0 500> @MC_top;
+    markClass uni0358 <anchor 0 450> @MC_topright;
+    pos base [a e o u m n dotlessi] <anchor 250 500> mark @MC_top;
+    pos base [o oacute ograve ocircumflex omacron obreve] <anchor 470 420> mark @MC_topright;
+    # ... capitals
+} mark;
+```
+
+Rules that came out of the survey:
+
+1. Put POJ composition in **`ccmp`, never `liga`**.
+2. Write ligatures in **canonical order** (tone, then 0358). Also add the reverse order for engines that don't reorder.
+3. Key ligatures on **both** spellings: `o + tone + 0358` (NFD) and `ó + 0358` (NFC).
+4. Keep **anchors even when ligatures exist**, so any combination not covered still works.
+5. Don't rely on shaper fallback. Always ship a GPOS `mark` feature.
+6. Add the dotless-i swap. Several fonts (taigivs IVS fonts, Helvetica, Geneva, Menlo, EB Garamond) leave the dot under U+030D.
+
+### 4.4 Testing
+
+```sh
+python3 -m venv venv && venv/bin/pip install fonttools uharfbuzz pillow
+venv/bin/python tools/poj_font_audit.py  path/to/Font.ttf > audit.json   # cmap, features, anchors, IVS, PUA
+venv/bin/python tools/poj_shape_test.py  path/to/Font.ttf > shape.json   # mechanism per cluster, NFC vs NFD
+venv/bin/python tools/poj_specimen.py    out_dir path/to/Font.ttf        # PNG specimen, NFC and NFD rows
+```
+
+Also check by eye in **Chrome (HarfBuzz)**, **Safari/Pages (CoreText)** and **Word (DirectWrite)**, with `letter-spacing: 0.1em` set in the browser to catch `liga`-dependent fonts. fontbakery's `--profile googlefonts` checks anchors and mark features, but it does not know POJ clusters yet (see the README's "Upstream efforts" section).
+
+---
+
+## 5. Model review (agy)
+
+_See §6, added after review._
+</report>
