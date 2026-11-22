@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>字型如何實作 POJ — 白話字（POJ）字型技術文件</title>
+<meta name="description" content="字型實作台語白話字（POJ）的四種 OpenType 技術（GPOS 錨點、ccmp 連字、SIL 佔位圓點、固定疊印與備援）、隱藏功能開關，以及 Google Fonts unicode-range 切塊實測。">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="alternate" hreflang="en" href="../fonts.html">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <button class="menu-btn" id="menu-toggle" type="button" aria-label="開啟導覽選單">☰</button>
+    <a class="brand" href="./">
+      <span class="brand-mark poj">o͘</span>
+      <span>PehoejiFont</span>
+      <span class="brand-badge">文件</span>
+    </a>
+    <div class="topbar-spacer"></div>
+    <button class="search-trigger" id="search-trigger" type="button">
+      <span>⌕</span>
+      <span class="search-label">搜尋文件…</span>
+      <span class="kbd">⌘K</span>
+    </button>
+    <a class="icon-btn lang-switch" href="../fonts.html" hreflang="en" lang="en">EN</a>
+    <button class="icon-btn" id="theme-toggle" type="button">☾ 暗色</button>
+    <a class="icon-btn gh-link" href="https://github.com/PehoejiFont/PehoejiFont.github.io">GitHub</a>
+  </div>
+</header>
+
+<div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+<div class="doc-shell">
+  <aside class="sidebar" aria-label="文件導覽">
+    <div class="sidebar-group">
+      <div class="sidebar-heading">開始使用</div>
+      <ul>
+        <li><a href="./">總覽</a></li>
+        <li><a href="choose.html#test">即時 POJ 測試台</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">核心原理</div>
+      <ul>
+        <li><a href="letters.html">Unicode 與編碼結構</a></li>
+        <li><a href="fonts.html" aria-current="page">字型如何實作 POJ</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">字型目錄與資料</div>
+      <ul>
+        <li><a href="choose.html">24 款字型實測與樣張</a></li>
+        <li><a href="catalog.html">Google Fonts 普查與 Fork</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">實務指南</div>
+      <ul>
+        <li><a href="problems.html">疑難排解與跨平台差異</a></li>
+        <li><a href="makers.html">字型開發者實作指南</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">參考資料</div>
+      <ul>
+        <li><a href="tools.html">檢測工具、方法與審查紀錄</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main class="doc-main">
+    <div class="breadcrumb"><a href="./">文件</a> › <span>核心原理</span> › <span>字型如何實作 POJ</span></div>
+    <h1>字型如何實作 POJ</h1>
+    <p class="lead">我們以 HarfBuzz 逐一測量 24 款字型在 NFC 與 NFD 下的 26 個測試音節，歸納出現行字型實作 <span class="poj">o͘</span> 與調號的四種 OpenType 技術——以及網頁載入時最容易踩到的切塊陷阱。</p>
+
+    <h2 id="four-techniques">四種實作技術一覽</h2>
+    <p>以下四張圖皆呈現 <span class="poj">ó͘</span>：藍色底框代表各字形的水平進位寬度（advance box），<strong style="color:var(--accent)">橘色</strong>代表字型獨立定位上去的組合附加符號：</p>
+
+    <div class="ways">
+      <div class="way">
+        <img src="../assets/img/way-a-anchor.svg" alt="POJ Chhiu-ki 中的 ó͘：透過 GPOS 錨點將橘色圓點吸附於右上方">
+        <h3>A. GPOS 錨點吸附</h3>
+        <p>字母右上設有 <code>topright</code> 錨點，由 <code>mark</code> 將 <code>U+0358</code> 如磁鐵般吸上。</p>
+        <p><em>POJ Chhiu-ki、Source Sans 3</em></p>
+      </div>
+      <div class="way">
+        <img src="../assets/img/way-b-ligature.svg" alt="Lesson One 中的 ó͘：透過 ccmp 替換為預繪的單一字形">
+        <h3>B. <code>ccmp</code> 預繪連字</h3>
+        <p>設計師直接繪製完整的 <span class="poj">ó͘</span> 單一字形，由 <code>ccmp</code> 將序列替換成成品。</p>
+        <p><em>Lesson One、粉圓、芫荽、TASA、源樣</em></p>
+      </div>
+      <div class="way">
+        <img src="../assets/img/way-c-spacing.svg" alt="Charis 中的 ó͘：橘色圓點擁有自己的窄寬方框">
+        <h3>C. 獨立佔位圓點</h3>
+        <p><code>U+0358</code> 設為 GDEF 類別 1 基礎字形，在 <span class="poj">o</span> 後方自帶微幅寬度。</p>
+        <p><em>SIL Charis、Doulos、Gentium</em></p>
+      </div>
+      <div class="way">
+        <img src="../assets/img/way-d-overstrike.svg" alt="Arial 中的 ó͘：無錨點橘色圓點掉到字母方框之外">
+        <h3>D. 固定疊印／引擎備援</h3>
+        <p>靠固定輪廓座標或瀏覽器猜測位置；遇上大寫或帶調母音便錯位。</p>
+        <p><em>Arial、Helvetica、Geneva、Menlo</em></p>
+      </div>
+    </div>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>技術路線</th><th>運作機制</th><th>代表字型</th><th>優點</th><th>缺點</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>A. GPOS <code>mark</code> 錨點</strong></td>
+          <td><code>o</code> 加上獨立附加符號字形，由 <code>mark</code>（<code>top</code>／<code>topright</code>）與 <code>mkmk</code> 定位</td>
+          <td>Source Sans 3、POJ Chhiu-ki、Arial（僅 <code>U+030D</code>）</td>
+          <td>字形數少、利於可變字型、任何帶錨點字母皆可用</td>
+          <td><strong>每一個</strong>預組帶調母音（<span class="poj">ó ò ô ō ŏ…</span>）都必須補上 <code>topright</code> 錨點，極易遺漏：Source Sans 3 漏了 <span class="poj">ŏ Ŏ</span>；一點明體僅在 <span class="poj">o ō</span> 設錨點。</td>
+        </tr>
+        <tr>
+          <td><strong>B. <code>ccmp</code> 預繪連字</strong></td>
+          <td><code>o 0301 0358</code> 或 <code>ó 0358</code> → 單一成品字形（如 <code>o_uni0301_uni0358</code>）</td>
+          <td>Lesson One、jf open 粉圓、芫荽、TASA、豆腐烏、一點明體、源樣明體、WD-XL</td>
+          <td>設計師完全掌控造形與避讓，不受錨點引擎差異影響</td>
+          <td>字形數增加；須同時覆蓋 NFC、NFD 與反向順序；未涵蓋組合會退回方式 A；連字成品若未加入字距微調群組會遺失 <code>o</code> 的字偶距（kerning）。</td>
+        </tr>
+        <tr>
+          <td><strong>C. 獨立佔位圓點</strong></td>
+          <td><code>U+0358</code> 設為 <strong>GDEF 類別 1 基礎字形</strong>並帶正向寬度（Gentium 200、Charis 279、Doulos 255 單位）</td>
+          <td>SIL Charis、Doulos、Gentium</td>
+          <td>圓點絕不會撞到後續字母（<span class="poj">o͘h</span>、<span class="poj">o͘ⁿ</span>）</td>
+          <td><span class="poj">o͘</span> 略寬；必須維持 GDEF 類別 1（改為類別 3 寬度會被歸零）；從 PDF 複製文字時有時會在點後多出空白。</td>
+        </tr>
+        <tr>
+          <td><strong>D. 零寬疊印或引擎備援</strong></td>
+          <td>零寬度符號畫在固定座標，或因完全無 <code>mark</code> 表由引擎猜測</td>
+          <td>Arial（<code>U+0358</code>）、Geneva、Helvetica、Menlo、taigivs 歐文區、豆腐烏（未涵蓋組合）</td>
+          <td>零開發成本</td>
+          <td>最多只對單一字母看起來正常；大寫、帶調母音與其他平台皆會失準。</td>
+        </tr>
+      </tbody>
+    </table></div>
+
+    <h2 id="technique-a">A. GPOS <code>mark</code> 錨點</h2>
+    <p>字型設計師在每個基礎字母上標記看不見的座標點：<code>top</code> 供居中聲調使用，<code>topright</code> 供 <code>U+0358</code> 使用；整形引擎再把符號的 <code>_top</code>／<code>_topright</code> 錨點對齊吸附上去。</p>
+    <p>由於 HarfBuzz 在進入 GSUB/GPOS 前會先轉為 NFC，<span class="poj">ō͘</span> 抵達時是預組的 <code>ō</code>＋<code>U+0358</code>，因此<strong>所有預組帶調母音</strong>（<span class="poj">ó ò ô ǒ ō ŏ ő</span> 與大寫）都必須具備 <code>topright</code> 錨點。又因為 HarfBuzz 的備援定位是「全有或全無」，只要漏掉其中一個，該圓點就會直接掉到 <code>(0, 0)</code>。Source Sans 3 在 <span class="poj">ŏ͘</span> 與 <span class="poj">Ŏ͘</span> 正好呈現這個錯誤：</p>
+    <div class="examples">
+      <div class="ex bad tall">
+        <div class="label"><span class="tag bad">漏設錨點</span><b>Source Sans 3</b>：<span class="poj">ō͘</span> 定位正確，但 <span class="poj">ŏ͘</span> 缺少 <code>topright</code> 錨點，圓點掉到 <code>(0, 0)</code></div>
+        <img src="../assets/img/sourcesans-breve.svg" alt="Source Sans 3 中 ō͘ 正常但 ŏ͘ 的圓點偏移出字母外">
+      </div>
+    </div>
+
+    <h2 id="technique-b">B. 透過 <code>ccmp</code> 替換預繪字形</h2>
+    <p>設計師直接將 <span class="poj">o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘</span> 及大寫繪製成完整字形，再透過 <code>ccmp</code> 連字規則替換。這樣能對寬幅調號（如長音符、揚抑符）做視覺微調與避讓，類似越南文字型處理 <code>ố</code>／<code>ớ</code> 的做法。</p>
+    <p><strong>工程上必須避開的陷阱：</strong></p>
+    <ul>
+      <li><strong>輸入形式：</strong>必須同時涵蓋 NFC（<code>oacute uni0358</code>）、NFD 標準順序（<code>o uni0301 uni0358</code>）與非正規反向順序（<code>o uni0358 uni0301</code>），且 3 字形規則寫在 2 字形規則之前。</li>
+      <li><strong>GDEF 類別：</strong>所有預繪連字成品都應歸為 <strong>GDEF 類別 1（base）</strong>而非類別 2（ligature），確保後續附加符號仍可正確附著。</li>
+      <li><strong>字偶距（Kerning）：</strong>須將所有預繪 <span class="poj">o͘</span> 字形加入 <code>o</code>／<code>O</code> 的字偶距群組，否則像 <span class="poj">Tō͘</span>、<span class="poj">o͘v</span> 這類字對會喪失微調。</li>
+      <li><strong>安全網：</strong>僅做方式 B 卻沒做 GPOS <code>mark</code> 的字型（如源樣明體與豆腐烏家族）在常見組合上非常漂亮，但遇上未列出的稀有組合時仍會仰賴引擎備援。</li>
+    </ul>
+
+    <h2 id="technique-c">C. 獨立佔位圓點（SIL 路線）</h2>
+    <p>SIL 的 Charis、Doulos 與 Gentium 將 <code>U+0358</code> 定義為 GDEF 類別 1 的基礎字形，並給予明確的正向進位寬度（Gentium <strong>200</strong>、Charis <strong>279</strong>、Doulos <strong>255</strong> 單位）。由於圓點佔有獨立水平空間，在 <span class="poj">o͘h</span>、<span class="poj">o͘k</span>、<span class="poj">o͘l</span>、<span class="poj">o͘t</span>、<span class="poj">o͘ⁿ</span> 等序列中絕不會撞到下一個字的上伸筆畫。</p>
+    <p>關鍵在於 <code>U+0358</code> 必須維持 GDEF 類別 1：若誤標為類別 3 附加符號，OpenType 整形器會強制將其寬度歸零。此作法的取捨是含 <span class="poj">o͘</span> 的單字會略寬，且從 PDF 複製文字時偶爾會在圓點後多出一個空白。</p>
+
+    <h2 id="technique-d">D. 零寬疊印與整形引擎備援</h2>
+    <p>當字型有畫 <code>U+0358</code> 卻沒有設錨點時：</p>
+    <ul>
+      <li>若字型為其他重音符號建了 <code>mark</code> 表（如 <strong>Arial</strong>），HarfBuzz 會完全停用備援定位，把 <code>U+0358</code> 畫在 <code>(0, 0)</code> 原始輪廓位置（在 Arial 中會懸空落在字母後方空白處）。</li>
+      <li>若字型<strong>完全沒有 <code>mark</code> 表</strong>（如 macOS 的 <strong>Geneva、Helvetica、Menlo</strong> 與<strong>字咍 taigivs</strong> 歐文區），HarfBuzz 會啟動外框盒備援；遇上大寫 <span class="poj">Ó͘</span>、<span class="poj">Ō͘</span> 時，備援演算法會將 <code>U+0358</code> 舉高至包含調號在內的整塊筆畫外框之上，讓圓點高高飄走。</li>
+    </ul>
+
+    <h2 id="best-practice">最佳實務：同時結合 A + B</h2>
+    <div class="callout good">
+      <span class="callout-title">推薦架構：方式 A ＋ 方式 B 並行</span>
+      <p>最穩健的 POJ 字型會以<strong><code>ccmp</code> 預繪字形（方式 B）</strong>處理所有常見音節以達完美視覺避讓，再以<strong>完整的 GPOS <code>mark</code>／<code>mkmk</code> 錨點（方式 A）</strong>作為萬用安全網。<strong>Lesson One、jf open 粉圓（Huninn）、芫荽 Iansui、TASA Explorer／Orbiter 與 WD-XL 滑油字</strong>全數採用 A + B。</p>
+    </div>
+
+    <h2 id="switches">可關閉的隱藏開關（<code>liga</code>、<code>clig</code>、<code>case</code>）</h2>
+    <p>OpenType 功能並非全部預設開啟：</p>
+    <ul>
+      <li><strong>絕不可把 POJ 組字放進 <code>liga</code> 或 <code>clig</code>。</strong>依 CSS Text Level 3 規範，只要網頁設定了非零的 <code>letter-spacing</code>，Chrome、Safari 與 Firefox 都會自動停用選用連字；<code>font-variant-ligatures: none</code> 亦同。Microsoft Word 預設也將連字功能<strong>關閉</strong>（需至「字型 → 進階」手動開啟），許多程式碼編輯器亦然。POJ 組字一律必須放在 <strong><code>ccmp</code></strong>。</li>
+      <li><strong><code>case</code> 在瀏覽器與 Word 中預設關閉</strong>——即使套用 CSS <code>text-transform: uppercase</code> 也不會啟用 <code>case</code>。因此大寫專用調號必須在 <code>ccmp</code> 中撰寫上下文替換規則，不能只寫在 <code>case</code>。</li>
+      <li><em>實測案例 — NunitoPOJ：</em>NunitoPOJ 將部分連字寫在 <code>liga</code> 並採非正規順序（<code>O 0358 030B</code>），因此在 HarfBuzz 中從未觸發；但實測確認即使關閉 <code>liga</code>，其 <code>ccmp</code> 無點 i 與 GPOS 錨點仍能正確顯示 <span class="poj">o͘</span> 與 <span class="poj">i̍</span>。</li>
+    </ul>
+
+    <h2 id="google-fonts">Google Fonts 網頁切塊（<code>unicode-range</code>）實測</h2>
+    <p>為了加快載入速度，Google Fonts CSS API（<code>fonts.googleapis.com/css2</code>）會將每款字型切成多個 <code>unicode-range</code> WOFF2 檔案。我們實測了 Chrome 實際收到的切塊（驗證日期 2026-11-20）：</p>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>Google Fonts 字型家族</th><th>總切塊數</th><th>是否包含 <code>U+0358</code> / <code>U+030D</code> / <code>U+207F</code></th><th>網頁實際呈現結果</th></tr></thead>
+      <tbody>
+        <tr><td><strong>TASA Explorer</strong></td><td>2（<code>latin</code>、<code>latin-ext</code>）</td><td><span class="tag bad">無</span></td><td><strong>完全沒有傳送 POJ 調號</strong>，即使 GitHub 完整版有收錄；網頁上所有 <span class="poj">o͘</span> 與第八調都會退回系統補字。</td></tr>
+        <tr><td><strong>Source Sans 3</strong></td><td>7</td><td><span class="tag bad">無</span></td><td>所有網頁切塊皆移除了 POJ 符號。</td></tr>
+        <tr><td><strong>EB Garamond</strong></td><td>7</td><td><span class="tag bad">無</span></td><td>切塊未含，且原字型本來就缺少 <code>U+0358</code>。</td></tr>
+        <tr><td><strong>芫荽 Iansui</strong></td><td>108</td><td><span class="tag good">切塊 #104</span></td><td>內含專屬台語切塊，收錄 POJ 符號、<span class="poj">ḿ ǹ ő ű ı ᴺ</span> 與基礎字母。</td></tr>
+        <tr><td><strong>jf open 粉圓（Huninn）</strong></td><td>111</td><td><span class="tag good">切塊 #106</span></td><td>同上，具備專屬台語切塊。</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="callout warn">
+      <span class="callout-title">跨切塊拆散風險與子集化（<code>pyftsubset</code>）保留清單</span>
+      <p>在芫荽與粉圓中，普通 <code>o</code> 同時存在於 <code>latin</code> 切塊與台語切塊；<code>o + U+0358</code> 能否留在同一個字型檔內取決於各瀏覽器的叢集補字機制，上線前應於 Chrome、Safari、Firefox 實測。此外，狗公會曉學台語將 TASA Explorer／Orbiter 列在「線頂 Google 字體 白話字台文」底下，直接載入 Google Fonts 的網站均會受影響。（Google Docs／Slides 的傳遞機制尚未實測。）</p>
+      <p><strong>網頁部署建議：</strong>自行託管完整字型檔（或使用 Google Fonts 的 <code>&amp;text=</code> 參數）。若使用 <code>pyftsubset</code> 或建置外掛做字型子集化，務必保留：</p>
+      <ul>
+        <li>字碼：<code>U+0358</code>、<code>U+030D</code>、<code>U+030B</code>、<code>U+030C</code>、<code>U+207F</code>、<code>U+1D3A</code>、<code>U+0131</code>、<code>U+0237</code>、<span class="poj">ḿ Ḿ ǹ Ǹ</span> 與全部帶調母音；</li>
+        <li>排版功能：<code>ccmp</code>、<code>mark</code>、<code>mkmk</code>（或比照 <code>tools/build_site_fonts.sh</code> 加上 <code>--layout-features='*'</code>）；</li>
+        <li>若為 IVS 注音字型：務必保留 <code>cmap</code> format 14 子表。</li>
+      </ul>
+    </div>
+
+    <nav class="doc-pager" aria-label="上下頁導覽">
+      <a class="pager-link prev" href="letters.html">
+        <span class="pager-dir">← 上一頁</span>
+        <span class="pager-title">Unicode 與編碼結構</span>
+      </a>
+      <a class="pager-link next" href="choose.html">
+        <span class="pager-dir">下一頁 →</span>
+        <span class="pager-title">24 款字型實測與樣張</span>
+      </a>
+    </nav>
+
+    <footer class="doc-footer">
+      PehoejiFont 計畫 · 全站文字採用 But Ko 製作之 <a href="https://github.com/ButTaiwan/genyo-font">源樣明體（GenYo Min）</a>（<a href="../assets/fonts/GenYo-OFL.txt">SIL Open Font License</a>） · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">GitHub 原始碼</a>
+    </footer>
+  </main>
+
+  <aside class="toc" aria-label="本頁目錄">
+    <div class="toc-title">本頁目錄</div>
+    <ul id="toc-list"></ul>
+  </aside>
+</div>
+
+<script src="../assets/docs.js"></script>
+</body>
+</html>

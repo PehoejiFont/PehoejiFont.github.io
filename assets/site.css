@@ -15,6 +15,20 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: "GenYo Site CJK";
+  src: url("fonts/GenYoMin2TW-R-zhtw.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "GenYo Site CJK";
+  src: url("fonts/GenYoMin2TW-B-zhtw.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   --bg: #fbfaf7;
@@ -104,7 +118,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family: "GenYo Site", "Noto Serif TC", "Songti TC", serif;
+  font-family: "GenYo Site", "GenYo Site CJK", "Noto Serif TC", "Songti TC", serif;
   font-size: 16.5px;
   line-height: 1.72;
 }
@@ -407,7 +421,7 @@ h2:hover .heading-anchor, h3:hover .heading-anchor, .heading-anchor:focus { opac
 }
 
 /* ── Typography helpers ──────────────────────────────────────────────────── */
-.poj { font-family: "GenYo Site", "Noto Serif TC", serif; }
+.poj { font-family: "GenYo Site", "GenYo Site CJK", "Noto Serif TC", serif; }
 .big { font-size: 1.35em; }
 .muted { color: var(--muted); }
 .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 0.88em; }
@@ -696,7 +710,7 @@ td.center, th.center { text-align: center; }
   border-radius: 6px;
   background: var(--bg);
   color: var(--ink);
-  font-family: "GenYo Site", serif;
+  font-family: "GenYo Site", "GenYo Site CJK", serif;
   font-size: 24px;
   line-height: 1.65;
   resize: vertical;
@@ -998,7 +1012,7 @@ details[open] summary { margin-bottom: 8px; }
   .doc-pager { grid-template-columns: 1fr; }
 }
 
-@media (max-width: 480px) {
-  .topbar-inner a.icon-btn { display: none; }
+@media (max-width: 560px) {
+  .topbar-inner a.gh-link { display: none; }
   .stat-grid { grid-template-columns: 1fr 1fr; }
 }

@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>疑難排解與跨平台差異 — 白話字（POJ）字型技術文件</title>
+<meta name="description" content="台語白話字（POJ）常見顯示、搜尋、網頁字型與 PDF 複製異常的症狀診斷，以及 HarfBuzz、macOS CoreText 與 Windows DirectWrite 引擎差異。">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="alternate" hreflang="en" href="../problems.html">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <button class="menu-btn" id="menu-toggle" type="button" aria-label="開啟導覽選單">☰</button>
+    <a class="brand" href="./">
+      <span class="brand-mark poj">o͘</span>
+      <span>PehoejiFont</span>
+      <span class="brand-badge">文件</span>
+    </a>
+    <div class="topbar-spacer"></div>
+    <button class="search-trigger" id="search-trigger" type="button">
+      <span>⌕</span>
+      <span class="search-label">搜尋文件…</span>
+      <span class="kbd">⌘K</span>
+    </button>
+    <a class="icon-btn lang-switch" href="../problems.html" hreflang="en" lang="en">EN</a>
+    <button class="icon-btn" id="theme-toggle" type="button">☾ 暗色</button>
+    <a class="icon-btn gh-link" href="https://github.com/PehoejiFont/PehoejiFont.github.io">GitHub</a>
+  </div>
+</header>
+
+<div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+<div class="doc-shell">
+  <aside class="sidebar" aria-label="文件導覽">
+    <div class="sidebar-group">
+      <div class="sidebar-heading">開始使用</div>
+      <ul>
+        <li><a href="./">總覽</a></li>
+        <li><a href="choose.html#test">即時 POJ 測試台</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">核心原理</div>
+      <ul>
+        <li><a href="letters.html">Unicode 與編碼結構</a></li>
+        <li><a href="fonts.html">字型如何實作 POJ</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">字型目錄與資料</div>
+      <ul>
+        <li><a href="choose.html">24 款字型實測與樣張</a></li>
+        <li><a href="catalog.html">Google Fonts 普查與 Fork</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">實務指南</div>
+      <ul>
+        <li><a href="problems.html" aria-current="page">疑難排解與跨平台差異</a></li>
+        <li><a href="makers.html">字型開發者實作指南</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">參考資料</div>
+      <ul>
+        <li><a href="tools.html">檢測工具、方法與審查紀錄</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main class="doc-main">
+    <div class="breadcrumb"><a href="./">文件</a> › <span>實務指南</span> › <span>疑難排解與跨平台差異</span></div>
+    <h1>疑難排解與跨平台差異</h1>
+    <p class="lead">針對台語白話字（POJ）在畫面渲染、全文搜尋、網頁載入與 PDF 複製上最常見的 11 種異常症狀逐一排查，並比較 HarfBuzz、macOS CoreText 與 Windows DirectWrite 的行為差異。</p>
+
+    <h2 id="symptoms">依症狀快速診斷</h2>
+
+    <details open>
+      <summary>1. 畫面上出現空白方框（□／豆腐字）</summary>
+      <p><strong>原因：</strong>該字型的 <code>cmap</code> 完全沒有收錄此字碼。例如 EB Garamond 沒有 <code>U+0358</code>；在 1,393 款待補字的 Google Fonts 候選家族中，也有 1,242 款同時缺少三個 POJ 字元（<code>U+0358</code>、<code>U+030D</code>、<code>U+207F</code>）。</p>
+      <p><strong>解法：</strong>改用<a href="choose.html#picks">推薦清單</a>中已驗證的字型。</p>
+    </details>
+
+    <details open>
+      <summary>2. <span class="poj">o͘</span> 的圓點掉到字母右邊很遠，或高高飄在大寫上方</summary>
+      <p><strong>原因：</strong>字型雖收錄 <code>U+0358</code> 但未建立 <code>topright</code> 錨點（<a href="fonts.html#technique-d">方式 D</a>）。若字型為其他符號設了 <code>mark</code> 表（如 Arial，或 Source Sans 3 的 <span class="poj">ŏ͘</span>），HarfBuzz 會關閉備援並把圓點留在 <code>(0, 0)</code>；若全無 <code>mark</code> 表（如 Helvetica、Geneva、Menlo），HarfBuzz 備援會將圓點抬高至 <span class="poj">Ó͘ Ō͘</span> 整個筆畫之上。</p>
+      <p><strong>解法：</strong>改用方式 A+B 或方式 A 字型。切勿以手動空白或微調硬喬位置，換一台電腦就會破版。</p>
+    </details>
+
+    <details open>
+      <summary>3. 一個字詞裡有個別字母長得像別款字型</summary>
+      <p><strong>原因：</strong>字型缺少該預組字碼（最常缺 <span class="poj">ḿ</span> <code>U+1E3F</code>、<span class="poj">ǹ</span> <code>U+01F9</code>、<span class="poj">ŏ</span>、<code>U+0358</code> 或 <code>U+030D</code>），系統於是悄悄借用其他字型補字（例如 macOS 上 EB Garamond 會借用 Helvetica 的 <code>U+0358</code>）。</p>
+      <p><strong>解法：</strong>選擇完整涵蓋 POJ 與 KPL 預組字集的字型（可至<a href="choose.html#test">測試台</a>驗證）。</p>
+    </details>
+
+    <details>
+      <summary>4. <span class="poj">i̍</span> 或 <span class="poj">i̋</span> 的聲調下方還留著 i 本身的圓點</summary>
+      <p><strong>原因：</strong>字型未在 <code>ccmp</code> 實作 <code>Soft_Dotted</code> 規則（上方附加符號前將 <code>i → dotlessi</code>；<a href="letters.html#dotted-i">見說明</a>）。字咍 Taigi IVS 字型、EB Garamond、Helvetica、Geneva 與 Menlo 皆有此現象。</p>
+      <p><strong>解法：</strong>更換字型。<strong>切勿手動輸入無點 <span class="poj">ı</span>（<code>U+0131</code>）</strong>，否則將破壞拼寫正確性與搜尋比對。</p>
+    </details>
+
+    <details>
+      <summary>5. 加上 CSS <code>letter-spacing</code> 或在 Microsoft Word 開啟後突然破版</summary>
+      <p><strong>原因：</strong>該字型把 POJ 組字放在選用的 <code>liga</code> 或 <code>clig</code>，而非必定執行的 <code>ccmp</code>。依 CSS Text 3，設定非零 <code>letter-spacing</code> 時瀏覽器會停用選用連字；Word 預設也關閉連字功能。</p>
+      <p><strong>解法：</strong>改用以 <code>ccmp</code> 實作的字型（本站<a href="choose.html#picks">推薦清單</a>皆符合）。在 Word 內臨時應急可至「字型 → 進階」手動啟用連字。</p>
+    </details>
+
+    <details>
+      <summary>6. <span class="poj">thiⁿ</span> 莫名其妙變成 <span class="poj">thin</span>（或 <span class="poj">hiⁿ</span> 變成 <span class="poj">hin</span>）</summary>
+      <p><strong>原因：</strong>資料庫、搜尋索引或全半形整理程式套用了 <strong>NFKC/NFKD</strong> 正規化，將 <code>U+207F</code> 透過 <code>&lt;super&gt; n</code> 分解成普通 <code>n</code>（<a href="letters.html#nasal">見說明</a>）。</p>
+      <p><strong>解法：</strong>所有處理台語文字的系統務必設定為 <strong>NFC</strong>，嚴禁使用 NFKC 或 NFKD。</p>
+    </details>
+
+    <details>
+      <summary>7. 畫面明明看得到某個詞，Ctrl+F 或資料庫卻搜尋不到</summary>
+      <p><strong>原因：</strong>文件中混雜了 NFC（<code>ó + 0358</code>）、NFD（<code>o + 0301 + 0358</code>）與反向順序（<code>o + 0358 + 0301</code>），或者使用了中圓點 <span class="poj">o·</span>（<code>U+00B7</code>）、越南語帶角 <span class="poj">ơ</span>（<code>U+01A1</code>）等形似字。</p>
+      <p><strong>解法：</strong>將所有形似字替換為標準 <code>U+0358</code>／<code>U+030D</code>／<code>U+207F</code>，再整份正規化為 <strong>NFC</strong>。</p>
+    </details>
+
+    <details>
+      <summary>8. 輕聲 <span class="poj">tńg--khì</span> 被變成 <span class="poj">tńg–khì</span></summary>
+      <p><strong>原因：</strong>文書軟體的「自動將連字號取代為破折號」功能誤改，或字型在 <code>liga</code>／<code>calt</code> 內將 <code>--</code> 連字成破折號。</p>
+      <p><strong>解法：</strong>關閉編輯器的自動破折號取代設定，並確認所選字型保留兩條獨立連字號。</p>
+    </details>
+
+    <details>
+      <summary>9. 本機電腦顯示正常，放到網站上圓點就壞掉</summary>
+      <p><strong>原因：</strong>網站可能從 Google Fonts CSS API 載入字型，而 Google Fonts 的 <code>unicode-range</code> 切塊會將 TASA Explorer 與 Source Sans 3 的 POJ 調號完全刪除（<a href="fonts.html#google-fonts">詳見實測</a>）；過度精簡的本機子集化工具也可能誤刪 <code>ccmp</code>／<code>mark</code> 或 <code>cmap</code> format 14。</p>
+      <p><strong>解法：</strong>將完整字型檔自行託管在網站上，或使用子集工具時明確保留所有 POJ 字碼與 <code>--layout-features='*'</code>（可參考 <code>tools/build_site_fonts.sh</code>）。</p>
+    </details>
+
+    <details>
+      <summary>10. 舊文件一換字型就變成怪符號或方框</summary>
+      <p><strong>原因：</strong>舊文件是以私用區（PUA，如早期 aiongg 字型的 <code>U+E400–E435</code>）或前 Unicode 時代的 8-bit 編碼（Windows-1252／MacRoman）繕打，離開原字型就失去意義。</p>
+      <p><strong>解法：</strong>將舊文件一次性轉碼為標準 Unicode NFC 白話字，之後即可通行所有現代字型。</p>
+    </details>
+
+    <details>
+      <summary>11. 從 PDF 複製出來的 POJ 文字變亂碼、多出空白或出現無點 <span class="poj">ı</span></summary>
+      <p><strong>原因：</strong>常見三種 PDF 機制問題：（a）字型使用非 AGL 標準字形名稱（如 <code>oopoj_acutecomb</code> 而非 <code>o_uni0301_uni0358</code>）導致自動 <code>ToUnicode</code> 對應失敗；（b）SIL 佔位圓點（<a href="fonts.html#technique-c">方式 C</a>）可能讓 PDF 閱讀器誤判為詞間空白；（c）<code>dotlessi + uni030D</code> 若 PDF 輸出端未寫入 <code>/ActualText</code>，複製時可能還原成 <code>ı̍</code>。</p>
+      <p><strong>解法：</strong>選用符合 AGL 命名規範的字型，並在支援的 PDF 排版軟體中啟用 <code>/ActualText</code> 標記。</p>
+    </details>
+
+    <h2 id="platforms">跨平台與整形引擎差異</h2>
+    <p id="mac">Chrome、Firefox、Android、LibreOffice 與 Linux 皆使用 <strong>HarfBuzz</strong>；Apple 原生程式（Safari、Pages、Keynote）使用 <strong>CoreText</strong>；Windows 原生程式（Microsoft Word、系統介面）使用 <strong>DirectWrite</strong>。</p>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>整形引擎</th><th>使用環境</th><th>本研究實測進度</th><th>處理 POJ 的關鍵行為</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>HarfBuzz</strong></td>
+          <td>Chrome、Firefox、Android、LibreOffice、Linux</td>
+          <td><span class="tag good">完整實測（24 款）</span></td>
+          <td>在 GSUB 前先正規化（<code>ccc</code> 重排＋<code>cmap</code> 重組）；缺少預組字母會自動分解；幾何備援定位為<strong>全有或全無</strong>（只要存在任何 <code>mark</code> 功能即全面停用）。</td>
+        </tr>
+        <tr>
+          <td><strong>CoreText</strong></td>
+          <td>macOS / iOS 原生軟體、Safari、Pages</td>
+          <td><span class="tag warn">初步實測完成</span><br>（<code>tools/poj_coretext.swift</code>）</td>
+          <td><strong>Lesson One、jf open 粉圓、芫荽 Iansui、一點明體、源樣明體與 WD-XL 滑油字</strong>在所有測試音節的輸出皆與 HarfBuzz 完全一致。無 <code>mark</code> 表的字型（Helvetica、Menlo、字咍 Taigi 字型）與 HarfBuzz 差異顯著，因 CoreText 不做 HarfBuzz 式備援，且 Apple 系統字型可能使用 AAT（<code>morx</code>/<code>kerx</code>）。</td>
+        </tr>
+        <tr>
+          <td><strong>DirectWrite</strong></td>
+          <td>Windows 原生軟體、Microsoft Word</td>
+          <td><span class="tag neutral">尚未直接實測</span></td>
+          <td><em>（模型審查意見，待實測）：</em>不會像 HarfBuzz 預先重排或重組 NFD，非正規順序會直接進入 GSUB；缺少預組字母時偏好觸發系統補字而非分解；Word 預設關閉 <code>liga</code>。</td>
+        </tr>
+      </tbody>
+    </table></div>
+
+    <div class="callout good">
+      <span class="callout-title">如何做到跨平台一致顯示？</span>
+      <p>優先採用以<strong>方式 A ＋ B</strong> 打造的字型（<code>ccmp</code> 預繪字形涵蓋 NFC／NFD／反向順序，加上完整的 GPOS <code>mark</code>／<code>mkmk</code> 錨點與全套預組字元 <code>cmap</code>），即可在 HarfBuzz、CoreText 與 DirectWrite 獲得最一致的結果。</p>
+    </div>
+
+    <nav class="doc-pager" aria-label="上下頁導覽">
+      <a class="pager-link prev" href="catalog.html">
+        <span class="pager-dir">← 上一頁</span>
+        <span class="pager-title">Google Fonts 普查與 Fork</span>
+      </a>
+      <a class="pager-link next" href="makers.html">
+        <span class="pager-dir">下一頁 →</span>
+        <span class="pager-title">字型開發者實作指南</span>
+      </a>
+    </nav>
+
+    <footer class="doc-footer">
+      PehoejiFont 計畫 · 全站文字採用 But Ko 製作之 <a href="https://github.com/ButTaiwan/genyo-font">源樣明體（GenYo Min）</a>（<a href="../assets/fonts/GenYo-OFL.txt">SIL Open Font License</a>） · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">GitHub 原始碼</a>
+    </footer>
+  </main>
+
+  <aside class="toc" aria-label="本頁目錄">
+    <div class="toc-title">本頁目錄</div>
+    <ul id="toc-list"></ul>
+  </aside>
+</div>
+
+<script src="../assets/docs.js"></script>
+</body>
+</html>

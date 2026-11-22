@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>檢測工具、研究方法與審查紀錄 — 白話字（POJ）字型技術文件</title>
+<meta name="description" content="PehoejiFont 全部 11 支 CLI 工具（Python 與 macOS Swift CoreText 探針）、儲存庫資料結構、待驗證研究問題，以及 Gemini 4 同儕審查查證紀錄。">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="alternate" hreflang="en" href="../tools.html">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <button class="menu-btn" id="menu-toggle" type="button" aria-label="開啟導覽選單">☰</button>
+    <a class="brand" href="./">
+      <span class="brand-mark poj">o͘</span>
+      <span>PehoejiFont</span>
+      <span class="brand-badge">文件</span>
+    </a>
+    <div class="topbar-spacer"></div>
+    <button class="search-trigger" id="search-trigger" type="button">
+      <span>⌕</span>
+      <span class="search-label">搜尋文件…</span>
+      <span class="kbd">⌘K</span>
+    </button>
+    <a class="icon-btn lang-switch" href="../tools.html" hreflang="en" lang="en">EN</a>
+    <button class="icon-btn" id="theme-toggle" type="button">☾ 暗色</button>
+    <a class="icon-btn gh-link" href="https://github.com/PehoejiFont/PehoejiFont.github.io">GitHub</a>
+  </div>
+</header>
+
+<div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+<div class="doc-shell">
+  <aside class="sidebar" aria-label="文件導覽">
+    <div class="sidebar-group">
+      <div class="sidebar-heading">開始使用</div>
+      <ul>
+        <li><a href="./">總覽</a></li>
+        <li><a href="choose.html#test">即時 POJ 測試台</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">核心原理</div>
+      <ul>
+        <li><a href="letters.html">Unicode 與編碼結構</a></li>
+        <li><a href="fonts.html">字型如何實作 POJ</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">字型目錄與資料</div>
+      <ul>
+        <li><a href="choose.html">24 款字型實測與樣張</a></li>
+        <li><a href="catalog.html">Google Fonts 普查與 Fork</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">實務指南</div>
+      <ul>
+        <li><a href="problems.html">疑難排解與跨平台差異</a></li>
+        <li><a href="makers.html">字型開發者實作指南</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">參考資料</div>
+      <ul>
+        <li><a href="tools.html" aria-current="page">檢測工具、方法與審查紀錄</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main class="doc-main">
+    <div class="breadcrumb"><a href="./">文件</a> › <span>參考資料</span> › <span>檢測工具、方法與審查紀錄</span></div>
+    <h1>檢測工具、研究方法與審查紀錄</h1>
+    <p class="lead">完整彙整 PehoejiFont 專案背後的 11 支檢測與建置腳本、資料檔目錄、尚未驗證的研究問題，以及兩份 Gemini 4 同儕審查的查證紀錄。</p>
+
+    <h2 id="scripts"><code>tools/</code> 目錄下的 CLI 工具腳本</h2>
+    <p>各腳本以儲存庫根目錄為執行工作路徑設計，供重現所有普查與實測數據：</p>
+    <div class="table-wrap"><table class="compact">
+      <thead><tr><th>腳本路徑</th><th>用途說明</th><th>相依套件</th></tr></thead>
+      <tbody>
+        <tr><td><code>tools/build_catalog.py</code></td><td>從 <code>google/fonts</code> 稀疏檢出建立 <code>data/google-fonts.json</code>（2,067 款家族的授權、RFN、設計師與上游網址）。</td><td>Python 3 標準函式庫</td></tr>
+        <tr><td><code>tools/download_fonts.py</code></td><td>為每款候選字型家族下載一支主要字型檔供覆蓋率檢測。</td><td>Python 3</td></tr>
+        <tr><td><code>tools/check_coverage.py</code></td><td>掃描下載字型的 POJ 字碼、組合聲調與 GPOS <code>mark</code> 功能，產出 <code>data/shortlist.json</code>。</td><td><code>fonttools</code></td></tr>
+        <tr><td><code>tools/fork_repos.sh</code></td><td>將 <code>data/fork-list.tsv</code> 中的 989 個獨立上游儲存庫（僅預設分支）批次 Fork 至 <code>PehoejiFont</code> 組織。</td><td><code>gh</code> CLI</td></tr>
+        <tr><td><code>tools/poj_font_audit.py</code></td><td>單一字型完整 POJ 稽核：<code>cmap</code> 覆蓋、GSUB/GPOS 功能、<code>U+0358</code>／<code>U+030D</code> 錨點基礎字數、IVS 與 PUA 統計。</td><td><code>fonttools</code>、<code>uharfbuzz</code></td></tr>
+        <tr><td><code>tools/poj_shape_test.py</code></td><td>HarfBuzz 整形探針，將每個 POJ 音節分類（<code>ligature</code>／<code>gpos-anchor</code>／<code>zero-width-overstrike</code>／<code>FLOATING</code>／<code>NOTDEF</code>）並比對 NFC 與 NFD。</td><td><code>uharfbuzz</code></td></tr>
+        <tr><td><code>tools/poj_specimen.py</code></td><td>輸出高解析度 PNG 樣張（每款字型並列 NFC 與 NFD 兩行）至 <code>docs/img/specimen-*.png</code>。</td><td><code>fonttools</code>、<code>uharfbuzz</code>、<code>pillow</code></td></tr>
+        <tr><td><code>tools/poj_coretext.swift</code></td><td>macOS CoreText 整形與 PNG 繪製探針；記錄 glyph ID、座標、名義進位寬度、外框盒與系統補字情形。</td><td>macOS Swift / CoreText</td></tr>
+        <tr><td><code>tools/poj_coretext_compare.py</code></td><td>將編譯後的 <code>poj_coretext.swift</code> 與 HarfBuzz 交叉比對（涵蓋 NFC、NFD 與反向順序）。</td><td><code>uharfbuzz</code>、Swift 探針</td></tr>
+        <tr><td><code>tools/poj_guide_svg.py</code></td><td>以 HarfBuzz 實際座標與 fontTools 輪廓輸出本網站範例 SVG（支援 <code>--boxes</code> 與 <code>--mark-color</code>）。</td><td><code>fonttools</code>、<code>uharfbuzz</code></td></tr>
+        <tr><td><code>tools/build_site_fonts.sh</code></td><td>重建本網站自託管的源樣明體 Regular 與 Bold WOFF2 子集（英文輕量主檔＋繁體中文增量 CJK 檔），並保留 GSUB 閉包。</td><td><code>fonttools</code>、<code>brotli</code>（<code>pyftsubset</code>）</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 id="site-font-rebuild">重建本網站的源樣明體字型子集</h3>
+    <p>本站自託管精簡版的 <a href="https://github.com/ButTaiwan/genyo-font">源樣明體（GenYo Min）</a> Regular 與 Bold：英文頁面僅下載約 85 KB 的基礎拉丁＋POJ＋英文頁漢字子集（<code>GenYoMin2TW-{R,B}-site.woff2</code>）；繁體中文頁面則額外按需載入 <code>GenYoMin2TW-{R,B}-zhtw.woff2</code> 補齊所有繁體中文漢字。日後新增頁面文字時，請於儲存庫根目錄執行：</p>
+    <div class="code-block">
+      <div class="code-head"><span>shell — 重建網站源樣明體子集</span><button class="copy-code-btn" type="button">複製</button></div>
+      <pre><code>tools/build_site_fonts.sh &lt;含 GenYoMin2TW-R.otf 與 B.otf 的資料夾&gt;</code></pre>
+    </div>
+    <p class="legend">註：源樣明體並未在 cmap 單獨收錄無點 <code>ı</code>（<code>U+0131</code>）與 <code>ȷ</code>（<code>U+0237</code>），因此字型開發者指南中那兩個單獨符號會退回系統字型；一般白話字內文如 <span class="poj">i̍</span> 則完全不受影響，因源樣明體的 <code>ccmp</code> 預繪字形本身已去點。</p>
+
+    <h2 id="repo-layout">儲存庫資料與文件結構</h2>
+    <div class="code-block">
+      <div class="code-head"><span>Repository 檔案結構</span><button class="copy-code-btn" type="button">複製</button></div>
+      <pre><code>data/
+  google-fonts.json            # 全部 2,067 款 Google Fonts 家族（授權、RFN、設計師、上游庫）
+  shortlist.json               # 1,471 款候選家族的 POJ 覆蓋率與 mark 功能檢查結果
+  fork-list.tsv                # 989 筆：上游儲存庫 → Fork 名稱 → 涵蓋字型家族
+  poj-font-audit.json          # 24 款實測字型的詳細稽核與 HarfBuzz 整形數據
+docs/
+  poj-font-implementation.md   # 完整 Markdown 技術研究報告
+  img/specimen-{0,1,2}.png     # HarfBuzz NFC vs NFD 渲染樣張
+  reviews/                     # Gemini 4 XHigh 審查原文與提示詞
+assets/
+  site.css, docs.js            # 靜態文件樣式表與雙語互動腳本
+  fonts/                       # 自託管源樣明體 Regular/Bold WOFF2 子集與 OFL 授權書
+  img/*.svg                    # 由真實字型輪廓繪製的 HarfBuzz SVG 圖解
+zh-tw/                         # 繁體中文版完整 8 頁文件（預設英文版位於根目錄）
+tools/                         # 上述全部 11 支 Python、Swift 與 Shell 腳本</code></pre>
+    </div>
+
+    <h2 id="open-questions">待進一步驗證的研究問題</h2>
+    <ol>
+      <li><strong>完整 CoreText 與 DirectWrite 跨引擎矩陣：</strong>於 macOS（CoreText）與 Windows（DirectWrite）補完調號重排、NFD 重組、缺字補字與無錨點 <code>U+0358</code> 的完整實測。</li>
+      <li><strong>Google Fonts 跨切塊拆散測試：</strong>於 Chrome、Safari、Firefox 實測芫荽與粉圓的 <code>o + U+0358</code> 是否可能在 <code>latin</code> 與台語 <code>unicode-range</code> 切塊間被拆散。</li>
+      <li><strong>尚未測試的社群字型：</strong>下載並對 <strong>Caivun</strong>、<strong>Kaukhia</strong> 與 <strong>Indeciso</strong> 執行完整檢測管線。</li>
+      <li><strong>舊式替代編碼的真實分布：</strong>掃描 ChhoeTaigi 語料庫與早期台語網頁，量化中圓點、越南語帶角 o、PUA 與 8-bit 編碼在現存文本中的比例。</li>
+    </ol>
+
+    <h2 id="model-reviews">模型同儕審查與查證紀錄（Gemini 4）</h2>
+    <p><code>docs/poj-font-implementation.md</code> 初稿曾以無工具的純文字模式交由兩套 Gemini 4 XHigh 模型（<code>gemini-4-neon-xhigh</code> 與 <code>gemini-4-hydrogen-xhigh</code>）經由 <code>agy</code> 獨立審查，完整紀錄保存於 <code>docs/reviews/</code>。</p>
+
+    <h3 id="confirmed">兩份審查一致確認的核心論點</h3>
+    <ul>
+      <li>標準組合類別（<code>ccc=230</code> 與 <code>ccc=232</code>）數值與正規化重排機制；</li>
+      <li>Unicode 17.0 預組 POJ／KPL 字表；</li>
+      <li>NFKC 會將 <code>U+207F</code>（<span class="poj">ⁿ</span>）破壞成普通 <code>n</code>；</li>
+      <li><span class="poj">i̍</span> 等組合序列的 <code>Soft_Dotted</code> 無點 i 需求；</li>
+      <li>HarfBuzz 在 GSUB 前執行正規化重排；</li>
+      <li>CSS 在非零 <code>letter-spacing</code> 下停用選用 <code>liga</code>。</li>
+    </ul>
+
+    <h3 id="corrections">已實測查證並採納的修正項目</h3>
+    <div class="table-wrap"><table class="compact">
+      <thead><tr><th>審查提出的修正點</th><th>本站查證方式與結果</th></tr></thead>
+      <tbody>
+        <tr><td>HarfBuzz 備援定位為全有或全無（只要有任何 <code>mark</code> 功能便停用），解釋 Arial 的 <code>U+0358</code> 與 Source Sans 3 的 <span class="poj">ŏ͘</span> 錯位。</td><td>實測驗證：兩者在該處偏移量確實為 <code>(0, 0)</code>。</td></tr>
+        <tr><td>Lesson One、粉圓、芫荽與 WD-XL 皆含 <code>mark</code>／<code>mkmk</code>（屬 B + A，非僅 B）；僅源樣、豆腐烏與 taigivs 缺乏 <code>mark</code>。</td><td>核對 <code>data/poj-font-audit.json</code> 中 GPOS 功能清單確認。</td></tr>
+        <tr><td>SIL 的佔位 <code>U+0358</code> 是 GDEF 類別 1 基礎字形，非附加符號。</td><td>檢查 Charis、Doulos、Gentium 之 GDEF 表確認為類別 1。</td></tr>
+        <tr><td><code>U+1D3A</code> 是大寫修飾字母 <span class="poj">ᴺ</span>，並非 <span class="poj">ⁿ</span> 的舊式寫法。</td><td>核對 <code>UnicodeData.txt</code> 確認。</td></tr>
+        <tr><td><span class="poj">o̍͘</span> 的 NFC 形式仍維持 <code>o + 030D + 0358</code>。</td><td>以 Python <code>unicodedata</code> 驗證確認。</td></tr>
+        <tr><td>HarfBuzz 在 GSUB 前亦會將 <code>o + 0301</code> 重組為 <code>ó</code>。</td><td>比對 NFC 與 NFD 輸出字形串確認完全一致。</td></tr>
+        <tr><td>KPL 保留第六調腔調使用的抑揚符 <code>U+030C</code>。</td><td>核對 Unicode 預組字元集確認。</td></tr>
+        <tr><td>網頁字型子集化可能拆散或遺漏 POJ 調號。</td><td><strong>實測確認且比預期更嚴重：</strong>Google Fonts 上的 TASA Explorer 與 Source Sans 3 完全刪除了 POJ 調號。</td></tr>
+        <tr><td>AFDKO 功能範本修正：最長優先連字、拆分 mark lookup、<code>languagesystem</code>、GDEF、mark filtering set、<code>uni0237</code>、<code>o_uni0358</code> 與 <code>ő ǒ</code> 基礎字、頂層 <code>markClass</code>、<code>mkmk</code>。</td><td>已全數套用於<a href="makers.html#fea-code">字型開發者實作指南</a>。</td></tr>
+        <tr><td>補充進階工程主題：雙連字號 <code>--</code>、垂直度量、<code>case</code> 預設關閉、<code>o͘</code> 後方碰撞、小型大寫、CFF 與 TrueType、可變字型、PDF 字形命名、<code>locl</code> 互動與額外舊式編碼。</td><td>已納入文件（部分項目尚未逐一跑實驗）。</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 id="unverified-and-rejected">保留標註「待實測」與未採納的項目</h3>
+    <ul>
+      <li><strong>標註為尚未獨立實測之審查意見：</strong>DirectWrite 重排／重組／補字細節；Microsoft Word 的連字預設狀態；額外舊式 PUA／8-bit／形似字在真實語料中的出現頻率。</li>
+      <li><strong>未採納或調整措辭：</strong>（1）「寫在前面的 2 字形連字會永久遮蔽 3 字形連字」——<code>feaLib</code> 與 <code>makeotf</code> 會在同一 lookup 內自動依長度降冪排序（規則 2 仍建議手動最長優先以確保跨工具相容）。（2）NunitoPOJ 無點 i 疑慮——已實測確認即使關閉 <code>liga</code>，NunitoPOJ 仍透過 <code>ccmp</code> 正確輸出 <code>dotlessi + uni030D</code>。</li>
+    </ul>
+
+    <nav class="doc-pager" aria-label="上下頁導覽">
+      <a class="pager-link prev" href="makers.html">
+        <span class="pager-dir">← 上一頁</span>
+        <span class="pager-title">字型開發者實作指南</span>
+      </a>
+      <a class="pager-link next" href="./">
+        <span class="pager-dir">回到開頭 →</span>
+        <span class="pager-title">總覽</span>
+      </a>
+    </nav>
+
+    <footer class="doc-footer">
+      PehoejiFont 計畫 · 全站文字採用 But Ko 製作之 <a href="https://github.com/ButTaiwan/genyo-font">源樣明體（GenYo Min）</a>（<a href="../assets/fonts/GenYo-OFL.txt">SIL Open Font License</a>） · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">GitHub 原始碼</a>
+    </footer>
+  </main>
+
+  <aside class="toc" aria-label="本頁目錄">
+    <div class="toc-title">本頁目錄</div>
+    <ul id="toc-list"></ul>
+  </aside>
+</div>
+
+<script src="../assets/docs.js"></script>
+</body>
+</html>

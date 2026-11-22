@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>白話字（POJ）字型技術文件 — PehoejiFont</title>
+<meta name="description" content="台語白話字（Pe̍h-ōe-jī，POJ）與教育部羅馬字（KPL）字型完整技術文件：Unicode 編碼、OpenType 組字原理、24 款字型實測、Google Fonts 普查與字型開發指南。">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="alternate" hreflang="en" href="../">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <button class="menu-btn" id="menu-toggle" type="button" aria-label="開啟導覽選單">☰</button>
+    <a class="brand" href="./">
+      <span class="brand-mark poj">o͘</span>
+      <span>PehoejiFont</span>
+      <span class="brand-badge">文件</span>
+    </a>
+    <div class="topbar-spacer"></div>
+    <button class="search-trigger" id="search-trigger" type="button">
+      <span>⌕</span>
+      <span class="search-label">搜尋文件…</span>
+      <span class="kbd">⌘K</span>
+    </button>
+    <a class="icon-btn lang-switch" href="../" hreflang="en" lang="en">EN</a>
+    <button class="icon-btn" id="theme-toggle" type="button">☾ 暗色</button>
+    <a class="icon-btn gh-link" href="https://github.com/PehoejiFont/PehoejiFont.github.io">GitHub</a>
+  </div>
+</header>
+
+<div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+<div class="doc-shell">
+  <aside class="sidebar" aria-label="文件導覽">
+    <div class="sidebar-group">
+      <div class="sidebar-heading">開始使用</div>
+      <ul>
+        <li><a href="./" aria-current="page">總覽</a></li>
+        <li><a href="choose.html#test">即時 POJ 測試台</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">核心原理</div>
+      <ul>
+        <li><a href="letters.html">Unicode 與編碼結構</a></li>
+        <li><a href="fonts.html">字型如何實作 POJ</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">字型目錄與資料</div>
+      <ul>
+        <li><a href="choose.html">24 款字型實測與樣張</a></li>
+        <li><a href="catalog.html">Google Fonts 普查與 Fork</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">實務指南</div>
+      <ul>
+        <li><a href="problems.html">疑難排解與跨平台差異</a></li>
+        <li><a href="makers.html">字型開發者實作指南</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">參考資料</div>
+      <ul>
+        <li><a href="tools.html">檢測工具、方法與審查紀錄</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main class="doc-main">
+    <div class="breadcrumb"><span>開始使用</span> › <span>總覽</span></div>
+    <h1>台語<span class="poj">白話字（Pe̍h-ōe-jī，POJ）</span>字型技術文件</h1>
+    <p class="lead">在電腦、手機與網頁上正確顯示台語（Taigi）<span class="poj">白話字（Pe̍h-ōe-jī，POJ）</span>與<span class="poj">教育部羅馬字（KPL，Kàu-io̍k Pō͘ Lô-má-jī）</span>的完整技術手冊——同時記錄我們對整個 Google Fonts 開源字型庫的普查與上游貢獻計畫。</p>
+
+    <div class="meta-row">
+      <span class="meta-pill">24 款字型逐字實測</span>
+      <span class="meta-pill">2,067 款 Google Fonts 家族普查</span>
+      <span class="meta-pill">989 個上游 GitHub Fork</span>
+      <span class="meta-pill">研究日期：2026 年 11 月</span>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-num">2,067</div>
+        <div class="stat-label">完成授權與保留名稱（RFN）普查的 Google Fonts 家族</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">1,471</div>
+        <div class="stat-label">符合開源、無 RFN 且原始碼位於 GitHub 的候選家族</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">55</div>
+        <div class="stat-label">候選清單中已收錄所有 POJ 字元的字型家族</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">989</div>
+        <div class="stat-label">已 Fork 至 <span class="mono">PehoejiFont</span> 組織的獨立上游儲存庫</div>
+      </div>
+    </div>
+
+    <h2 id="problem-in-one-picture">一張圖看懂問題所在</h2>
+    <p>以下五個範例是相同的五個台語詞彙：<span class="poj">O͘-á</span>、<span class="poj">hō͘</span>（雨）、<span class="poj">chia̍h</span>（食）、<span class="poj">thiⁿ</span>（天）與 <span class="poj">n̂g</span>（黃），經由 HarfBuzz（Chrome、Firefox、Android、LibreOffice 與 Linux 所使用的文字整形引擎）在五款不同字型中的真實渲染結果：</p>
+
+    <div class="examples">
+      <div class="ex good">
+        <div class="label"><span class="tag good">正確</span><b>Lesson One</b> — 免費 OFL 字型，同時結合 <code>ccmp</code> 預繪字形與 <code>mark</code> 錨點（方式 A + B）</div>
+        <img src="../assets/img/sample-lessonone.svg" alt="Lesson One 正確顯示 O͘-á hō͘ chia̍h thiⁿ n̂g">
+      </div>
+      <div class="ex bad">
+        <div class="label"><span class="tag bad">圓點錯位</span><b>Arial</b> — 擁有 <code>mark</code> 表但缺乏 <code>U+0358</code> 錨點，導致 HarfBuzz 關閉備援定位，圓點掉到字母後方空白處</div>
+        <img src="../assets/img/sample-arial.svg" alt="Arial 中 hō͘ 的右點偏移到字母後方">
+      </div>
+      <div class="ex bad">
+        <div class="label"><span class="tag bad">圓點浮空</span><b>Helvetica</b> — 完全沒有 <code>mark</code> 表，HarfBuzz 備援計算把 <code>U+0358</code> 抬高到大寫 O͘ 整個筆畫外框之上</div>
+        <img src="../assets/img/sample-helvetica.svg" alt="Helvetica 中大寫 O͘ 的圓點高高浮在上方">
+      </div>
+      <div class="ex bad">
+        <div class="label"><span class="tag bad">缺字</span><b>EB Garamond</b> — 完全未收錄 <code>U+0358</code>，直接顯示空白方框（豆腐字）</div>
+        <img src="../assets/img/sample-ebgaramond.svg" alt="EB Garamond 因缺少 U+0358 而顯示空白方框">
+      </div>
+      <div class="ex good">
+        <div class="label"><span class="tag good">正確</span><b>源樣明體（GenYo Min）</b> — 本站採用的字型；以 <code>ccmp</code> 預繪字形呈現，右點緊貼字母 o</div>
+        <img src="../assets/img/sample-genyo.svg" alt="源樣明體正確顯示 O͘-á hō͘ chia̍h thiⁿ n̂g">
+      </div>
+    </div>
+    <p class="legend">以上 SVG 皆由 <code>tools/poj_guide_svg.py</code> 依據 HarfBuzz 實際定位與字型輪廓繪製。macOS CoreText 在缺乏 OpenType <code>mark</code> 表的字型上表現可能不同，詳見<a href="problems.html#platforms">跨平台差異</a>。</p>
+
+    <h2 id="why-it-happens">三個根本原因，看懂 POJ 為什麼常破版</h2>
+    <ol>
+      <li><strong>Unicode 沒有預組好的 <span class="poj">o͘</span> 與第八調字母。</strong>電腦是將 <span class="poj">o͘</span> 存成 <span class="poj">o</span> 加上「右上圓點」組合附加符號（<code>U+0358</code>），把 <span class="poj">a̍</span> 存成 <span class="poj">a</span> 加上「上方短豎線」（<code>U+030D</code>）。再加上鼻化上標 <span class="poj">ⁿ</span>（<code>U+207F</code>），多數歐文字型根本沒有這些字元。<a href="letters.html">深入了解 Unicode 編碼 →</a></li>
+      <li><strong>只補上字碼還不夠。</strong>字型必須知道如何把 <code>U+0358</code> 精準定位到每一個帶調的 <span class="poj">o</span> 右上方（包含預組的 <span class="poj">ó ò ô ō ŏ ő</span> 與大寫）、在 <code>U+030D</code> 下方把 <span class="poj">i</span> 換成無點 <span class="poj">ı</span>，而且所有組字規則都必須寫在必定啟用的 <code>ccmp</code>（絕不能放在可關閉的 <code>liga</code>）。<a href="fonts.html">字型實作方式 →</a></li>
+      <li><strong>同一個字面上的音節，背後可能有好幾種 Unicode 編碼順序。</strong>NFC（<code>ó + U+0358</code>）、NFD（<code>o + U+0301 + U+0358</code>）以及非正規順序（<code>o + U+0358 + U+0301</code>），在 HarfBuzz、CoreText 與 DirectWrite 上都必須呈現完全一致的外觀。<a href="letters.html#canonical">標準組合類別與順序 →</a></li>
+    </ol>
+
+    <h2 id="quick-answers">快速解答</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>我想做的事…</th><th>建議做法</th></tr></thead>
+      <tbody>
+        <tr><td>書寫純白話字（POJ）文章</td><td>推薦使用 <strong>Lesson One</strong>、<strong>POJ Chhiu-ki</strong>、<strong>SIL Charis / Doulos / Gentium</strong>，或從 GitHub 下載的 <strong>TASA Explorer / Orbiter</strong>。<a href="choose.html">查看完整推薦 →</a></td></tr>
+        <tr><td>書寫漢羅混合文章（漢羅）</td><td>推薦使用 <strong>jf open 粉圓（Huninn）</strong>、<strong>芫荽 Iansui</strong> 或 <strong>WD-XL 滑油字</strong>（皆採方式 A + B）；<strong>源樣明體（GenYo Min）</strong>與<strong>一點明體（I.Ming）</strong>亦可良好顯示。<a href="choose.html#hanlo">比較清單 →</a></td></tr>
+        <tr><td>在漢字上方加註白話字注音（Ruby）</td><td>純文字環境可使用 ButTaiwan 的<strong>字咍 taigivs</strong> IVS 字型（<code>cmap</code> format 14），網頁環境建議使用 HTML <code>&lt;ruby&gt;</code>。<a href="letters.html#ivs">IVS 說明 →</a></td></tr>
+        <tr><td>在網站上載入 POJ 字型</td><td>請自行託管完整字型檔（或子集化時完整保留所有 POJ 字碼與 <code>ccmp/mark/mkmk</code>）。Google Fonts 的 <code>unicode-range</code> 切塊會將 TASA Explorer 與 Source Sans 3 的 POJ 調號直接刪掉。<a href="fonts.html#google-fonts">查看實測結果 →</a></td></tr>
+        <tr><td>快速檢測任何字型是否支援 POJ</td><td>使用本站的<a href="choose.html#test">即時 POJ 測試台</a>，複製 NFC、NFD 與反向順序字串，並測試開啟 <code>letter-spacing</code>。</td></tr>
+        <tr><td>排除破版、亂碼或搜尋不到的問題</td><td>請查閱<a href="problems.html">疑難排解與跨平台差異</a>。</td></tr>
+        <tr><td>為字型加入 POJ 與 KPL 支援</td><td>請遵循<a href="makers.html">字型開發者實作指南</a>中的字形、錨點、AFDKO/<code>feaLib</code> 程式碼範本與自動化檢測流程。</td></tr>
+        <tr><td>查詢 Google Fonts 普查與 989 個 Fork</td><td>在<a href="catalog.html">Google Fonts 普查與 Fork</a> 直接搜尋全部 1,471 款候選家族與 989 個上游專案。</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2 id="documentation-map">文件章節總覽</h2>
+    <div class="card-grid">
+      <a class="doc-card" href="letters.html">
+        <h3>1. Unicode 與編碼結構</h3>
+        <p>完整 POJ 與 KPL 字碼清單、Unicode 17.0 預組字表、ccc 230 與 232 排序機制、三大整形引擎、Soft_Dotted i/j、NFKC 破壞 ⁿ 的風險、舊式 PUA 編碼、IVS 注音與雙連字號。</p>
+      </a>
+      <a class="doc-card" href="fonts.html">
+        <h3>2. 字型如何實作 POJ</h3>
+        <p>詳解四種實作技術（GPOS 錨點、<code>ccmp</code> 預繪連字、SIL 佔位圓點、固定疊印／引擎備援）、GDEF 類別、<code>liga</code>/<code>case</code> 隱藏開關，以及 Google Fonts <code>unicode-range</code> 切塊實測。</p>
+      </a>
+      <a class="doc-card" href="choose.html">
+        <h3>3. 24 款字型實測與樣張</h3>
+        <p>精選開源字型推薦、即時 POJ 測試台與編碼檢視器、24 款字型完整對照表、HarfBuzz 互動檢驗器、未測試名單，以及高解析度 NFC vs NFD PNG 樣張。</p>
+      </a>
+      <a class="doc-card" href="catalog.html">
+        <h3>4. Google Fonts 普查與 Fork</h3>
+        <p>2,067 款家族授權分析、1,471 款互動篩選清單、55 款已有字元名單、989 個 GitHub Fork 目錄、上游 PR 工作流程，以及 Google Fonts 標準推動進度。</p>
+      </a>
+      <a class="doc-card" href="problems.html">
+        <h3>5. 疑難排解與跨平台差異</h3>
+        <p>11 種常見故障症狀診斷（豆腐字、浮動圓點、單字補字、i̍ 殘留點、字距破版、NFKC 遺失鼻化、PDF 複製亂碼）與 HarfBuzz / macOS CoreText / Windows DirectWrite 比較。</p>
+      </a>
+      <a class="doc-card" href="makers.html">
+        <h3>6. 字型開發者實作指南</h3>
+        <p>完整工程配方：字形與 <code>cmap</code>、錨點配置、可直接複製的 AFDKO/<code>feaLib</code> 功能碼範本、8 條 OpenType 規則、垂直度量、CFF 與 TrueType 差異、可變字型與測試指令。</p>
+      </a>
+      <a class="doc-card" href="tools.html">
+        <h3>7. 檢測工具、方法與審查紀錄</h3>
+        <p><code>tools/</code> 底下全部 11 支 Python／Swift／Shell 腳本說明、專案檔案結構、待驗證研究問題，以及 Gemini 4 同儕審查的查證紀錄。</p>
+      </a>
+    </div>
+
+    <h2 id="project-scope">研究範圍與名詞約定</h2>
+    <div class="callout info">
+      <span class="callout-title">關於本研究與用語規範</span>
+      <p>24 款字型的逐字檢驗完成於 2026 年 11 月，取材自 <a href="https://oh.taigi.info/siataibun/jithe/">狗公會曉學台語 › 字體（font）</a> 所整理的免費字型清單，並與完整 <a href="https://github.com/google/fonts">google/fonts</a> 目錄（commit <code>cc5661d</code>，2026-11-19）交叉比對。所有整形數據皆以 HarfBuzz（<code>uharfbuzz</code>）程式實測驗證，並輔以 macOS CoreText 初步測試。</p>
+      <p>本文件統一採用以下名稱：語言稱為<strong>台語（Taigi）</strong>，拉丁字母書寫系統稱為<strong>羅馬字正書法（Roman Orthography）</strong>，傳統教會白話字稱為<strong>白話字（Pe̍h-ōe-jī，POJ）</strong>，教育部頒布之系統稱為<strong>教育部羅馬字（KPL，Kàu-io̍k Pō͘ Lô-má-jī）</strong>。</p>
+    </div>
+
+    <nav class="doc-pager" aria-label="上下頁導覽">
+      <span></span>
+      <a class="pager-link next" href="letters.html">
+        <span class="pager-dir">下一頁 →</span>
+        <span class="pager-title">Unicode 與編碼結構</span>
+      </a>
+    </nav>
+
+    <footer class="doc-footer">
+      PehoejiFont 計畫 · 全站文字採用 But Ko 製作之 <a href="https://github.com/ButTaiwan/genyo-font">源樣明體（GenYo Min）</a>（<a href="../assets/fonts/GenYo-OFL.txt">SIL Open Font License</a>） · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">GitHub 原始碼</a>
+    </footer>
+  </main>
+
+  <aside class="toc" aria-label="本頁目錄">
+    <div class="toc-title">本頁目錄</div>
+    <ul id="toc-list"></ul>
+  </aside>
+</div>
+
+<script src="../assets/docs.js"></script>
+</body>
+</html>

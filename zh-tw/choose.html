@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>24 款字型實測、推薦與樣張 — 白話字（POJ）字型技術文件</title>
+<meta name="description" content="免費開源台語 POJ 與漢羅字型推薦、內建編碼檢視器的即時測試台、24 款字型 HarfBuzz 互動檢驗器，以及 NFC vs NFD 高解析度樣張。">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="alternate" hreflang="en" href="../choose.html">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <button class="menu-btn" id="menu-toggle" type="button" aria-label="開啟導覽選單">☰</button>
+    <a class="brand" href="./">
+      <span class="brand-mark poj">o͘</span>
+      <span>PehoejiFont</span>
+      <span class="brand-badge">文件</span>
+    </a>
+    <div class="topbar-spacer"></div>
+    <button class="search-trigger" id="search-trigger" type="button">
+      <span>⌕</span>
+      <span class="search-label">搜尋文件…</span>
+      <span class="kbd">⌘K</span>
+    </button>
+    <a class="icon-btn lang-switch" href="../choose.html" hreflang="en" lang="en">EN</a>
+    <button class="icon-btn" id="theme-toggle" type="button">☾ 暗色</button>
+    <a class="icon-btn gh-link" href="https://github.com/PehoejiFont/PehoejiFont.github.io">GitHub</a>
+  </div>
+</header>
+
+<div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+<div class="doc-shell">
+  <aside class="sidebar" aria-label="文件導覽">
+    <div class="sidebar-group">
+      <div class="sidebar-heading">開始使用</div>
+      <ul>
+        <li><a href="./">總覽</a></li>
+        <li><a href="choose.html#test">即時 POJ 測試台</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">核心原理</div>
+      <ul>
+        <li><a href="letters.html">Unicode 與編碼結構</a></li>
+        <li><a href="fonts.html">字型如何實作 POJ</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">字型目錄與資料</div>
+      <ul>
+        <li><a href="choose.html" aria-current="page">24 款字型實測與樣張</a></li>
+        <li><a href="catalog.html">Google Fonts 普查與 Fork</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">實務指南</div>
+      <ul>
+        <li><a href="problems.html">疑難排解與跨平台差異</a></li>
+        <li><a href="makers.html">字型開發者實作指南</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">參考資料</div>
+      <ul>
+        <li><a href="tools.html">檢測工具、方法與審查紀錄</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main class="doc-main">
+    <div class="breadcrumb"><a href="./">文件</a> › <span>字型目錄與資料</span> › <span>24 款字型實測與樣張</span></div>
+    <h1>24 款字型實測、推薦清單與樣張</h1>
+    <p class="lead">涵蓋純 POJ 與漢羅開源字型推薦、可即時檢視字碼的線上測試台、24 款字型完整 HarfBuzz 互動檢驗資料，以及 NFC 與 NFD 並列對照樣張。</p>
+
+    <h2 id="picks">推薦的免費開源字型</h2>
+    <h3 id="running-poj">純白話字（POJ）內文推薦</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>字型</th><th>風格</th><th>授權</th><th>技術</th><th>說明</th></tr></thead>
+      <tbody>
+        <tr><td><a href="https://github.com/ButTaiwan/LessonOne"><strong>Lesson One</strong></a></td><td>簡潔無襯線</td><td>OFL 1.1</td><td>B + A</td><td>無襯線首選；NFC、NFD 與反向順序全數正確。</td></tr>
+        <tr><td><a href="https://github.com/aiongg/POJFonts"><strong>POJ Chhiu-ki</strong></a></td><td>POJ 專用</td><td>Apache-2.0</td><td>A</td><td>專為白話字打造，全套錨點定位乾淨俐落。</td></tr>
+        <tr><td><a href="https://software.sil.org/charis/"><strong>Charis</strong></a>、<a href="https://software.sil.org/doulos/"><strong>Doulos</strong></a>、<a href="https://software.sil.org/gentium/"><strong>Gentium</strong></a>（SIL）</td><td>書籍襯線</td><td>OFL 1.1 (RFN)</td><td>A + C</td><td>出版級品質；採獨立佔位圓點（<a href="fonts.html#technique-c">方式 C</a>）避免碰撞。分支修改需更名。</td></tr>
+        <tr><td><a href="https://github.com/localremotetw/TASA-Typeface-Collection"><strong>TASA Explorer / Orbiter</strong></a></td><td>現代無襯線</td><td>OFL 1.1</td><td>B + A</td><td>從 GitHub 下載完整版表現完美；<strong>切勿從 Google Fonts 載入</strong>（<a href="fonts.html#google-fonts">會刪掉 POJ 調號</a>）。</td></tr>
+        <tr><td><a href="https://github.com/adobe-fonts/source-sans"><strong>Source Sans 3</strong></a></td><td>無襯線</td><td>OFL 1.1</td><td>A</td><td>除罕見第九調 <span class="poj">ŏ͘</span>／<span class="poj">Ŏ͘</span> 漏設錨點外皆正確；避免從 Google Fonts 載入。</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 id="hanlo">漢字＋白話字混排（漢羅）推薦</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>字型</th><th>風格</th><th>授權</th><th>技術</th><th>說明</th></tr></thead>
+      <tbody>
+        <tr><td><a href="https://github.com/justfont/open-huninn-font"><strong>jf open 粉圓 2.1（Huninn）</strong></a></td><td>圓體</td><td>OFL 1.1</td><td>B + A</td><td>所有測試音節完全正確；Google Fonts 附有台語專屬切塊。</td></tr>
+        <tr><td><a href="https://github.com/ButTaiwan/iansui"><strong>芫荽 Iansui</strong></a></td><td>手寫楷體感</td><td>OFL 1.1</td><td>B + A</td><td>所有測試音節完全正確；Google Fonts 附有台語專屬切塊。</td></tr>
+        <tr><td><a href="https://github.com/NightFurySL2001/WD-XL-font"><strong>WD-XL Lubrifont TC 滑油字</strong></a></td><td>黑體無襯線</td><td>OFL 1.1</td><td>B + A</td><td><code>ccmp</code> 動態組字搭配完整 <code>mark</code>／<code>mkmk</code> 安全網。</td></tr>
+        <tr><td><a href="https://github.com/ichitenfont/I.Ming"><strong>一點明體 I.Ming</strong></a></td><td>明體</td><td>IPA Font 1.0</td><td>B + A</td><td>品質優秀；<code>U+0358</code> 錨點僅設於 <code>o ō</code>，其餘由連字涵蓋。採 IPA 授權而非 OFL。</td></tr>
+        <tr><td><a href="https://github.com/ButTaiwan/genyo-font"><strong>源樣明體 GenYo Min</strong></a></td><td>明體</td><td>OFL 1.1</td><td>僅 B</td><td><strong>本站採用的字型。</strong>以 <code>ccmp</code> 預繪字形呈現（右點緊貼字母碗緣）；無 <code>mark</code> 表作為未收錄組合的安全網。</td></tr>
+        <tr><td><strong>豆腐烏／Tāu-hū</strong> 家族（Khu-lé-iòng、Môo-tn̄g、Tauhu Oo）</td><td>多款</td><td>OFL 1.1</td><td>僅 B</td><td>常見組合透過 <code>ccmp</code> 顯示正確；無 GPOS <code>mark</code> 安全網。</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 id="avoid">純 POJ 內文應避開的字型</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>字型</th><th>實測缺陷</th></tr></thead>
+      <tbody>
+        <tr><td><strong>EB Garamond</strong></td><td>完全缺少 <code>U+0358</code>（顯示豆腐字）；<code>U+030D</code> 未設錨點；<span class="poj">i̍</span> 未去點。部分台語字型清單誤列此款，<strong>無法用於 <span class="poj">o͘</span></strong>。</td></tr>
+        <tr><td><strong>字咍 Taigi IVS 字型</strong>（作為一般 POJ 內文）</td><td>漢字注音極佳（8,021 筆 IVS），但歐文區無 <code>mark</code> 表且 <span class="poj">i̍</span> 保留點，不適合長篇純 POJ。</td></tr>
+        <tr><td><strong>Arial</strong>（macOS 內建版）</td><td><code>U+0358</code> 為無錨點疊印；因字型含有 <code>mark</code> 表，HarfBuzz 關閉備援，圓點掉到字母後方。</td></tr>
+        <tr><td><strong>Helvetica、Geneva、Menlo</strong>（macOS）</td><td>無 <code>mark</code> 表且 <span class="poj">i̍</span> 未去點；HarfBuzz 備援讓大寫 <span class="poj">Ó͘ Ō͘</span> 圓點高高飄起。</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2 id="test">即時 POJ / KPL 字型測試台</h2>
+    <p>在下方輸入或貼上任何台語文字，一鍵複製 <strong>NFC</strong>、<strong>NFD</strong> 或<strong>非正規反向順序</strong>（<code>o + U+0358 + 聲調</code>）貼入其他軟體測試；也可以勾選 <code>letter-spacing</code> 檢驗是否誤用 <code>liga</code>，並即時檢視每個字元的 Unicode 編號。</p>
+
+    <div class="bench">
+      <div class="bench-toolbar">
+        <button class="btn primary" type="button" data-copy-form="NFC">複製 NFC</button>
+        <button class="btn" type="button" data-copy-form="NFD" title="macOS 檔名與部分 PDF 產生的分解形式">複製 NFD</button>
+        <button class="btn" type="button" data-copy-form="REV" title="非正規順序：U+0358 排在聲調之前">複製反向順序</button>
+        <button class="btn" type="button" data-preset="specimen">短樣張字串</button>
+        <button class="btn" type="button" data-preset="full">完整 POJ + KPL</button>
+        <button class="btn" type="button" data-preset="words">常用詞範例</button>
+      </div>
+      <textarea class="bench-input" id="bench-input" spellcheck="false" aria-label="POJ 測試文字">o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ ő͘ ǒ͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ m̌ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | i̋ ő ǎ | tńg--khì | Pe̍h-ōe-jī Lâu Ô͘-chhiû</textarea>
+      <div class="bench-controls">
+        <label>字級：<input type="range" id="bench-size" min="16" max="48" value="24"> <span id="bench-size-val">24px</span></label>
+        <label><input type="checkbox" id="bench-spacing"> 加上 <code>letter-spacing: 0.12em</code>（會停用 <code>liga</code>）</label>
+        <label><input type="checkbox" id="bench-bold"> 粗體（700）</label>
+      </div>
+      <div class="cp-strip" id="cp-strip" aria-label="即時 Unicode 字碼拆解"></div>
+    </div>
+
+    <p><strong>貼到目標字型後的六項快速檢查：</strong></p>
+    <ol>
+      <li><strong>沒有空白方框（□）</strong>，也沒有個別字母突然變成另一款字型。</li>
+      <li><strong><span class="poj">o͘</span> 的圓點</strong>穩穩落在右上方，尤其檢查大寫 <span class="poj">O͘ Ó͘ Ō͘ O̍͘</span> 與寬調號 <span class="poj">ō͘ ô͘ ŏ͘</span>。</li>
+      <li><strong><span class="poj">i̍</span> 與 <span class="poj">i̋</span> 乾淨去點</strong>，豎線或雙銳音符下方沒有殘留圓點。</li>
+      <li><strong>第八調短豎線</strong>居中對齊於 <span class="poj">a̍ e̍ o̍ u̍ m̍ n̍</span> 與大寫字母正上方。</li>
+      <li><strong><span class="poj">tńg--khì</span> 中的 <code>--</code> 維持兩條獨立連字號</strong>，未合併成破折號。</li>
+      <li><strong>NFC、NFD 與反向順序外觀完全一致</strong>，且加上 <code>letter-spacing</code> 不會破版。</li>
+    </ol>
+
+    <h2 id="survey-table">24 款字型完整實測總表（Regular 字重）</h2>
+    <p>下列字型除 <strong>EB Garamond（缺少 <code>U+0358</code>）</strong>之外，全數皆有收錄 <code>U+0358</code>、<code>U+030D</code>、<code>U+207F</code> 與 <code>U+030B</code>。「<code>mark</code>」欄表示是否具備 GPOS <code>mark</code> 定位功能。</p>
+
+    <div class="table-wrap"><table class="compact">
+      <thead><tr><th>字型</th><th>授權</th><th>技術</th><th class="center"><code>mark</code></th><th class="center">無點 <span class="poj">i̍</span></th><th>詳細實測觀察</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Source Sans 3</strong>（Adobe）</td><td>OFL 1.1</td><td>A</td><td class="center">✓</td><td class="center">✓</td><td><span class="poj">ŏ͘</span> 與 <span class="poj">Ŏ͘</span> 漏設錨點 → 圓點落於 <code>(0,0)</code> 無備援；Google Fonts 會刪調號。其餘乾淨。</td></tr>
+        <tr><td><strong>POJ Chhiu-ki</strong>（aiongg）</td><td>Apache-2.0</td><td>A</td><td class="center">✓</td><td class="center">✓</td><td>專為 POJ 設計（81 個 <code>U+0358</code>／54 個 <code>U+030D</code> 錨點基礎字），全部音節乾淨。</td></tr>
+        <tr><td><strong>NunitoPOJ</strong>（aiongg／字咍輸入法隨附）</td><td>OFL 1.1</td><td>B (<code>liga</code>)、A、PUA</td><td class="center">✓</td><td class="center">✓</td><td>含 PUA <code>E400–E435</code>（55 格）。<code>liga</code> 採非正規順序故在 HarfBuzz 不會觸發；但關閉 <code>liga</code> 後仍可藉 <code>ccmp</code>＋錨點正確顯示 <span class="poj">o͘</span> 與 <span class="poj">i̍</span>。</td></tr>
+        <tr><td><strong>Lesson One</strong>（But）</td><td>OFL 1.1</td><td>B（<code>ccmp</code> 雙順序）+ A</td><td class="center">✓</td><td class="center">✓</td><td>最佳實務典範。</td></tr>
+        <tr><td><strong>TASA Explorer / Orbiter</strong></td><td>OFL 1.1</td><td>B + A</td><td class="center">✓</td><td class="center">✓</td><td>GitHub 完整版表現優異；<strong>Google Fonts 網頁版缺少 <code>U+0358</code>/<code>U+030D</code>/<code>ⁿ</code>。</strong></td></tr>
+        <tr><td><strong>jf open 粉圓 2.1（Huninn）</strong></td><td>OFL 1.1</td><td>B + A</td><td class="center">✓</td><td class="center">✓</td><td>全部正確；Google Fonts 具專屬台語切塊 #106。</td></tr>
+        <tr><td><strong>芫荽 Iansui</strong>（But）</td><td>OFL 1.1</td><td>B + A</td><td class="center">✓</td><td class="center">✓</td><td>全部正確；Google Fonts 具專屬台語切塊 #104。</td></tr>
+        <tr><td><strong>WD-XL Lubrifont TC 滑油字</strong></td><td>OFL 1.1</td><td>B（<code>ccmp</code> 動態組字）+ A</td><td class="center">✓</td><td class="center">✓</td><td>測試音節全過，並附 24 筆 IVS。</td></tr>
+        <tr><td><strong>一點明體 I.Ming</strong></td><td>IPA Font 1.0</td><td>B + A</td><td class="center">✓</td><td class="center">✓</td><td>60,597 字形；<code>U+0358</code> 錨點僅設於 <code>o ō</code>，其餘由 <code>ccmp</code> 連字覆蓋。</td></tr>
+        <tr><td><strong>源樣明體 GenYoMin2 TW</strong></td><td>OFL 1.1</td><td>僅 B</td><td class="center">✗</td><td class="center">✓</td><td>圓點緊貼字母（略近角狀）；未收錄組合仰賴引擎備援。<strong>本站採用字型。</strong></td></tr>
+        <tr><td><strong>豆腐烏家族</strong>（Khu-lé-iòng／Môo-tn̄g／Tauhu Oo）</td><td>OFL 1.1</td><td>僅 B</td><td class="center">✗</td><td class="center">✓</td><td>與源樣明體相同：常見組合由 <code>ccmp</code> 妥善覆蓋，但無 GPOS <code>mark</code> 安全網。</td></tr>
+        <tr><td><strong>Charis / Doulos / Gentium</strong>（SIL）</td><td>OFL 1.1 (RFN)</td><td>A + C</td><td class="center">✓</td><td class="center">✓</td><td>表現卓越；獨立佔位圓點（GDEF 類別 1，寬 200–279u）；含 223 個 PUA 字形。分支需更名。</td></tr>
+        <tr><td><strong>EB Garamond</strong></td><td>OFL 1.1</td><td>A（缺 <code>U+0358</code>）</td><td class="center">✓</td><td class="center">✗</td><td><code>U+0358</code> 顯示豆腐字；<code>U+030D</code> 未設錨點偏移。<strong>不可用於 <span class="poj">o͘</span>。</strong></td></tr>
+        <tr><td><strong>字咍 Taigi IVS 字型</strong>（Huninn POJ、Iansui TL）</td><td>OFL / Apache-2.0</td><td>D + IVS 注音</td><td class="center">✗</td><td class="center">✗</td><td>每款含 8,021 筆漢字 IVS 注音；純 POJ 內文較弱（無 <code>mark</code>、<span class="poj">i̍</span> 留點）。</td></tr>
+        <tr><td><strong>Arial</strong>（macOS 版）</td><td>專有授權</td><td>A（<code>030D</code>）+ D（<code>0358</code>）</td><td class="center">✓</td><td class="center">✓</td><td><code>U+0358</code> 為無錨點疊印；因具 <code>mark</code> 表，HarfBuzz 關閉備援。</td></tr>
+        <tr><td><strong>Helvetica / Geneva / Menlo</strong>（macOS）</td><td>專有授權</td><td>D</td><td class="center">✗</td><td class="center">✗</td><td>無 GSUB/GPOS；HarfBuzz 備援使 <span class="poj">Ó͘ Ō͘</span> 圓點浮空。CoreText 結果可能不同（AAT）。</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 id="not-tested">網站列表中有提及但尚未測試的字型</h3>
+    <ul>
+      <li><strong>Caivun</strong>（itch.io；頁面標示 SIL OFL）— 待直接下載字型檔檢測。</li>
+      <li><strong>Kaukhia</strong>（itch.io；<strong>CC BY 4.0</strong>）— 創用 CC 官方不建議將 CC 授權用於字型，但仍允許再使用。</li>
+      <li><strong>Indeciso</strong> — 下載網站為純 JavaScript 介面，尚未取得檔案。</li>
+      <li><strong>昭源（Chiron）</strong>（OFL）— 官網未宣稱支援 POJ（註：Chiron Hei HK 與 Chiron Sung HK 有出現在 55 款具 POJ 字碼的 Google Fonts 清單中，見<a href="catalog.html#ready-55">普查頁</a>）。</li>
+      <li><strong>嘉市體</strong> — 免費使用但<strong>禁止修改</strong>，非開源字型。</li>
+    </ul>
+
+    <h2 id="audit-explorer">24 款字型 HarfBuzz 互動檢驗器</h2>
+    <p>直接檢視 <a href="../data/poj-font-audit.json"><code>data/poj-font-audit.json</code></a> 的完整自動化檢測數據：逐字碼覆蓋率、GSUB/GPOS 功能標籤、<code>U+0358</code>/<code>U+030D</code> 錨點數量，以及 25 個音節在 NFC 與 NFD 下的整形機制。</p>
+
+    <div class="filter-bar">
+      <label for="audit-select"><strong>選擇字型：</strong></label>
+      <select id="audit-select"><option>正在載入 data/poj-font-audit.json…</option></select>
+    </div>
+    <div id="audit-detail"></div>
+
+    <h2 id="specimens">高解析度 NFC vs NFD 渲染樣張</h2>
+    <p>由 <code>tools/poj_specimen.py</code> 透過 HarfBuzz 渲染產生。每款字型皆並列兩行：<strong>第一行為 NFC</strong>、<strong>第二行為 NFD</strong>，測試字串為 <code>o͘ ó͘ ò͘ ô͘ ō͘ o̍͘ ŏ͘ O͘ Ó͘ Ō͘ | a̍ i̍ m̍ n̍ n̍g I̍ | ḿ m̄ m̂ ǹ n̄ | iⁿ i̋ | Pe̍h-ōe-jī Lâu Ô͘-chhiû</code>。點擊圖片可放大檢視。</p>
+
+    <figure class="specimen-fig">
+      <img src="../docs/img/specimen-0.png" alt="POJ 字型樣張第 1 頁（NFC 與 NFD 對照）" loading="lazy">
+      <figcaption><strong>樣張 1 / 3</strong>（<code>docs/img/specimen-0.png</code>）— 點擊圖片放大檢視原尺寸。</figcaption>
+    </figure>
+    <figure class="specimen-fig">
+      <img src="../docs/img/specimen-1.png" alt="POJ 字型樣張第 2 頁（NFC 與 NFD 對照）" loading="lazy">
+      <figcaption><strong>樣張 2 / 3</strong>（<code>docs/img/specimen-1.png</code>）— 點擊圖片放大檢視原尺寸。</figcaption>
+    </figure>
+    <figure class="specimen-fig">
+      <img src="../docs/img/specimen-2.png" alt="POJ 字型樣張第 3 頁（NFC 與 NFD 對照）" loading="lazy">
+      <figcaption><strong>樣張 3 / 3</strong>（<code>docs/img/specimen-2.png</code>）— 點擊圖片放大檢視原尺寸。</figcaption>
+    </figure>
+
+    <nav class="doc-pager" aria-label="上下頁導覽">
+      <a class="pager-link prev" href="fonts.html">
+        <span class="pager-dir">← 上一頁</span>
+        <span class="pager-title">字型如何實作 POJ</span>
+      </a>
+      <a class="pager-link next" href="catalog.html">
+        <span class="pager-dir">下一頁 →</span>
+        <span class="pager-title">Google Fonts 普查與 Fork</span>
+      </a>
+    </nav>
+
+    <footer class="doc-footer">
+      PehoejiFont 計畫 · 全站文字採用 But Ko 製作之 <a href="https://github.com/ButTaiwan/genyo-font">源樣明體（GenYo Min）</a>（<a href="../assets/fonts/GenYo-OFL.txt">SIL Open Font License</a>） · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">GitHub 原始碼</a>
+    </footer>
+  </main>
+
+  <aside class="toc" aria-label="本頁目錄">
+    <div class="toc-title">本頁目錄</div>
+    <ul id="toc-list"></ul>
+  </aside>
+</div>
+
+<script src="../assets/docs.js"></script>
+<script>
+(function () {
+  var PRESETS = {
+    specimen: 'o͘ ó͘ ò͘ ô͘ ō͘ o̍͘ ŏ͘ O͘ Ó͘ Ō͘ | a̍ i̍ m̍ n̍ n̍g I̍ | ḿ m̄ m̂ ǹ n̄ | iⁿ i̋ | Pe̍h-ōe-jī Lâu Ô͘-chhiû',
+    full: 'o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ ő͘ ǒ͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ E̍ I̍ O̍ U̍ M̍ N̍g | ḿ m̀ m̂ m̄ m̌ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h | i̋ ő ǎ | tńg--khì | Pe̍h-ōe-jī Lâu Ô͘-chhiû',
+    words: 'O͘-á hō͘（雨）chia̍h（食）thiⁿ（天）n̂g（黃）· kun 君 kún 滾 kùn 棍 kut 骨 kûn 裙 kūn 郡 ku̍t 滑 · tńg--khì 轉去 · Pe̍h-ōe-jī 白話字'
+  };
+
+  var input = document.getElementById('bench-input');
+  var strip = document.getElementById('cp-strip');
+  var sizeRange = document.getElementById('bench-size');
+  var sizeVal = document.getElementById('bench-size-val');
+  var spacingChk = document.getElementById('bench-spacing');
+  var boldChk = document.getElementById('bench-bold');
+
+  function toReverseOrder(str) {
+    var nfd = str.normalize('NFD');
+    return nfd.replace(/([\u0300-\u030D\u030B\u030C]+)\u0358/g, '\u0358$1');
+  }
+
+  function renderCodepoints() {
+    var text = input.value.slice(0, 120);
+    var cps = Array.from(text);
+    var html = cps.map(function (ch) {
+      var cp = ch.codePointAt(0);
+      var hex = 'U+' + cp.toString(16).toUpperCase().padStart(4, '0');
+      var isMark = (cp >= 0x0300 && cp <= 0x036F);
+      var disp = ch === ' ' ? '␣' : (isMark ? '◌' + ch : ch);
+      return '<span class="cp-chip' + (isMark ? ' is-mark' : '') + '">' +
+        window.POJEscapeHtml(disp) + ' ' + hex + '</span>';
+    }).join('');
+    if (input.value.length > 120) html += '<span class="muted"> …（僅顯示前 120 個字碼）</span>';
+    strip.innerHTML = html || '<span class="muted">請在上方輸入或貼上 POJ 文字以檢視 Unicode 字碼。</span>';
+  }
+
+  if (input) {
+    input.addEventListener('input', renderCodepoints);
+    renderCodepoints();
+
+    sizeRange.addEventListener('input', function () {
+      input.style.fontSize = sizeRange.value + 'px';
+      sizeVal.textContent = sizeRange.value + 'px';
+    });
+    spacingChk.addEventListener('change', function () {
+      input.style.letterSpacing = spacingChk.checked ? '0.12em' : '';
+    });
+    boldChk.addEventListener('change', function () {
+      input.style.fontWeight = boldChk.checked ? '700' : '400';
+    });
+
+    document.querySelectorAll('[data-preset]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        input.value = PRESETS[btn.dataset.preset];
+        renderCodepoints();
+      });
+    });
+
+    document.querySelectorAll('[data-copy-form]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var form = btn.dataset.copyForm;
+        var out = form === 'REV' ? toReverseOrder(input.value) : input.value.normalize(form);
+        var orig = btn.textContent;
+        window.POJCopyText(out, function (ok) {
+          btn.textContent = ok ? '已複製' : '複製失敗';
+          setTimeout(function () { btn.textContent = orig; }, 1400);
+        });
+      });
+    });
+  }
+
+  var select = document.getElementById('audit-select');
+  var detail = document.getElementById('audit-detail');
+  var esc = window.POJEscapeHtml;
+
+  var LABEL_MAP = {
+    'U+0358 dot above right (o͘)': 'U+0358 右上圓點（o͘）',
+    'U+030D vertical line (tone 8)': 'U+030D 短豎線（第八調）',
+    'U+207F superscript n (ⁿ)': 'U+207F 鼻化上標 n（ⁿ）',
+    'U+0301 acute': 'U+0301 銳音符（第二調）',
+    'U+0300 grave': 'U+0300 重音符（第三調）',
+    'U+0302 circumflex': 'U+0302 揚抑符（第五調）',
+    'U+0304 macron': 'U+0304 長音符（第七調）',
+    'U+0306 breve (POJ t9)': 'U+0306 短音符（POJ 第九調）',
+    'U+030B double acute (Tâi-lô t9)': 'U+030B 雙銳音符（KPL 第九調）',
+    'U+0131 dotless i': 'U+0131 無點 ı',
+    'U+00B7 middle dot (o· fallback)': 'U+00B7 中圓點（o· 舊式替代）',
+    'U+1D3A/ᴺ cap superscript N': 'U+1D3A 大寫鼻化上標 ᴺ'
+  };
+
+  function mechClass(m) {
+    if (!m) return '';
+    if (m === 'ligature' || m === 'gpos-anchor' || m === 'partial-ligature+gpos' || m === 'single') return 'cl-ok';
+    if (m.indexOf('NOTDEF') !== -1 || m.indexOf('FLOATING') !== -1 || m.indexOf('overstrike') !== -1) return 'cl-bad';
+    return 'cl-warn';
+  }
+
+  function renderFont(f) {
+    var hasRows = Object.keys(f.has).map(function (k) {
+      var ok = f.has[k];
+      return '<tr><td>' + esc(LABEL_MAP[k] || k) + '</td><td>' +
+        (ok ? '<span class="tag good">有</span>' : '<span class="tag bad">無</span>') + '</td></tr>';
+    }).join('');
+
+    var o358Keys = Object.keys(f['0358_on'] || {});
+    var o358Badges = o358Keys.map(function (k) {
+      var ok = f['0358_on'][k];
+      return '<span class="tag ' + (ok ? 'good' : 'neutral') + '" style="margin:2px 4px 2px 0"><span class="poj">' + esc(k) + '</span> ' + (ok ? '✓' : '✗') + '</span>';
+    }).join('');
+
+    var clusters = Object.keys(f.shaping || {}).map(function (cl) {
+      var s = f.shaping[cl];
+      var cls = mechClass(s.nfc);
+      var diff = s.same ? '' : ' <span class="tag warn">NFC≠NFD</span>';
+      return '<div class="cluster-cell ' + cls + '">' +
+        '<div class="cl-ch poj">' + esc(cl) + diff + '</div>' +
+        '<div class="cl-m">NFC: ' + esc(s.nfc) + '</div>' +
+        '<div class="cl-m">NFD: ' + esc(s.nfd) + '</div>' +
+      '</div>';
+    }).join('');
+
+    detail.innerHTML =
+      '<div class="stat-grid">' +
+        '<div class="stat-card"><div class="stat-num">' + Number(f.glyphs).toLocaleString() + '</div><div class="stat-label">總字形數</div></div>' +
+        '<div class="stat-card"><div class="stat-num">' + (f.mark_bases ? f.mark_bases['U+0358'] : 0) + ' / ' + (f.mark_bases ? f.mark_bases['U+030D'] : 0) + '</div><div class="stat-label">錨點基礎字數（<code>0358</code> / <code>030D</code>）</div></div>' +
+        '<div class="stat-card"><div class="stat-num">' + Number(f.pua_count || 0).toLocaleString() + '</div><div class="stat-label">私用區（PUA）字數</div></div>' +
+        '<div class="stat-card"><div class="stat-num">' + Number(f.ivs_mappings || 0).toLocaleString() + '</div><div class="stat-label">IVS 注音對應筆數</div></div>' +
+      '</div>' +
+      '<p><strong>檔案路徑：</strong><code>' + esc(f.file) + '</code><br>' +
+      '<strong>GSUB 功能：</strong>' + (f.GSUB.length ? f.GSUB.map(function (x) { return '<code>' + esc(x) + '</code>'; }).join(' ') : '<span class="muted">無</span>') + '<br>' +
+      '<strong>GPOS 功能：</strong>' + (f.GPOS.length ? f.GPOS.map(function (x) { return '<code>' + esc(x) + '</code>'; }).join(' ') : '<span class="muted">無</span>') + '<br>' +
+      '<strong>缺少的預組字母：</strong>' + (f.precomposed_missing ? '<span class="poj">' + esc(f.precomposed_missing) + '</span>' : '<span class="tag good">無缺漏</span>') + '</p>' +
+      '<p><strong><code>U+0358</code> 於各 o 類基礎字的 GPOS 錨點：</strong><br>' + o358Badges + '</p>' +
+      '<details><summary>字元 cmap 收錄檢查（' + Object.keys(f.has).length + ' 項）</summary>' +
+      '<div class="table-wrap"><table class="compact"><thead><tr><th>字元</th><th>收錄</th></tr></thead><tbody>' + hasRows + '</tbody></table></div></details>' +
+      '<h3>HarfBuzz 逐音節整形結果（' + Object.keys(f.shaping || {}).length + ' 個測試組合）</h3>' +
+      '<div class="cluster-grid">' + clusters + '</div>';
+  }
+
+  fetch('../data/poj-font-audit.json')
+    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function (data) {
+      select.innerHTML = data.map(function (f, idx) {
+        return '<option value="' + idx + '">' + esc(f.name) + '（' + f.glyphs + ' 字形）</option>';
+      }).join('');
+      select.addEventListener('change', function () { renderFont(data[Number(select.value)]); });
+      renderFont(data[0]);
+    })
+    .catch(function () {
+      detail.innerHTML = '<div class="callout warn"><span class="callout-title">本機開檔提醒</span><p>請透過 HTTP 伺服器（例如 GitHub Pages 或 <code>python3 -m http.server</code>）開啟本頁，以載入 <code>data/poj-font-audit.json</code> 互動檢驗資料。</p></div>';
+    });
+})();
+</script>
+</body>
+</html>
