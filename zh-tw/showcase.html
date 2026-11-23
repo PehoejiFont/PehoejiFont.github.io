@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>首批支援 POJ 的 10 套開源字型展示 — PehoejiFont</title>
+<meta name="description" content="首批完成台語白話字（POJ）升級的 10 套 Google Fonts 開源字型家族互動展示頁（採用方式 B + A：ccmp 連字與 GPOS 錨點）。">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="alternate" hreflang="en" href="../showcase.html">
+<style>
+  .showcase-controls {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 24px 0 32px;
+    box-shadow: var(--shadow-sm);
+  }
+  .showcase-input {
+    width: 100%;
+    font-size: 19px;
+    line-height: 1.5;
+    padding: 10px 14px;
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--ink);
+    margin-top: 10px;
+    margin-bottom: 12px;
+  }
+  .showcase-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 18px;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .showcase-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 20px;
+  }
+  .font-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 22px 24px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .font-card:hover {
+    box-shadow: var(--shadow-md);
+  }
+  .font-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 12px;
+  }
+  .font-title {
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .font-badges {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .font-badge {
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: var(--surface-alt);
+    color: var(--muted);
+    border: 1px solid var(--line);
+  }
+  .font-badge.success {
+    background: #eef7ee;
+    color: #276727;
+    border-color: #b8e0b8;
+    font-weight: 600;
+  }
+  .font-preview {
+    min-height: 70px;
+    color: var(--ink);
+    word-break: break-word;
+    margin: 12px 0 16px;
+    transition: letter-spacing 0.15s ease;
+  }
+  .font-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--muted);
+    border-top: 1px dashed var(--line);
+    padding-top: 12px;
+  }
+  .font-actions {
+    display: flex;
+    gap: 10px;
+  }
+  .btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    font-weight: 600;
+    background: var(--surface-alt);
+    color: var(--accent);
+    border: 1px solid var(--accent-border);
+    text-decoration: none;
+  }
+  .btn-download:hover {
+    background: var(--accent);
+    color: #fff;
+  }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <button class="menu-btn" id="menu-toggle" type="button" aria-label="切換選單">☰</button>
+    <a class="brand" href="./">
+      <span class="brand-mark poj">o͘</span>
+      <span>PehoejiFont</span>
+      <span class="brand-badge">文件</span>
+    </a>
+    <div class="topbar-spacer"></div>
+    <button class="search-trigger" id="search-trigger" type="button">
+      <span>⌕</span>
+      <span class="search-label">搜尋文件…</span>
+      <span class="kbd">⌘K</span>
+    </button>
+    <a class="icon-btn lang-switch" href="../showcase.html" hreflang="en" lang="en">English</a>
+    <button class="icon-btn" id="theme-toggle" type="button">☾ 暗色</button>
+    <a class="icon-btn gh-link" href="https://github.com/PehoejiFont">GitHub</a>
+  </div>
+</header>
+
+<div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+<div class="doc-shell">
+  <aside class="sidebar" aria-label="文件導覽選單">
+    <div class="sidebar-group">
+      <div class="sidebar-heading">快速開始</div>
+      <ul>
+        <li><a href="./">總覽簡介</a></li>
+        <li><a href="test.html">線上 POJ 測試台</a></li>
+        <li><a href="showcase.html" aria-current="page">首批 10 套 POJ 字型</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">核心概念</div>
+      <ul>
+        <li><a href="letters.html">Unicode 與編碼規範</a></li>
+        <li><a href="fonts.html">字型如何實現 POJ</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">字型名錄與資料</div>
+      <ul>
+        <li><a href="choose.html">24 套字型審查與樣張</a></li>
+        <li><a href="catalog.html">Google Fonts 調查與 Fork</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">實作指南</div>
+      <ul>
+        <li><a href="problems.html">疑難排解與跨平台陷阱</a></li>
+        <li><a href="makers.html">字型設計師指南</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main class="doc-main">
+    <div class="breadcrumb"><a href="./">文件</a> › <span>快速開始</span> › <span>首批 10 套 POJ 字型</span></div>
+    <h1>首批升級支援白話字（POJ）的 10 套開源字型</h1>
+    <p class="lead">此頁面為本專案完成台語白話字（POJ）原生支援升級的首批 10 套 Google Fonts 開源字型家族。每套字型均嚴格依照本專案推薦的<strong>方式 B + A</strong>（<code>ccmp</code> 連字字形 + GPOS <code>mark</code> 錨點防護網）構建，並在 HarfBuzz 引擎下 100% 通過全套 26 組 POJ 壓力測試音節（包含 NFC 與 NFD）。</p>
+
+    <div class="showcase-controls">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <label for="showcase-text-input" style="font-weight:600; color:var(--ink);">即時預覽文字（10 套字型同步渲染）：</label>
+        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+          <button class="btn" type="button" onclick="setSample('Pe̍h-ōe-jī sī Tâi-oân-ōe siāng chē lâng sú-iōng ê Lô-má-jī.')">台語格言</button>
+          <button class="btn" type="button" onclick="setSample('Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!')">對話例句</button>
+          <button class="btn" type="button" onclick="setSample('o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g | ḿ m̀ m̂ m̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h')">POJ 測試字集</button>
+        </div>
+      </div>
+      <input type="text" id="showcase-text-input" class="showcase-input" value="Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!">
+      <div class="showcase-toolbar">
+        <label>字體大小：<input type="range" id="size-slider" min="18" max="52" value="30"> <span id="size-label">30px</span></label>
+        <label><input type="checkbox" id="spacing-toggle"> 開啟 <code>letter-spacing: 0.12em</code>（驗證停用 <code>liga</code> 下 <code>ccmp</code> 的穩定度）</label>
+      </div>
+    </div>
+
+    <div class="showcase-grid">
+
+      <!-- 1. Alata -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Alata</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">由 Sorkin Type 設計</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">無襯線體</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 組音節全數通過</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-alata" style="font-family:'Alata POJ', sans-serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">檢視 HarfBuzz 實測排版輪廓樣張（NFC 與 NFD 比對）</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="../assets/img/first10/Alata-Regular.png" alt="Alata 字型樣張" style="max-width: 100%; height: auto; display: block;">
+          </div>
+        </details>
+        <div class="font-meta">
+          <span>方式 B + A · 俐落幾何線條與紀念碑式結構比例</span>
+          <div class="font-actions">
+            <a class="btn-download" href="../assets/fonts/poj/Alata-Regular.woff2" download>WOFF2 (97 KB)</a>
+            <a class="btn-download" href="../assets/fonts/poj/Alata-Regular.ttf" download>TTF (342 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/Alata" target="_blank" rel="noopener">專案庫 ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Alatsi -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Alatsi</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">由 Sorkin Type 設計</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">無襯線體</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 組音節全數通過</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-alatsi" style="font-family:'Alatsi POJ', sans-serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">檢視 HarfBuzz 實測排版輪廓樣張（NFC 與 NFD 比對）</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="../assets/img/first10/Alatsi-Regular.png" alt="Alatsi 字型樣張" style="max-width: 100%; height: auto; display: block;">
+          </div>
+        </details>
+        <div class="font-meta">
+          <span>方式 B + A · 沉靜現代氣質與裝飾藝術筆觸</span>
+          <div class="font-actions">
+            <a class="btn-download" href="../assets/fonts/poj/Alatsi-Regular.woff2" download>WOFF2 (154 KB)</a>
+            <a class="btn-download" href="../assets/fonts/poj/Alatsi-Regular.ttf" download>TTF (435 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/Alatsi" target="_blank" rel="noopener">專案庫 ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Alice -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Alice</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">由 Cyreal 設計</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">襯線體</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 組音節全數通過</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-alice" style="font-family:'Alice POJ', serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">檢視 HarfBuzz 實測排版輪廓樣張（NFC 與 NFD 比對）</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="../assets/img/first10/Alice-Regular.png" alt="Alice 字型樣張" style="max-width: 100%; height: auto; display: block;">
+          </div>
+        </details>
+        <div class="font-meta">
+          <span>方式 B + A · 源自童話靈感的優雅古典排版字體</span>
+          <div class="font-actions">
+            <a class="btn-download" href="../assets/fonts/poj/Alice-Regular.woff2" download>WOFF2 (45 KB)</a>
+            <a class="btn-download" href="../assets/fonts/poj/Alice-Regular.ttf" download>TTF (128 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/Alice" target="_blank" rel="noopener">專案庫 ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Aboreto -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Aboreto</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">由 Domi Janka 設計</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">展示字體</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 組音節全數通過</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-aboreto" style="font-family:'Aboreto POJ', serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">檢視 HarfBuzz 實測排版輪廓樣張（NFC 與 NFD 比對）</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="../assets/img/first10/Aboreto-Regular.png" alt="Aboreto 字型樣張" style="max-width: 100%; height: auto; display: block;">
+          </div>
+        </details>
+        <div class="font-meta">
+          <span>方式 B + A · 具建築結構感與強烈對比的高雅展示字形</span>
+          <div class="font-actions">
+            <a class="btn-download" href="../assets/fonts/poj/Aboreto-Regular.woff2" download>WOFF2 (20 KB)</a>
+            <a class="btn-download" href="../assets/fonts/poj/Aboreto-Regular.ttf" download>TTF (47 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/Aboreto" target="_blank" rel="noopener">專案庫 ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Afacad -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Afacad</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">由 Dicotype 設計</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">無襯線體</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 組音節全數通過</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-afacad" style="font-family:'Afacad POJ', sans-serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">檢視 HarfBuzz 實測排版輪廓樣張（NFC 與 NFD 比對）</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="../assets/img/first10/Afacad-Regular.png" alt="Afacad 字型樣張" style="max-width: 100%; height: auto; display: block;">
+          </div>
+        </details>
+        <div class="font-meta">
+          <span>方式 B + A · 清晰俐落、針對高易讀性打造的現代編輯字型</span>
+          <div class="font-actions">
+            <a class="btn-download" href="../assets/fonts/poj/Afacad-Regular.woff2" download>WOFF2 (38 KB)</a>
+            <a class="btn-download" href="../assets/fonts/poj/Afacad-Regular.ttf" download>TTF (109 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/Afacad" target="_blank" rel="noopener">專案庫 ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. Amatic SC -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Amatic SC</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">由 Vernon Adams 設計</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">手寫字體</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 組音節全數通過</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-amaticsc" style="font-family:'Amatic SC POJ', cursive; font-size:34px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">檢視 HarfBuzz 實測排版輪廓樣張（NFC 與 NFD 比對）</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="../assets/img/first10/AmaticSC-Regular.png" alt="Amatic SC 字型樣張" style="max-width: 100%; height: auto; display: block;">
+          </div>
+        </details>
+        <div class="font-meta">
+          <span>方式 B + A · 緊湊窄體、手繪感強烈的人氣小型大寫字體</span>
+          <div class="font-actions">
+            <a class="btn-download" href="../assets/fonts/poj/AmaticSC-Regular.woff2" download>WOFF2 (65 KB)</a>
+            <a class="btn-download" href="../assets/fonts/poj/AmaticSC-Regular.ttf" download>TTF (146 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/AmaticSC" target="_blank" rel="noopener">專案庫 ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. Andada Pro -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Andada Pro</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">由 Huerta Tipográfica 設計</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">襯線體</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 組音節全數通過</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-andada" style="font-family:'Andada Pro POJ', serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">檢視 HarfBuzz 實測排版輪廓樣張（NFC 與 NFD 比對）</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="../assets/img/first10/AndadaPro-Regular.png" alt="Andada Pro 字型樣張" style="max-width: 100%; height: auto; display: block;">
+          </div>
+        </details>
+        <div class="font-meta">
+          <span>方式 B + A · 溫暖有機、專為長文沉浸閱讀優化的襯線字體</span>
+          <div class="font-actions">
+            <a class="btn-download" href="../assets/fonts/poj/AndadaPro-Regular.woff2" download>WOFF2 (60 KB)</a>
+            <a class="btn-download" href="../assets/fonts/poj/AndadaPro-Regular.ttf" download>TTF (160 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/Andada-Pro" target="_blank" rel="noopener">專案庫 ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. Alan Sans -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Alan Sans</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">由 Alan 設計</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">無襯線體</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 組音節全數通過</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-alan" style="font-family:'Alan Sans POJ', sans-serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">檢視 HarfBuzz 實測排版輪廓樣張（NFC 與 NFD 比對）</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="../assets/img/first10/AlanSans-Regular.png" alt="Alan Sans 字型樣張" style="max-width: 100%; height: auto; display: block;">
+          </div>
+        </details>
+        <div class="font-meta">
+          <span>方式 B + A · 勻稱均衡、韻律純淨的新無襯線字體</span>
+          <div class="font-actions">
+            <a class="btn-download" href="../assets/fonts/poj/AlanSans-Regular.woff2" download>WOFF2 (58 KB)</a>
+            <a class="btn-download" href="../assets/fonts/poj/AlanSans-Regular.ttf" download>TTF (146 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/Alan-Sans" target="_blank" rel="noopener">專案庫 ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9. Baskervville -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Baskervville</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">由 ANRT 設計</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">襯線體</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 組音節全數通過</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-baskervville" style="font-family:'Baskervville POJ', serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">檢視 HarfBuzz 實測排版輪廓樣張（NFC 與 NFD 比對）</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="../assets/img/first10/Baskervville-Regular.png" alt="Baskervville 字型樣張" style="max-width: 100%; height: auto; display: block;">
+          </div>
+        </details>
+        <div class="font-meta">
+          <span>方式 B + A · 忠實復刻 18 世紀過渡期經典活字風韻</span>
+          <div class="font-actions">
+            <a class="btn-download" href="../assets/fonts/poj/Baskervville-Regular.woff2" download>WOFF2 (46 KB)</a>
+            <a class="btn-download" href="../assets/fonts/poj/Baskervville-Regular.ttf" download>TTF (121 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/ANRT-Baskervville" target="_blank" rel="noopener">專案庫 ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10. Anta -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Anta</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">由 Typedesigners 設計</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">展示字體</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 組音節全數通過</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-anta" style="font-family:'Anta POJ', sans-serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">檢視 HarfBuzz 實測排版輪廓樣張（NFC 與 NFD 比對）</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="../assets/img/first10/Anta-Regular.png" alt="Anta 字型樣張" style="max-width: 100%; height: auto; display: block;">
+          </div>
+        </details>
+        <div class="font-meta">
+          <span>方式 B + A · 融合電競與科技感的未來主義標題字體</span>
+          <div class="font-actions">
+            <a class="btn-download" href="../assets/fonts/poj/Anta-Regular.woff2" download>WOFF2 (23 KB)</a>
+            <a class="btn-download" href="../assets/fonts/poj/Anta-Regular.ttf" download>TTF (74 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/Anta-Regular" target="_blank" rel="noopener">專案庫 ↗</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="doc-pager">
+      <a class="pager-prev" href="test.html"><span class="pager-label">← 上一頁</span><span class="pager-title">線上 POJ 測試台</span></a>
+      <a class="pager-next" href="letters.html"><span class="pager-label">下一頁 →</span><span class="pager-title">Unicode 與編碼規範</span></a>
+    </div>
+  </main>
+</div>
+
+<script src="../assets/docs.js"></script>
+<script>
+  var textInput = document.getElementById('showcase-text-input');
+  var sizeSlider = document.getElementById('size-slider');
+  var sizeLabel = document.getElementById('size-label');
+  var spacingToggle = document.getElementById('spacing-toggle');
+  var previews = document.querySelectorAll('.font-preview');
+
+  function updatePreviews() {
+    var val = textInput.value;
+    for (var i = 0; i < previews.length; i++) {
+      previews[i].textContent = val;
+    }
+  }
+
+  function updateSize() {
+    var sz = sizeSlider.value + 'px';
+    sizeLabel.textContent = sz;
+    for (var i = 0; i < previews.length; i++) {
+      previews[i].style.fontSize = sz;
+    }
+  }
+
+  function updateSpacing() {
+    var sp = spacingToggle.checked ? '0.12em' : 'normal';
+    for (var i = 0; i < previews.length; i++) {
+      previews[i].style.letterSpacing = sp;
+    }
+  }
+
+  function setSample(str) {
+    textInput.value = str;
+    updatePreviews();
+  }
+
+  textInput.addEventListener('input', updatePreviews);
+  sizeSlider.addEventListener('input', updateSize);
+  spacingToggle.addEventListener('change', updateSpacing);
+</script>
+</body>
+</html>

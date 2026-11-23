@@ -30,6 +30,78 @@
   font-display: swap;
 }
 
+/* ── 10 Google Fonts upgraded with native POJ support ── */
+@font-face {
+  font-family: "Alata POJ";
+  src: url("fonts/poj/Alata-Regular.woff2") format("woff2"), url("fonts/poj/Alata-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Alatsi POJ";
+  src: url("fonts/poj/Alatsi-Regular.woff2") format("woff2"), url("fonts/poj/Alatsi-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Alice POJ";
+  src: url("fonts/poj/Alice-Regular.woff2") format("woff2"), url("fonts/poj/Alice-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Aboreto POJ";
+  src: url("fonts/poj/Aboreto-Regular.woff2") format("woff2"), url("fonts/poj/Aboreto-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Afacad POJ";
+  src: url("fonts/poj/Afacad-Regular.woff2") format("woff2"), url("fonts/poj/Afacad-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Amatic SC POJ";
+  src: url("fonts/poj/AmaticSC-Regular.woff2") format("woff2"), url("fonts/poj/AmaticSC-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Andada Pro POJ";
+  src: url("fonts/poj/AndadaPro-Regular.woff2") format("woff2"), url("fonts/poj/AndadaPro-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Alan Sans POJ";
+  src: url("fonts/poj/AlanSans-Regular.woff2") format("woff2"), url("fonts/poj/AlanSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Baskervville POJ";
+  src: url("fonts/poj/Baskervville-Regular.woff2") format("woff2"), url("fonts/poj/Baskervville-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anta POJ";
+  src: url("fonts/poj/Anta-Regular.woff2") format("woff2"), url("fonts/poj/Anta-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ── Formosa Editorial Press Theme (台灣活版印書配色：宣紙 × 藍染靛青 × 印泥朱紅) ── */
 :root {
   --bg: #f8f5ef;
@@ -76,6 +148,7 @@
   --sidebar-w: 258px;
   --toc-w: 224px;
   --radius: 9px;
+  --font-body: "GenYo Site", "GenYo Site CJK", "Noto Serif TC", "Songti TC", serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -167,10 +240,14 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family: "GenYo Site", "GenYo Site CJK", "Noto Serif TC", "Songti TC", serif;
+  font-family: var(--font-body);
   font-size: 16.5px;
   line-height: 1.74;
   -webkit-font-smoothing: antialiased;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
 }
 
 a {
@@ -529,7 +606,7 @@ h2:hover .heading-anchor, h3:hover .heading-anchor, .heading-anchor:focus { opac
 }
 
 /* ── Typography helpers ──────────────────────────────────────────────────── */
-.poj { font-family: "GenYo Site", "GenYo Site CJK", "Noto Serif TC", serif; }
+.poj { font-family: var(--font-body); }
 .big { font-size: 1.35em; }
 .muted { color: var(--muted); }
 .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 0.88em; }
@@ -589,7 +666,7 @@ pre code { background: none; border: 0; padding: 0; font-size: inherit; color: v
 
 .copy-code-btn {
   font: inherit;
-  font-family: "GenYo Site", "GenYo Site CJK", sans-serif;
+  font-family: var(--font-body);
   font-size: 12px;
   padding: 2.5px 10px;
   border: 1px solid var(--line-strong);
@@ -896,7 +973,7 @@ td.center, th.center { text-align: center; }
   border-radius: 7px;
   background: var(--bg);
   color: var(--ink);
-  font-family: "GenYo Site", "GenYo Site CJK", serif;
+  font-family: var(--font-body);
   font-size: 24px;
   line-height: 1.65;
   resize: vertical;

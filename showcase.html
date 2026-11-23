@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>First 10 POJ Supported Fonts — PehoejiFont</title>
+<meta name="description" content="Interactive live display of the first 10 Google Fonts families upgraded with native Taiwanese Pe̍h-ōe-jī (POJ) support (Technique B + A).">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="alternate" hreflang="zh-Hant-TW" href="zh-tw/showcase.html">
+<style>
+  .showcase-controls {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 24px 0 32px;
+    box-shadow: var(--shadow-sm);
+  }
+  .showcase-input {
+    width: 100%;
+    font-size: 19px;
+    line-height: 1.5;
+    padding: 10px 14px;
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--ink);
+    margin-top: 10px;
+    margin-bottom: 12px;
+  }
+  .showcase-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 18px;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .showcase-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 20px;
+  }
+  .font-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 22px 24px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .font-card:hover {
+    box-shadow: var(--shadow-md);
+  }
+  .font-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 12px;
+  }
+  .font-title {
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .font-badges {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .font-badge {
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: var(--surface-alt);
+    color: var(--muted);
+    border: 1px solid var(--line);
+  }
+  .font-badge.success {
+    background: #eef7ee;
+    color: #276727;
+    border-color: #b8e0b8;
+    font-weight: 600;
+  }
+  .font-preview {
+    min-height: 70px;
+    color: var(--ink);
+    word-break: break-word;
+    margin: 12px 0 16px;
+    transition: letter-spacing 0.15s ease;
+  }
+  .font-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--muted);
+    border-top: 1px dashed var(--line);
+    padding-top: 12px;
+  }
+  .font-actions {
+    display: flex;
+    gap: 10px;
+  }
+  .btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    font-weight: 600;
+    background: var(--surface-alt);
+    color: var(--accent);
+    border: 1px solid var(--accent-border);
+    text-decoration: none;
+  }
+  .btn-download:hover {
+    background: var(--accent);
+    color: #fff;
+  }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <button class="menu-btn" id="menu-toggle" type="button" aria-label="Toggle navigation">☰</button>
+    <a class="brand" href="./">
+      <span class="brand-mark poj">o͘</span>
+      <span>PehoejiFont</span>
+      <span class="brand-badge">Docs</span>
+    </a>
+    <div class="topbar-spacer"></div>
+    <button class="search-trigger" id="search-trigger" type="button">
+      <span>⌕</span>
+      <span class="search-label">Search docs…</span>
+      <span class="kbd">⌘K</span>
+    </button>
+    <a class="icon-btn lang-switch" href="zh-tw/showcase.html" hreflang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</a>
+    <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    <a class="icon-btn gh-link" href="https://github.com/PehoejiFont">GitHub</a>
+  </div>
+</header>
+
+<div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+<div class="doc-shell">
+  <aside class="sidebar" aria-label="Documentation navigation">
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Getting Started</div>
+      <ul>
+        <li><a href="./">Overview</a></li>
+        <li><a href="test.html">Live POJ Test Bench</a></li>
+        <li><a href="showcase.html" aria-current="page">First 10 POJ Fonts</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Core Concepts</div>
+      <ul>
+        <li><a href="letters.html">Unicode &amp; Encoding</a></li>
+        <li><a href="fonts.html">How Fonts Implement POJ</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Font Directory &amp; Data</div>
+      <ul>
+        <li><a href="choose.html">24-Font Audit &amp; Specimens</a></li>
+        <li><a href="catalog.html">Google Fonts Survey &amp; Forks</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Practical Guides</div>
+      <ul>
+        <li><a href="problems.html">Troubleshooting &amp; Platforms</a></li>
+        <li><a href="makers.html">Font Maker’s Guide</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main class="doc-main">
+    <div class="breadcrumb"><a href="./">Docs</a> › <span>Getting Started</span> › <span>First 10 POJ Fonts</span></div>
+    <h1>First 10 Open-Source Fonts Upgraded with POJ</h1>
+    <p class="lead">Here are the first 10 Google Fonts open-source families upgraded with native Taiwanese Pe̍h-ōe-jī (POJ) support. Each font implements the project's recommended <strong>Technique B + A</strong> (robust <code>ccmp</code> ligatures + GPOS <code>mark</code> anchors) and has been 100% verified across all 26 POJ test clusters in both NFC and NFD.</p>
+
+    <div class="showcase-controls">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <label for="showcase-text-input" style="font-weight:600; color:var(--ink);">Test text across all 10 fonts:</label>
+        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+          <button class="btn" type="button" onclick="setSample('Pe̍h-ōe-jī sī Tâi-oân-ōe siāng chē lâng sú-iōng ê Lô-má-jī.')">Proverb</button>
+          <button class="btn" type="button" onclick="setSample('Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!')">Dialogue</button>
+          <button class="btn" type="button" onclick="setSample('o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g | ḿ m̀ m̂ m̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h')">POJ Clusters</button>
+        </div>
+      </div>
+      <input type="text" id="showcase-text-input" class="showcase-input" value="Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!">
+      <div class="showcase-toolbar">
+        <label>Size: <input type="range" id="size-slider" min="18" max="52" value="30"> <span id="size-label">30px</span></label>
+        <label><input type="checkbox" id="spacing-toggle"> Enable <code>letter-spacing: 0.12em</code> (proves <code>ccmp</code> robustness without <code>liga</code>)</label>
+      </div>
+    </div>
+
+    <div class="showcase-grid">
+
+      <!-- 1. Alata -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Alata</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">by Sorkin Type</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">Sans Serif</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 Clusters OK</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-alata" style="font-family:'Alata POJ', sans-serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">View HarfBuzz Outline Specimen (NFC vs NFD)</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="assets/img/first10/Alata-Regular.png" alt="HarfBuzz specimen for Alata" style="max-width: 100%; height: auto; display: block;">
+          </div>
+        </details>
+        <div class="font-meta">
+          <span>Technique B + A · Clean geometric sans with monumental proportions</span>
+          <div class="font-actions">
+            <a class="btn-download" href="assets/fonts/poj/Alata-Regular.woff2" download>WOFF2 (97 KB)</a>
+            <a class="btn-download" href="assets/fonts/poj/Alata-Regular.ttf" download>TTF (342 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/Alata" target="_blank" rel="noopener">Repo ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Alatsi -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Alatsi</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">by Sorkin Type</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">Sans Serif</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 Clusters OK</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-alatsi" style="font-family:'Alatsi POJ', sans-serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">View HarfBuzz Outline Specimen (NFC vs NFD)</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="assets/img/first10/Alatsi-Regular.png" alt="HarfBuzz specimen for Alatsi" style="max-width: 100%; height: auto; display: block;">
+          </div>
+        </details>
+        <div class="font-meta">
+          <span>Technique B + A · Contemporary calm sans with Art Deco touch</span>
+          <div class="font-actions">
+            <a class="btn-download" href="assets/fonts/poj/Alatsi-Regular.woff2" download>WOFF2 (154 KB)</a>
+            <a class="btn-download" href="assets/fonts/poj/Alatsi-Regular.ttf" download>TTF (435 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/Alatsi" target="_blank" rel="noopener">Repo ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Alice -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Alice</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">by Cyreal</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">Serif</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 Clusters OK</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-alice" style="font-family:'Alice POJ', serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">View HarfBuzz Outline Specimen (NFC vs NFD)</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="assets/img/first10/Alice-Regular.png" alt="HarfBuzz specimen for Alice" style="max-width: 100%; height: auto; display: block;">
+          </div>
+        </details>
+        <div class="font-meta">
+          <span>Technique B + A · Elegant quaint book typeface inspired by Lewis Carroll</span>
+          <div class="font-actions">
+            <a class="btn-download" href="assets/fonts/poj/Alice-Regular.woff2" download>WOFF2 (45 KB)</a>
+            <a class="btn-download" href="assets/fonts/poj/Alice-Regular.ttf" download>TTF (128 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/Alice" target="_blank" rel="noopener">Repo ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Aboreto -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Aboreto</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">by Domi Janka</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">Display</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 Clusters OK</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-aboreto" style="font-family:'Aboreto POJ', serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">View HarfBuzz Outline Specimen (NFC vs NFD)</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="assets/img/first10/Aboreto-Regular.png" alt="HarfBuzz specimen for Aboreto" style="max-width: 100%; height: auto; display: block;">
+          </div>
+        </details>
+        <div class="font-meta">
+          <span>Technique B + A · Sophisticated architectural display face with high aesthetic contrast</span>
+          <div class="font-actions">
+            <a class="btn-download" href="assets/fonts/poj/Aboreto-Regular.woff2" download>WOFF2 (20 KB)</a>
+            <a class="btn-download" href="assets/fonts/poj/Aboreto-Regular.ttf" download>TTF (47 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/Aboreto" target="_blank" rel="noopener">Repo ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Afacad -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Afacad</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">by Dicotype</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">Sans Serif</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 Clusters OK</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-afacad" style="font-family:'Afacad POJ', sans-serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">View HarfBuzz Outline Specimen (NFC vs NFD)</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="assets/img/first10/Afacad-Regular.png" alt="HarfBuzz specimen for Afacad" style="max-width: 100%; height: auto; display: block;">
+          </div>
+        </details>
+        <div class="font-meta">
+          <span>Technique B + A · Crisp modern sans-serif designed for clean editorial readability</span>
+          <div class="font-actions">
+            <a class="btn-download" href="assets/fonts/poj/Afacad-Regular.woff2" download>WOFF2 (38 KB)</a>
+            <a class="btn-download" href="assets/fonts/poj/Afacad-Regular.ttf" download>TTF (109 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/Afacad" target="_blank" rel="noopener">Repo ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. Amatic SC -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Amatic SC</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">by Vernon Adams</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">Handwriting</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 Clusters OK</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-amaticsc" style="font-family:'Amatic SC POJ', cursive; font-size:34px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">View HarfBuzz Outline Specimen (NFC vs NFD)</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="assets/img/first10/AmaticSC-Regular.png" alt="HarfBuzz specimen for Amatic SC" style="max-width: 100%; height: auto; display: block;">
+          </div>
+        </details>
+        <div class="font-meta">
+          <span>Technique B + A · Simple, highly condensed hand-drawn small-caps display font</span>
+          <div class="font-actions">
+            <a class="btn-download" href="assets/fonts/poj/AmaticSC-Regular.woff2" download>WOFF2 (65 KB)</a>
+            <a class="btn-download" href="assets/fonts/poj/AmaticSC-Regular.ttf" download>TTF (146 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/AmaticSC" target="_blank" rel="noopener">Repo ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. Andada Pro -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Andada Pro</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">by Huerta Tipográfica</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">Serif</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 Clusters OK</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-andada" style="font-family:'Andada Pro POJ', serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">View HarfBuzz Outline Specimen (NFC vs NFD)</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="assets/img/first10/AndadaPro-Regular.png" alt="HarfBuzz specimen for Andada Pro" style="max-width: 100%; height: auto; display: block;">
+          </div>
+        </details>
+        <div class="font-meta">
+          <span>Technique B + A · Warm organic text serif optimized for demanding continuous reading</span>
+          <div class="font-actions">
+            <a class="btn-download" href="assets/fonts/poj/AndadaPro-Regular.woff2" download>WOFF2 (60 KB)</a>
+            <a class="btn-download" href="assets/fonts/poj/AndadaPro-Regular.ttf" download>TTF (160 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/Andada-Pro" target="_blank" rel="noopener">Repo ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. Alan Sans -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Alan Sans</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">by Alan</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">Sans Serif</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 Clusters OK</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-alan" style="font-family:'Alan Sans POJ', sans-serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">View HarfBuzz Outline Specimen (NFC vs NFD)</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="assets/img/first10/AlanSans-Regular.png" alt="HarfBuzz specimen for Alan Sans" style="max-width: 100%; height: auto; display: block;">
+          </div>
+        </details>
+        <div class="font-meta">
+          <span>Technique B + A · Balanced neo-grotesque sans with clean metric rhythm</span>
+          <div class="font-actions">
+            <a class="btn-download" href="assets/fonts/poj/AlanSans-Regular.woff2" download>WOFF2 (58 KB)</a>
+            <a class="btn-download" href="assets/fonts/poj/AlanSans-Regular.ttf" download>TTF (146 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/Alan-Sans" target="_blank" rel="noopener">Repo ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9. Baskervville -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Baskervville</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">by ANRT</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">Serif</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 Clusters OK</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-baskervville" style="font-family:'Baskervville POJ', serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">View HarfBuzz Outline Specimen (NFC vs NFD)</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="assets/img/first10/Baskervville-Regular.png" alt="HarfBuzz specimen for Baskervville" style="max-width: 100%; height: auto; display: block;">
+          </div>
+        </details>
+        <div class="font-meta">
+          <span>Technique B + A · Faithful revival of John Baskerville's timeless transitional serif</span>
+          <div class="font-actions">
+            <a class="btn-download" href="assets/fonts/poj/Baskervville-Regular.woff2" download>WOFF2 (46 KB)</a>
+            <a class="btn-download" href="assets/fonts/poj/Baskervville-Regular.ttf" download>TTF (121 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/ANRT-Baskervville" target="_blank" rel="noopener">Repo ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10. Anta -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Anta</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">by Typedesigners</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">Display</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 Clusters OK</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-anta" style="font-family:'Anta POJ', sans-serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">View HarfBuzz Outline Specimen (NFC vs NFD)</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="assets/img/first10/Anta-Regular.png" alt="HarfBuzz specimen for Anta" style="max-width: 100%; height: auto; display: block;">
+          </div>
+        </details>
+        <div class="font-meta">
+          <span>Technique B + A · Tech and gaming inspired futuristic display font</span>
+          <div class="font-actions">
+            <a class="btn-download" href="assets/fonts/poj/Anta-Regular.woff2" download>WOFF2 (23 KB)</a>
+            <a class="btn-download" href="assets/fonts/poj/Anta-Regular.ttf" download>TTF (74 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/Anta-Regular" target="_blank" rel="noopener">Repo ↗</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="doc-pager">
+      <a class="pager-prev" href="test.html"><span class="pager-label">← Previous</span><span class="pager-title">Live POJ Test Bench</span></a>
+      <a class="pager-next" href="letters.html"><span class="pager-label">Next →</span><span class="pager-title">Unicode &amp; Encoding</span></a>
+    </div>
+  </main>
+</div>
+
+<script src="assets/docs.js"></script>
+<script>
+  var textInput = document.getElementById('showcase-text-input');
+  var sizeSlider = document.getElementById('size-slider');
+  var sizeLabel = document.getElementById('size-label');
+  var spacingToggle = document.getElementById('spacing-toggle');
+  var previews = document.querySelectorAll('.font-preview');
+
+  function updatePreviews() {
+    var val = textInput.value;
+    for (var i = 0; i < previews.length; i++) {
+      previews[i].textContent = val;
+    }
+  }
+
+  function updateSize() {
+    var sz = sizeSlider.value + 'px';
+    sizeLabel.textContent = sz;
+    for (var i = 0; i < previews.length; i++) {
+      previews[i].style.fontSize = sz;
+    }
+  }
+
+  function updateSpacing() {
+    var sp = spacingToggle.checked ? '0.12em' : 'normal';
+    for (var i = 0; i < previews.length; i++) {
+      previews[i].style.letterSpacing = sp;
+    }
+  }
+
+  function setSample(str) {
+    textInput.value = str;
+    updatePreviews();
+  }
+
+  textInput.addEventListener('input', updatePreviews);
+  sizeSlider.addEventListener('input', updateSize);
+  spacingToggle.addEventListener('change', updateSpacing);
+</script>
+</body>
+</html>
