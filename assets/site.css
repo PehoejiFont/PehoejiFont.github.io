@@ -102,6 +102,78 @@
   font-display: swap;
 }
 
+/* ── Batch 2 (10 Google Fonts upgraded with native POJ) ── */
+@font-face {
+  font-family: "Aleo POJ";
+  src: url("fonts/poj/Aleo-Regular.woff2") format("woff2"), url("fonts/poj/Aleo-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Alex Brush POJ";
+  src: url("fonts/poj/AlexBrush-Regular.woff2") format("woff2"), url("fonts/poj/AlexBrush-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Archivo POJ";
+  src: url("fonts/poj/Archivo-Regular.woff2") format("woff2"), url("fonts/poj/Archivo-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Archivo Black POJ";
+  src: url("fonts/poj/ArchivoBlack-Regular.woff2") format("woff2"), url("fonts/poj/ArchivoBlack-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible POJ";
+  src: url("fonts/poj/AtkinsonHyperlegible-Regular.woff2") format("woff2"), url("fonts/poj/AtkinsonHyperlegible-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bad Script POJ";
+  src: url("fonts/poj/BadScript-Regular.woff2") format("woff2"), url("fonts/poj/BadScript-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bangers POJ";
+  src: url("fonts/poj/Bangers-Regular.woff2") format("woff2"), url("fonts/poj/Bangers-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Barlow POJ";
+  src: url("fonts/poj/Barlow-Regular.woff2") format("woff2"), url("fonts/poj/Barlow-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "BioRhyme POJ";
+  src: url("fonts/poj/BioRhyme-Regular.woff2") format("woff2"), url("fonts/poj/BioRhyme-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bricolage Grotesque POJ";
+  src: url("fonts/poj/BricolageGrotesque-Regular.woff2") format("woff2"), url("fonts/poj/BricolageGrotesque-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ── Formosa Editorial Press Theme (台灣活版印書配色：宣紙 × 藍染靛青 × 印泥朱紅) ── */
 :root {
   --bg: #f8f5ef;

@@ -172,7 +172,7 @@
       <ul>
         <li><a href="./">總覽簡介</a></li>
         <li><a href="test.html">線上 POJ 測試台</a></li>
-        <li><a href="showcase.html" aria-current="page">首批 10 套 POJ 字型</a></li>
+        <li><a href="showcase.html" aria-current="page">20 套 POJ 字型展示</a></li>
       </ul>
     </div>
     <div class="sidebar-group">
@@ -199,13 +199,13 @@
   </aside>
 
   <main class="doc-main">
-    <div class="breadcrumb"><a href="./">文件</a> › <span>快速開始</span> › <span>首批 10 套 POJ 字型</span></div>
-    <h1>首批升級支援白話字（POJ）的 10 套開源字型</h1>
-    <p class="lead">此頁面為本專案完成台語白話字（POJ）原生支援升級的首批 10 套 Google Fonts 開源字型家族。每套字型均嚴格依照本專案推薦的<strong>方式 B + A</strong>（<code>ccmp</code> 連字字形 + GPOS <code>mark</code> 錨點防護網）構建，並在 HarfBuzz 引擎下 100% 通過全套 26 組 POJ 壓力測試音節（包含 NFC 與 NFD）。</p>
+    <div class="breadcrumb"><a href="./">文件</a> › <span>快速開始</span> › <span>20 套 POJ 字型展示</span></div>
+    <h1>20 套升級支援白話字（POJ）的開源字型</h1>
+    <p class="lead">此頁面為本專案完成台語白話字（POJ）原生支援升級的20 套 Google Fonts 開源字型家族（兩批各 10 套）。每套字型均嚴格依照本專案推薦的<strong>方式 B + A</strong>（<code>ccmp</code> 連字字形 + GPOS <code>mark</code> 錨點防護網）構建，並在 HarfBuzz 引擎下 100% 通過全套 26 組 POJ 壓力測試音節（包含 NFC 與 NFD）。</p>
 
     <div class="showcase-controls">
       <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-        <label for="showcase-text-input" style="font-weight:600; color:var(--ink);">即時預覽文字（10 套字型同步渲染）：</label>
+        <label for="showcase-text-input" style="font-weight:600; color:var(--ink);">即時預覽文字（20 套字型同步渲染）：</label>
         <div style="display:flex; gap:6px; flex-wrap:wrap;">
           <button class="btn" type="button" onclick="setSample('Pe̍h-ōe-jī sī Tâi-oân-ōe siāng chē lâng sú-iōng ê Lô-má-jī.')">台語格言</button>
           <button class="btn" type="button" onclick="setSample('Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!')">對話例句</button>
@@ -547,6 +547,336 @@
             <a class="btn-download" href="../assets/fonts/poj/Anta-Regular.woff2" download>WOFF2 (24 KB)</a>
             <a class="btn-download" href="../assets/fonts/poj/Anta-Regular.ttf" download>TTF (75 KB)</a>
             <a class="btn-download" href="https://github.com/PehoejiFont/Anta-Regular" target="_blank" rel="noopener">專案庫 ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 11. Aleo -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Aleo</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">由 Alessio Laiso 設計</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">襯線體</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 組音節全數通過</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-aleo" style="font-family:'Aleo POJ', sans-serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">檢視 HarfBuzz 實測排版輪廓樣張（NFC 與 NFD 比對）</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="../assets/img/second10/Aleo-Regular.png" alt="HarfBuzz specimen for Aleo" style="max-width: 100%; height: auto; display: block;">
+          </div>
+          <a class="specimen-link" href="../assets/img/second10/Aleo-Regular.png" target="_blank" rel="noopener">在新分頁開啟完整樣張</a>
+        </details>
+        <div class="font-meta">
+          <span>方式 B + A · 當代溫潤圓角粗襯線體（Slab Serif）</span>
+          <div class="font-actions">
+            <a class="btn-download" href="../assets/fonts/poj/Aleo-Regular.woff2" download>WOFF2 (38 KB)</a>
+            <a class="btn-download" href="../assets/fonts/poj/Aleo-Regular.ttf" download>TTF (101 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/aleo" target="_blank" rel="noopener">專案庫 ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 12. Alex Brush -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Alex Brush</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">由 TypeSETit 設計</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">手寫體</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 組音節全數通過</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-alex-brush" style="font-family:'Alex Brush POJ', sans-serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">檢視 HarfBuzz 實測排版輪廓樣張（NFC 與 NFD 比對）</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="../assets/img/second10/AlexBrush-Regular.png" alt="HarfBuzz specimen for Alex Brush" style="max-width: 100%; height: auto; display: block;">
+          </div>
+          <a class="specimen-link" href="../assets/img/second10/AlexBrush-Regular.png" target="_blank" rel="noopener">在新分頁開啟完整樣張</a>
+        </details>
+        <div class="font-meta">
+          <span>方式 B + A · 流暢典雅經典花體草書手寫體（Calligraphic Script）</span>
+          <div class="font-actions">
+            <a class="btn-download" href="../assets/fonts/poj/AlexBrush-Regular.woff2" download>WOFF2 (51 KB)</a>
+            <a class="btn-download" href="../assets/fonts/poj/AlexBrush-Regular.ttf" download>TTF (115 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/alex-brush" target="_blank" rel="noopener">專案庫 ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 13. Archivo -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Archivo</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">由 Omnibus-Type 設計</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">無襯線體</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 組音節全數通過</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-archivo" style="font-family:'Archivo POJ', sans-serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">檢視 HarfBuzz 實測排版輪廓樣張（NFC 與 NFD 比對）</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="../assets/img/second10/Archivo-Regular.png" alt="HarfBuzz specimen for Archivo" style="max-width: 100%; height: auto; display: block;">
+          </div>
+          <a class="specimen-link" href="../assets/img/second10/Archivo-Regular.png" target="_blank" rel="noopener">在新分頁開啟完整樣張</a>
+        </details>
+        <div class="font-meta">
+          <span>方式 B + A · 高效能螢幕與印刷專用新怪誕無襯線體（Grotesque Sans）</span>
+          <div class="font-actions">
+            <a class="btn-download" href="../assets/fonts/poj/Archivo-Regular.woff2" download>WOFF2 (52 KB)</a>
+            <a class="btn-download" href="../assets/fonts/poj/Archivo-Regular.ttf" download>TTF (180 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/Archivo" target="_blank" rel="noopener">專案庫 ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 14. Archivo Black -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Archivo Black</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">由 Omnibus-Type 設計</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">展示字體</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 組音節全數通過</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-archivo-black" style="font-family:'Archivo Black POJ', sans-serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">檢視 HarfBuzz 實測排版輪廓樣張（NFC 與 NFD 比對）</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="../assets/img/second10/ArchivoBlack-Regular.png" alt="HarfBuzz specimen for Archivo Black" style="max-width: 100%; height: auto; display: block;">
+          </div>
+          <a class="specimen-link" href="../assets/img/second10/ArchivoBlack-Regular.png" target="_blank" rel="noopener">在新分頁開啟完整樣張</a>
+        </details>
+        <div class="font-meta">
+          <span>方式 B + A · 重量級超粗大字標題無襯線體（Heavy Display Sans）</span>
+          <div class="font-actions">
+            <a class="btn-download" href="../assets/fonts/poj/ArchivoBlack-Regular.woff2" download>WOFF2 (38 KB)</a>
+            <a class="btn-download" href="../assets/fonts/poj/ArchivoBlack-Regular.ttf" download>TTF (102 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/ArchivoBlack" target="_blank" rel="noopener">專案庫 ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 15. Atkinson Hyperlegible -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Atkinson Hyperlegible</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">由 Braille Institute 設計</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">無襯線體</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 組音節全數通過</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-atkinson-hyperlegible" style="font-family:'Atkinson Hyperlegible POJ', sans-serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">檢視 HarfBuzz 實測排版輪廓樣張（NFC 與 NFD 比對）</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="../assets/img/second10/AtkinsonHyperlegible-Regular.png" alt="HarfBuzz specimen for Atkinson Hyperlegible" style="max-width: 100%; height: auto; display: block;">
+          </div>
+          <a class="specimen-link" href="../assets/img/second10/AtkinsonHyperlegible-Regular.png" target="_blank" rel="noopener">在新分頁開啟完整樣張</a>
+        </details>
+        <div class="font-meta">
+          <span>方式 B + A · 布萊葉盲人協會開發之高易讀辨識無襯線體（Accessibility Sans）</span>
+          <div class="font-actions">
+            <a class="btn-download" href="../assets/fonts/poj/AtkinsonHyperlegible-Regular.woff2" download>WOFF2 (24 KB)</a>
+            <a class="btn-download" href="../assets/fonts/poj/AtkinsonHyperlegible-Regular.ttf" download>TTF (55 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/atkinson-hyperlegible" target="_blank" rel="noopener">專案庫 ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 16. Bad Script -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Bad Script</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">由 Roman Shchyukin 設計</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">手寫體</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 組音節全數通過</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-bad-script" style="font-family:'Bad Script POJ', sans-serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">檢視 HarfBuzz 實測排版輪廓樣張（NFC 與 NFD 比對）</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="../assets/img/second10/BadScript-Regular.png" alt="HarfBuzz specimen for Bad Script" style="max-width: 100%; height: auto; display: block;">
+          </div>
+          <a class="specimen-link" href="../assets/img/second10/BadScript-Regular.png" target="_blank" rel="noopener">在新分頁開啟完整樣張</a>
+        </details>
+        <div class="font-meta">
+          <span>方式 B + A · 活潑親切的休閒手寫字體（Casual Handwriting）</span>
+          <div class="font-actions">
+            <a class="btn-download" href="../assets/fonts/poj/BadScript-Regular.woff2" download>WOFF2 (79 KB)</a>
+            <a class="btn-download" href="../assets/fonts/poj/BadScript-Regular.ttf" download>TTF (181 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/badscript" target="_blank" rel="noopener">專案庫 ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 17. Bangers -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Bangers</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">由 Vernon Adams 設計</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">展示字體</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 組音節全數通過</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-bangers" style="font-family:'Bangers POJ', sans-serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">檢視 HarfBuzz 實測排版輪廓樣張（NFC 與 NFD 比對）</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="../assets/img/second10/Bangers-Regular.png" alt="HarfBuzz specimen for Bangers" style="max-width: 100%; height: auto; display: block;">
+          </div>
+          <a class="specimen-link" href="../assets/img/second10/Bangers-Regular.png" target="_blank" rel="noopener">在新分頁開啟完整樣張</a>
+        </details>
+        <div class="font-meta">
+          <span>方式 B + A · 美式中世紀美漫風格高張力標題字（Comic Book Display）</span>
+          <div class="font-actions">
+            <a class="btn-download" href="../assets/fonts/poj/Bangers-Regular.woff2" download>WOFF2 (37 KB)</a>
+            <a class="btn-download" href="../assets/fonts/poj/Bangers-Regular.ttf" download>TTF (93 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/bangers" target="_blank" rel="noopener">專案庫 ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 18. Barlow -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Barlow</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">由 Jeremy Tribby 設計</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">無襯線體</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 組音節全數通過</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-barlow" style="font-family:'Barlow POJ', sans-serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">檢視 HarfBuzz 實測排版輪廓樣張（NFC 與 NFD 比對）</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="../assets/img/second10/Barlow-Regular.png" alt="HarfBuzz specimen for Barlow" style="max-width: 100%; height: auto; display: block;">
+          </div>
+          <a class="specimen-link" href="../assets/img/second10/Barlow-Regular.png" target="_blank" rel="noopener">在新分頁開啟完整樣張</a>
+        </details>
+        <div class="font-meta">
+          <span>方式 B + A · 加州公路與大眾運輸標誌風格無襯線體（California Grotesque）</span>
+          <div class="font-actions">
+            <a class="btn-download" href="../assets/fonts/poj/Barlow-Regular.woff2" download>WOFF2 (47 KB)</a>
+            <a class="btn-download" href="../assets/fonts/poj/Barlow-Regular.ttf" download>TTF (130 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/barlow" target="_blank" rel="noopener">專案庫 ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 19. BioRhyme -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">BioRhyme</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">由 Aoife Mooney 設計</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">襯線體</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 組音節全數通過</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-biorhyme" style="font-family:'BioRhyme POJ', sans-serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">檢視 HarfBuzz 實測排版輪廓樣張（NFC 與 NFD 比對）</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="../assets/img/second10/BioRhyme-Regular.png" alt="HarfBuzz specimen for BioRhyme" style="max-width: 100%; height: auto; display: block;">
+          </div>
+          <a class="specimen-link" href="../assets/img/second10/BioRhyme-Regular.png" target="_blank" rel="noopener">在新分頁開啟完整樣張</a>
+        </details>
+        <div class="font-meta">
+          <span>方式 B + A · 寬版有性格且韻律飽滿的粗襯線體（Expanded Slab Serif）</span>
+          <div class="font-actions">
+            <a class="btn-download" href="../assets/fonts/poj/BioRhyme-Regular.woff2" download>WOFF2 (40 KB)</a>
+            <a class="btn-download" href="../assets/fonts/poj/BioRhyme-Regular.ttf" download>TTF (101 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/makingbiorhyme" target="_blank" rel="noopener">專案庫 ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 20. Bricolage Grotesque -->
+      <div class="font-card">
+        <div class="font-header">
+          <div>
+            <span class="font-title">Bricolage Grotesque</span>
+            <span style="color:var(--muted); font-size:14px; margin-left:8px;">由 Mathieu Triay 設計</span>
+          </div>
+          <div class="font-badges">
+            <span class="font-badge">無襯線體</span>
+            <span class="font-badge">SIL OFL 1.1</span>
+            <span class="font-badge success">✓ 26/26 組音節全數通過</span>
+          </div>
+        </div>
+        <div class="font-preview" id="prev-bricolage-grotesque" style="font-family:'Bricolage Grotesque POJ', sans-serif; font-size:30px;">
+          Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!
+        </div>
+        <details style="margin: 8px 0 12px; font-size: 13px; color: var(--muted);">
+          <summary style="cursor: pointer; user-select: none;">檢視 HarfBuzz 實測排版輪廓樣張（NFC 與 NFD 比對）</summary>
+          <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
+            <img src="../assets/img/second10/BricolageGrotesque-Regular.png" alt="HarfBuzz specimen for Bricolage Grotesque" style="max-width: 100%; height: auto; display: block;">
+          </div>
+          <a class="specimen-link" href="../assets/img/second10/BricolageGrotesque-Regular.png" target="_blank" rel="noopener">在新分頁開啟完整樣張</a>
+        </details>
+        <div class="font-meta">
+          <span>方式 B + A · 融合英法字型傳統的高衝擊力新怪誕字體（Expressive Neo-grotesque）</span>
+          <div class="font-actions">
+            <a class="btn-download" href="../assets/fonts/poj/BricolageGrotesque-Regular.woff2" download>WOFF2 (46 KB)</a>
+            <a class="btn-download" href="../assets/fonts/poj/BricolageGrotesque-Regular.ttf" download>TTF (114 KB)</a>
+            <a class="btn-download" href="https://github.com/PehoejiFont/bricolage" target="_blank" rel="noopener">專案庫 ↗</a>
           </div>
         </div>
       </div>
