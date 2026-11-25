@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>POJ Visual Inspection — High Resolution</title>
+<style>
+@font-face { font-family: 'Alata-POJ'; src: url('assets/fonts/poj/Alata-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'Alatsi-POJ'; src: url('assets/fonts/poj/Alatsi-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'Alice-POJ'; src: url('assets/fonts/poj/Alice-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'Aboreto-POJ'; src: url('assets/fonts/poj/Aboreto-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'Afacad-POJ'; src: url('assets/fonts/poj/Afacad-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'AmaticSC-POJ'; src: url('assets/fonts/poj/AmaticSC-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'AndadaPro-POJ'; src: url('assets/fonts/poj/AndadaPro-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'AlanSans-POJ'; src: url('assets/fonts/poj/AlanSans-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'Baskervville-POJ'; src: url('assets/fonts/poj/Baskervville-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'Anta-POJ'; src: url('assets/fonts/poj/Anta-Regular.woff2') format('woff2'); }
+
+body { background: #fff; color: #111; padding: 20px; font-family: system-ui; }
+h1 { font-size: 24px; margin-bottom: 10px; }
+h2 { font-size: 18px; color: #555; margin: 30px 0 5px; border-bottom: 1px solid #ccc; }
+.font-section { margin-bottom: 40px; padding: 15px; border: 1px solid #ddd; background: #fafafa; }
+.font-name { font-size: 16px; font-weight: bold; color: #333; margin-bottom: 8px; }
+.test-row { margin: 6px 0; }
+.test-row .label { display: inline-block; width: 160px; font-size: 11px; color: #888; vertical-align: top; padding-top: 20px; }
+.test-row .text { display: inline-block; line-height: 1.6; }
+.sz72 { font-size: 72px; }
+.sz48 { font-size: 48px; }
+.collision-focus { background: #fff3cd; padding: 4px 8px; border-radius: 4px; }
+.nfc-nfd { display: flex; gap: 40px; }
+.nfc-nfd > div { flex: 1; }
+.nfc-nfd .sub-label { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+<h1>POJ High-Resolution Visual Inspection Page</h1>
+<p style="font-size:13px;color:#666">Each font rendered at 72px for critical POJ test strings. Inspect: dot position, accent-dot clearance, o͘h spacing, ⁿ padding, NFC=NFD identity.</p>
+
+<script>
+const fonts = [
+  ['Alata-POJ', 'Alata'],
+  ['Alatsi-POJ', 'Alatsi'],
+  ['Alice-POJ', 'Alice'],
+  ['Aboreto-POJ', 'Aboreto'],
+  ['Afacad-POJ', 'Afacad'],
+  ['AmaticSC-POJ', 'Amatic SC'],
+  ['AndadaPro-POJ', 'Andada Pro'],
+  ['AlanSans-POJ', 'Alan Sans'],
+  ['Baskervville-POJ', 'Baskervville'],
+  ['Anta-POJ', 'Anta'],
+];
+
+// Critical test strings
+const tests = [
+  ['Toned o͘ (all)', 'o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ ő͘ o̍͘'],
+  ['Uppercase O͘', 'O͘ Ó͘ Ò͘ Ô͘ Ō͘'],
+  ['o͘h collision', 'tńg--khì-o͘h'],
+  ['ⁿ spacing', 'saⁿ-koan hoaⁿ-hí kiⁿ-á-ji̍t'],
+  ['piⁿ + o͘h', 'Chhù-piⁿ tńg--khì-o͘h'],
+  ['Full sentence', 'Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!'],
+  ['Tone 8 & 9', 'a̍ e̍ i̍ o̍ u̍ m̍ n̍ i̋'],
+  ['Nasals', 'ḿ m̀ m̂ m̄ ǹ n̂ n̄'],
+  ['ⁿ cluster', 'iⁿ sⁿ o͘ⁿ'],
+];
+
+// NFD versions (decomposed)
+function toNFD(s) { return s.normalize('NFD'); }
+function toNFC(s) { return s.normalize('NFC'); }
+
+for (const [family, label] of fonts) {
+  const section = document.createElement('div');
+  section.className = 'font-section';
+
+  const name = document.createElement('div');
+  name.className = 'font-name';
+  name.textContent = label;
+  section.appendChild(name);
+
+  for (const [testLabel, testStr] of tests) {
+    const row = document.createElement('div');
+    row.className = 'test-row';
+
+    const lbl = document.createElement('span');
+    lbl.className = 'label';
+    lbl.textContent = testLabel;
+    row.appendChild(lbl);
+
+    const container = document.createElement('div');
+    container.className = 'nfc-nfd';
+    container.style.display = 'inline-flex';
+
+    // NFC
+    const nfcDiv = document.createElement('div');
+    const nfcLabel = document.createElement('div');
+    nfcLabel.className = 'sub-label';
+    nfcLabel.textContent = 'NFC';
+    nfcDiv.appendChild(nfcLabel);
+    const nfcText = document.createElement('div');
+    nfcText.className = 'text sz72';
+    nfcText.style.fontFamily = family;
+    nfcText.textContent = toNFC(testStr);
+    nfcDiv.appendChild(nfcText);
+    container.appendChild(nfcDiv);
+
+    // NFD
+    const nfdDiv = document.createElement('div');
+    const nfdLabel = document.createElement('div');
+    nfdLabel.className = 'sub-label';
+    nfdLabel.textContent = 'NFD';
+    nfdDiv.appendChild(nfdLabel);
+    const nfdText = document.createElement('div');
+    nfdText.className = 'text sz72';
+    nfdText.style.fontFamily = family;
+    nfdText.textContent = toNFD(testStr);
+    nfdDiv.appendChild(nfdText);
+    container.appendChild(nfdDiv);
+
+    row.appendChild(container);
+    section.appendChild(row);
+  }
+
+  document.body.appendChild(section);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>POJ High-Resolution Font Inspection (72px &amp; 120px)</title>
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  body {
+    background: #0f141c;
+    color: #f1f5f9;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    padding: 40px;
+  }
+  h1 { font-size: 28px; margin-bottom: 8px; color: #38bdf8; }
+  p.subtitle { color: #94a3b8; font-size: 15px; margin-top: 0; margin-bottom: 30px; }
+  
+  .font-section {
+    background: #182232;
+    border: 1px solid #2d3d54;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 36px;
+  }
+  .font-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid #2d3d54;
+    padding-bottom: 12px;
+    margin-bottom: 18px;
+  }
+  .font-name { font-size: 22px; font-weight: bold; color: #f8fafc; }
+  .font-meta { font-size: 13px; color: #94a3b8; }
+  
+  .sample-block {
+    margin-bottom: 20px;
+    background: #0b1017;
+    border: 1px solid #233144;
+    border-radius: 8px;
+    padding: 18px 24px;
+  }
+  .sample-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .text-120 {
+    font-size: 120px;
+    line-height: 1.35;
+    white-space: nowrap;
+    overflow-x: auto;
+    color: #ffffff;
+  }
+  .text-72 {
+    font-size: 72px;
+    line-height: 1.35;
+    white-space: nowrap;
+    overflow-x: auto;
+    color: #ffffff;
+  }
+  .text-48 {
+    font-size: 48px;
+    line-height: 1.4;
+    color: #f1f5f9;
+  }
+  
+  /* Font Family Classes */
+  .ff-alata { font-family: 'Alata POJ', sans-serif; }
+  .ff-alatsi { font-family: 'Alatsi POJ', sans-serif; }
+  .ff-alice { font-family: 'Alice POJ', serif; }
+  .ff-aboreto { font-family: 'Aboreto POJ', display; }
+  .ff-afacad { font-family: 'Afacad POJ', sans-serif; }
+  .ff-amaticsc { font-family: 'Amatic SC POJ', cursive; }
+  .ff-andada { font-family: 'Andada Pro POJ', serif; }
+  .ff-alan { font-family: 'Alan Sans POJ', sans-serif; }
+  .ff-baskervville { font-family: 'Baskervville POJ', serif; }
+  .ff-anta { font-family: 'Anta POJ', sans-serif; }
+
+  .diff-tag {
+    background: #1e293b;
+    border: 1px solid #475569;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #38bdf8;
+    font-size: 11px;
+  }
+</style>
+</head>
+<body>
+
+<h1>POJ High-Resolution Inspection Testbench</h1>
+<p class="subtitle">Focusing on dot placement, accent clearances, terminal styling, and NFC vs NFD at 120px and 72px.</p>
+
+<div id="container"></div>
+
+<script>
+const FONTS = [
+  { id: 'alata', name: 'Alata POJ', cls: 'ff-alata', cat: 'Geometric Sans' },
+  { id: 'alatsi', name: 'Alatsi POJ', cls: 'ff-alatsi', cat: 'Contemporary Sans' },
+  { id: 'alice', name: 'Alice POJ', cls: 'ff-alice', cat: 'Soft Editorial Serif' },
+  { id: 'aboreto', name: 'Aboreto POJ', cls: 'ff-aboreto', cat: 'Geometric Display (All-Caps)' },
+  { id: 'afacad', name: 'Afacad POJ', cls: 'ff-afacad', cat: 'Humanist Sans' },
+  { id: 'amaticsc', name: 'Amatic SC POJ', cls: 'ff-amaticsc', cat: 'Condensed Hand-drawn' },
+  { id: 'andada', name: 'Andada Pro POJ', cls: 'ff-andada', cat: 'Editorial Slab Serif' },
+  { id: 'alan', name: 'Alan Sans POJ', cls: 'ff-alan', cat: 'Grotesque Sans' },
+  { id: 'baskervville', name: 'Baskervville POJ', cls: 'ff-baskervville', cat: 'Transitional Serif' },
+  { id: 'anta', name: 'Anta POJ', cls: 'ff-anta', cat: 'Modular Techno' }
+];
+
+const TESTS = [
+  {
+    title: '1. Dotted O Vowels with Tones (120px) — Hardest Collision Case',
+    size: 'text-120',
+    nfc: 'o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ ő͘ o̍͘  O͘ Ó͘ Ō͘ O̍͘',
+    nfd: 'o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ ő͘ o̍͘  O͘ Ó͘ Ō͘ O̍͘'
+  },
+  {
+    title: '2. Syllabic Nasals & 8th Tone Vertical Lines (72px)',
+    size: 'text-72',
+    nfc: 'a̍ e̍ i̍ o̍ u̍ m̍ n̍ n̍g  A̍ E̍ I̍ O̍ U̍ M̍ N̍g  ḿ m̀ m̂ m̄ ǹ n̂ n̄',
+    nfd: 'a̍ e̍ i̍ o̍ u̍ m̍ n̍ n̍g  A̍ E̍ I̍ O̍ U̍ M̍ N̍g  ḿ m̀ m̂ m̄ ǹ n̂ n̄'
+  },
+  {
+    title: '3. Superscript Nasal (ⁿ) & Tone 9 (72px)',
+    size: 'text-72',
+    nfc: 'iⁿ sⁿ o͘ⁿ i̋  (Nasal + Dot: o͘ⁿ)',
+    nfd: 'iⁿ sⁿ o͘ⁿ i̋  (Nasal + Dot: o͘ⁿ)'
+  },
+  {
+    title: '4. Contextual Sentence & Connectivity (48px)',
+    size: 'text-48',
+    nfc: 'Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí! Pe̍h-ōe-jī Mi̍h-kiāⁿ',
+    nfd: 'Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí! Pe̍h-ōe-jī Mi̍h-kiāⁿ'
+  }
+];
+
+const container = document.getElementById('container');
+
+FONTS.forEach(f => {
+  const sec = document.createElement('div');
+  sec.className = 'font-section';
+  sec.id = 'sec-' + f.id;
+  
+  let html = `
+    <div class="font-header">
+      <span class="font-name">${f.name}</span>
+      <span class="font-meta">${f.cat}</span>
+    </div>
+  `;
+  
+  TESTS.forEach(t => {
+    html += `
+      <div class="sample-block">
+        <div class="sample-label">
+          <span>${t.title} [NFC]</span>
+          <span class="diff-tag">NFC</span>
+        </div>
+        <div class="${t.size} ${f.cls}">${t.nfc.normalize('NFC')}</div>
+        
+        <div class="sample-label" style="margin-top: 14px;">
+          <span>${t.title} [NFD]</span>
+          <span class="diff-tag">NFD</span>
+        </div>
+        <div class="${t.size} ${f.cls}">${t.nfd.normalize('NFD')}</div>
+      </div>
+    `;
+  });
+  
+  sec.innerHTML = html;
+  container.appendChild(sec);
+});
+</script>
+
+</body>
+</html>

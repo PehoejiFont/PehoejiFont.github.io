@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>POJ Visual Inspection — Per Font</title>
+<style>
+@font-face { font-family: 'Alata-POJ'; src: url('assets/fonts/poj/Alata-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'Alatsi-POJ'; src: url('assets/fonts/poj/Alatsi-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'Alice-POJ'; src: url('assets/fonts/poj/Alice-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'Aboreto-POJ'; src: url('assets/fonts/poj/Aboreto-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'Afacad-POJ'; src: url('assets/fonts/poj/Afacad-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'AmaticSC-POJ'; src: url('assets/fonts/poj/AmaticSC-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'AndadaPro-POJ'; src: url('assets/fonts/poj/AndadaPro-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'AlanSans-POJ'; src: url('assets/fonts/poj/AlanSans-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'Baskervville-POJ'; src: url('assets/fonts/poj/Baskervville-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'Anta-POJ'; src: url('assets/fonts/poj/Anta-Regular.woff2') format('woff2'); }
+
+body { background: #fff; color: #111; padding: 20px; margin: 0; }
+h2 { font-size: 20px; font-family: system-ui; border-bottom: 2px solid #333; padding-bottom: 4px; margin: 0 0 10px; }
+.row { margin: 4px 0; display: flex; align-items: baseline; gap: 20px; }
+.lbl { font-family: system-ui; font-size: 11px; color: #888; min-width: 90px; flex-shrink: 0; }
+.txt { font-size: 80px; line-height: 1.5; }
+.form-label { font-family: system-ui; font-size: 9px; color: #aaa; }
+.section { margin-bottom: 30px; page-break-inside: avoid; }
+</style>
+</head>
+<body>
+<script>
+const params = new URLSearchParams(window.location.search);
+const idx = parseInt(params.get('f') || '0');
+const fonts = [
+  ['Alata-POJ', 'Alata'],
+  ['Alatsi-POJ', 'Alatsi'],
+  ['Alice-POJ', 'Alice'],
+  ['Aboreto-POJ', 'Aboreto'],
+  ['Afacad-POJ', 'Afacad'],
+  ['AmaticSC-POJ', 'Amatic SC'],
+  ['AndadaPro-POJ', 'Andada Pro'],
+  ['AlanSans-POJ', 'Alan Sans'],
+  ['Baskervville-POJ', 'Baskervville'],
+  ['Anta-POJ', 'Anta'],
+];
+
+const [family, label] = fonts[idx] || fonts[0];
+
+const tests = [
+  ['Toned o͘', 'o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ ő͘ o̍͘'],
+  ['Upper O͘', 'O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ Ő͘'],
+  ['o͘h gap', 'tńg--khì-o͘h'],
+  ['ⁿ spacing', 'saⁿ-koan hoaⁿ-hí'],
+  ['Sentence', 'Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!'],
+  ['Tone 8/9', 'a̍ e̍ i̍ o̍ u̍ m̍ n̍ i̋'],
+  ['ⁿ cluster', 'iⁿ sⁿ o͘ⁿ'],
+  ['Nasals', 'ḿ m̀ m̂ m̄ ǹ n̂ n̄'],
+];
+
+function toNFD(s) { return s.normalize('NFD'); }
+function toNFC(s) { return s.normalize('NFC'); }
+
+const h = document.createElement('h2');
+h.textContent = `${label} — POJ Inspection (font ${idx+1}/10)`;
+document.body.appendChild(h);
+
+for (const [tl, ts] of tests) {
+  const sec = document.createElement('div');
+  sec.className = 'section';
+
+  // NFC row
+  const r1 = document.createElement('div');
+  r1.className = 'row';
+  const l1 = document.createElement('div');
+  l1.className = 'lbl';
+  l1.innerHTML = tl + '<br><span class="form-label">NFC</span>';
+  r1.appendChild(l1);
+  const t1 = document.createElement('div');
+  t1.className = 'txt';
+  t1.style.fontFamily = family;
+  t1.textContent = toNFC(ts);
+  r1.appendChild(t1);
+  sec.appendChild(r1);
+
+  // NFD row
+  const r2 = document.createElement('div');
+  r2.className = 'row';
+  const l2 = document.createElement('div');
+  l2.className = 'lbl';
+  l2.innerHTML = '<span class="form-label">NFD</span>';
+  r2.appendChild(l2);
+  const t2 = document.createElement('div');
+  t2.className = 'txt';
+  t2.style.fontFamily = family;
+  t2.textContent = toNFD(ts);
+  r2.appendChild(t2);
+  sec.appendChild(r2);
+
+  document.body.appendChild(sec);
+}
+</script>
+</body>
+</html>

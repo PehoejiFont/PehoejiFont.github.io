@@ -51,7 +51,7 @@
     transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
   .font-card:hover {
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow);
   }
   .font-header {
     display: flex;
@@ -94,6 +94,10 @@
     margin: 12px 0 16px;
     transition: letter-spacing 0.15s ease;
   }
+  .specimen-link {
+    display: inline-block;
+    margin-top: 0.4rem;
+  }
   .font-meta {
     display: flex;
     flex-wrap: wrap;
@@ -107,6 +111,7 @@
   }
   .font-actions {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
   }
   .btn-download {
@@ -126,13 +131,22 @@
     background: var(--accent);
     color: #fff;
   }
+  @media (max-width: 420px) {
+    .topbar-inner { gap: 5px; padding-inline: 8px; }
+    .topbar-spacer { display: none; }
+    .search-trigger { margin-inline-start: auto; }
+    .brand { gap: 5px; font-size: 15px; }
+  }
+  @media (max-width: 360px) {
+    .brand > span:nth-child(2) { display: none; }
+  }
 </style>
 </head>
 <body>
 <header class="topbar">
   <div class="topbar-inner">
     <button class="menu-btn" id="menu-toggle" type="button" aria-label="Toggle navigation">☰</button>
-    <a class="brand" href="./">
+    <a class="brand" href="./" aria-label="PehoejiFont">
       <span class="brand-mark poj">o͘</span>
       <span>PehoejiFont</span>
       <span class="brand-badge">Docs</span>
@@ -195,7 +209,7 @@
         <div style="display:flex; gap:6px; flex-wrap:wrap;">
           <button class="btn" type="button" onclick="setSample('Pe̍h-ōe-jī sī Tâi-oân-ōe siāng chē lâng sú-iōng ê Lô-má-jī.')">Proverb</button>
           <button class="btn" type="button" onclick="setSample('Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!')">Dialogue</button>
-          <button class="btn" type="button" onclick="setSample('o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ o̍͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g | ḿ m̀ m̂ m̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h')">POJ Clusters</button>
+          <button class="btn" type="button" onclick="setSample('o͘ ó͘ ò͘ ô͘ ō͘ ŏ͘ ő͘ o̍͘ O͘ Ó͘ Ò͘ Ô͘ Ō͘ Ŏ͘ Ő͘ O̍͘ | a̍ e̍ i̍ o̍ u̍ m̍ n̍g A̍ I̍ M̍ N̍g | ḿ m̀ m̂ m̄ ǹ n̂ n̄ | iⁿ sⁿ Sⁿ o͘ⁿ o͘h i̋')">POJ Clusters</button>
         </div>
       </div>
       <input type="text" id="showcase-text-input" class="showcase-input" value="Chhù-piⁿ tńg--khì-o͘h, saⁿ-koan lóng hó-sè, kiⁿ-á-ji̍t chin hoaⁿ-hí!">
@@ -228,12 +242,13 @@
           <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
             <img src="assets/img/first10/Alata-Regular.png" alt="HarfBuzz specimen for Alata" style="max-width: 100%; height: auto; display: block;">
           </div>
+          <a class="specimen-link" href="assets/img/first10/Alata-Regular.png" target="_blank" rel="noopener">Open full-size specimen</a>
         </details>
         <div class="font-meta">
           <span>Technique B + A · Clean geometric sans with monumental proportions</span>
           <div class="font-actions">
             <a class="btn-download" href="assets/fonts/poj/Alata-Regular.woff2" download>WOFF2 (97 KB)</a>
-            <a class="btn-download" href="assets/fonts/poj/Alata-Regular.ttf" download>TTF (342 KB)</a>
+            <a class="btn-download" href="assets/fonts/poj/Alata-Regular.ttf" download>TTF (343 KB)</a>
             <a class="btn-download" href="https://github.com/PehoejiFont/Alata" target="_blank" rel="noopener">Repo ↗</a>
           </div>
         </div>
@@ -260,12 +275,13 @@
           <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
             <img src="assets/img/first10/Alatsi-Regular.png" alt="HarfBuzz specimen for Alatsi" style="max-width: 100%; height: auto; display: block;">
           </div>
+          <a class="specimen-link" href="assets/img/first10/Alatsi-Regular.png" target="_blank" rel="noopener">Open full-size specimen</a>
         </details>
         <div class="font-meta">
           <span>Technique B + A · Contemporary calm sans with Art Deco touch</span>
           <div class="font-actions">
             <a class="btn-download" href="assets/fonts/poj/Alatsi-Regular.woff2" download>WOFF2 (154 KB)</a>
-            <a class="btn-download" href="assets/fonts/poj/Alatsi-Regular.ttf" download>TTF (435 KB)</a>
+            <a class="btn-download" href="assets/fonts/poj/Alatsi-Regular.ttf" download>TTF (436 KB)</a>
             <a class="btn-download" href="https://github.com/PehoejiFont/Alatsi" target="_blank" rel="noopener">Repo ↗</a>
           </div>
         </div>
@@ -292,11 +308,12 @@
           <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
             <img src="assets/img/first10/Alice-Regular.png" alt="HarfBuzz specimen for Alice" style="max-width: 100%; height: auto; display: block;">
           </div>
+          <a class="specimen-link" href="assets/img/first10/Alice-Regular.png" target="_blank" rel="noopener">Open full-size specimen</a>
         </details>
         <div class="font-meta">
           <span>Technique B + A · Elegant quaint book typeface inspired by Lewis Carroll</span>
           <div class="font-actions">
-            <a class="btn-download" href="assets/fonts/poj/Alice-Regular.woff2" download>WOFF2 (45 KB)</a>
+            <a class="btn-download" href="assets/fonts/poj/Alice-Regular.woff2" download>WOFF2 (46 KB)</a>
             <a class="btn-download" href="assets/fonts/poj/Alice-Regular.ttf" download>TTF (128 KB)</a>
             <a class="btn-download" href="https://github.com/PehoejiFont/Alice" target="_blank" rel="noopener">Repo ↗</a>
           </div>
@@ -324,12 +341,13 @@
           <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
             <img src="assets/img/first10/Aboreto-Regular.png" alt="HarfBuzz specimen for Aboreto" style="max-width: 100%; height: auto; display: block;">
           </div>
+          <a class="specimen-link" href="assets/img/first10/Aboreto-Regular.png" target="_blank" rel="noopener">Open full-size specimen</a>
         </details>
         <div class="font-meta">
           <span>Technique B + A · Sophisticated architectural display face with high aesthetic contrast</span>
           <div class="font-actions">
-            <a class="btn-download" href="assets/fonts/poj/Aboreto-Regular.woff2" download>WOFF2 (20 KB)</a>
-            <a class="btn-download" href="assets/fonts/poj/Aboreto-Regular.ttf" download>TTF (47 KB)</a>
+            <a class="btn-download" href="assets/fonts/poj/Aboreto-Regular.woff2" download>WOFF2 (21 KB)</a>
+            <a class="btn-download" href="assets/fonts/poj/Aboreto-Regular.ttf" download>TTF (48 KB)</a>
             <a class="btn-download" href="https://github.com/PehoejiFont/Aboreto" target="_blank" rel="noopener">Repo ↗</a>
           </div>
         </div>
@@ -356,11 +374,12 @@
           <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
             <img src="assets/img/first10/Afacad-Regular.png" alt="HarfBuzz specimen for Afacad" style="max-width: 100%; height: auto; display: block;">
           </div>
+          <a class="specimen-link" href="assets/img/first10/Afacad-Regular.png" target="_blank" rel="noopener">Open full-size specimen</a>
         </details>
         <div class="font-meta">
           <span>Technique B + A · Crisp modern sans-serif designed for clean editorial readability</span>
           <div class="font-actions">
-            <a class="btn-download" href="assets/fonts/poj/Afacad-Regular.woff2" download>WOFF2 (38 KB)</a>
+            <a class="btn-download" href="assets/fonts/poj/Afacad-Regular.woff2" download>WOFF2 (39 KB)</a>
             <a class="btn-download" href="assets/fonts/poj/Afacad-Regular.ttf" download>TTF (109 KB)</a>
             <a class="btn-download" href="https://github.com/PehoejiFont/Afacad" target="_blank" rel="noopener">Repo ↗</a>
           </div>
@@ -388,11 +407,12 @@
           <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
             <img src="assets/img/first10/AmaticSC-Regular.png" alt="HarfBuzz specimen for Amatic SC" style="max-width: 100%; height: auto; display: block;">
           </div>
+          <a class="specimen-link" href="assets/img/first10/AmaticSC-Regular.png" target="_blank" rel="noopener">Open full-size specimen</a>
         </details>
         <div class="font-meta">
           <span>Technique B + A · Simple, highly condensed hand-drawn small-caps display font</span>
           <div class="font-actions">
-            <a class="btn-download" href="assets/fonts/poj/AmaticSC-Regular.woff2" download>WOFF2 (65 KB)</a>
+            <a class="btn-download" href="assets/fonts/poj/AmaticSC-Regular.woff2" download>WOFF2 (66 KB)</a>
             <a class="btn-download" href="assets/fonts/poj/AmaticSC-Regular.ttf" download>TTF (146 KB)</a>
             <a class="btn-download" href="https://github.com/PehoejiFont/AmaticSC" target="_blank" rel="noopener">Repo ↗</a>
           </div>
@@ -420,6 +440,7 @@
           <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
             <img src="assets/img/first10/AndadaPro-Regular.png" alt="HarfBuzz specimen for Andada Pro" style="max-width: 100%; height: auto; display: block;">
           </div>
+          <a class="specimen-link" href="assets/img/first10/AndadaPro-Regular.png" target="_blank" rel="noopener">Open full-size specimen</a>
         </details>
         <div class="font-meta">
           <span>Technique B + A · Warm organic text serif optimized for demanding continuous reading</span>
@@ -452,6 +473,7 @@
           <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
             <img src="assets/img/first10/AlanSans-Regular.png" alt="HarfBuzz specimen for Alan Sans" style="max-width: 100%; height: auto; display: block;">
           </div>
+          <a class="specimen-link" href="assets/img/first10/AlanSans-Regular.png" target="_blank" rel="noopener">Open full-size specimen</a>
         </details>
         <div class="font-meta">
           <span>Technique B + A · Balanced neo-grotesque sans with clean metric rhythm</span>
@@ -484,12 +506,13 @@
           <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
             <img src="assets/img/first10/Baskervville-Regular.png" alt="HarfBuzz specimen for Baskervville" style="max-width: 100%; height: auto; display: block;">
           </div>
+          <a class="specimen-link" href="assets/img/first10/Baskervville-Regular.png" target="_blank" rel="noopener">Open full-size specimen</a>
         </details>
         <div class="font-meta">
           <span>Technique B + A · Faithful revival of John Baskerville's timeless transitional serif</span>
           <div class="font-actions">
-            <a class="btn-download" href="assets/fonts/poj/Baskervville-Regular.woff2" download>WOFF2 (46 KB)</a>
-            <a class="btn-download" href="assets/fonts/poj/Baskervville-Regular.ttf" download>TTF (121 KB)</a>
+            <a class="btn-download" href="assets/fonts/poj/Baskervville-Regular.woff2" download>WOFF2 (47 KB)</a>
+            <a class="btn-download" href="assets/fonts/poj/Baskervville-Regular.ttf" download>TTF (122 KB)</a>
             <a class="btn-download" href="https://github.com/PehoejiFont/ANRT-Baskervville" target="_blank" rel="noopener">Repo ↗</a>
           </div>
         </div>
@@ -516,12 +539,13 @@
           <div style="margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; overflow-x: auto;">
             <img src="assets/img/first10/Anta-Regular.png" alt="HarfBuzz specimen for Anta" style="max-width: 100%; height: auto; display: block;">
           </div>
+          <a class="specimen-link" href="assets/img/first10/Anta-Regular.png" target="_blank" rel="noopener">Open full-size specimen</a>
         </details>
         <div class="font-meta">
           <span>Technique B + A · Tech and gaming inspired futuristic display font</span>
           <div class="font-actions">
-            <a class="btn-download" href="assets/fonts/poj/Anta-Regular.woff2" download>WOFF2 (23 KB)</a>
-            <a class="btn-download" href="assets/fonts/poj/Anta-Regular.ttf" download>TTF (74 KB)</a>
+            <a class="btn-download" href="assets/fonts/poj/Anta-Regular.woff2" download>WOFF2 (24 KB)</a>
+            <a class="btn-download" href="assets/fonts/poj/Anta-Regular.ttf" download>TTF (75 KB)</a>
             <a class="btn-download" href="https://github.com/PehoejiFont/Anta-Regular" target="_blank" rel="noopener">Repo ↗</a>
           </div>
         </div>
@@ -529,10 +553,14 @@
 
     </div>
 
-    <div class="doc-pager">
-      <a class="pager-prev" href="test.html"><span class="pager-label">← Previous</span><span class="pager-title">Live POJ Test Bench</span></a>
-      <a class="pager-next" href="letters.html"><span class="pager-label">Next →</span><span class="pager-title">Unicode &amp; Encoding</span></a>
-    </div>
+    <nav class="doc-pager" aria-label="Pagination">
+      <a class="pager-link prev" href="test.html"><span class="pager-dir">← Previous</span><span class="pager-title">Live POJ Test Bench</span></a>
+      <a class="pager-link next" href="letters.html"><span class="pager-dir">Next →</span><span class="pager-title">Unicode &amp; Encoding</span></a>
+    </nav>
+
+    <footer class="doc-footer">
+      PehoejiFont project · Text is set in <a href="https://github.com/ButTaiwan/genyo-font">源樣明體 GenYo Min</a> by But Ko (<a href="assets/fonts/GenYo-OFL.txt">SIL Open Font License</a>) · <a href="https://github.com/PehoejiFont/PehoejiFont.github.io">Source on GitHub</a>
+    </footer>
   </main>
 </div>
 
