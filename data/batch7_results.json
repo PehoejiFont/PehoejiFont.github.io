@@ -1,0 +1,135 @@
+{
+  "batch": 7,
+  "verified": [
+    {
+      "repo": "alumni",
+      "family": "Alumni Sans SC",
+      "category": "Sans Serif",
+      "designer": "Robert Leuschke",
+      "ttf_name": "AlumniSans-Regular.ttf",
+      "woff2_name": "AlumniSans-Regular.woff2",
+      "img_rel": "assets/img/batch7/AlumniSans-Regular.png",
+      "ttf_size_kb": 118.4,
+      "woff2_size_kb": 46.1,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "alumni-sans-collegiate",
+      "family": "Alumni Sans Collegiate One SC",
+      "category": "Display",
+      "designer": "Robert Leuschke",
+      "ttf_name": "AlumniSansCollegiateOne-Regular.ttf",
+      "woff2_name": "AlumniSansCollegiateOne-Regular.woff2",
+      "img_rel": "assets/img/batch7/AlumniSansCollegiateOne-Regular.png",
+      "ttf_size_kb": 162.0,
+      "woff2_size_kb": 66.4,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "alumni-sans-inline",
+      "family": "Alumni Sans Inline One",
+      "category": "Sans Serif",
+      "designer": "Robert Leuschke",
+      "ttf_name": "AlumniSansInlineOne-Regular.ttf",
+      "woff2_name": "AlumniSansInlineOne-Regular.woff2",
+      "img_rel": "assets/img/batch7/AlumniSansInlineOne-Regular.png",
+      "ttf_size_kb": 131.7,
+      "woff2_size_kb": 49.7,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "alumni-sans-pinstripe",
+      "family": "Alumni Sans Pinstripe",
+      "category": "Display",
+      "designer": "Robert Leuschke",
+      "ttf_name": "AlumniSansPinstripe-Regular.ttf",
+      "woff2_name": "AlumniSansPinstripe-Regular.woff2",
+      "img_rel": "assets/img/batch7/AlumniSansPinstripe-Regular.png",
+      "ttf_size_kb": 103.7,
+      "woff2_size_kb": 39.6,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "anaheimFont",
+      "family": "Anaheim",
+      "category": "Sans Serif",
+      "designer": "Vernon Adams",
+      "ttf_name": "Anaheim-Regular.ttf",
+      "woff2_name": "Anaheim-Regular.woff2",
+      "img_rel": "assets/img/batch7/Anaheim-Regular.png",
+      "ttf_size_kb": 87.8,
+      "woff2_size_kb": 32.1,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "antonioFont",
+      "family": "Antonio",
+      "category": "Display",
+      "designer": "Vernon Adams",
+      "ttf_name": "Antonio-Regular.ttf",
+      "woff2_name": "Antonio-Regular.woff2",
+      "img_rel": "assets/img/batch7/Antonio-Regular.png",
+      "ttf_size_kb": 56.1,
+      "woff2_size_kb": 23.8,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "ar-one-sans",
+      "family": "AR One Sans",
+      "category": "Sans Serif",
+      "designer": "Niteesh Yadav",
+      "ttf_name": "AROneSansRetina-Regular.ttf",
+      "woff2_name": "AROneSansRetina-Regular.woff2",
+      "img_rel": "assets/img/batch7/AROneSansRetina-Regular.png",
+      "ttf_size_kb": 114.4,
+      "woff2_size_kb": 45.9,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "are-you-serious",
+      "family": "Are You Serious",
+      "category": "Handwriting",
+      "designer": "Robert Leuschke",
+      "ttf_name": "AreYouSerious-Regular.ttf",
+      "woff2_name": "AreYouSerious-Regular.woff2",
+      "img_rel": "assets/img/batch7/AreYouSerious-Regular.png",
+      "ttf_size_kb": 149.6,
+      "woff2_size_kb": 59.9,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "arizonia",
+      "family": "Arizonia",
+      "category": "Handwriting",
+      "designer": "Robert Leuschke",
+      "ttf_name": "Arizonia-Regular.ttf",
+      "woff2_name": "Arizonia-Regular.woff2",
+      "img_rel": "assets/img/batch7/Arizonia-Regular.png",
+      "ttf_size_kb": 125.2,
+      "woff2_size_kb": 49.6,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "asimovian",
+      "family": "Asimovian",
+      "category": "Sans Serif",
+      "designer": "Carolina Short",
+      "ttf_name": "Asimovian-Regular.ttf",
+      "woff2_name": "Asimovian-Regular.woff2",
+      "img_rel": "assets/img/batch7/Asimovian-Regular.png",
+      "ttf_size_kb": 66.5,
+      "woff2_size_kb": 26.8,
+      "verified_clusters": 26
+    }
+  ],
+  "rejected": [
+    {
+      "repo": "athiti",
+      "family": "Athiti",
+      "category": "Sans Serif",
+      "designer": "Cadson Demak",
+      "ttf_name": "Athiti-Regular.ttf",
+      "reason": "Visual inspection & geometry failure: U+0358 combining dot above right renders below the baseline at the bottom-right of o/O (dot_high=false across all 11 dotted-o clusters, colliding under following 'h' and '-'), U+030D Tone 8 vertical line renders on the baseline inside the bottom-right of base glyphs, and U+030B double acute on i̋/I̋ shifts left and collides with the stem."
+    }
+  ]
+}

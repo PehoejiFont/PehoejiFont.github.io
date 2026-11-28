@@ -1,0 +1,132 @@
+{
+  "batch": 9,
+  "verified": [
+    {
+      "repo": "boldonse",
+      "family": "Boldonse",
+      "category": "Display",
+      "designer": "Universitype",
+      "ttf_name": "Boldonse-Regular.ttf",
+      "woff2_name": "Boldonse-Regular.woff2",
+      "img_rel": "assets/img/batch9/Boldonse-Regular.png",
+      "ttf_size_kb": 78.5,
+      "woff2_size_kb": 31.6,
+      "verified_clusters": "26/26"
+    },
+    {
+      "repo": "bonheur-royale",
+      "family": "Bonheur Royale",
+      "category": "Handwriting",
+      "designer": "Robert Leuschke",
+      "ttf_name": "BonheurRoyale-Regular.ttf",
+      "woff2_name": "BonheurRoyale-Regular.woff2",
+      "img_rel": "assets/img/batch9/BonheurRoyale-Regular.png",
+      "ttf_size_kb": 132.6,
+      "woff2_size_kb": 53.7,
+      "verified_clusters": "26/26"
+    },
+    {
+      "repo": "buenard",
+      "family": "Buenard",
+      "category": "Serif",
+      "designer": "Gustavo Ibarra",
+      "ttf_name": "Buenard-Regular.ttf",
+      "woff2_name": "Buenard-Regular.woff2",
+      "img_rel": "assets/img/batch9/Buenard-Regular.png",
+      "ttf_size_kb": 65.4,
+      "woff2_size_kb": 28.0,
+      "verified_clusters": "26/26"
+    },
+    {
+      "repo": "caacupe",
+      "family": "Caacupe One",
+      "category": "Display",
+      "designer": "Magdalena Alonso Rebollo",
+      "ttf_name": "CaacupeOne-Regular.ttf",
+      "woff2_name": "CaacupeOne-Regular.woff2",
+      "img_rel": "assets/img/batch9/CaacupeOne-Regular.png",
+      "ttf_size_kb": 65.6,
+      "woff2_size_kb": 28.4,
+      "verified_clusters": "26/26"
+    },
+    {
+      "repo": "caladea",
+      "family": "Caladea",
+      "category": "Serif",
+      "designer": "HT Fonts, Carolina Giovagnoli, Andrés Torresi",
+      "ttf_name": "Caladea-Regular.ttf",
+      "woff2_name": "Caladea-Regular.woff2",
+      "img_rel": "assets/img/batch9/Caladea-Regular.png",
+      "ttf_size_kb": 79.0,
+      "woff2_size_kb": 31.4,
+      "verified_clusters": "26/26"
+    },
+    {
+      "repo": "caramel",
+      "family": "Caramel",
+      "category": "Handwriting",
+      "designer": "Robert Leuschke",
+      "ttf_name": "CaramelPro-Regular.ttf",
+      "woff2_name": "CaramelPro-Regular.woff2",
+      "img_rel": "assets/img/batch9/CaramelPro-Regular.png",
+      "ttf_size_kb": 372.2,
+      "woff2_size_kb": 71.4,
+      "verified_clusters": "26/26"
+    },
+    {
+      "repo": "carattere",
+      "family": "Carattere",
+      "category": "Handwriting",
+      "designer": "Robert Leuschke",
+      "ttf_name": "Carattere-Regular.ttf",
+      "woff2_name": "Carattere-Regular.woff2",
+      "img_rel": "assets/img/batch9/Carattere-Regular.png",
+      "ttf_size_kb": 123.9,
+      "woff2_size_kb": 50.9,
+      "verified_clusters": "26/26"
+    },
+    {
+      "repo": "font",
+      "family": "Cal Sans",
+      "category": "Sans Serif",
+      "designer": "Mark Davis, Cal.com Inc.",
+      "ttf_name": "CalSans-Regular.ttf",
+      "woff2_name": "CalSans-Regular.woff2",
+      "img_rel": "assets/img/batch9/CalSans-Regular.png",
+      "ttf_size_kb": 232.1,
+      "woff2_size_kb": 71.4,
+      "verified_clusters": "26/26"
+    },
+    {
+      "repo": "morisawa-biz-ud-gothic",
+      "family": "BIZ UDPGothic",
+      "category": "Sans Serif",
+      "designer": "Type Bank Co., Morisawa Inc.",
+      "ttf_name": "BIZUDGothic-Regular.ttf",
+      "woff2_name": "BIZUDGothic-Regular.woff2",
+      "img_rel": "assets/img/batch9/BIZUDGothic-Regular.png",
+      "ttf_size_kb": 4505.6,
+      "woff2_size_kb": 2137.9,
+      "verified_clusters": "26/26"
+    },
+    {
+      "repo": "morisawa-biz-ud-mincho",
+      "family": "BIZ UDPMincho",
+      "category": "Serif",
+      "designer": "Type Bank Co., Morisawa Inc.",
+      "ttf_name": "BIZUDMincho-Regular.ttf",
+      "woff2_name": "BIZUDMincho-Regular.woff2",
+      "img_rel": "assets/img/batch9/BIZUDMincho-Regular.png",
+      "ttf_size_kb": 5957.3,
+      "woff2_size_kb": 2819.2,
+      "verified_clusters": "26/26"
+    }
+  ],
+  "rejected": [
+    {
+      "repo": "bytesized-gf",
+      "family": "Bytesized",
+      "reason": "Visual inspection failed: U+0358 dot floats far to the right with massive horizontal gaps on toned dotted-o clusters, superscript ⁿ has massive horizontal gaps, and Tone 8 (U+030D) vertical marks float far above the letters/row."
+    }
+  ]
+}

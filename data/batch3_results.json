@@ -1,0 +1,132 @@
+{
+  "batch": 3,
+  "verified": [
+    {
+      "repo": "ADLaM-Display",
+      "family": "ADLaM Display",
+      "category": "Display",
+      "designer": "Mark Jamra, Neil Patel, Andrew Footit",
+      "ttf_name": "ADLaMDisplay-Regular.ttf",
+      "woff2_name": "ADLaMDisplay-Regular.woff2",
+      "img_rel": "assets/img/batch3/ADLaMDisplay-Regular.png",
+      "ttf_size_kb": 97.3,
+      "woff2_size_kb": 41.5,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "Akaya-Kanadaka",
+      "family": "Akaya Kanadaka",
+      "category": "Display",
+      "designer": "Vaishnavi Murthy, Juan Luis Blanco",
+      "ttf_name": "AkayaKanadaka-Regular.ttf",
+      "woff2_name": "AkayaKanadaka-Regular.woff2",
+      "img_rel": "assets/img/batch3/AkayaKanadaka-Regular.png",
+      "ttf_size_kb": 335.3,
+      "woff2_size_kb": 103.7,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "Akaya-Telivigala",
+      "family": "Akaya Telivigala",
+      "category": "Display",
+      "designer": "Vaishnavi Murthy, Juan Luis Blanco",
+      "ttf_name": "AkayaTelivigala-Regular.ttf",
+      "woff2_name": "AkayaTelivigala-Regular.woff2",
+      "img_rel": "assets/img/batch3/AkayaTelivigala-Regular.png",
+      "ttf_size_kb": 549.5,
+      "woff2_size_kb": 143.6,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "AlYamama",
+      "family": "Alyamama",
+      "category": "Serif",
+      "designer": "Yazeed Omar",
+      "ttf_name": "Alyamama-Regular.ttf",
+      "woff2_name": "Alyamama-Regular.woff2",
+      "img_rel": "assets/img/batch3/Alyamama-Regular.png",
+      "ttf_size_kb": 226.4,
+      "woff2_size_kb": 79.9,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "Alegreya-Sans",
+      "family": "Alegreya Sans SC",
+      "category": "Sans Serif",
+      "designer": "Juan Pablo del Peral, HT Fonts",
+      "ttf_name": "AlegreyaSans-Regular.ttf",
+      "woff2_name": "AlegreyaSans-Regular.woff2",
+      "img_rel": "assets/img/batch3/AlegreyaSans-Regular.png",
+      "ttf_size_kb": 253.5,
+      "woff2_size_kb": 87.9,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "Alexandria",
+      "family": "Alexandria",
+      "category": "Sans Serif",
+      "designer": "Mohamed Gaber, Julieta Ulanovsky",
+      "ttf_name": "Alexandria-Regular.ttf",
+      "woff2_name": "Alexandria-Regular.woff2",
+      "img_rel": "assets/img/batch3/Alexandria-Regular.png",
+      "ttf_size_kb": 218.0,
+      "woff2_size_kb": 73.5,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "AlienBlock",
+      "family": "Alien Block",
+      "category": "Display",
+      "designer": "Kensuke Uchida",
+      "ttf_name": "AlienBlock-Regular.ttf",
+      "woff2_name": "AlienBlock-Regular.woff2",
+      "img_rel": "assets/img/batch3/AlienBlock-Regular.png",
+      "ttf_size_kb": 36.8,
+      "woff2_size_kb": 12.5,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "Amarna",
+      "family": "Amarna",
+      "category": "Sans Serif",
+      "designer": "Ishtār van Looy",
+      "ttf_name": "Amarna-Regular.ttf",
+      "woff2_name": "Amarna-Regular.woff2",
+      "img_rel": "assets/img/batch3/Amarna-Regular.png",
+      "ttf_size_kb": 49.8,
+      "woff2_size_kb": 21.8,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "Amita",
+      "family": "Amita",
+      "category": "Handwriting",
+      "designer": "Eduardo Tunni, Brian Bonislawsky",
+      "ttf_name": "Amita-Regular.ttf",
+      "woff2_name": "Amita-Regular.woff2",
+      "img_rel": "assets/img/batch3/Amita-Regular.png",
+      "ttf_size_kb": 193.7,
+      "woff2_size_kb": 74.4,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "AntonFont",
+      "family": "Anton SC",
+      "category": "Display",
+      "designer": "Vernon Adams",
+      "ttf_name": "Anton-Regular.ttf",
+      "woff2_name": "Anton-Regular.woff2",
+      "img_rel": "assets/img/batch3/Anton-Regular.png",
+      "ttf_size_kb": 168.3,
+      "woff2_size_kb": 57.1,
+      "verified_clusters": 26
+    }
+  ],
+  "rejected": [
+    {
+      "repo": "Amiko-Devanagari",
+      "family": "Amiko",
+      "reason": "Tone 9 double acute (U+030B) on lowercase i̋ renders at the baseline colliding with the bottom of the i stem (while i retains its tittle dot)."
+    }
+  ]
+}

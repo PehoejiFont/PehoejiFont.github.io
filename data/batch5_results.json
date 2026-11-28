@@ -1,0 +1,131 @@
+{
+  "batch": 5,
+  "verified": [
+    {
+      "repo": "Ballet",
+      "family": "Ballet",
+      "category": "Handwriting",
+      "designer": "Omnibus-Type, Maximiliano Sproviero",
+      "ttf_name": "Ballet72pt-Regular.ttf",
+      "woff2_name": "Ballet72pt-Regular.woff2",
+      "img_rel": "assets/img/batch5/Ballet72pt-Regular.png",
+      "ttf_size_kb": 129.4,
+      "woff2_size_kb": 53.7,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "BeVietnamPro",
+      "family": "Be Vietnam Pro",
+      "category": "Sans Serif",
+      "designer": "Lâm Bảo, Tony Le, ViệtAnh Nguyễn",
+      "ttf_name": "BeVietnamPro-Regular.ttf",
+      "woff2_name": "BeVietnamPro-Regular.woff2",
+      "img_rel": "assets/img/batch5/BeVietnamPro-Regular.png",
+      "ttf_size_kb": 131.8,
+      "woff2_size_kb": 38.1,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "Bellota-Font",
+      "family": "Bellota Text",
+      "category": "Display",
+      "designer": "Kemie Guaida",
+      "ttf_name": "Bellota-Regular.ttf",
+      "woff2_name": "Bellota-Regular.woff2",
+      "img_rel": "assets/img/batch5/Bellota-Regular.png",
+      "ttf_size_kb": 218.0,
+      "woff2_size_kb": 75.1,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "Besley",
+      "family": "Besley",
+      "category": "Serif",
+      "designer": "Owen Earl",
+      "ttf_name": "Besley-Regular.ttf",
+      "woff2_name": "Besley-Regular.woff2",
+      "img_rel": "assets/img/batch5/Besley-Regular.png",
+      "ttf_size_kb": 152.8,
+      "woff2_size_kb": 59.4,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "BevanFont",
+      "family": "Bevan",
+      "category": "Serif",
+      "designer": "Vernon Adams",
+      "ttf_name": "Bevan-Regular.ttf",
+      "woff2_name": "Bevan-Regular.woff2",
+      "img_rel": "assets/img/batch5/Bevan-Regular.png",
+      "ttf_size_kb": 117.2,
+      "woff2_size_kb": 40.1,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "Black-Ops",
+      "family": "Black Ops One",
+      "category": "Display",
+      "designer": "James Grieshaber, Eben Sorkin",
+      "ttf_name": "BlackOpsOne-Regular.ttf",
+      "woff2_name": "BlackOpsOne-Regular.woff2",
+      "img_rel": "assets/img/batch5/BlackOpsOne-Regular.png",
+      "ttf_size_kb": 164.3,
+      "woff2_size_kb": 55.6,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "Blaka",
+      "family": "Blaka Ink",
+      "category": "Display",
+      "designer": "Mohamed Gaber",
+      "ttf_name": "BlakaInk-Regular.ttf",
+      "woff2_name": "BlakaInk-Regular.woff2",
+      "img_rel": "assets/img/batch5/BlakaInk-Regular.png",
+      "ttf_size_kb": 384.2,
+      "woff2_size_kb": 73.2,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "Bodoni",
+      "family": "Bodoni Moda SC",
+      "category": "Serif",
+      "designer": "Owen Earl",
+      "ttf_name": "BodoniModa-Regular.ttf",
+      "woff2_name": "BodoniModa-Regular.woff2",
+      "img_rel": "assets/img/batch5/BodoniModa-Regular.png",
+      "ttf_size_kb": 83.5,
+      "woff2_size_kb": 34.7,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "Bona-Nova",
+      "family": "Bona Nova SC",
+      "category": "Serif",
+      "designer": "Capitalics, Mateusz Machalski, Andrzej Heidrich",
+      "ttf_name": "BonaNova-Regular.ttf",
+      "woff2_name": "BonaNova-Regular.woff2",
+      "img_rel": "assets/img/batch5/BonaNova-Regular.png",
+      "ttf_size_kb": 391.7,
+      "woff2_size_kb": 136.0,
+      "verified_clusters": 26
+    }
+  ],
+  "rejected": [
+    {
+      "repo": "Barrio",
+      "family": "Barrio",
+      "category": "Display",
+      "designer": "Omnibus-Type",
+      "ttf_name": "Barrio-Regular.ttf",
+      "reason": "Visual inspection failed: combining tone marks on nasals (ḿ, m̀, m̄, ǹ, n̄) and tone 9 (i̋) are severely shifted right (i̋ double acute collides with I̋), and U+0358 dot on o͘ collides with following h stem in khì-o͘h."
+    },
+    {
+      "repo": "Braah",
+      "family": "Braah One",
+      "category": "Sans Serif",
+      "designer": "Ashish Kumar",
+      "ttf_name": "BraahOne-Regular.ttf",
+      "reason": "Visual inspection failed: combining tone marks on nasals (ḿ, m̀, m̄, ǹ, n̄) and tone 9 (i̋, I̋) are severely shifted right (n̄ macron collides with |, i̋ double acute sits over I, I̋ double acute floats past I)."
+    }
+  ]
+}

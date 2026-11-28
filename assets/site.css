@@ -174,6 +174,477 @@
   font-display: swap;
 }
 
+/* ── Batches 3–9 (67 Google Fonts upgraded with native POJ) ── */
+@font-face {
+  font-family: "ADLaM Display POJ";
+  src: url("fonts/poj/ADLaMDisplay-Regular.woff2") format("woff2"), url("fonts/poj/ADLaMDisplay-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Akaya Kanadaka POJ";
+  src: url("fonts/poj/AkayaKanadaka-Regular.woff2") format("woff2"), url("fonts/poj/AkayaKanadaka-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Akaya Telivigala POJ";
+  src: url("fonts/poj/AkayaTelivigala-Regular.woff2") format("woff2"), url("fonts/poj/AkayaTelivigala-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Alyamama POJ";
+  src: url("fonts/poj/Alyamama-Regular.woff2") format("woff2"), url("fonts/poj/Alyamama-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Alegreya Sans SC POJ";
+  src: url("fonts/poj/AlegreyaSans-Regular.woff2") format("woff2"), url("fonts/poj/AlegreyaSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Alexandria POJ";
+  src: url("fonts/poj/Alexandria-Regular.woff2") format("woff2"), url("fonts/poj/Alexandria-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Alien Block POJ";
+  src: url("fonts/poj/AlienBlock-Regular.woff2") format("woff2"), url("fonts/poj/AlienBlock-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Amarna POJ";
+  src: url("fonts/poj/Amarna-Regular.woff2") format("woff2"), url("fonts/poj/Amarna-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Amita POJ";
+  src: url("fonts/poj/Amita-Regular.woff2") format("woff2"), url("fonts/poj/Amita-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anton SC POJ";
+  src: url("fonts/poj/Anton-Regular.woff2") format("woff2"), url("fonts/poj/Anton-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anybody POJ";
+  src: url("fonts/poj/Anybody-Regular.woff2") format("woff2"), url("fonts/poj/Anybody-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Archivo Narrow POJ";
+  src: url("fonts/poj/ArchivoNarrow-Regular.woff2") format("woff2"), url("fonts/poj/ArchivoNarrow-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Arima POJ";
+  src: url("fonts/poj/Arima-Regular.woff2") format("woff2"), url("fonts/poj/Arima-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Arsenal SC POJ";
+  src: url("fonts/poj/Arsenal-Regular.woff2") format("woff2"), url("fonts/poj/Arsenal-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Asap Condensed POJ";
+  src: url("fonts/poj/Asap-Regular.woff2") format("woff2"), url("fonts/poj/Asap-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Asset POJ";
+  src: url("fonts/poj/Asset-Regular.woff2") format("woff2"), url("fonts/poj/Asset-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Azeret Mono POJ";
+  src: url("fonts/poj/AzeretMono-Regular.woff2") format("woff2"), url("fonts/poj/AzeretMono-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Badeen Display POJ";
+  src: url("fonts/poj/BadeenDisplay-Regular.woff2") format("woff2"), url("fonts/poj/BadeenDisplay-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bahianita POJ";
+  src: url("fonts/poj/Bahiana-Regular.woff2") format("woff2"), url("fonts/poj/Bahiana-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bai Jamjuree POJ";
+  src: url("fonts/poj/BaiJamjuree-Regular.woff2") format("woff2"), url("fonts/poj/BaiJamjuree-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Ballet POJ";
+  src: url("fonts/poj/Ballet72pt-Regular.woff2") format("woff2"), url("fonts/poj/Ballet72pt-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Be Vietnam Pro POJ";
+  src: url("fonts/poj/BeVietnamPro-Regular.woff2") format("woff2"), url("fonts/poj/BeVietnamPro-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bellota Text POJ";
+  src: url("fonts/poj/Bellota-Regular.woff2") format("woff2"), url("fonts/poj/Bellota-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Besley POJ";
+  src: url("fonts/poj/Besley-Regular.woff2") format("woff2"), url("fonts/poj/Besley-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bevan POJ";
+  src: url("fonts/poj/Bevan-Regular.woff2") format("woff2"), url("fonts/poj/Bevan-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Black Ops One POJ";
+  src: url("fonts/poj/BlackOpsOne-Regular.woff2") format("woff2"), url("fonts/poj/BlackOpsOne-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blaka Ink POJ";
+  src: url("fonts/poj/BlakaInk-Regular.woff2") format("woff2"), url("fonts/poj/BlakaInk-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bodoni Moda SC POJ";
+  src: url("fonts/poj/BodoniModa-Regular.woff2") format("woff2"), url("fonts/poj/BodoniModa-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bona Nova SC POJ";
+  src: url("fonts/poj/BonaNova-Regular.woff2") format("woff2"), url("fonts/poj/BonaNova-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Brawler POJ";
+  src: url("fonts/poj/Brawler-Regular.woff2") format("woff2"), url("fonts/poj/Brawler-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Brygada 1918 POJ";
+  src: url("fonts/poj/Brygada1918-Regular.woff2") format("woff2"), url("fonts/poj/Brygada1918-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cabin Condensed POJ";
+  src: url("fonts/poj/Cabin-Regular.woff2") format("woff2"), url("fonts/poj/Cabin-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Calistoga POJ";
+  src: url("fonts/poj/Calistoga-Regular.woff2") format("woff2"), url("fonts/poj/Calistoga-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Capriola POJ";
+  src: url("fonts/poj/Capriola-Regular.woff2") format("woff2"), url("fonts/poj/Capriola-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Akshar POJ";
+  src: url("fonts/poj/Akshar-Regular.woff2") format("woff2"), url("fonts/poj/Akshar-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Akt POJ";
+  src: url("fonts/poj/Akt-Regular.woff2") format("woff2"), url("fonts/poj/Akt-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Allison POJ";
+  src: url("fonts/poj/Allison-Regular.woff2") format("woff2"), url("fonts/poj/Allison-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Allura POJ";
+  src: url("fonts/poj/Allura-Regular.woff2") format("woff2"), url("fonts/poj/Allura-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Alumni Sans SC POJ";
+  src: url("fonts/poj/AlumniSans-Regular.woff2") format("woff2"), url("fonts/poj/AlumniSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Alumni Sans Collegiate One SC POJ";
+  src: url("fonts/poj/AlumniSansCollegiateOne-Regular.woff2") format("woff2"), url("fonts/poj/AlumniSansCollegiateOne-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Alumni Sans Inline One POJ";
+  src: url("fonts/poj/AlumniSansInlineOne-Regular.woff2") format("woff2"), url("fonts/poj/AlumniSansInlineOne-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Alumni Sans Pinstripe POJ";
+  src: url("fonts/poj/AlumniSansPinstripe-Regular.woff2") format("woff2"), url("fonts/poj/AlumniSansPinstripe-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anaheim POJ";
+  src: url("fonts/poj/Anaheim-Regular.woff2") format("woff2"), url("fonts/poj/Anaheim-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Antonio POJ";
+  src: url("fonts/poj/Antonio-Regular.woff2") format("woff2"), url("fonts/poj/Antonio-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "AR One Sans POJ";
+  src: url("fonts/poj/AROneSansRetina-Regular.woff2") format("woff2"), url("fonts/poj/AROneSansRetina-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Are You Serious POJ";
+  src: url("fonts/poj/AreYouSerious-Regular.woff2") format("woff2"), url("fonts/poj/AreYouSerious-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Arizonia POJ";
+  src: url("fonts/poj/Arizonia-Regular.woff2") format("woff2"), url("fonts/poj/Arizonia-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Asimovian POJ";
+  src: url("fonts/poj/Asimovian-Regular.woff2") format("woff2"), url("fonts/poj/Asimovian-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible Next POJ";
+  src: url("fonts/poj/AtkinsonHyperlegibleNext-Regular.woff2") format("woff2"), url("fonts/poj/AtkinsonHyperlegibleNext-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible Mono POJ";
+  src: url("fonts/poj/AtkinsonHyperlegibleMono-Regular.woff2") format("woff2"), url("fonts/poj/AtkinsonHyperlegibleMono-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Average POJ";
+  src: url("fonts/poj/Average-Regular.woff2") format("woff2"), url("fonts/poj/Average-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Babylonica POJ";
+  src: url("fonts/poj/Babylonica-Regular.woff2") format("woff2"), url("fonts/poj/Babylonica-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Beau Rivage POJ";
+  src: url("fonts/poj/BeauRivage-Regular.woff2") format("woff2"), url("fonts/poj/BeauRivage-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Big Shoulders Text SC POJ";
+  src: url("fonts/poj/BigShouldersText-Regular.woff2") format("woff2"), url("fonts/poj/BigShouldersText-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bilbo POJ";
+  src: url("fonts/poj/Bilbo-Regular.woff2") format("woff2"), url("fonts/poj/Bilbo-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Birthstone POJ";
+  src: url("fonts/poj/Birthstone-Regular.woff2") format("woff2"), url("fonts/poj/Birthstone-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Birthstone Bounce POJ";
+  src: url("fonts/poj/BirthstoneBounce-Regular.woff2") format("woff2"), url("fonts/poj/BirthstoneBounce-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Boldonse POJ";
+  src: url("fonts/poj/Boldonse-Regular.woff2") format("woff2"), url("fonts/poj/Boldonse-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bonheur Royale POJ";
+  src: url("fonts/poj/BonheurRoyale-Regular.woff2") format("woff2"), url("fonts/poj/BonheurRoyale-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Buenard POJ";
+  src: url("fonts/poj/Buenard-Regular.woff2") format("woff2"), url("fonts/poj/Buenard-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Caacupe One POJ";
+  src: url("fonts/poj/CaacupeOne-Regular.woff2") format("woff2"), url("fonts/poj/CaacupeOne-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Caladea POJ";
+  src: url("fonts/poj/Caladea-Regular.woff2") format("woff2"), url("fonts/poj/Caladea-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Caramel POJ";
+  src: url("fonts/poj/CaramelPro-Regular.woff2") format("woff2"), url("fonts/poj/CaramelPro-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Carattere POJ";
+  src: url("fonts/poj/Carattere-Regular.woff2") format("woff2"), url("fonts/poj/Carattere-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cal Sans POJ";
+  src: url("fonts/poj/CalSans-Regular.woff2") format("woff2"), url("fonts/poj/CalSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "BIZ UDPGothic POJ";
+  src: url("fonts/poj/BIZUDGothic-Regular.woff2") format("woff2"), url("fonts/poj/BIZUDGothic-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "BIZ UDPMincho POJ";
+  src: url("fonts/poj/BIZUDMincho-Regular.woff2") format("woff2"), url("fonts/poj/BIZUDMincho-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ── Formosa Editorial Press Theme (台灣活版印書配色：宣紙 × 藍染靛青 × 印泥朱紅) ── */
 :root {
   --bg: #f8f5ef;

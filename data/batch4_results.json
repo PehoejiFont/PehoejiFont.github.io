@@ -1,0 +1,132 @@
+{
+  "batch": 4,
+  "verified": [
+    {
+      "repo": "Anybody",
+      "family": "Anybody",
+      "category": "Sans Serif",
+      "designer": "Tyler Finck",
+      "ttf_name": "Anybody-Regular.ttf",
+      "woff2_name": "Anybody-Regular.woff2",
+      "img_rel": "assets/img/batch4/Anybody-Regular.png",
+      "ttf_size_kb": 102.6,
+      "woff2_size_kb": 38.3,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "ArchivoNarrow",
+      "family": "Archivo Narrow",
+      "category": "Sans Serif",
+      "designer": "Omnibus-Type",
+      "ttf_name": "ArchivoNarrow-Regular.ttf",
+      "woff2_name": "ArchivoNarrow-Regular.woff2",
+      "img_rel": "assets/img/batch4/ArchivoNarrow-Regular.png",
+      "ttf_size_kb": 90.0,
+      "woff2_size_kb": 33.6,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "Arima-Font",
+      "family": "Arima",
+      "category": "Display",
+      "designer": "Natanael Gama, Joana Correia, Rosalie Wagner",
+      "ttf_name": "Arima-Regular.ttf",
+      "woff2_name": "Arima-Regular.woff2",
+      "img_rel": "assets/img/batch4/Arima-Regular.png",
+      "ttf_size_kb": 272.1,
+      "woff2_size_kb": 103.1,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "Arsenal",
+      "family": "Arsenal SC",
+      "category": "Sans Serif",
+      "designer": "Andrij Shevchenko",
+      "ttf_name": "Arsenal-Regular.ttf",
+      "woff2_name": "Arsenal-Regular.woff2",
+      "img_rel": "assets/img/batch4/Arsenal-Regular.png",
+      "ttf_size_kb": 176.4,
+      "woff2_size_kb": 57.0,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "Asap",
+      "family": "Asap Condensed",
+      "category": "Sans Serif",
+      "designer": "Omnibus-Type",
+      "ttf_name": "Asap-Regular.ttf",
+      "woff2_name": "Asap-Regular.woff2",
+      "img_rel": "assets/img/batch4/Asap-Regular.png",
+      "ttf_size_kb": 95.8,
+      "woff2_size_kb": 36.9,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "Asset",
+      "family": "Asset",
+      "category": "Display",
+      "designer": "Riccardo De Franceschi, Eben Sorkin",
+      "ttf_name": "Asset-Regular.ttf",
+      "woff2_name": "Asset-Regular.woff2",
+      "img_rel": "assets/img/batch4/Asset-Regular.png",
+      "ttf_size_kb": 184.3,
+      "woff2_size_kb": 66.3,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "Azeret",
+      "family": "Azeret Mono",
+      "category": "Monospace",
+      "designer": "Displaay, Martin Vácha",
+      "ttf_name": "AzeretMono-Regular.ttf",
+      "woff2_name": "AzeretMono-Regular.woff2",
+      "img_rel": "assets/img/batch4/AzeretMono-Regular.png",
+      "ttf_size_kb": 75.2,
+      "woff2_size_kb": 30.3,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "Badeen-Display",
+      "family": "Badeen Display",
+      "category": "Display",
+      "designer": "Hani Alasadi",
+      "ttf_name": "BadeenDisplay-Regular.ttf",
+      "woff2_name": "BadeenDisplay-Regular.woff2",
+      "img_rel": "assets/img/batch4/BadeenDisplay-Regular.png",
+      "ttf_size_kb": 79.2,
+      "woff2_size_kb": 25.5,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "Bahiana",
+      "family": "Bahianita",
+      "category": "Display",
+      "designer": "Omnibus-Type",
+      "ttf_name": "Bahiana-Regular.ttf",
+      "woff2_name": "Bahiana-Regular.woff2",
+      "img_rel": "assets/img/batch4/Bahiana-Regular.png",
+      "ttf_size_kb": 110.3,
+      "woff2_size_kb": 43.3,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "Bai-Jamjuree",
+      "family": "Bai Jamjuree",
+      "category": "Sans Serif",
+      "designer": "Cadson Demak",
+      "ttf_name": "BaiJamjuree-Regular.ttf",
+      "woff2_name": "BaiJamjuree-Regular.woff2",
+      "img_rel": "assets/img/batch4/BaiJamjuree-Regular.png",
+      "ttf_size_kb": 116.5,
+      "woff2_size_kb": 43.4,
+      "verified_clusters": 26
+    }
+  ],
+  "rejected": [
+    {
+      "repo": "Anuphan",
+      "family": "Anuphan",
+      "reason": "Visual inspection failed: U+0358 dot sits below the baseline (dot_high=False on all 11 dotted-o clusters) and Tone 8 vertical line (U+030D) sits inside letter bodies near baseline instead of above."
+    }
+  ]
+}

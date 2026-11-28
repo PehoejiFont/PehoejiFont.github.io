@@ -1,0 +1,127 @@
+{
+  "batch": 8,
+  "verified": [
+    {
+      "repo": "atkinson-hyperlegible-next",
+      "family": "Atkinson Hyperlegible Next",
+      "category": "Sans Serif",
+      "designer": "Braille Institute, Applied Design Works, Elliott Scott, Megan Eiswerth, Letters From Sweden",
+      "ttf_name": "AtkinsonHyperlegibleNext-Regular.ttf",
+      "woff2_name": "AtkinsonHyperlegibleNext-Regular.woff2",
+      "img_rel": "assets/img/batch8/AtkinsonHyperlegibleNext-Regular.png",
+      "ttf_size_kb": 65.8,
+      "woff2_size_kb": 25.1,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "atkinson-hyperlegible-next-mono",
+      "family": "Atkinson Hyperlegible Mono",
+      "category": "Sans Serif",
+      "designer": "Braille Institute, Applied Design Works, Elliott Scott, Megan Eiswerth, Letters From Sweden",
+      "ttf_name": "AtkinsonHyperlegibleMono-Regular.ttf",
+      "woff2_name": "AtkinsonHyperlegibleMono-Regular.woff2",
+      "img_rel": "assets/img/batch8/AtkinsonHyperlegibleMono-Regular.png",
+      "ttf_size_kb": 53.0,
+      "woff2_size_kb": 22.7,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "average",
+      "family": "Average",
+      "category": "Serif",
+      "designer": "Eduardo Tunni",
+      "ttf_name": "Average-Regular.ttf",
+      "woff2_name": "Average-Regular.woff2",
+      "img_rel": "assets/img/batch8/Average-Regular.png",
+      "ttf_size_kb": 74.0,
+      "woff2_size_kb": 30.9,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "babylonica",
+      "family": "Babylonica",
+      "category": "Handwriting",
+      "designer": "Robert Leuschke",
+      "ttf_name": "Babylonica-Regular.ttf",
+      "woff2_name": "Babylonica-Regular.woff2",
+      "img_rel": "assets/img/batch8/Babylonica-Regular.png",
+      "ttf_size_kb": 488.6,
+      "woff2_size_kb": 155.1,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "beau-rivage",
+      "family": "Beau Rivage",
+      "category": "Handwriting",
+      "designer": "Robert Leuschke",
+      "ttf_name": "BeauRivage-Regular.ttf",
+      "woff2_name": "BeauRivage-Regular.woff2",
+      "img_rel": "assets/img/batch8/BeauRivage-Regular.png",
+      "ttf_size_kb": 234.5,
+      "woff2_size_kb": 84.4,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "big_shoulders",
+      "family": "Big Shoulders Text SC",
+      "category": "Display",
+      "designer": "Patric King",
+      "ttf_name": "BigShouldersText-Regular.ttf",
+      "woff2_name": "BigShouldersText-Regular.woff2",
+      "img_rel": "assets/img/batch8/BigShouldersText-Regular.png",
+      "ttf_size_kb": 123.1,
+      "woff2_size_kb": 45.9,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "bilbo",
+      "family": "Bilbo",
+      "category": "Handwriting",
+      "designer": "Robert Leuschke",
+      "ttf_name": "Bilbo-Regular.ttf",
+      "woff2_name": "Bilbo-Regular.woff2",
+      "img_rel": "assets/img/batch8/Bilbo-Regular.png",
+      "ttf_size_kb": 100.4,
+      "woff2_size_kb": 43.1,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "birthstone",
+      "family": "Birthstone",
+      "category": "Handwriting",
+      "designer": "Robert Leuschke",
+      "ttf_name": "Birthstone-Regular.ttf",
+      "woff2_name": "Birthstone-Regular.woff2",
+      "img_rel": "assets/img/batch8/Birthstone-Regular.png",
+      "ttf_size_kb": 372.4,
+      "woff2_size_kb": 132.5,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "birthstone-bounce",
+      "family": "Birthstone Bounce",
+      "category": "Handwriting",
+      "designer": "Robert Leuschke",
+      "ttf_name": "BirthstoneBounce-Regular.ttf",
+      "woff2_name": "BirthstoneBounce-Regular.woff2",
+      "img_rel": "assets/img/batch8/BirthstoneBounce-Regular.png",
+      "ttf_size_kb": 319.5,
+      "woff2_size_kb": 114.8,
+      "verified_clusters": 26
+    }
+  ],
+  "rejected": [
+    {
+      "repo": "belleza",
+      "family": "Belleza",
+      "ttf_name": "Belleza-Regular.ttf",
+      "reason": "Visual inspection failed: tone marks on nasals (ḿ m̀ m̂ m̄ ǹ n̂ n̄, tńg) and tone 9 (i̋ I̋) are horizontally displaced far to the right of their base letters, colliding with adjacent glyphs (e.g., | and g)."
+    },
+    {
+      "repo": "betania-patmos",
+      "family": "Betania Patmos In GDL",
+      "ttf_name": "BetaniaPatmos-Regular.ttf",
+      "reason": "Visual inspection failed: U+0358 combining dot is displaced past following characters in o̍͘, o͘ⁿ, and khì-o͘h (renders after h); Tone 8 vertical mark (U+030D) is missing/invisible above lowercase a̍ e̍ o̍ u̍ m̍ and in Pe̍h."
+    }
+  ]
+}

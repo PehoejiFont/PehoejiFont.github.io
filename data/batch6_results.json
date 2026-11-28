@@ -1,0 +1,125 @@
+{
+  "batch": 6,
+  "verified": [
+    {
+      "repo": "Brawler",
+      "family": "Brawler",
+      "category": "Serif",
+      "designer": "Cyreal",
+      "ttf_name": "Brawler-Regular.ttf",
+      "woff2_name": "Brawler-Regular.woff2",
+      "img_rel": "assets/img/batch6/Brawler-Regular.png",
+      "ttf_size_kb": 66.7,
+      "woff2_size_kb": 26.7,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "Brygada-1918",
+      "family": "Brygada 1918",
+      "category": "Serif",
+      "designer": "Capitalics, Mateusz Machalski, Borys Kosmynka, Ania Wieluńska, Przemysław Hoffer",
+      "ttf_name": "Brygada1918-Regular.ttf",
+      "woff2_name": "Brygada1918-Regular.woff2",
+      "img_rel": "assets/img/batch6/Brygada1918-Regular.png",
+      "ttf_size_kb": 222.8,
+      "woff2_size_kb": 79.8,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "Cabin",
+      "family": "Cabin Condensed",
+      "category": "Sans Serif",
+      "designer": "Impallari Type",
+      "ttf_name": "Cabin-Regular.ttf",
+      "woff2_name": "Cabin-Regular.woff2",
+      "img_rel": "assets/img/batch6/Cabin-Regular.png",
+      "ttf_size_kb": 102.7,
+      "woff2_size_kb": 38.7,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "Calistoga",
+      "family": "Calistoga",
+      "category": "Display",
+      "designer": "Yvonne Schüttler, Sorkin Type, Eben Sorkin",
+      "ttf_name": "Calistoga-Regular.ttf",
+      "woff2_name": "Calistoga-Regular.woff2",
+      "img_rel": "assets/img/batch6/Calistoga-Regular.png",
+      "ttf_size_kb": 270.1,
+      "woff2_size_kb": 93.0,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "Capriola-VF",
+      "family": "Capriola",
+      "category": "Sans Serif",
+      "designer": "Viktoriya Grabowska",
+      "ttf_name": "Capriola-Regular.ttf",
+      "woff2_name": "Capriola-Regular.woff2",
+      "img_rel": "assets/img/batch6/Capriola-Regular.png",
+      "ttf_size_kb": 251.5,
+      "woff2_size_kb": 92.1,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "akshar-type",
+      "family": "Akshar",
+      "category": "Sans Serif",
+      "designer": "Tall Chai",
+      "ttf_name": "Akshar-Regular.ttf",
+      "woff2_name": "Akshar-Regular.woff2",
+      "img_rel": "assets/img/batch6/Akshar-Regular.png",
+      "ttf_size_kb": 203.4,
+      "woff2_size_kb": 64.5,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "akt",
+      "family": "Akt",
+      "category": "Sans Serif",
+      "designer": "Dmitry Grenev",
+      "ttf_name": "Akt-Regular.ttf",
+      "woff2_name": "Akt-Regular.woff2",
+      "img_rel": "assets/img/batch6/Akt-Regular.png",
+      "ttf_size_kb": 265.4,
+      "woff2_size_kb": 80.4,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "allison",
+      "family": "Allison",
+      "category": "Handwriting",
+      "designer": "Robert Leuschke",
+      "ttf_name": "Allison-Regular.ttf",
+      "woff2_name": "Allison-Regular.woff2",
+      "img_rel": "assets/img/batch6/Allison-Regular.png",
+      "ttf_size_kb": 142.3,
+      "woff2_size_kb": 55.4,
+      "verified_clusters": 26
+    },
+    {
+      "repo": "allura",
+      "family": "Allura",
+      "category": "Handwriting",
+      "designer": "Robert Leuschke",
+      "ttf_name": "Allura-Regular.ttf",
+      "woff2_name": "Allura-Regular.woff2",
+      "img_rel": "assets/img/batch6/Allura-Regular.png",
+      "ttf_size_kb": 243.3,
+      "woff2_size_kb": 86.0,
+      "verified_clusters": 26
+    }
+  ],
+  "rejected": [
+    {
+      "repo": "Bruno-ace",
+      "family": "Bruno Ace SC",
+      "reason": "Visual inspection failed: combining tone marks on syllabic nasals (ḿ m̀ m̂ m̄ ǹ n̂ n̄) and tone 9 (i̋, I̋) are shifted far to the right of their base letters instead of centered above them."
+    },
+    {
+      "repo": "agrave-pro",
+      "family": "Agrave Pro",
+      "reason": "Visual inspection failed: combining tone marks on n (ǹ n̂ n̄, tńg) and tone 9 uppercase (I̋) are shifted far to the right of their base letters, colliding with adjacent characters (n̄ overlaps |, tńg acute sits over g)."
+    }
+  ]
+}
